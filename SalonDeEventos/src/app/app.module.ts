@@ -9,6 +9,7 @@ import { HeadersComponent } from './headers/headers.component';
 import { FooterComponent } from './footer/footer.component';
 import { SliderComponent } from './slider/slider.component';
 import { RegistroUsuariosComponent } from './registro-usuarios/registro-usuarios.component';
+import { PersonaComponent } from './modelo/persona/persona.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '', pathMatch: 'full' },
@@ -27,7 +28,8 @@ const routes: Routes = [
     HeadersComponent,
     FooterComponent,
     SliderComponent,
-    RegistroUsuariosComponent
+    RegistroUsuariosComponent,
+    PersonaComponent
   ],
   imports: [
     BrowserModule,
