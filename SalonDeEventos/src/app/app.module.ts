@@ -13,7 +13,7 @@ import { RegistroUsuariosComponent } from './registro-usuarios/registro-usuarios
 const routes: Routes = [
   { path: '', redirectTo: '', pathMatch: 'full' },
   { path: 'login', component: LoginComponent},
-  { path: 'header', component: HeaderComponent},
+  { path: 'menu', component: HeaderComponent},
   { path: 'singup', component: RegistroUsuariosComponent},
 
 ]
