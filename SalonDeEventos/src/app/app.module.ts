@@ -8,14 +8,15 @@ import { HeaderComponent } from './header/header.component';
 import { HeadersComponent } from './headers/headers.component';
 import { FooterComponent } from './footer/footer.component';
 import { SliderComponent } from './slider/slider.component';
-import { RegistroUsuariosComponent } from './registro-usuarios/registro-usuarios.component';
-import { PersonaComponent } from './modelo/persona/persona.component';
+import { ReservaComponent } from './reserva/reserva.component';
+import { CotizacionComponent } from './cotizacion/cotizacion.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent},
-  { path: 'menu', component: HeaderComponent},
-  { path: 'singup', component: RegistroUsuariosComponent},
+  { path: 'login', component: LoginComponent },
+  { path: 'cot', component: CotizacionComponent },
+  { path: 'res', component: ReservaComponent },
+  { path: 'menu', component: HeaderComponent }
 
 ]
 
@@ -28,8 +29,9 @@ const routes: Routes = [
     HeadersComponent,
     FooterComponent,
     SliderComponent,
-    RegistroUsuariosComponent,
-    PersonaComponent
+    ReservaComponent,
+    CotizacionComponent,
+
   ],
   imports: [
     BrowserModule,
