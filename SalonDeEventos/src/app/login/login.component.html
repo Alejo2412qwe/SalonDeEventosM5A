@@ -99,12 +99,12 @@
               </div>
               <div class="input-box">
                 <i class="fas fa-envelope"></i>
-                <input type="text" [(ngModel)]="usuario.usuContrasena" placeholder="Contraseña " required>
+                <input type="password" [(ngModel)]="usuario.usuContrasena" placeholder="Contraseña " required>
               </div>
             </section>
             <div class="input-box">
               <i class="fas fa-envelope"></i>
-              <input type="text" [(ngModel)]="confirmarPass" placeholder="Verifica tu contraseña" required>
+              <input type="password" [(ngModel)]="confirmarPass" placeholder="Verifica tu contraseña" required>
             </div>
             <div class="button input-box">
               <input type="submit" value="Registrate" (click)="createusuario">
