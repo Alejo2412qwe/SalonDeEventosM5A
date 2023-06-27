@@ -10,6 +10,8 @@ import { FooterComponent } from './footer/footer.component';
 import { SliderComponent } from './slider/slider.component';
 import { ReservaComponent } from './reserva/reserva.component';
 import { CotizacionComponent } from './cotizacion/cotizacion.component';
+import {HttpClientModule}from  '@angular/common/http'
+import { FormsModule } from '@angular/forms';
 
 const routes: Routes = [
   { path: '', redirectTo: '', pathMatch: 'full' },
@@ -36,6 +38,8 @@ const routes: Routes = [
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
     RouterModule.forRoot(routes)
   ],
   providers: [],

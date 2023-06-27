@@ -4,27 +4,27 @@ import { Rol } from "./rol";
 export class Usuario {
 
     usuId: number;
-    usuNombreUsuario;
-    usuContraseña: string;
+    usuNombreUsuario: string;
+    usuContrasena: string;
     usuFechaRegistro: Date;
     usuPerId: Persona;
     rolId: Rol;
 
 
     constructor(
-        usuId: number,
-        usuNombreUsuario: string,
-        usuContraseña: string,
-        usuFechaRegistro: Date,
-        usuPerId: Persona,
-        rolId: Rol
+        usuId?: number,
+        usuNombreUsuario?: string,
+        usuContraseña?: string,
+        usuFechaRegistro?: Date,
+        usuPerId?: Persona,
+        rolId?: Rol
     ) {
-        this.usuId = usuId;
-        this.usuNombreUsuario = usuNombreUsuario;
-        this.usuContraseña = usuContraseña;
-        this.usuFechaRegistro = usuFechaRegistro;
-        this.usuPerId = usuPerId;
-        this.rolId = rolId;
+        this.usuId = usuId || 0;
+        this.usuNombreUsuario = usuNombreUsuario || "";
+        this.usuContrasena = usuContraseña || "";
+        this.usuFechaRegistro = usuFechaRegistro || new Date;
+        this.usuPerId = usuPerId || new Persona;
+        this.rolId = rolId || new Rol;
     }
 
 

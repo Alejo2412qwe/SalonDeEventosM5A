@@ -11,8 +11,6 @@
 </head>
 
 <body>
-
-
   <img class="imglogo">
   <div class="container">
     <input type="checkbox" id="flip">
@@ -31,7 +29,7 @@
     </div>
     <div class="forms">
       <div class="form-content">
-        
+
         <div class="login-form">
           <img class="2" src="assets/img/png.png" style="align-items: center;" width="65%">
           <div class="title">Login - Salon de Eventos</div>
@@ -53,63 +51,66 @@
             </div>
           </form>
         </div>
+
         <div class="signup-form">
           <div class="title" style="font-weight: bolder;">Crear cuenta en "PERRUNCAY"</div>
-          <div class="title2"
-            style="margin-top: 20px; margin-bottom: 10px; font-size: 18px; text-align: center; font-weight: bolder;">
-            Datos
-            Personales</div>
+          <form action="">
+            <div class="title2"
+              style="margin-top: 20px; margin-bottom: 10px; font-size: 18px; text-align: center; font-weight: bolder;">
+              Datos
+              Personales</div>
 
             <section class="layout2">
               <div class="input-box">
                 <i class="fas fa-user"></i>
-                <input type="text" placeholder="Ingresa tu numero de cedula" required>
+                <input type="text" [(ngModel)]="persona.perCedula" class="form-control" placeholder="Cedula"  required>
+              </div>
+              <div class="input-box">
+                <i class="fas fa-user"></i>
+                <input type="text" [(ngModel)]="persona.perNombre" placeholder="Nombres" required>
+              </div>
+              <div class="input-box">
+                <i class="fas fa-user"></i>
+                <input type="text" [(ngModel)]="persona.perApellido" placeholder="Apellidos" required>
               </div>
               <div class="input-box">
                 <i class="fas fa-envelope"></i>
-                <input type="text" placeholder="Ingresa tus nombres" required>
-              </div>
-              <div class="input-box">
-                <i class="fas fa-lock"></i>
-                <input type="password" placeholder="Verifica tus apellidos" required>
-              </div>
-              <div class="input-box">
-                <i class="fas fa-user"></i>
-                <input type="text" placeholder="Ingresa tu correo electronico" required>
-              </div>
-              
-              <div class="input-box">
-                <i class="fas fa-user"></i>
-                <input type="text" placeholder="Ingresa tu numero de telefono" required>
+                <input type="text" [(ngModel)]="persona.perCorreo" placeholder="Correo electronico" required>
               </div>
 
               <div class="input-box">
-                <i class="fas fa-user"></i>
-                <input type="date" placeholder="Ingresa tu fecha de nacimiento" required>
+                <i class="fas fa-phone"></i>
+                <input type="text" [(ngModel)]="persona.perTelefono" placeholder="Telefono" required>
+              </div>
+
+              <div class="input-box">
+                <i class="fas fa-calendar"></i>
+                <input type="date" [(ngModel)]="persona.perFechaNacimiento" placeholder="Fecha de nacimiento" required>
               </div>
             </section>
-
+            
             <div class="title2"
-                style="margin-top: 30px; margin-bottom: 10px; font-size: 18px; text-align: center; font-weight: bolder;">
-                Datos del Usuario</div>
-                <section class="layout3"> 
+              style="margin-top: 30px; margin-bottom: 10px; font-size: 18px; text-align: center; font-weight: bolder;">
+              Datos del Usuario</div>
+            <section class="layout3">
               <div class="input-box">
                 <i class="fas fa-envelope"></i>
-                <input type="text" placeholder="Ingresa tu nombre de usuario" required>
+                <input type="text"[(ngModel)]="usuario.usuNombreUsuario" placeholder="Nombre de usuario" required>
               </div>
               <div class="input-box">
                 <i class="fas fa-envelope"></i>
-                <input type="text" placeholder="Ingresa tu contraseña " required>
+                <input type="text" [(ngModel)]="usuario.usuContrasena" placeholder="Contraseña " required>
               </div>
             </section>
-              <div class="input-box">
-                <i class="fas fa-envelope"></i>
-                <input type="text" placeholder="Verifica tu contraseña" required>
-              </div>
-        <div class="button input-box">
-          <input type="submit" value="Registrate">
-        </div>
-        <div class="text sign-up-text">¿Ya tienes una cuenta? <label for="flip">Inicia Sesion</label></div>
+            <div class="input-box">
+              <i class="fas fa-envelope"></i>
+              <input type="text" [(ngModel)]="confirmarPass" placeholder="Verifica tu contraseña" required>
+            </div>
+            <div class="button input-box">
+              <input type="submit" value="Registrate" (click)="createusuario">
+            </div>
+          </form>
+          <div class="text sign-up-text">¿Ya tienes una cuenta? <label for="flip">Inicia Sesion</label></div>
         </div>
       </div>
     </div>
