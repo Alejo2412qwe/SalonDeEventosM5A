@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-cotizacion',
   templateUrl: './cotizacion.component.html',
-  styleUrls: ['./cotizacion.component.css']
+  styleUrls: ['./cotizacion.component.scss']
 })
-export class CotizacionComponent {
+export class CotizacionComponent implements OnInit {
+  ngOnInit(): void {
+  }
 
 }
