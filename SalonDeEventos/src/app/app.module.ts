@@ -14,7 +14,7 @@ import {HttpClientModule}from  '@angular/common/http'
 import { FormsModule } from '@angular/forms';
 
 const routes: Routes = [
-  { path: '', redirectTo: '', pathMatch: 'full' },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'cot', component: CotizacionComponent },
   { path: 'res', component: ReservaComponent },
