@@ -14,13 +14,16 @@ import { HttpClientModule } from '@angular/common/http'
 import { FormsModule } from '@angular/forms';
 import { SalonComponent } from './salon/salon.component';
 import { AdminComponent } from './admin/admin.component';
+import { EmpleadoComponent } from './empleado/empleado.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'cot', component: CotizacionComponent },
-  { path: 'res', component: ReservaComponent },
+  { path: 'res', component: ReservaComponent }, 
+  { path: 'admin', component: AdminComponent },
   { path: 'salon', component: SalonComponent },
+  { path: 'emp', component: EmpleadoComponent },
   { path: 'menu', component: HeaderComponent }
 
 ]
@@ -38,6 +41,7 @@ const routes: Routes = [
     CotizacionComponent,
     SalonComponent,
     AdminComponent,
+    EmpleadoComponent,
 
   ],
   imports: [
