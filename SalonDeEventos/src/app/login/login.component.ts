@@ -24,7 +24,8 @@ export class LoginComponent implements OnInit {
   public createusuario(): void {
     if (this.usuario.usuContrasena == this.confirmarPass) {
       this.personaService.crearPersona(this.persona).subscribe(
-        response => this.usuarioService.crearUsuario(this.usuario).subscribe(
+        response => 
+        this.usuarioService.crearUsuario(this.usuario).subscribe(
           response => {
             this.router.navigate(['/login'])
             Swal.fire({
@@ -34,7 +35,7 @@ export class LoginComponent implements OnInit {
               showConfirmButton: false,
               timer: 1500
             })
-
+            console.log(this.persona.perId);
           }
         )
       )

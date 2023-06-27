@@ -10,13 +10,17 @@ export class PersonaService {
 
   private url: string = 'http://localhost:9999/persona'
 
-  private httpHeaders = new HttpHeaders({ 'Content- Type': 'application / json' })
+  private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' })
 
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   crearPersona(persona: Persona): Observable<Persona> {
     return this.http.post<Persona>(this.url + "/crear", persona, { headers: this.httpHeaders })
+  }
+
+  getCliente():Observable<number>{
+    return this.http.get<number>(this.url+"/ultimoregistro");
   }
 
 }
