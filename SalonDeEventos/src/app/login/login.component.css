@@ -12,7 +12,7 @@
 
 body {
     display: grid;
-    grid-template-rows: 1fr 9.5fr;
+    grid-template-rows: fr 9.5fr;
     justify-items: center;
     align-items: center;
     min-height: 95vh;
