@@ -18,7 +18,7 @@
 }
 
 .form_main {
-    width: 600px;
+    width: 1000px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -30,6 +30,7 @@
     overflow: hidden;
     height: 500px;
     border-radius: 5px;
+    margin: auto;
 }
 
 .form_main::before {
@@ -346,7 +347,6 @@
 
 p.monto {
     text-align-last: right;
-
 }
 
 p.fecha {

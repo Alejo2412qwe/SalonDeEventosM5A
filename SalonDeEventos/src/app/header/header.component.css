@@ -15,7 +15,6 @@
     padding-right: 8%;
     box-sizing: border-box;
     overflow: hidden;
-    margin: 11px;
 }
 
 .navbar {
@@ -451,13 +450,13 @@ h1 {
 }
 
 .direccion {
-    display: flex;
-    justify-content: center;
+    
 }
 
 .col-4 {
     flex-basis: 40%;
     position: relative;
+    width: 100%;
 
 }
 

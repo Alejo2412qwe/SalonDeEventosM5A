@@ -10,14 +10,17 @@ import { FooterComponent } from './footer/footer.component';
 import { SliderComponent } from './slider/slider.component';
 import { ReservaComponent } from './reserva/reserva.component';
 import { CotizacionComponent } from './cotizacion/cotizacion.component';
-import {HttpClientModule}from  '@angular/common/http'
+import { HttpClientModule } from '@angular/common/http'
 import { FormsModule } from '@angular/forms';
+import { SalonComponent } from './salon/salon.component';
+import { AdminComponent } from './admin/admin.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '', pathMatch: 'full' },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'cot', component: CotizacionComponent },
   { path: 'res', component: ReservaComponent },
+  { path: 'salon', component: SalonComponent },
   { path: 'menu', component: HeaderComponent }
 
 ]
@@ -33,6 +36,8 @@ const routes: Routes = [
     SliderComponent,
     ReservaComponent,
     CotizacionComponent,
+    SalonComponent,
+    AdminComponent,
 
   ],
   imports: [
