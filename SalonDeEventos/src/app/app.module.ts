@@ -15,6 +15,7 @@ import { FormsModule } from '@angular/forms';
 import { SalonComponent } from './salon/salon.component';
 import { AdminComponent } from './admin/admin.component';
 import { EmpleadoComponent } from './empleado/empleado.component';
+import { ProductoComponent } from './producto/producto.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -24,7 +25,8 @@ const routes: Routes = [
   { path: 'admin', component: AdminComponent },
   { path: 'salon', component: SalonComponent },
   { path: 'emp', component: EmpleadoComponent },
-  { path: 'menu', component: HeaderComponent }
+  { path: 'menu', component: HeaderComponent },
+  {path:'prod',component:ProductoComponent}
 
 ]
 
@@ -42,6 +44,7 @@ const routes: Routes = [
     SalonComponent,
     AdminComponent,
     EmpleadoComponent,
+    ProductoComponent,
 
   ],
   imports: [
