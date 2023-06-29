@@ -7,6 +7,8 @@ import { UsuarioService } from '../service/usuario.service';
 import Swal from 'sweetalert2';
 import { ToastrService } from 'ngx-toastr';
 import { formatDate } from '@angular/common';
+import { RolService } from '../service/rol.service';
+import { Rol } from '../modelo/rol';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +17,7 @@ import { formatDate } from '@angular/common';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private personaService: PersonaService, private usuarioService: UsuarioService,
+  constructor(private personaService: PersonaService, private usuarioService: UsuarioService, private rolService: RolService,
     private router: Router, private toastr: ToastrService) { }
   ngOnInit(): void {
     this.registrar
@@ -25,6 +27,18 @@ export class LoginComponent implements OnInit {
   usuario: Usuario = new Usuario();
   confirmarPass = "";
   persona: Persona = new Persona();
+  rol: Rol = new Rol();
+
+  getrol(): void {
+    console.log("holaaaaa");
+    this.rolService.getRol(3).subscribe(rol => {
+      this.rol=rol;
+
+      // this.usuario.rolId = this.rol;
+      console.log("NOmbre "+this.rol.rolNombre)
+    });
+
+  }
 
   registrar(): void {
     if (this.validaciones()) {
@@ -34,19 +48,27 @@ export class LoginComponent implements OnInit {
             this.persona.perId = data;
             this.usuario.usuPerId = this.persona;
 
-            this.usuarioService.crearUsuario(this.usuario).subscribe(
-              response => {
-                Swal.fire({
-                  position: 'center',
-                  icon: 'success',
-                  title: 'Registro exitoso',
-                  showConfirmButton: true,
-                  timer: 1500
-                }).then(() => {
-                  location.reload();
-                });
-              }
-            )
+            // this.rolService.getRol(3).subscribe(rol => {
+            // this.rol.rolId = 3;
+            // this.rol.rolNombre="Cliente";
+            // this.rol.rolFechaRegistro=new Date("2023-06-29T00:40:38.000+00:00");
+
+            // this.usuario.rolId = this.rol;
+
+
+            this.usuarioService.crearUsuario(this.usuario).subscribe(response => {
+              Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Registro exitoso',
+                showConfirmButton: true,
+                timer: 1500
+              }).then(() => {
+                location.reload();
+              });
+            })
+
+
           });
         }
       )
