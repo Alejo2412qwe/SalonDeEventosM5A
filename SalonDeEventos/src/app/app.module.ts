@@ -17,6 +17,10 @@ import { AdminComponent } from './admin/admin.component';
 import { EmpleadoComponent } from './empleado/empleado.component';
 import { ProductoComponent } from './producto/producto.component';
 
+import { CommonModule } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
@@ -52,7 +56,10 @@ const routes: Routes = [
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    CommonModule,
+    BrowserAnimationsModule, // required animations module
+    ToastrModule.forRoot(), // ToastrModule added
   ],
   providers: [],
   bootstrap: [AppComponent]

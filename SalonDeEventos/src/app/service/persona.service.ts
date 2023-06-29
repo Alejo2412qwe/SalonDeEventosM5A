@@ -15,11 +15,15 @@ export class PersonaService {
 
   constructor(private http: HttpClient) { }
 
+  // crearPersona(persona: Persona): Observable<Persona> {
+  //   return this.http.post<Persona>(this.url + "http://localhost:9999/persona/crear", persona, { headers: this.httpHeaders })
+  // }
+
   crearPersona(persona: Persona): Observable<Persona> {
-    return this.http.post<Persona>(this.url + "/crear", persona, { headers: this.httpHeaders })
+    return this.http.post<Persona>(`${this.url}/crear`, persona, { headers: this.httpHeaders })
   }
 
-  getCliente():Observable<number>{
+  getId():Observable<number>{
     return this.http.get<number>(this.url+"/ultimoregistro");
   }
 

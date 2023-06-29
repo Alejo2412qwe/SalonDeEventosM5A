@@ -2,9 +2,18 @@ import { Usuario } from "./usuario";
 
 export class Rol {
 
-    rolId: number = 0;
-    rolNombre: string = "";
-    rolFechaRegistro: Date = new Date;
+    rolId: number |undefined;;
+    rolNombre: string;
+    rolFechaRegistro: Date;
 
+    constructor(
+        rolId?: number,
+        rolNombre?: string,
+        rolFechaRegistro?: Date
+    ) {
+        this.rolId = rolId;
+        this.rolNombre = rolNombre || "";
+        this.rolFechaRegistro = rolFechaRegistro || new Date;
+    }
 }
 
