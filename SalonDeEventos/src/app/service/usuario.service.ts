@@ -14,7 +14,15 @@ export class UsuarioService {
   constructor(private http: HttpClient) { }
 
   crearUsuario(usuario: Usuario): Observable<Usuario> {
+    console.log("USUSERVICE= "+usuario?.usuPerId?.perId);
     return this.http.post<Usuario>(this.url + "/crear", usuario, { headers: this.httpHeaders })
   }
 
+  usuarioExiste(usuario:string):Observable<boolean>{
+    return this.http.get<boolean>(`${this.url}/usuarioExiste/${usuario}`);
+  }
+
+  login(usuario:string, password:string):Observable<Usuario>{
+    return this.http.get<Usuario>(`${this.url}/login/${usuario}/${password}`);
+  }
 }

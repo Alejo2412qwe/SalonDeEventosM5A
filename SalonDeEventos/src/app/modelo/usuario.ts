@@ -14,15 +14,15 @@ export class Usuario {
     constructor(
         usuId?: number,
         usuNombreUsuario?: string,
-        usuContraseña?: string,
+        usuContrasena?: string,
         usuFechaRegistro?: Date,
         usuPerId?: Persona,
         rolId?: Rol
     ) {
         this.usuId = usuId || 0;
         this.usuNombreUsuario = usuNombreUsuario || "";
-        this.usuContrasena = usuContraseña || "";
-        this.usuFechaRegistro = usuFechaRegistro || new Date;
+        this.usuContrasena = usuContrasena || "";
+        this.usuFechaRegistro = usuFechaRegistro || new Date();
         this.usuPerId = usuPerId || new Persona;
         this.rolId = rolId || new Rol;
     }

@@ -37,15 +37,15 @@
             <div class="input-boxes">
               <div class="input-box">
                 <i class="fas fa-envelope"></i>
-                <input type="text" placeholder="Ingresa tu Correo" required>
+                <input type="text" [(ngModel)]="usuariologin" placeholder="Ingresa tu Usuario" required>
               </div>
               <div class="input-box">
                 <i class="fas fa-lock"></i>
-                <input type="password" placeholder="Ingresa tu contraseña" required>
+                <input type="password" [(ngModel)]="passlogin" placeholder="Ingresa tu contraseña" required>
               </div>
               <div class="text"><a href="#">¿Olvidaste tu contraseña?</a></div>
               <div class="button input-box">
-                <input type="submit" value="Iniciar Sesion">
+                <input type="submit" (click)="login()" value="Iniciar Sesion">
               </div>
               <div class="text sign-up-text">No tienes una cuenta? <label for="flip">Registrate</label></div>
             </div>
@@ -107,7 +107,7 @@
               <input type="password" [(ngModel)]="confirmarPass" placeholder="Verifica tu contraseña" required>
             </div>
             <div class="button input-box">
-              <input type="submit" value="Registrate" (click)="getrol()" >
+              <input type="submit" value="Registrate" (click)="registrar()" >
             </div>
           <!-- </form> -->
           <div class="text sign-up-text">¿Ya tienes una cuenta? <label for="flip">Inicia Sesion</label></div>

@@ -20,8 +20,54 @@ export class LoginComponent implements OnInit {
   constructor(private personaService: PersonaService, private usuarioService: UsuarioService, private rolService: RolService,
     private router: Router, private toastr: ToastrService) { }
   ngOnInit(): void {
-    this.registrar
+    this.getrol()
   }
+
+  usuariologin: string = "";
+  passlogin: string = "";
+  usuarioLogin:Usuario=new Usuario;
+
+  login(): void {
+    console.log("usuariologin= "+this.usuariologin);
+
+    this.usuarioService.usuarioExiste(this.usuariologin).subscribe(existe => {
+      console.log("boolean= "+existe);
+      // if (existe) {
+        
+      //   this.usuarioService.login(this.usuariologin, this.passlogin).subscribe(login => {
+      //     console.log("hola:3");
+      //     Swal.fire({
+      //       position: 'center',
+      //       icon: 'success',
+      //       title: 'Bienvenido',
+      //       showConfirmButton: false,
+      //       timer: 3500
+      //     }).then(() => {
+      //       this.router.navigate(["salon"]);
+      //     });
+
+      //   });
+
+
+
+      // } else {
+      //   Swal.fire({
+      //     position: 'center',
+      //     icon: 'success',
+      //     title: 'Bienvenido',
+      //     showConfirmButton: true
+      //     // timer: 3500
+      //   }).then(() => {
+      //     location.reload();
+      //   });
+      // }
+    });
+
+  }
+
+
+////////////REGISTRO///////////////////////////////////////
+
 
   // personaId: Persona = new Persona();
   usuario: Usuario = new Usuario();
@@ -32,10 +78,11 @@ export class LoginComponent implements OnInit {
   getrol(): void {
     console.log("holaaaaa");
     this.rolService.getRol(3).subscribe(rol => {
-      this.rol=rol;
+      this.rol.rolId = rol.rolId;
+      // this.usuario.rolId = rol;
 
       // this.usuario.rolId = this.rol;
-      console.log("NOmbre "+this.rol.rolNombre)
+      // console.log("NOmbre " + this.rol.rolId)
     });
 
   }
@@ -44,31 +91,28 @@ export class LoginComponent implements OnInit {
     if (this.validaciones()) {
       this.personaService.crearPersona(this.persona).subscribe(
         response => {
-          this.personaService.getId().subscribe(data => {
-            this.persona.perId = data;
-            this.usuario.usuPerId = this.persona;
+          this.rolService.getRol(3).subscribe(rol => {
+            this.rol.rolId = rol.rolId;
+            this.usuario.rolId = this.rol;
 
-            // this.rolService.getRol(3).subscribe(rol => {
-            // this.rol.rolId = 3;
-            // this.rol.rolNombre="Cliente";
-            // this.rol.rolFechaRegistro=new Date("2023-06-29T00:40:38.000+00:00");
+            this.personaService.getId().subscribe(data => {
+              this.persona.perId = data;
+              this.usuario.usuPerId = this.persona;
 
-            // this.usuario.rolId = this.rol;
+              console.log("this.usuario.rolid= " + this.usuario.rolId?.rolId);
 
-
-            this.usuarioService.crearUsuario(this.usuario).subscribe(response => {
-              Swal.fire({
-                position: 'center',
-                icon: 'success',
-                title: 'Registro exitoso',
-                showConfirmButton: true,
-                timer: 1500
-              }).then(() => {
-                location.reload();
+              this.usuarioService.crearUsuario(this.usuario).subscribe(response => {
+                Swal.fire({
+                  position: 'center',
+                  icon: 'success',
+                  title: 'Registro exitoso',
+                  showConfirmButton: true
+                  // timer: 3500
+                }).then(() => {
+                  location.reload();
+                });
               });
-            })
-
-
+            });
           });
         }
       )

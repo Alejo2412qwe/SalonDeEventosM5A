@@ -2,7 +2,7 @@ import { Usuario } from "./usuario";
 
 export class Rol {
 
-    rolId: number |undefined;;
+    rolId: number;
     rolNombre: string;
     rolFechaRegistro: Date;
 
@@ -11,9 +11,9 @@ export class Rol {
         rolNombre?: string,
         rolFechaRegistro?: Date
     ) {
-        this.rolId = rolId;
+        this.rolId = rolId||0;
         this.rolNombre = rolNombre || "";
-        this.rolFechaRegistro = rolFechaRegistro || new Date;
+        this.rolFechaRegistro = rolFechaRegistro || new Date();
     }
 }
 
