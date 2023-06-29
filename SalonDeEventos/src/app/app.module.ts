@@ -20,6 +20,7 @@ import { ProductoComponent } from './producto/producto.component';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { DetallesusuarioComponent } from './detallesusuario/detallesusuario.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -30,6 +31,7 @@ const routes: Routes = [
   { path: 'salon', component: SalonComponent },
   { path: 'emp', component: EmpleadoComponent },
   { path: 'menu', component: HeaderComponent },
+  { path: 'editarusu', component: DetallesusuarioComponent },
   {path:'prod',component:ProductoComponent}
 
 ]
@@ -49,6 +51,7 @@ const routes: Routes = [
     AdminComponent,
     EmpleadoComponent,
     ProductoComponent,
+    DetallesusuarioComponent,
 
   ],
   imports: [
