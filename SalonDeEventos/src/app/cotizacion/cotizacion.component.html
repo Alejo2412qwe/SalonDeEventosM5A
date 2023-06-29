@@ -1,59 +1,140 @@
 <!-- CAROUSEL -->
 <div>
-<app-headers></app-headers>
+    <app-headers></app-headers>
 </div>
-<section class="carouselSection">
-    <div class="bodyCarusel">
-        <div id="carousel-HomeJumbotron" class="carousel slide carousel-fade" data-bs-ride="carousel"
-            data-bs-interval="5000">
-            <div class="carousel-indicators">
-                <button type="button" data-bs-target="#carousel-HomeJumbotron" data-bs-slide-to="0" class="active"
-                    aria-label="Slide 1" aria-current="true"></button>
-                <button type="button" data-bs-target="#carousel-HomeJumbotron" data-bs-slide-to="1" aria-label="Slide 2"
-                    class=""></button>
-                <button type="button" data-bs-target="#carousel-HomeJumbotron" data-bs-slide-to="2" aria-label="Slide 3"
-                    class=""></button>
+<!-- ALL -->
+<div class="divPrimero">
+    <div class="divSegundo">
+        <section class="carouselSection">
+            <div class="bodyCarusel">
+                <div id="carousel-HomeJumbotron" class="carousel slide carousel-fade" data-bs-ride="carousel"
+                    data-bs-interval="5000">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carousel-HomeJumbotron" data-bs-slide-to="0"
+                            class="active" aria-label="Slide 1" aria-current="true"></button>
+                        <button type="button" data-bs-target="#carousel-HomeJumbotron" data-bs-slide-to="1"
+                            aria-label="Slide 2" class=""></button>
+                        <button type="button" data-bs-target="#carousel-HomeJumbotron" data-bs-slide-to="2"
+                            aria-label="Slide 3" class=""></button>
+                    </div>
+                    <div class="carousel-inner">
+                        <div class="carousel-item slide-one-image active" role="img"
+                            aria-label="adorable photo of a squirrel">
+                            <div class="carousel-item-bg"></div>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item slide-two-image" role="img" aria-label="photo of the woods">
+                            <div class="carousel-item-bg"></div>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item slide-three-image" role="img" aria-label="photo of a pond">
+                            <div class="carousel-item-bg"></div>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carousel-HomeJumbotron"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carousel-HomeJumbotron"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next2</span>
+                </button>
             </div>
-            <div class="carousel-inner">
-                <div class="carousel-item slide-one-image active" role="img" aria-label="adorable photo of a squirrel">
-                    <div class="carousel-item-bg"></div>
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-6">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item slide-two-image" role="img" aria-label="photo of the woods">
-                    <div class="carousel-item-bg"></div>
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-6">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item slide-three-image" role="img" aria-label="photo of a pond">
-                    <div class="carousel-item-bg"></div>
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-6">
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        </section>
+        <!-- CAROUSEL -->
+    </div>
+</div>
+
+<div class="divPrimero">
+    <div class="divSegundo">
+        <!-- FORMULARIO -->
+        <div class="divPadding">
+
+            <head>
+                <meta charset="UTF-8">
+                <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Formulario de reserva</title>
+            </head>
+            <div class="divPadding">
+
+                <body>
+                    <form action="#">
+                        <h1>Datos de la reserva</h1>
+                        <fieldset id="datos_personales">
+                            <p>Por favor, rellene todos los campos. </p>
+                            <label for="nombre">Cotización #:
+                                <!-- <input id="invoiceNumber" type="text" [(ngModel)]="invoiceNumber"> -->
+                                <!-- <input id="invoiceNumber" type="text" [(ngModel)]="invoiceNumber"> -->
+                                <label for="" id="cotizacion">numero</label>
+                            </label>
+                            <!-- <label for="apellidos"> Apellidos:
+                        <input type="text" id="nombre">
+                    </label>
+                    <label for="telefono"> Teléfono de contacto:
+                        <input type="text" id="telefono">
+                    </label>
+                    <label for="email"> Email:
+                        <input type="email" id="email">
+                    </label> -->
+                        </fieldset>
+
+                        <fieldset class="datos_reserva">
+                            <label for="dia">Fecha de reserva:
+                                <input type="date" id="dia">
+                            </label>
+                            <!-- <label for="noches"> holaaa
+                        <input type="number" id="noches">
+                    </label> -->
+
+                            <p>Salón que desea reservar:</p>
+                            <input type="radio" name="salon" value="Gran Aventura">Gran Aventura
+                            <input type="radio" name="salon" value="Noche Buena">Noche Buena
+                            <input type="radio" name="salon" value="Miraflores">Miraflores
+
+                            <!-- <p>Extras:</p>
+                    <input type="checkbox" name="extras"> > <br>
+                    <input type="checkbox" name="extras"> <br>
+                    <input type="checkbox" name="extras"> <br>
+                    <input type="checkbox" name="extras"> <br> -->
+
+                        </fieldset>
+                        <!-- 
+                <fieldset>
+                    <p>Comentarios: (opcional) </p>
+                    <textarea name="comentarios" cols="50" rows="5"></textarea>
+                </fieldset> -->
+
+                        <fieldset class="enviar">
+                            <p>Reservar: </p>
+                            <button id="enviar" type="submit">Reservar</button>
+                            <button id="cancelar" type="reset">Cancelar</button>
+                        </fieldset>
+
+                    </form>
+
+                </body>
+
             </div>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carousel-HomeJumbotron"
-            data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carousel-HomeJumbotron"
-            data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next2</span>
-        </button>
     </div>
-</section>
-<!-- CAROUSEL -->
+</div>

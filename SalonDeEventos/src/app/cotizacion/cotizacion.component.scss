@@ -1,10 +1,29 @@
-// CAROUSEL
-// .bodyCarusel {
-//   background-color: #000;
+// ALL
+.divPrimero {
+  position: relative;
+  background-color: #FFFF;
+}
+
+.divSegundo {
+  color: #ddd;
+  background-color:#FFFF;
+  text-align: center;
+  text-align: justify;
+  
+}
+
+// .divSegundo_pading {
+//   color: #ddd;
+//   background-color: $color-all-uno;
+//   text-align: center;
+//   padding: 50px 80px;
+//   text-align: justify;
 // }
 
+//CAROUSEL
+
 .slide-one-image {
-  background-image: url("../../assets/img/cumpleperros.jpeg");
+  background-image: url("../../assets/img/copas.png");
   background-position: top center;
 }
 
@@ -136,12 +155,102 @@ nav+.carousel {
   .carousel-control-prev {
     width: 5%;
   }
+
+  .bodyCarusel{
+
+    width: 90%;
+    margin: auto;
+  }
 }
 
 // CAROUSEL
 
-.bodyCarusel{
 
-  width: 90%;
-  margin: auto;
+// FORMULARIO
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 15px;
+  display: flex;
+  justify-content: center;
+  background-image: url("../../assets/img/salonfino.jpeg");
+  // background-size: contain;
+  background-size: cover;
+  padding: 10px;
+  // // background-repeat: no-repeat;
+  // background-position: center;
 }
+.divPadding{
+  margin-top: 10px;
+  color: #000000;
+}
+
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+h1 {
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+form {
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 1rem;
+  width: auto;
+  color: white;
+  margin: 10px;
+}
+
+fieldset {
+  padding: 0.5rem 2rem;
+  border: none;
+}
+
+#datos_personales {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-bottom: 0.5rem;
+}
+
+input[type="text"],
+input[type="email"] {
+  width: 100%;
+
+}
+
+textarea {
+  width: 100%;
+}
+
+.enviar {
+  text-align: center;
+}
+
+button:hover {
+  color: rgba(0, 0, 0, 0.8);
+}
+
+
+button {
+  border: 10px;
+  border-radius: 0.5em;
+  font-size: 1rem;
+  padding: 0.5em;
+  color: white;
+}
+
+
+#enviar {
+  background-color: rgba(194, 132, 17, 0.8)
+}
+
+
+#cancelar {
+  background-color: rgba(167, 42, 4, 0.8)
+}
+//FORMULARIO
