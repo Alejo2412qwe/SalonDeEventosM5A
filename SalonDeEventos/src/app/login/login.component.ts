@@ -25,48 +25,47 @@ export class LoginComponent implements OnInit {
 
   usuariologin: string = "";
   passlogin: string = "";
-  usuarioLogin:Usuario=new Usuario;
+  // usuarioLogin:Usuario=new Usuario;
 
   login(): void {
-    console.log("usuariologin= "+this.usuariologin);
 
     this.usuarioService.usuarioExiste(this.usuariologin).subscribe(existe => {
-      console.log("boolean= "+existe);
-      // if (existe) {
-        
-      //   this.usuarioService.login(this.usuariologin, this.passlogin).subscribe(login => {
-      //     console.log("hola:3");
-      //     Swal.fire({
-      //       position: 'center',
-      //       icon: 'success',
-      //       title: 'Bienvenido',
-      //       showConfirmButton: false,
-      //       timer: 3500
-      //     }).then(() => {
-      //       this.router.navigate(["salon"]);
-      //     });
+      console.log("boolean= " + existe);
+      if (existe) {
 
-      //   });
+        this.usuarioService.login(this.usuariologin, this.passlogin).subscribe(login => {
+          if (login) {
+            Swal.fire({
+              position: 'center',
+              icon: 'success',
+              title: 'Bienvenido',
+              showConfirmButton: false,
+              timer: 2000
+            }).then(() => {
+              this.router.navigate(["menu"]);
+            });
+          } else {
+            this.toastr.error('', 'Contraseña incorrecta', {
+              timeOut: 3000
+            });
+          }
+
+
+        });
 
 
 
-      // } else {
-      //   Swal.fire({
-      //     position: 'center',
-      //     icon: 'success',
-      //     title: 'Bienvenido',
-      //     showConfirmButton: true
-      //     // timer: 3500
-      //   }).then(() => {
-      //     location.reload();
-      //   });
-      // }
+      } else {
+        this.toastr.error('', 'Nombre de usuario incorrecto', {
+          timeOut: 3000
+        });
+      }
     });
 
   }
 
 
-////////////REGISTRO///////////////////////////////////////
+  ////////////REGISTRO///////////////////////////////////////
 
 
   // personaId: Persona = new Persona();
