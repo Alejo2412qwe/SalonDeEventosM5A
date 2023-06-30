@@ -64,11 +64,11 @@
             <section class="layout2">
               <div class="input-box">
                 <i class="fas fa-user"></i>
-                <input type="text" name="perCedula" [(ngModel)]="persona.perCedula" class="form-control" placeholder="Cedula" required>
+                <input type="text"  name="perCedula" [(ngModel)]="persona.perCedula" class="form-control" placeholder="Cedula" required (keydown)="numeros($event)" >
               </div>
               <div class="input-box">
                 <i class="fas fa-user"></i>
-                <input type="text" name="perNombre" [(ngModel)]="persona.perNombre" placeholder="Nombres" required>
+                <input type="text" name="perNombre" [(ngModel)]="persona.perNombre" placeholder="Nombres" required >
               </div>
               <div class="input-box">
                 <i class="fas fa-user"></i>
@@ -108,7 +108,7 @@
               <input type="password" name="confirmarPass" [(ngModel)]="confirmarPass" placeholder="Verifica tu contraseña" required>
             </div>
             <div class="button input-box">
-              <input type="submit" value="Registrate" (click)="registrar()">
+              <input type="submit" value="Registrate" (click)="registrar()" >
             </div>
           </form>
           <div class="text sign-up-text">¿Ya tienes una cuenta? <label for="flip">Inicia Sesion</label></div>
