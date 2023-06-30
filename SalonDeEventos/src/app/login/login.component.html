@@ -33,15 +33,15 @@
         <div class="login-form">
           <img class="2" src="assets/img/png.png" style="align-items: center;" width="65%">
           <div class="title">Login - Salon de Eventos</div>
-          <form action="#">
+          <form action="#" name="login">
             <div class="input-boxes">
               <div class="input-box">
                 <i class="fas fa-envelope"></i>
-                <input type="text" [(ngModel)]="usuariologin" placeholder="Ingresa tu Usuario" required>
+                <input type="text" name="usuariologin" [(ngModel)]="usuariologin" placeholder="Ingresa tu Usuario" required>
               </div>
               <div class="input-box">
                 <i class="fas fa-lock"></i>
-                <input type="password" [(ngModel)]="passlogin" placeholder="Ingresa tu contraseña" required>
+                <input type="password" name="passlogin" [(ngModel)]="passlogin" placeholder="Ingresa tu contraseña" required>
               </div>
               <div class="text"><a href="#">¿Olvidaste tu contraseña?</a></div>
               <div class="button input-box">
@@ -55,6 +55,7 @@
         <div class="signup-form">
           <div class="title" style="font-weight: bolder;">Crear cuenta en "PERRUNCAY"</div>
           <!-- <form action=""> -->
+          <form action="#" name="registro">
             <div class="title2"
               style="margin-top: 20px; margin-bottom: 10px; font-size: 18px; text-align: center; font-weight: bolder;">
               Datos
@@ -63,53 +64,53 @@
             <section class="layout2">
               <div class="input-box">
                 <i class="fas fa-user"></i>
-                <input type="text" [(ngModel)]="persona.perCedula" class="form-control" placeholder="Cedula"  required>
+                <input type="text" name="perCedula" [(ngModel)]="persona.perCedula" class="form-control" placeholder="Cedula" required>
               </div>
               <div class="input-box">
                 <i class="fas fa-user"></i>
-                <input type="text" [(ngModel)]="persona.perNombre" placeholder="Nombres" required>
+                <input type="text" name="perNombre" [(ngModel)]="persona.perNombre" placeholder="Nombres" required>
               </div>
               <div class="input-box">
                 <i class="fas fa-user"></i>
-                <input type="text" [(ngModel)]="persona.perApellido" placeholder="Apellidos" required>
+                <input type="text" name="perApellido" [(ngModel)]="persona.perApellido" placeholder="Apellidos" required>
               </div>
               <div class="input-box">
                 <i class="fas fa-envelope"></i>
-                <input type="text" [(ngModel)]="persona.perCorreo" placeholder="Correo electronico" required>
+                <input type="text" name="perCorreo" [(ngModel)]="persona.perCorreo" placeholder="Correo electronico" required>
               </div>
 
               <div class="input-box">
                 <i class="fas fa-phone"></i>
-                <input type="text" [(ngModel)]="persona.perTelefono" placeholder="Telefono" required>
+                <input type="text" name="perTelefono" [(ngModel)]="persona.perTelefono" placeholder="Telefono" required>
               </div>
 
               <div class="input-box">
                 <i class="fas fa-calendar"></i>
-                <input type="date" [(ngModel)]="persona.perFechaNacimiento" placeholder="Fecha de nacimiento" required>
+                <input type="date" name="perFechaNacimiento" [(ngModel)]="persona.perFechaNacimiento" placeholder="Fecha de nacimiento" required>
               </div>
             </section>
-            
+
             <div class="title2"
               style="margin-top: 30px; margin-bottom: 10px; font-size: 18px; text-align: center; font-weight: bolder;">
               Datos del Usuario</div>
             <section class="layout3">
               <div class="input-box">
                 <i class="fas fa-envelope"></i>
-                <input type="text"[(ngModel)]="usuario.usuNombreUsuario" placeholder="Nombre de usuario" required>
+                <input type="text" name="usuNombreUsuario" [(ngModel)]="usuario.usuNombreUsuario" placeholder="Nombre de usuario" required>
               </div>
               <div class="input-box">
                 <i class="fas fa-envelope"></i>
-                <input type="password" [(ngModel)]="usuario.usuContrasena" placeholder="Contraseña " required>
+                <input type="password" name="usuContrasena" [(ngModel)]="usuario.usuContrasena" placeholder="Contraseña " required>
               </div>
             </section>
             <div class="input-box">
               <i class="fas fa-envelope"></i>
-              <input type="password" [(ngModel)]="confirmarPass" placeholder="Verifica tu contraseña" required>
+              <input type="password" name="confirmarPass" [(ngModel)]="confirmarPass" placeholder="Verifica tu contraseña" required>
             </div>
             <div class="button input-box">
-              <input type="submit" value="Registrate" (click)="registrar()" >
+              <input type="submit" value="Registrate" (click)="registrar()">
             </div>
-          <!-- </form> -->
+          </form>
           <div class="text sign-up-text">¿Ya tienes una cuenta? <label for="flip">Inicia Sesion</label></div>
         </div>
       </div>

@@ -14,7 +14,6 @@ export class UsuarioService {
   constructor(private http: HttpClient) { }
 
   crearUsuario(usuario: Usuario): Observable<Usuario> {
-    console.log("USUSERVICE= "+usuario?.usuPerId?.perId);
     return this.http.post<Usuario>(this.url + "/crear", usuario, { headers: this.httpHeaders })
   }
 

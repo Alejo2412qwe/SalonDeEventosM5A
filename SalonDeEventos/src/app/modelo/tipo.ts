@@ -5,17 +5,14 @@ export class Tipo {
     tipId: number = 0;
     tipNombre: string = "";
     tipFechaRegistro: Date = new Date;
-    listaProductos: ProductoServicio = ProductoServicio;
 
     constructor(
-        tipId: number,
-        tipNombre: string,
-        tipFechaRegistro: Date,
-        listaProductos: ProductoServicio[]
+        tipId?: number,
+        tipNombre?: string,
+        tipFechaRegistro?: Date,
     ) {
-        this.tipId = tipId;
-        this.tipNombre = tipNombre;
-        this.tipFechaRegistro = tipFechaRegistro;
-        this.listaProductos = listaProductos;
+        this.tipId = tipId || 0;
+        this.tipNombre = tipNombre || "";
+        this.tipFechaRegistro = tipFechaRegistro || new Date;
     }
 }

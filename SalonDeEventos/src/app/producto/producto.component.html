@@ -1,32 +1,17 @@
 <div class="container">
     <section class="layout">
         <div>
-            <form action="" class="form_main">
+            <form action="#" class="form_main" name="formProd">
 
                 <p class="heading">Crear un Producto</p>
                 <section class="layout">
                     <div class="inputContainer">
-                        <input type="text" placeholder="Ingresa el nombre" required>
+                        <input name="prodNombre" type="text" [(ngModel)]="producto.prodNombre"
+                            placeholder="Ingresa el nombre" required>
                     </div>
 
                     <div class="inputContainer">
                         <h2 class="nombre">Elige la categoria</h2>
-                        <select class="select">
-                            <option>Música</option>
-                            <option>Decoración</option>
-                            <option>Sillas</option>
-                        </select>
-                    </div>
-                    <div class="inputContainer">
-                        <input type="text" placeholder="Ingresa el precio" required>
-                    </div>
-
-                    <div class="inputContainer">
-                        <input type="text" placeholder="Ingresa la descripcion" required>
-                    </div>
-
-                    <div class="inputContainer">
-                        <h2 class="nombre">Elige el tipo</h2>
                         <select class="select">
                             <option>Boda</option>
                             <option>Graduacion</option>
@@ -35,15 +20,32 @@
                             <option>Cumpleaños</option>
                         </select>
                     </div>
+                    <div class="inputContainer">
+                        <input name="prodPrecio" type="text" [(ngModel)]="producto.prodPrecio"
+                            placeholder="Ingresa el precio" required>
+                    </div>
+
+                    <div class="inputContainer">
+                        <input name="prodDescripcion" type="text" [(ngModel)]="producto.prodDescripcion"
+                            placeholder="Ingresa la descripcion" required>
+                    </div>
+
+                    <div class="inputContainer">
+                        <h2 class="nombre">Elige el tipo</h2>
+                        <select name="tipos" [(ngModel)]="seleccionados" required class="select">
+                            <option *ngFor="let tipo of tipos" [ngValue]="tipo" select="Producto">
+                                {{tipo.tipNombre}}
+                              </option>
+                        </select>
+                    </div>
 
                 </section>
 
-                <button id="button">Crear un producto</button>
-
+                <button id="button" (click)="registrar()">Crear un producto</button>
             </form>
         </div>
         <div style="height: 400px;">
-<!-- 
+            <!-- 
             <section class="layout4">
 
                 <div>
