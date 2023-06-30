@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Persona } from '../modelo/persona';
 import { PersonaService } from '../service/persona.service';
 import { Router } from '@angular/router'
@@ -28,42 +28,62 @@ export class LoginComponent implements OnInit {
   // usuarioLogin:Usuario=new Usuario;
 
   login(): void {
+    if (this.validacionesLogin()) {
+      this.usuarioService.usuarioExiste(this.usuariologin).subscribe(existe => {
+        console.log("boolean= " + existe);
+        if (existe) {
 
-    this.usuarioService.usuarioExiste(this.usuariologin).subscribe(existe => {
-      console.log("boolean= " + existe);
-      if (existe) {
-
-        this.usuarioService.login(this.usuariologin, this.passlogin).subscribe(login => {
-          if (login) {
-            Swal.fire({
-              position: 'center',
-              icon: 'success',
-              title: 'Bienvenido',
-              showConfirmButton: false,
-              timer: 2000
-            }).then(() => {
-              this.router.navigate(["menu"]);
-            });
-          } else {
-            this.toastr.error('', 'Contraseña incorrecta', {
-              timeOut: 3000
-            });
-          }
-
-
-        });
+          this.usuarioService.login(this.usuariologin, this.passlogin).subscribe(login => {
+            if (login) {
+              Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Bienvenido',
+                showConfirmButton: false,
+                timer: 2000
+              }).then(() => {
+                this.router.navigate(["menu"]);
+              });
+            } else {
+              this.toastr.error('', 'Contraseña incorrecta', {
+                timeOut: 3000
+              });
+            }
 
 
+          });
 
-      } else {
-        this.toastr.error('', 'Nombre de usuario incorrecto', {
-          timeOut: 3000
-        });
-      }
-    });
-
+        } else {
+          this.toastr.error('', 'Nombre de usuario incorrecto', {
+            timeOut: 3000
+          });
+        }
+      });
+    }
   }
 
+  validacionesLogin(): boolean {
+    // const fechaActual = new Date();
+    // console.log(fechaActual);
+    let tiempo: number = 2500;
+
+    let ban: boolean = true;
+
+    if (this.usuariologin.length === 0) {
+      this.toastr.error('Ingrese su nombre de usuario', '', {
+        timeOut: tiempo
+      });
+      ban = false;
+    }
+    if (this.passlogin.length === 0) {
+      this.toastr.error('Ingrese su contraseña', '', {
+        timeOut: tiempo
+      });
+      ban = false;
+    }
+
+    return ban;
+  }
 
   ////////////REGISTRO///////////////////////////////////////
 
@@ -87,7 +107,7 @@ export class LoginComponent implements OnInit {
   }
 
   registrar(): void {
-    if (this.validaciones()) {
+    if (this.validacionesRegistro()) {
       this.personaService.crearPersona(this.persona).subscribe(
         response => {
           this.rolService.getRol(3).subscribe(rol => {
@@ -118,7 +138,7 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  validaciones(): boolean {
+  validacionesRegistro(): boolean {
     // const fechaActual = new Date();
     // console.log(fechaActual);
     let tiempo: number = 4000;
@@ -191,6 +211,16 @@ export class LoginComponent implements OnInit {
         timeOut: tiempo
       });
       ban = false;
+    } else {
+      this.usuarioService.usuarioExiste(this.usuario.usuNombreUsuario).subscribe(existe => {
+
+        if (existe) {
+          this.toastr.error('Este usuario ya existe', '', {
+            timeOut: tiempo
+          });
+          ban = false;
+        }
+      });
     }
 
     if (this.confirmarPass.length === 0) {
@@ -198,6 +228,13 @@ export class LoginComponent implements OnInit {
         timeOut: tiempo
       });
       ban = false;
+    } else {
+      if (this.confirmarPass !== this.usuario.usuContrasena) {
+        this.toastr.error('Las 2 contraseñas tienen que coincidir', '', {
+          timeOut: tiempo
+        });
+        ban = false;
+      }
     }
 
     return ban;
@@ -227,4 +264,31 @@ export class LoginComponent implements OnInit {
 
     return edad;
   }
+
+
+  numeros(event: KeyboardEvent) {
+    const allowedKeys = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.', '-', ',', 'Backspace', 'Delete', 'Tab'];
+    const inputKey = event.key;
+
+    if (!allowedKeys.includes(inputKey)) {
+      event.preventDefault();
+    }
+  }
+
+  // @HostListener('letras', ['$event'])
+  // letras(event: KeyboardEvent) {
+
+  //   const allowedKeys = ['Backspace', 'Delete', 'Tab'];
+
+  //   // Agregar letras de la 'a' a la 'z'
+  //   for (let i = 97; i <= 122; i++) {
+  //     allowedKeys.push(String.fromCharCode(i));
+  //   }
+
+  //   const inputKey = event.key.toLowerCase();
+
+  //   if (!allowedKeys.includes(inputKey)) {
+  //     event.preventDefault();
+  //   }
+  // }
 }
