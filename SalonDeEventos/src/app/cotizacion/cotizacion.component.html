@@ -1,9 +1,20 @@
 <!-- CAROUSEL -->
+<!DOCTYPE html>
+<!-- Coding by CodingNepal | www.codingnepalweb.com-->
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <title> Logeo para el Salon de Eventos </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
 <div>
     <app-headers></app-headers>
 </div>
 <!-- ALL -->
-<div class="divPrimero">
+<!-- <div class="divPrimero">
     <div class="divSegundo">
         <section class="carouselSection">
             <div class="bodyCarusel">
@@ -61,12 +72,11 @@
             </div>
         </section>
         <!-- CAROUSEL -->
-    </div>
-</div>
+<!-- </div>
+</div> --> -->
 
-<div class="divPrimero">
+<!-- <div class="divPrimero">
     <div class="divSegundo">
-        <!-- FORMULARIO -->
         <div class="divPadding">
 
             <head>
@@ -81,60 +91,103 @@
                     <form action="#">
                         <h1>Datos de la reserva</h1>
                         <fieldset id="datos_personales">
-                            <p>Por favor, rellene todos los campos. </p>
                             <label for="nombre">Cotización #:
-                                <!-- <input id="invoiceNumber" type="text" [(ngModel)]="invoiceNumber"> -->
-                                <!-- <input id="invoiceNumber" type="text" [(ngModel)]="invoiceNumber"> -->
+
                                 <label for="" id="cotizacion">numero</label>
                             </label>
-                            <!-- <label for="apellidos"> Apellidos:
-                        <input type="text" id="nombre">
-                    </label>
-                    <label for="telefono"> Teléfono de contacto:
-                        <input type="text" id="telefono">
-                    </label>
-                    <label for="email"> Email:
-                        <input type="email" id="email">
-                    </label> -->
+
                         </fieldset>
 
                         <fieldset class="datos_reserva">
                             <label for="dia">Fecha de reserva:
                                 <input type="date" id="dia">
                             </label>
-                            <!-- <label for="noches"> holaaa
-                        <input type="number" id="noches">
-                    </label> -->
 
                             <p>Salón que desea reservar:</p>
-                            <input type="radio" name="salon" value="Gran Aventura">Gran Aventura
+                            <input type="radio" name="salon" value="Gran Aventura">Gran Aventur
                             <input type="radio" name="salon" value="Noche Buena">Noche Buena
                             <input type="radio" name="salon" value="Miraflores">Miraflores
 
-                            <!-- <p>Extras:</p>
-                    <input type="checkbox" name="extras"> > <br>
-                    <input type="checkbox" name="extras"> <br>
-                    <input type="checkbox" name="extras"> <br>
-                    <input type="checkbox" name="extras"> <br> -->
-
                         </fieldset>
-                        <!-- 
-                <fieldset>
-                    <p>Comentarios: (opcional) </p>
-                    <textarea name="comentarios" cols="50" rows="5"></textarea>
-                </fieldset> -->
-
                         <fieldset class="enviar">
                             <p>Reservar: </p>
                             <button id="enviar" type="submit">Reservar</button>
                             <button id="cancelar" type="reset">Cancelar</button>
                         </fieldset>
-
                     </form>
-
                 </body>
-
             </div>
         </div>
     </div>
-</div>
+</div> -->
+
+<p class="titulo" style="text-align: center; font-size: 24px;">DATOS DE LA RESERVA</p>
+<section style="width: 80%; margin-left: auto; margin-right: auto;">
+    <section class="layout" style="margin-bottom: px;">
+        <div>
+            <p style="padding-left: 10%;">Por favor, rellene todos los campos. </p>
+        </div>
+    </section>
+
+    <section class="layout">
+        <div>
+            <p style="padding-left: 10%;">Cotizacion: # <label for="">COT001</label> </p>
+        </div>
+    </section>
+
+    <section class="layout2">
+
+        <div class="datos">
+            <div class="datos">
+                <label style="width: 100%; text-align: center;" for="dia">Fecha de reserva:
+                </label>
+            </div>
+            <div class="datos">
+                <input type="date" id="dia" style="  height: 50px; width: 324px; font-weight: bolder; padding-left: 35px;border: none; border-bottom: 2px solid rgba(0, 0, 0, 0.2);   box-shadow: 3px 3px #cecccc;">
+            </div>
+        </div>
+
+        <div class="datos">
+            <div class="datos">
+                <label for="dia">Elige el salon donde deseas realizar el evento:
+                </label>
+            </div>
+
+            <div class="datos">
+                <select class="select">
+                    <option>Selecciona una opcion</option>
+                    <option>PERRUNCAY 2</option>
+                    <option>PERRUNCAY 3</option>
+                    <option>PERRUNCAY 4</option>
+                    <option>PERRUNCAY 5</option>
+                </select>
+
+            </div>
+        </div>
+
+    </section>
+
+    <section class="layout3">
+
+        <div>
+        </div>
+
+        <div style="text-align: center;">
+            <p>Deseas confirmar tu reserva?
+
+            </p>
+            <div class="buttons">
+
+                <button class="btn"><span></span>
+                    <p data-start="good luck!" data-text="CONFIRMAR!" data-title="CONFIRMAR"></p>
+                </button>
+                <button class="btn"><span></span>
+                    <p data-start="good luck!" data-text="VOLVER" data-title="CANCELAR"></p>
+                </button>
+
+            </div>
+        </div>
+    </section>
+</section>
+
+</html>
