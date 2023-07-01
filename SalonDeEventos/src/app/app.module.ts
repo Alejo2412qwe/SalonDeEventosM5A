@@ -17,12 +17,6 @@ import { AdminComponent } from './admin/admin.component';
 import { EmpleadoComponent } from './empleado/empleado.component';
 import { ProductoComponent } from './producto/producto.component';
 
-import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
-import { MatIconModule } from '@angular/material/icon';
-import { MatGridListModule } from '@angular/material/grid-list';
-
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
@@ -32,13 +26,13 @@ const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'cot', component: CotizacionComponent },
-  { path: 'res', component: ReservaComponent },
+  { path: 'res', component: ReservaComponent }, 
   { path: 'admin', component: AdminComponent },
   { path: 'salon', component: SalonComponent },
   { path: 'emp', component: EmpleadoComponent },
   { path: 'menu', component: HeaderComponent },
   { path: 'editarusu', component: DetallesusuarioComponent },
-  { path: 'prod', component: ProductoComponent }
+  {path:'prod',component:ProductoComponent}
 
 ]
 
@@ -67,11 +61,6 @@ const routes: Routes = [
     FormsModule,
     RouterModule.forRoot(routes),
     CommonModule,
-    MatProgressBarModule,
-    MatButtonModule,
-    MatCardModule,
-    MatIconModule,
-    MatGridListModule,
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(), // ToastrModule added
   ],

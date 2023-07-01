@@ -3,12 +3,12 @@ import { Tipo } from "./tipo";
 import { Categoria } from "./categoria";
 
 export class ProductoServicio {
-    prodId: number;
-    prodNombre: string;
-    prodPrecio: number;
-    prodDescripcion: string;
-    prodEstado: number;
-    prodFechaRegistro: Date;
+    prodId: number = 0;
+    prodNombre: string = "";
+    prodPrecio: number = 0;
+    prodDescripcion: string = "";
+    prodEstado: number = 0;
+    prodFechaRegistro: Date = new Date(0);
     tipId: Tipo;
     catId: Categoria;
 
