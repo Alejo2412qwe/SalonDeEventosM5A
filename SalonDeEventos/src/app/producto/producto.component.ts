@@ -35,10 +35,13 @@ export class ProductoComponent {
   onFileChange(event: any): void {
     this.selectedFiles = Array.from(event.target.files);
     this.filePreviews = [];
+    console.log("select= " + this.selectedFiles.length)
 
     for (const file of this.selectedFiles) {
       this.getPreviewUrl(file).then((previewUrl) => {
         this.filePreviews.push(previewUrl);
+        console.log("PREVIEW= " + this.filePreviews.length)
+
       });
     }
   }
