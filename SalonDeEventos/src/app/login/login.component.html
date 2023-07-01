@@ -64,8 +64,7 @@
             <section class="layout2">
               <div class="input-box">
                 <i class="fas fa-user"></i>
-                <input type="text" name="perCedula" [(ngModel)]="persona.perCedula" class="form-control" placeholder="Cedula" required>
-              </div>
+                <input type="text"  name="perCedula" [(ngModel)]="persona.perCedula" class="form-control" placeholder="Cedula" required (keydown)="numeros($event)" >              </div>
               <div class="input-box">
                 <i class="fas fa-user"></i>
                 <input type="text" name="perNombre" [(ngModel)]="persona.perNombre" placeholder="Nombres" required>

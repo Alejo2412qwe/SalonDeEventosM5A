@@ -35,15 +35,29 @@
                         <select name="tipos" [(ngModel)]="seleccionados" required class="select">
                             <option *ngFor="let tipo of tipos" [ngValue]="tipo" select="Producto">
                                 {{tipo.tipNombre}}
-                              </option>
+                            </option>
                         </select>
                     </div>
-
+                    <div>
+                        <input type="file" (change)="onFileChange($event)" multiple>
+                        <div *ngFor="let preview of filePreviews">
+                            <!-- <img [src]="preview" alt="Vista previa de imagen"> -->
+                            <div class="card" *ngFor="let preview of filePreviews" style="height: 75px; width: 75px;">
+                                <img [src]="preview" alt="Vista previa de imagen" class="card-image">
+                            </div>
+                        </div>
+                        <button (click)="uploadFiles()">Subir archivos</button>
+            
+                        <!-- <input type="file" (change)="onFileChange($event)" multiple>
+                        <button (click)="uploadFiles()">Subir archivos</button> -->
+                    </div>
+                    <button id="button" (click)="registrar()">Crear un producto</button>
                 </section>
 
-                <button id="button" (click)="registrar()">Crear un producto</button>
+                <!-- <button id="button" (click)="registrar()">Crear un producto</button> -->
             </form>
         </div>
+        
         <div style="height: 400px;">
             <!-- 
             <section class="layout4">

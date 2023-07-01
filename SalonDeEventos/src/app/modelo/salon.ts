@@ -12,32 +12,29 @@ export class Salon {
     salLongitud: number;
     salLatitud: number;
     salFechaRegistro: Date;
-    listaCotizaciones: Cotizacion;
     empresa: Empresa;
 
     constructor(
-        salId: number,
-        salNombre: string,
-        salDireccion: string,
-        salCapacidad: number,
-        salCostoHora: number,
-        salEstado: boolean,
-        salLongitud: number,
-        salLatitud: number,
-        salFechaRegistro: Date,
-        listaCotizaciones: Cotizacion,
-        empresa: Empresa
+        salId?: number,
+        salNombre?: string,
+        salDireccion?: string,
+        salCapacidad?: number,
+        salCostoHora?: number,
+        salEstado?: boolean,
+        salLongitud?: number,
+        salLatitud?: number,
+        salFechaRegistro?: Date,
+        empresa?: Empresa
     ) {
-        this.salId = salId;
-        this.salNombre = salNombre;
-        this.salDireccion = salDireccion;
-        this.salCapacidad = salCapacidad;
-        this.salCostoHora = salCostoHora;
-        this.salEstado = salEstado;
-        this.salLongitud = salLongitud;
-        this.salLatitud = salLatitud;
-        this.salFechaRegistro = salFechaRegistro;
-        this.listaCotizaciones = listaCotizaciones;
-        this.empresa = empresa;
+        this.salId = salId || 0;
+        this.salNombre = salNombre|| "";
+        this.salDireccion = salDireccion || "";
+        this.salCapacidad = salCapacidad || 0;
+        this.salCostoHora = salCostoHora || 0;
+        this.salEstado = salEstado || true;
+        this.salLongitud = salLongitud || 0;
+        this.salLatitud = salLatitud || 0;
+        this.salFechaRegistro = salFechaRegistro || new Date ;
+        this.empresa = empresa || new Empresa;
     }
 }
