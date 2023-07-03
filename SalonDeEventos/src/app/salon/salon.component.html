@@ -14,34 +14,47 @@
     <app-headers></app-headers>
 
     <div class="container">
-            <div>
-                <form action="" class="form_main">
+        <div>
+            <form action="" class="form_main">
 
-                    <p class="heading">Crear un Nuevo Salon </p>
-                    <section class="layout">
+                <p class="heading">Crear un Nuevo Salon </p>
+                <section class="layout">
 
-                        <div class="inputContainer">
-                            <input type="text" placeholder="Ingresa el nombre" required>
-                        </div>
+                    <div class="inputContainer">
+                        <input type="text" [(ngModel)]="salon.salNombre" placeholder="Ingresa el nombre" required>
+                    </div>
 
-                        <div class="inputContainer">
-                            <input type="text" placeholder="Ingresa la direccion" required>
-                        </div>
+                    <div class="inputContainer">
+                        <input type="text" [(ngModel)]="salon.salDireccion" placeholder="Ingresa la direccion" required>
+                    </div>
 
-                        <div class="inputContainer">
-                            <input type="number" placeholder="Ingresa la capacidad " required>
-                        </div>
-                        
-                        <div class="inputContainer">
-                            <input type="number" placeholder="Ingresa el costo/hora " required>
-                        </div>
-                    </section>
+                    <div class="inputContainer">
+                        <input type="number" [(ngModel)]="salon.salCapacidad" placeholder="Ingresa la capacidad "
+                            required>
+                    </div>
 
-                    <button id="button">Crear un Salon</button>
+                    <div class="inputContainer">
+                        <input type="number" [(ngModel)]="salon.salCostoHora" placeholder="Ingresa el costo/hora "
+                            required>
+                    </div>
 
-                </form>
-            </div>
-            
+                    <div class="inputContainer">
+                        <input type="number" [(ngModel)]="salon.salLatitud" placeholder="Ingresa la latitud del local"
+                            required>
+                    </div>
+
+                    <div class="inputContainer">
+                        <input type="number" [(ngModel)]="salon.salLongitud" placeholder="Ingresa la longitud del local"
+                            required>
+                    </div>
+                </section>
+
+
+                <button id="button" (click)="registrarSalon()">Crear un Salon</button>
+
+            </form>
+        </div>
+
     </div>
 
 
