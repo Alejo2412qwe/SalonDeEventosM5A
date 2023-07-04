@@ -23,12 +23,15 @@ import { ToastrModule } from 'ngx-toastr';
 import { DetallesusuarioComponent } from './detallesusuario/detallesusuario.component';
 import { EmpresaComponent } from './empresa/empresa.component';
 import { PerfiluserComponent } from './perfiluser/perfiluser.component';
+import { ListausuariosComponent } from './listausuarios/listausuarios.component';
+import { ListareservasComponent } from './listareservas/listareservas.component';
+
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'cot', component: CotizacionComponent },
-  { path: 'res', component: ReservaComponent }, 
+  { path: 'res', component: ReservaComponent },
   { path: 'admin', component: AdminComponent },
   { path: 'salon', component: SalonComponent },
   { path: 'emp', component: EmpleadoComponent },
@@ -36,7 +39,12 @@ const routes: Routes = [
   { path: 'editarusu', component: DetallesusuarioComponent },
   {path:'prod',component:ProductoComponent},
   {path:'empresas',component:EmpresaComponent},
-  {path:'perfiluser',component:PerfiluserComponent}
+  {path:'perfiluser',component:PerfiluserComponent},
+  { path: 'prod', component: ProductoComponent },
+  { path: 'listausu', component: ListausuariosComponent },
+  { path: 'listares', component: ListareservasComponent },
+  { path: 'empresas', component: EmpresaComponent }
+
 
 ]
 
@@ -58,6 +66,8 @@ const routes: Routes = [
     DetallesusuarioComponent,
     EmpresaComponent,
     PerfiluserComponent,
+    ListausuariosComponent,
+    ListareservasComponent,
 
   ],
   imports: [
