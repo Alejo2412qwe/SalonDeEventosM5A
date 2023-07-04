@@ -10,7 +10,7 @@
 .container {
 
     width: 100%;
-    min-height: 80vh;
+    height: 100%;
     padding-left: 8%;
     padding-right: 8%;
     box-sizing: border-box;
@@ -71,6 +71,7 @@ nav ul li a:hover {
     justify-content: space-between;
     align-items: center;
     margin: 50px 0;
+    flex-wrap: nowrap;
 }
 
 .col-1 {
@@ -156,7 +157,7 @@ button {
 .col-2 .banner {
 
     margin-left: 120px;
-    width: 500%;
+    width: 80%;
 
 }
 
@@ -250,6 +251,17 @@ button {
         grid-template-columns: 1fr;
         gap: 270px;
         margin-bottom: 350px;
+    }
+
+}
+
+@media only screen and (max-width:985px) {
+
+    .col-2 .banner {
+
+        margin-left: 120px;
+        width: 0px;
+    
     }
 
 }
@@ -521,4 +533,3 @@ h1 {
         margin-bottom: 40px;
     }
 }
-

@@ -1,62 +1,74 @@
-<div class="container">
-    <section class="layout">
-        <div>
-            <form action="#" class="form_main" name="formProd">
+<app-headers></app-headers>
 
-                <p class="heading">Crear un Producto</p>
-                <section class="layout">
-                    <div class="inputContainer">
-                        <input name="prodNombre" type="text" [(ngModel)]="producto.prodNombre"
-                            placeholder="Ingresa el nombre" required>
-                    </div>
+<section class="layout2">
 
-                    <div class="inputContainer">
-                        <h2 class="nombre">Elige la categoria</h2>
-                        <select class="select">
-                            <option>Boda</option>
-                            <option>Graduacion</option>
-                            <option>Bautizo</option>
-                            <option>Confirmacion</option>
-                            <option>Cumpleaños</option>
-                        </select>
-                    </div>
-                    <div class="inputContainer">
-                        <input name="prodPrecio" type="text" [(ngModel)]="producto.prodPrecio"
-                            placeholder="Ingresa el precio" required>
-                    </div>
+    <div>
+        <form action="#" class="form_main" name="formProd">
 
-                    <div class="inputContainer">
-                        <input name="prodDescripcion" type="text" [(ngModel)]="producto.prodDescripcion"
-                            placeholder="Ingresa la descripcion" required>
-                    </div>
+            <p class="heading">Crear un Producto</p>
+            <section class="layout">
+                <div class="inputContainer">
+                    <input name="prodNombre" type="text" [(ngModel)]="producto.prodNombre"
+                        placeholder="Ingresa el nombre" required>
+                </div>
 
-                    <div class="inputContainer">
-                        <h2 class="nombre">Elige el tipo</h2>
-                        <select name="tipos" [(ngModel)]="seleccionados" required class="select">
-                            <option *ngFor="let tipo of tipos" [ngValue]="tipo" select="Producto">
-                                {{tipo.tipNombre}}
-                            </option>
-                        </select>
-                    </div>
-                    <div>
-                        <input type="file" (change)="onFileChange($event)" multiple>
-                        <div>
-                            <div class="card" *ngFor="let preview of filePreviews" style="height: 75px; width: 75px;">
-                                <img [src]="preview" alt="Vista previa de imagen" class="card-image">
-                            </div>
-                        </div>
-                        <!-- <button (click)="uploadFiles()">Subir archivos</button> -->
+                <div class="inputContainer">
+                    <h2 class="nombre" style="font-size: 18px;">Elige la categoria</h2>
+                    <select class="select">
+                        <option>Boda</option>
+                        <option>Graduacion</option>
+                        <option>Bautizo</option>
+                        <option>Confirmacion</option>
+                        <option>Cumpleaños</option>
+                    </select>
+                </div>
+                <div class="inputContainer">
+                    <input name="prodPrecio" type="number" [(ngModel)]="producto.prodPrecio"
+                        placeholder="Ingresa el precio" required>
+                </div>
 
-                    </div>
-                    <button id="button" (click)="registrar()">Crear un producto</button>
-                </section>
+                <div class="inputContainer">
+                    <input name="prodDescripcion" type="text" [(ngModel)]="producto.prodDescripcion"
+                        placeholder="Ingresa la descripcion" required>
+                </div>
 
-                <!-- <button id="button" (click)="registrar()">Crear un producto</button> -->
-            </form>
-        </div>
-        
-        <div style="height: 400px;">
-            <!-- 
+                <div class="inputContainer">
+                    <h2 class="nombre" style="font-size: 18px;">Elige el tipo</h2>
+                    <select name="tipos" [(ngModel)]="seleccionados" required class="select">
+                        <option *ngFor="let tipo of tipos" [ngValue]="tipo" select="Producto">
+                            {{tipo.tipNombre}}
+                        </option>
+                    </select>
+                </div>
+                <div class="inputContainer">
+                    <input type="file" (change)="onFileChange($event)" multiple>
+
+                    <!-- <button (click)="uploadFiles()">Subir archivos</button> -->
+
+                </div>
+            </section>
+            <button id="button" (click)="registrar()">Crear un producto</button>
+
+            <!-- <button id="button" (click)="registrar()">Crear un producto</button> -->
+        </form>
+
+
+    </div>
+
+    <div>
+        <section class="layout">
+
+            <div class="card" *ngFor="let preview of filePreviews" style="height: 150px; width: 150px;">
+                <img [src]="preview" alt="Vista previa de imagen" class="card-image">
+            </div>
+        </section>
+    </div>
+
+</section>
+
+
+<!-- <div style="height: 400px;">
+            
             <section class="layout4">
 
                 <div>
@@ -81,6 +93,5 @@
                 <div>
                     <p class="fecha">2023/06/23</p>
                 </div>
-            </section> -->
-        </div>
-    </section>
+            </section>
+        </div> -->
