@@ -22,6 +22,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { DetallesusuarioComponent } from './detallesusuario/detallesusuario.component';
 import { EmpresaComponent } from './empresa/empresa.component';
+import { PerfiluserComponent } from './perfiluser/perfiluser.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -34,7 +35,8 @@ const routes: Routes = [
   { path: 'menu', component: HeaderComponent },
   { path: 'editarusu', component: DetallesusuarioComponent },
   {path:'prod',component:ProductoComponent},
-  {path:'empresas',component:EmpresaComponent}
+  {path:'empresas',component:EmpresaComponent},
+  {path:'perfiluser',component:PerfiluserComponent}
 
 ]
 
@@ -55,6 +57,7 @@ const routes: Routes = [
     ProductoComponent,
     DetallesusuarioComponent,
     EmpresaComponent,
+    PerfiluserComponent,
 
   ],
   imports: [
