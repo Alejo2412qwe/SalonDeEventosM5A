@@ -1,5 +1,14 @@
 export class Categoria {
-    catId: number = 0;
-    catNombre: string = "";
-    catFechaRegistro: Date = new Date(0);
+    catId: number;
+    catNombre: string;
+    catFechaRegistro: Date;
+
+    constructor(
+        catId?: number,
+        catNombre?: string,
+        catFechaRegistro?: Date) {
+        this.catId = catId || 0;
+        this.catNombre = catNombre || "";
+        this.catFechaRegistro = catFechaRegistro || new Date;
+    }
 }

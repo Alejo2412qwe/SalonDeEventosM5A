@@ -13,7 +13,7 @@ export class Rol {
     ) {
         this.rolId = rolId||0;
         this.rolNombre = rolNombre || "";
-        this.rolFechaRegistro = rolFechaRegistro || new Date();
+        this.rolFechaRegistro = rolFechaRegistro || new Date;
     }
 }
 

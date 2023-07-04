@@ -12,7 +12,7 @@ export class Salon {
     salLongitud: number;
     salLatitud: number;
     salFechaRegistro: Date;
-    empresa: Empresa;
+    empId: Empresa;
 
     constructor(
         salId?: number,
@@ -24,7 +24,7 @@ export class Salon {
         salLongitud?: number,
         salLatitud?: number,
         salFechaRegistro?: Date,
-        empresa?: Empresa
+        empId?: Empresa
     ) {
         this.salId = salId || 0;
         this.salNombre = salNombre|| "";
@@ -35,6 +35,6 @@ export class Salon {
         this.salLongitud = salLongitud || 0;
         this.salLatitud = salLatitud || 0;
         this.salFechaRegistro = salFechaRegistro || new Date ;
-        this.empresa = empresa || new Empresa;
+        this.empId = empId || new Empresa;
     }
 }

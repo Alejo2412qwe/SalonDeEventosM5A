@@ -1,24 +1,26 @@
 import { Timestamp } from "rxjs";
+import { Cotizacion } from "./cotizacion";
+import { ProductoServicio } from "./producto-servicio";
 
 export class Adicionales {
-    adiId: number = 0;
-    cotiId: number = 0;
-    prodId: number = 0;
-    adiCantidad: number = 0;
-    adiFechaRegistro: Date = new Date(0);
+    adiId: number;
+    cotiId: Cotizacion;
+    prodId: ProductoServicio;
+    adiCantidad: number;
+    adiFechaRegistro: Date;
 
     constructor(
-        adiId: number,
-        cotiId: number,
-        prodId: number,
-        adiCantidad: number,
-        adiFechaRegistro: Date
+        adiId?: number,
+        adiCantidad?: number,
+        adiFechaRegistro?: Date,
+        cotiId?: Cotizacion,
+        prodId?: ProductoServicio,
     ) {
-        this.adiId = adiId;
-        this.cotiId = cotiId;
-        this.prodId = prodId;
-        this.adiCantidad = adiCantidad;
-        this.adiFechaRegistro = adiFechaRegistro;
+        this.adiId = adiId||0;
+        this.adiCantidad = adiCantidad||0;
+        this.adiFechaRegistro = adiFechaRegistro||new Date;
+        this.cotiId = cotiId || new Cotizacion;
+        this.prodId = prodId||new ProductoServicio;
     }
 
 }

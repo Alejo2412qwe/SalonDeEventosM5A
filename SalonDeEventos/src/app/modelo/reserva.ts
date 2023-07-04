@@ -7,22 +7,25 @@ export class Reserva {
     resEstado: boolean;
     resComprobante: string;
     resFechaRegistro: Date;
+    resFechaEvento:Date;
     reCotiId: Cotizacion;
-    usuario: Usuario;
+    usuId: Usuario;
 
     constructor(
-        resId: number,
-        resEstado: boolean,
-        resComprobante: string,
-        resFechaRegistro: Date,
-        reCotiId: Cotizacion,
-        usuario: Usuario
+        resId?: number,
+        resEstado?: boolean,
+        resComprobante?: string,
+        resFechaRegistro?: Date,
+        resFechaEvento?:Date,
+        reCotiId?: Cotizacion,
+        usuId?: Usuario
     ) {
-        this.resId = resId;
-        this.resEstado = resEstado;
-        this.resComprobante = resComprobante;
-        this.resFechaRegistro = resFechaRegistro;
-        this.reCotiId = reCotiId;
-        this.usuario = usuario;
+        this.resId = resId||0;
+        this.resEstado = resEstado||false;
+        this.resComprobante = resComprobante||"";
+        this.resFechaRegistro = resFechaRegistro||new Date;
+        this.resFechaEvento = resFechaEvento||new Date;
+        this.reCotiId = reCotiId||new Cotizacion;
+        this.usuId = usuId|| new Usuario;
     }
 }
