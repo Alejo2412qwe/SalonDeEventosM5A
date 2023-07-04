@@ -27,7 +27,27 @@ export class ProductoComponent {
   ngOnInit(): void {
     this.cargarTipos()
   }
+  
+  tipos: Tipo[] = [];
+  producto: ProductoServicio = new ProductoServicio();
+  categoria: Categoria = new Categoria();
+  tipo: Tipo = new Tipo();
+  seleccionados: Tipo = new Tipo;
 
+  cargarTipos(): void {
+
+    let tipoSELEC: Tipo = new Tipo()
+    tipoSELEC.tipId = 0;
+    tipoSELEC.tipNombre = 'Seleccione una categoria';
+    this.tipos.push(tipoSELEC);
+    this.tipoService.getTipos().subscribe(
+      tiposArray => {
+        for (let tipo of tiposArray) {
+          this.tipos.push(tipo)
+        }
+      }
+    );
+  }
   ////////////////////IMAGENES///////////////////////////////////
   selectedFiles: File[] = [];
   filePreviews: string[] = [];
@@ -149,26 +169,7 @@ export class ProductoComponent {
       });
   };
 
-  tipos: Tipo[] = [];
-  producto: ProductoServicio = new ProductoServicio();
-  categoria: Categoria = new Categoria();
-  tipo: Tipo = new Tipo();
-  seleccionados: Tipo = new Tipo;
 
-  cargarTipos(): void {
-
-    let tipoSELEC: Tipo = new Tipo()
-    tipoSELEC.tipId = 0;
-    tipoSELEC.tipNombre = 'Seleccione una categoria';
-    this.tipos.push(tipoSELEC);
-    this.tipoService.getTipos().subscribe(
-      tiposArray => {
-        for (let tipo of tiposArray) {
-          this.tipos.push(tipo)
-        }
-      }
-    );
-  }
 
   // registrar(): void {
 

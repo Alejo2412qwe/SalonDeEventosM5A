@@ -1,3 +1,5 @@
+import { Rol } from "./rol";
+
 export class Persona {
     perId: number|undefined;
     perCedula: string;
@@ -8,6 +10,7 @@ export class Persona {
     perTelefono: string;
     perFechaNacimiento: Date;
 
+
     constructor(
         perId?: number,
         perCedula?: string,
@@ -16,7 +19,8 @@ export class Persona {
         perCorreo?: string,
         perDireccion?: string,
         perTelefono?: string,
-        perFechaNacimiento?: Date
+        perFechaNacimiento?: Date,
+ 
     ) {
         this.perId = perId;
         this.perCedula = perCedula || "";
@@ -26,5 +30,6 @@ export class Persona {
         this.perDireccion = perDireccion || "";
         this.perTelefono = perTelefono || "";
         this.perFechaNacimiento = perFechaNacimiento || new Date;
+
     }
 }

@@ -20,7 +20,6 @@ export class LoginComponent implements OnInit {
   constructor(private personaService: PersonaService, private usuarioService: UsuarioService, private rolService: RolService,
     private router: Router, private toastr: ToastrService) { }
   ngOnInit(): void {
-    this.getrol()
   }
 
   usuariologin: string = "";
@@ -91,45 +90,30 @@ export class LoginComponent implements OnInit {
   persona: Persona = new Persona();
   rol: Rol = new Rol();
 
-  getrol(): void {
-    console.log("holaaaaa");
-    this.rolService.getRol(3).subscribe(rol => {
-      this.rol.rolId = rol.rolId;
-      // this.usuario.rolId = rol;
-
-      // this.usuario.rolId = this.rol;
-      // console.log("NOmbre " + this.rol.rolId)
-    });
-
-  }
-
-  registrar(): void {
+  registrarPersona(): void {
     if (this.validacionesRegistro()) {
 
       this.personaService.crearPersona(this.persona).subscribe(
         response => {
+          this.persona.perId = response.perId;
+          this.usuario.usuPerId = this.persona;
           this.rolService.getRol(3).subscribe(rol => {
             this.rol.rolId = rol.rolId;
-            this.usuario.rolId = this.rol;
+            this.usuario.rolId.rolId = rol.rolId;
+            this.usuarioService.crearUsuario(this.usuario).subscribe(response => {
 
-            this.personaService.getId().subscribe(data => {
-              this.persona.perId = data;
-              this.usuario.usuPerId = this.persona;
-
-              console.log("this.usuario.rolid= " + this.usuario.rolId?.rolId);
-
-              this.usuarioService.crearUsuario(this.usuario).subscribe(response => {
-                Swal.fire({
-                  position: 'center',
-                  icon: 'success',
-                  title: 'Registro exitoso',
-                  showConfirmButton: true
-                  // timer: 3500
-                }).then(() => {
-                  location.reload();
-                });
+              console.log(this.usuario.rolId.rolId)
+              Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Registro exitoso',
+                showConfirmButton: true
+                // timer: 3500
+              }).then(() => {
+                location.reload();
               });
             });
+
           });
         }
       )
