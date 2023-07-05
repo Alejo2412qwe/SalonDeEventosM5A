@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Observable } from 'rxjs';
+import { Categoria } from '../modelo/categoria';
 
 @Injectable({
   providedIn: 'root'
@@ -14,5 +15,8 @@ export class CategoriaService {
 
   constructor(private http: HttpClient) { }
 
+  getCategoria():Observable<Categoria[]>{
+    return this.http.get<Categoria[]>(this.url+"/listar");
 
+  }
 }

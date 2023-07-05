@@ -34,14 +34,27 @@ export class LoginComponent implements OnInit {
 
           this.usuarioService.login(this.usuariologin, this.passlogin).subscribe(login => {
             if (login) {
+
               Swal.fire({
                 position: 'center',
                 icon: 'success',
                 title: 'Bienvenido',
                 showConfirmButton: false,
-                timer: 2000
+                timer: 1000
               }).then(() => {
-                this.router.navigate(["menu"]);
+                const usertString = JSON.stringify(login);
+
+                localStorage.setItem('userData', usertString);
+
+                if (login.rolId.rolId === 1) {
+                  this.router.navigate(["admin"]);
+                }
+                if (login.rolId.rolId === 2) {
+                  this.router.navigate(["emp"]);
+                }
+                if (login.rolId.rolId === 3) {
+                  this.router.navigate(["menu"]);
+                }
               });
             } else {
               this.toastr.error('', 'Contraseña incorrecta', {
@@ -97,12 +110,15 @@ export class LoginComponent implements OnInit {
         response => {
           this.persona.perId = response.perId;
           this.usuario.usuPerId = this.persona;
+
           this.rolService.getRol(3).subscribe(rol => {
             this.rol.rolId = rol.rolId;
             this.usuario.rolId.rolId = rol.rolId;
+
             this.usuarioService.crearUsuario(this.usuario).subscribe(response => {
 
-              console.log(this.usuario.rolId.rolId)
+              console.log(response)
+
               Swal.fire({
                 position: 'center',
                 icon: 'success',

@@ -13,17 +13,15 @@
 
                 <div class="inputContainer">
                     <h2 class="nombre" style="font-size: 18px;">Elige la categoria</h2>
-                    <select class="select">
-                        <option>Boda</option>
-                        <option>Graduacion</option>
-                        <option>Bautizo</option>
-                        <option>Confirmacion</option>
-                        <option>Cumpleaños</option>
+                    <select name="categorias" [(ngModel)]="categoriaSelect" required class="select">
+                        <option *ngFor="let categoria of categorias" [ngValue]="categoria">
+                            {{categoria.catNombre}}
+                        </option>
                     </select>
                 </div>
                 <div class="inputContainer">
                     <input name="prodPrecio" type="number" [(ngModel)]="producto.prodPrecio"
-                        placeholder="Ingresa el precio" required>
+                        placeholder="Ingresa el precio" required placeholder="Ingresa el nombre" required>
                 </div>
 
                 <div class="inputContainer">
@@ -33,8 +31,8 @@
 
                 <div class="inputContainer">
                     <h2 class="nombre" style="font-size: 18px;">Elige el tipo</h2>
-                    <select name="tipos" [(ngModel)]="seleccionados" required class="select">
-                        <option *ngFor="let tipo of tipos" [ngValue]="tipo" select="Producto">
+                    <select name="tipos" [(ngModel)]="tipoSelect" required class="select">
+                        <option *ngFor="let tipo of tipos" [ngValue]="tipo">
                             {{tipo.tipNombre}}
                         </option>
                     </select>

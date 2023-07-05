@@ -26,13 +26,16 @@ export class ProductoComponent {
 
   ngOnInit(): void {
     this.cargarTipos()
+    this.cargarCategorias()
   }
-  
+
   tipos: Tipo[] = [];
+  categorias: Categoria[] = [];
   producto: ProductoServicio = new ProductoServicio();
   categoria: Categoria = new Categoria();
   tipo: Tipo = new Tipo();
-  seleccionados: Tipo = new Tipo;
+  tipoSelect: Tipo = new Tipo;
+  categoriaSelect: Categoria = new Categoria;
 
   cargarTipos(): void {
 
@@ -48,6 +51,22 @@ export class ProductoComponent {
       }
     );
   }
+
+  cargarCategorias(): void {
+
+    let categotiaSELEC: Categoria = new Categoria()
+    categotiaSELEC.catId = 0;
+    categotiaSELEC.catNombre = 'Seleccione una categoria';
+    this.categorias.push(categotiaSELEC);
+    this.categoriaService.getCategoria().subscribe(
+      categoriaArray => {
+        for (let categoria of categoriaArray) {
+          this.categorias.push(categoria)
+        }
+      }
+    );
+  }
+
   ////////////////////IMAGENES///////////////////////////////////
   selectedFiles: File[] = [];
   filePreviews: string[] = [];
@@ -99,7 +118,7 @@ export class ProductoComponent {
 
   registrar(): void {
 
-    this.tipo.tipNombre = this.seleccionados.tipNombre;
+    this.tipo.tipNombre = this.tipoSelect.tipNombre;
 
     for (const tip of this.tipos) {
       if (this.tipo.tipNombre === tip.tipNombre) {
@@ -107,6 +126,16 @@ export class ProductoComponent {
         break;
       }
     }
+
+    this.categoria.catNombre= this.categoriaSelect.catNombre;
+
+    for (const cat of this.categorias) {
+      if (this.categoria.catNombre === cat.catNombre) {
+        this.producto.catId = cat;
+        break;
+      }
+    }
+
     let imgProducto: ImgProducto[] = [];
     this.productoService.crearProducto(this.producto).subscribe(
       productonew => {
