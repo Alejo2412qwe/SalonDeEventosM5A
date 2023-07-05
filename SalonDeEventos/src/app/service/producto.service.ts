@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { ProductoServicio } from '../modelo/producto-servicio';
+import { ProductoComponent } from '../producto/producto.component';
 
 @Injectable({
     providedIn: 'root'
@@ -18,5 +19,9 @@ export class productoService {
     crearProducto(productoServicio: ProductoServicio): Observable<ProductoServicio> {
         return this.http.post<ProductoServicio>(this.url + "/crear", productoServicio, { headers: this.httpHeaders })
     }
+
+    getProducto(): Observable<ProductoServicio[]> {
+        return this.http.get(this.url + "/listar").pipe(map(response => response as ProductoServicio[]));
+      }
 
 }

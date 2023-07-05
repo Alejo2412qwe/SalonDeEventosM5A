@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
-import { Observable } from 'rxjs';
+import { Observable, map, of } from 'rxjs';
 import { Persona } from '../modelo/persona';
+import { ListausuariosComponent } from '../listausuarios/listausuarios.component';
+import { PERSONAS } from '../listausuarios/listausuarios.json';
 
 @Injectable({
   providedIn: 'root'
@@ -23,8 +25,12 @@ export class PersonaService {
     return this.http.post<Persona>(`${this.url}/crear`, persona, { headers: this.httpHeaders })
   }
 
-  getId():Observable<number>{
-    return this.http.get<number>(this.url+"/ultimoregistro");
+  getId(): Observable<number> {
+    return this.http.get<number>(this.url + "/ultimoregistro");
+  }
+
+  getPersonas(): Observable<Persona[]> {
+    return this.http.get(this.url + "/listar").pipe(map(response => response as Persona[]));
   }
 
 }

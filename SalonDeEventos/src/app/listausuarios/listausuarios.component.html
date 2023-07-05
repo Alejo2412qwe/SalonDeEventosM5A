@@ -23,12 +23,12 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>Grupo1</td>
-            <td>Grupos2023 1</td>
-            <td>TecAzuay</td>
-            <td>0978717957</td>
-            <td>29/06/2023</td>
+        <tr *ngFor="let per of persona">            
+            <td>{{per.perId}}</td>
+            <td>{{per.perCedula}}</td>
+            <td>{{per.perNombre}}</td>
+            <td>{{per.perApellido}}</td>
+            <td>{{per.perFechaNacimiento}}</td>
             <td><button style="margin-right: 10px;">Editar</button><button>Eliminar</button></td>
 
         </tr>  

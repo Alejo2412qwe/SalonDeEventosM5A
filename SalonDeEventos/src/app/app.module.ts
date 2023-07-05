@@ -25,6 +25,7 @@ import { EmpresaComponent } from './empresa/empresa.component';
 import { PerfiluserComponent } from './perfiluser/perfiluser.component';
 import { ListausuariosComponent } from './listausuarios/listausuarios.component';
 import { ListareservasComponent } from './listareservas/listareservas.component';
+import { ListaproductosComponent } from './listaproductos/listaproductos.component';
 
 
 const routes: Routes = [
@@ -43,6 +44,7 @@ const routes: Routes = [
   { path: 'prod', component: ProductoComponent },
   { path: 'listausu', component: ListausuariosComponent },
   { path: 'listares', component: ListareservasComponent },
+  { path: 'listaprod', component: ListaproductosComponent },
   { path: 'empresas', component: EmpresaComponent }
 
 
@@ -68,6 +70,7 @@ const routes: Routes = [
     PerfiluserComponent,
     ListausuariosComponent,
     ListareservasComponent,
+    ListaproductosComponent,
 
   ],
   imports: [
