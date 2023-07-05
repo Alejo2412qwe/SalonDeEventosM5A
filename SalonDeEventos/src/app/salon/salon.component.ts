@@ -44,7 +44,7 @@ export class SalonComponent {
 
     for (const emp of this.empresas) {
       if (this.empresa.empNombre === emp.empNombre) {
-        this.salon.empresa = emp;
+        this.salon.empId = emp;
         break;
       }
     }
