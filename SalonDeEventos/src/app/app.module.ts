@@ -26,6 +26,7 @@ import { PerfiluserComponent } from './perfiluser/perfiluser.component';
 import { ListausuariosComponent } from './listausuarios/listausuarios.component';
 import { ListareservasComponent } from './listareservas/listareservas.component';
 import { ListaproductosComponent } from './listaproductos/listaproductos.component';
+import { ListasalonesComponent } from './listasalones/listasalones.component';
 
 
 const routes: Routes = [
@@ -71,6 +72,7 @@ const routes: Routes = [
     ListausuariosComponent,
     ListareservasComponent,
     ListaproductosComponent,
+    ListasalonesComponent,
 
   ],
   imports: [
