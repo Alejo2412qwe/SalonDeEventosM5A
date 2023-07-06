@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Observable } from 'rxjs';
 import { Salon } from '../modelo/salon';
+import { map } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -17,5 +18,9 @@ export class SalonService {
     crearSalon(salon: Salon): Observable<Salon> {
         return this.http.post<Salon>(this.url + "/crear", salon, { headers: this.httpHeaders })
     }
+
+    getSalon(): Observable<Salon[]> {
+        return this.http.get(this.url + "/listar").pipe(map(response => response as Salon[]));
+      }
 
 }
