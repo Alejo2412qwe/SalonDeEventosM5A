@@ -19,18 +19,28 @@
             <th>Telefono</th>
             <th>Fecha de Registro</th>
             <th>Accion</th>
+            <th>Accion</th>
 
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>Grupo1</td>
-            <td>Grupos2023 1</td>
-            <td>TecAzuay</td>
-            <td>0978717957</td>
-            <td>29/06/2023</td>
-            <td><button style="margin-right: 10px;">Editar</button><button>Eliminar</button></td>
-
+        <tr *ngFor="let per of persona">            
+            <td>{{per.perId}}</td>
+            <td>{{per.perCedula}}</td>
+            <td>{{per.perNombre}}</td>
+            <td>{{per.perApellido}}</td>
+            <td>{{per.perFechaNacimiento}}</td>
+            <td class="button">
+                <div><button>
+                    <img src="assets/img/lapiz.png" width="20px">
+                  </button></div>
+            </td>
+    
+            <td class="button2">
+                <div><button class="2">
+                  <img src="assets/img/eliminar.png" width="20px">
+                  </button></div>
+            </td>
         </tr>  
         <tbody>
     </table>

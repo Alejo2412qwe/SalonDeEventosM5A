@@ -123,7 +123,7 @@ button {
   }
   
   button:hover {
-    background: linear-gradient(to right, #E8AA42, #E57C23);
+    background: linear-gradient(to right, #F1C27B, #FFD89C);
     box-shadow: 0px 15px 20px rgba(164, 97, 26, 0.4);
     color: #fff;
     transform: translateY(-7px);
@@ -138,7 +138,7 @@ button {
     content: '';
     width: 10px;
     height: 65%;
-    background: linear-gradient(to right, #E8AA42, #E57C23);
+    background: linear-gradient(to right, #F1C27B, #FFD89C);
     position: absolute;
     left: -40px;
     top: 8px;
@@ -202,7 +202,7 @@ button {
     nav ul {
 
         width: 100%;
-        background: linear-gradient(to right, #E8AA42, #E57C23);
+        background: linear-gradient(to right, #F1C27B, #FFD89C);
         position: absolute;
         top: 75px;
         right: 0;
@@ -486,6 +486,7 @@ h1 {
 .col-4 h2 {
     font-size: 60px;
     text-align: center;
+
   background: -webkit-linear-gradient(330deg,#E8AA42,#E57C23,#784110);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

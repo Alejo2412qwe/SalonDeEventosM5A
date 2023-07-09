@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta class="viewport" content="width-device-width, initial-scale=1.0">
+  <title>HEADER</title>
+
+</head>
+
+<app-headers></app-headers>
+<h2 style="font-size: 24px; color: black;">LISTA DE USUARIOS</h2>
+<div class="table-wrapper">
+  <table class="fl-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>NOMBRE DEL PRODUCTO</th>
+        <th>DESCRIPCION</th>
+        <th>COSTO</th>
+        <th>Fecha de Registro</th>
+        <th>Accion</th>
+        <th>Accion</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let pro of producto">
+        <td>{{pro.prodId}}</td>
+        <td>{{pro.prodNombre}}</td>
+        <td>{{pro.prodDescripcion}}</td>
+        <td>{{pro.prodPrecio}}</td>
+        <td>{{pro.prodFechaRegistro}}</td>
+        <td class="button">
+          <div><button>
+              <img src="assets/img/lapiz.png" width="20px">
+            </button></div>
+        </td>
+
+        <td class="button">
+          <div><button class="2">
+              <img src="assets/img/eliminar.png" width="20px">
+            </button></div>
+        </td>
+      </tr>
+    <tbody>
+  </table>
+</div>
+
+</html>
