@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
-import { Observable } from 'rxjs';
+import { Observable, map, of } from 'rxjs';
 import { Usuario } from '../modelo/usuario';
 
 @Injectable({
@@ -17,11 +17,27 @@ export class UsuarioService {
     return this.http.post<Usuario>(this.url + "/crear", usuario, { headers: this.httpHeaders })
   }
 
-  usuarioExiste(usuario:string):Observable<boolean>{
+  usuarioExiste(usuario: string): Observable<boolean> {
     return this.http.get<boolean>(`${this.url}/usuarioExiste/${usuario}`);
   }
 
-  login(usuario:string, password:string):Observable<Usuario>{
+  login(usuario: string, password: string): Observable<Usuario> {
     return this.http.get<Usuario>(`${this.url}/login/${usuario}/${password}`);
+  }
+
+  buscarUsu(id: number): Observable<Usuario> {
+    return this.http.get<Usuario>(`${this.url}/buscar/${id}`);
+  }
+
+  getUsuarios(): Observable<Usuario[]> {
+    return this.http.get(this.url + "/listar").pipe(map(response => response as Usuario[]));
+  }
+
+  update(id: number,usuario: Usuario): Observable<Usuario> {
+    return this.http.put<Usuario>(`${this.url}/actualizar/${id}`,usuario);
+  }
+
+  delete(id: number): Observable<Usuario> {
+    return this.http.put<Usuario>(`${this.url}/eliminarE/${id}`,null);
   }
 }

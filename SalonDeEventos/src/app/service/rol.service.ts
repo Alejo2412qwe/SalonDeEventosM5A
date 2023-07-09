@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
-import { Observable } from 'rxjs';
+import { Observable, map, of } from 'rxjs';
 import { Rol } from '../modelo/rol';
 
 @Injectable({
@@ -14,7 +14,14 @@ export class RolService {
 
   constructor(private http: HttpClient) { }
 
-  getRol(id:number):Observable<Rol>{
+  getRol(id: number): Observable<Rol> {
     return this.http.get<Rol>(`${this.url}/rolId/${id}`);
   }
+
+  getRoles(): Observable<Rol[]> {
+    return this.http.get(this.url + "/listar").pipe(map(response => response as Rol[]));
+  }
+  // update(id: number, rol: Rol): Observable<Rol> {
+  //   return this.http.put<Rol>(`${this.url}/actualizar/${id}`, rol);
+  // }
 }

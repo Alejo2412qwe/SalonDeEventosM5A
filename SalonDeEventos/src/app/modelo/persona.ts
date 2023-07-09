@@ -1,7 +1,7 @@
 import { Rol } from "./rol";
 
 export class Persona {
-    perId: number|undefined;
+    perId: number;
     perCedula: string;
     perNombre: string;
     perApellido: string;
@@ -22,7 +22,7 @@ export class Persona {
         perFechaNacimiento?: Date,
  
     ) {
-        this.perId = perId;
+        this.perId = perId||0;
         this.perCedula = perCedula || "";
         this.perNombre = perNombre || "";
         this.perApellido = perApellido || "";

@@ -37,6 +37,8 @@ const routes: Routes = [
   { path: 'emp', component: EmpleadoComponent },
   { path: 'menu', component: HeaderComponent },
   { path: 'editarusu', component: DetallesusuarioComponent },
+
+  { path: 'editarusu/:id', component: DetallesusuarioComponent },
   {path:'prod',component:ProductoComponent},
   {path:'empresas',component:EmpresaComponent},
   {path:'perfiluser',component:PerfiluserComponent},

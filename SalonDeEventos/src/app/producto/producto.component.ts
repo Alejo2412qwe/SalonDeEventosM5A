@@ -117,7 +117,7 @@ export class ProductoComponent {
   }
 
   registrar(): void {
-
+    this.producto.prodEstado=1;
     this.tipo.tipNombre = this.tipoSelect.tipNombre;
 
     for (const tip of this.tipos) {

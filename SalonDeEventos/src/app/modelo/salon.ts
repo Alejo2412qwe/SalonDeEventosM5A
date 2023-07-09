@@ -8,7 +8,7 @@ export class Salon {
     salDireccion: string;
     salCapacidad: number;
     salCostoHora: number;
-    salEstado: boolean;
+    salEstado: number;
     salLongitud: number;
     salLatitud: number;
     salFechaRegistro: Date;
@@ -20,7 +20,7 @@ export class Salon {
         salDireccion?: string,
         salCapacidad?: number,
         salCostoHora?: number,
-        salEstado?: boolean,
+        salEstado?: number,
         salLongitud?: number,
         salLatitud?: number,
         salFechaRegistro?: Date,
@@ -31,7 +31,7 @@ export class Salon {
         this.salDireccion = salDireccion || "";
         this.salCapacidad = salCapacidad || 0;
         this.salCostoHora = salCostoHora || 0;
-        this.salEstado = salEstado || true;
+        this.salEstado = salEstado || 0;
         this.salLongitud = salLongitud || 0;
         this.salLatitud = salLatitud || 0;
         this.salFechaRegistro = salFechaRegistro || new Date ;

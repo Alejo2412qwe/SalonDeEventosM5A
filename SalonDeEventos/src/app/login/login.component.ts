@@ -103,9 +103,9 @@ export class LoginComponent implements OnInit {
   persona: Persona = new Persona();
   rol: Rol = new Rol();
 
-  registrarPersona(): void {
+  registrar(): void {
     if (this.validacionesRegistro()) {
-
+      this.usuario.usuEstado=1;
       this.personaService.crearPersona(this.persona).subscribe(
         response => {
           this.persona.perId = response.perId;

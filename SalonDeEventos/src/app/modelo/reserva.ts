@@ -4,7 +4,7 @@ import { Usuario } from "./usuario";
 export class Reserva {
 
     resId: number;
-    resEstado: boolean;
+    resEstado: number;
     resComprobante: string;
     resFechaRegistro: Date;
     resFechaEvento:Date;
@@ -13,7 +13,7 @@ export class Reserva {
 
     constructor(
         resId?: number,
-        resEstado?: boolean,
+        resEstado?: number,
         resComprobante?: string,
         resFechaRegistro?: Date,
         resFechaEvento?:Date,
@@ -21,7 +21,7 @@ export class Reserva {
         usuId?: Usuario
     ) {
         this.resId = resId||0;
-        this.resEstado = resEstado||false;
+        this.resEstado = resEstado||0;
         this.resComprobante = resComprobante||"";
         this.resFechaRegistro = resFechaRegistro||new Date;
         this.resFechaEvento = resFechaEvento||new Date;

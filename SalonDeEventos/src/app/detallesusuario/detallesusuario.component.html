@@ -13,34 +13,42 @@
             <section class="layout2">
                 <div class="input-box">
                     <i class="fas fa-user"></i>
-                    <input type="text" class="form-control" placeholder="Cedula" required>
+                    <input type="text" class="form-control" name="Cedula" [(ngModel)]="usuario.usuPerId.perCedula"
+                        placeholder="Cedula" required>
                 </div>
                 <div class="input-box">
                     <i class="fas fa-user"></i>
-                    <input type="text" placeholder="Nombres" required>
+                    <input type="text" name="Nombres" [(ngModel)]="usuario.usuPerId.perNombre" placeholder="Nombres"
+                        required>
                 </div>
                 <div class="input-box">
                     <i class="fas fa-user"></i>
-                    <input type="text" placeholder="Apellidos" required>
+                    <input type="text" name="Apellidos" [(ngModel)]="usuario.usuPerId.perApellido"
+                        placeholder="Apellidos" required>
                 </div>
                 <div class="input-box">
                     <i class="fas fa-envelope"></i>
-                    <input type="text" placeholder="Correo electronico" required>
+                    <input type="text" name="Correo" [(ngModel)]="usuario.usuPerId.perCorreo"
+                        placeholder="Correo electronico" required>
                 </div>
 
                 <div class="input-box">
                     <i class="fas fa-envelope"></i>
-                    <input type="text" placeholder="Direccion" required>
+                    <input type="text" name="Direccion" [(ngModel)]="usuario.usuPerId.perDireccion"
+                        placeholder="Direccion" required>
                 </div>
 
                 <div class="input-box">
                     <i class="fas fa-phone"></i>
-                    <input type="text" placeholder="Telefono" required>
+                    <input type="text" name="Telefono" [(ngModel)]="usuario.usuPerId.perTelefono" placeholder="Telefono"
+                        required>
                 </div>
 
                 <div class="input-box">
                     <i class="fas fa-calendar"></i>
-                    <input type="date" placeholder="Fecha de nacimiento" required>
+                    <input type="date" name="FechaNacimiento"
+                        [ngModel]="formatDate(usuario.usuPerId.perFechaNacimiento)" (ngModelChange)="updateDate($event)"
+                        placeholder="Fecha de nacimiento" required>
                 </div>
             </section>
 
@@ -50,19 +58,34 @@
             <section class="layout3">
                 <div class="input-box">
                     <i class="fas fa-envelope"></i>
-                    <input type="text" placeholder="Nombre de usuario" required>
+                    <input type="text" name="usuario" [(ngModel)]="usuario.usuNombreUsuario"
+                        placeholder="Nombre de usuario" required>
                 </div>
                 <div class="input-box">
                     <i class="fas fa-envelope"></i>
-                    <input type="password" placeholder="Contraseña " required>
+                    <input type="password" name="Contraseña" [(ngModel)]="usuario.usuContrasena"
+                        placeholder="Contraseña " required >
                 </div>
             </section>
             <div class="input-box">
                 <i class="fas fa-envelope"></i>
                 <input type="password" placeholder="Verifica tu contraseña" required>
             </div>
+            <div class="inputContainer" >
+                <!-- *ngIf="usuario.usuId !== 1" -->
+                <h2 class="nombre" style="font-size: 18px;">Elige rol</h2>
+                <select name="roles" [(ngModel)]="rolSelect" class="select" [disabled]="usuario.usuId === 1">
+                    <option value="" selected disabled>Selecciona un rol</option>
+
+                    <option *ngFor="let rol of roles" [ngValue]="rol">
+                        {{rol.rolNombre}}
+                    </option>
+                </select>
+
+            </div>
+
             <div class="button input-box">
-                <input type="submit" value="Confirmar Cmambios">
+                <input type="submit" value="Confirmar Cmambios" (click)="update()">
             </div>
             <!-- </form> -->
         </div>

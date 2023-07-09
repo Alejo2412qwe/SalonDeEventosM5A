@@ -6,6 +6,7 @@ export class Usuario {
     usuId: number;
     usuNombreUsuario: string;
     usuContrasena: string;
+    usuEstado: number;
     usuFechaRegistro: Date;
     usuPerId: Persona;
     rolId: Rol;
@@ -15,6 +16,7 @@ export class Usuario {
         usuId?: number,
         usuNombreUsuario?: string,
         usuContrasena?: string,
+        usuEstado?: number,
         usuFechaRegistro?: Date,
         usuPerId?: Persona,
         rolId?: Rol
@@ -22,6 +24,7 @@ export class Usuario {
         this.usuId = usuId || 0;
         this.usuNombreUsuario = usuNombreUsuario || "";
         this.usuContrasena = usuContrasena || "";
+        this.usuEstado = usuEstado   || 0;
         this.usuFechaRegistro = usuFechaRegistro || new Date();
         this.usuPerId = usuPerId || new Persona;
         this.rolId = rolId || new Rol;

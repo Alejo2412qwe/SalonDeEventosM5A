@@ -7,7 +7,7 @@ export class Cotizacion {
     cotiTipoEvento: string;
     cotiFechaEvento: Date;
     cotiDescripcion: string;
-    cotiEstado: boolean;
+    cotiEstado: number;
     cotiMonto: number;
     cotiHoraFin: Date;
     cotiHoraInicio: Date;
@@ -21,7 +21,7 @@ export class Cotizacion {
         cotiTipoEvento?: string,
         cotiFechaEvento?: Date,
         cotiDescripcion?: string,
-        cotiEstado?: boolean,
+        cotiEstado?: number,
         cotiMonto?: number,
         cotiHoraFin?: Date,
         cotiHoraInicio?: Date,
@@ -34,7 +34,7 @@ export class Cotizacion {
         this.cotiTipoEvento = cotiTipoEvento||"";
         this.cotiFechaEvento = cotiFechaEvento||new Date;
         this.cotiDescripcion = cotiDescripcion||"";
-        this.cotiEstado = cotiEstado||false;
+        this.cotiEstado = cotiEstado||0;
         this.cotiMonto = cotiMonto||0;
         this.cotiHoraFin = cotiHoraFin||new Date;
         this.cotiHoraInicio = cotiHoraInicio||new Date;
