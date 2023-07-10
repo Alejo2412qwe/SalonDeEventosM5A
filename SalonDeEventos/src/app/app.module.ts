@@ -27,6 +27,7 @@ import { ListareservasComponent } from './listareservas/listareservas.component'
 import { ListaproductosComponent } from './listaproductos/listaproductos.component';
 import { ListasalonesComponent } from './listasalones/listasalones.component';
 import { UsuariogestionComponent } from './usuariogestion/usuariogestion.component';
+import { GestionproductosComponent } from './gestionproductos/gestionproductos.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -49,7 +50,9 @@ const routes: Routes = [
   { path: 'listaprod', component: ListaproductosComponent },
   { path: 'listasal', component: ListasalonesComponent },
   { path: 'empresas', component: EmpresaComponent },
-  {path: 'gestionuser',component: UsuariogestionComponent}
+  {path: 'gestionuser',component: UsuariogestionComponent},
+  {path: 'gestionProd',component: GestionproductosComponent}
+
 
 
 ]
@@ -77,6 +80,7 @@ const routes: Routes = [
     ListaproductosComponent,
     ListasalonesComponent,
     UsuariogestionComponent,
+    GestionproductosComponent,
 
   ],
   imports: [
