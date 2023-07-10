@@ -40,14 +40,8 @@ export class SalonComponent {
 
   registrarSalon(): void {
 
-    this.empresa.empNombre = this.seleccionados.empNombre;
+    this.empresa.empId = 1;
 
-    for (const emp of this.empresas) {
-      if (this.empresa.empNombre === emp.empNombre) {
-        this.salon.empId = emp;
-        break;
-      }
-    }
     this.salonService.crearSalon(this.salon).subscribe(
       response => {
         Swal.fire({
