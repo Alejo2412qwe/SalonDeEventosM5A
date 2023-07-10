@@ -28,6 +28,7 @@ import { ListaproductosComponent } from './listaproductos/listaproductos.compone
 import { ListasalonesComponent } from './listasalones/listasalones.component';
 import { UsuariogestionComponent } from './usuariogestion/usuariogestion.component';
 import { GestionproductosComponent } from './gestionproductos/gestionproductos.component';
+import { HeaderlogeoComponent } from './headerlogeo/headerlogeo.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -40,7 +41,7 @@ const routes: Routes = [
   { path: 'menu', component: HeaderComponent },
   { path: 'editarusu', component: DetallesusuarioComponent },
 
-  { path: 'editarusu/:id', component: DetallesusuarioComponent },
+  { path: 'editarusu/:id/:accion', component: DetallesusuarioComponent },
   {path:'prod',component:ProductoComponent},
   {path:'empresas',component:EmpresaComponent},
   {path:'perfiluser',component:PerfiluserComponent},
@@ -81,6 +82,7 @@ const routes: Routes = [
     ListasalonesComponent,
     UsuariogestionComponent,
     GestionproductosComponent,
+    HeaderlogeoComponent,
 
   ],
   imports: [
