@@ -7,7 +7,7 @@
 
 </head>
 
-<app-headers></app-headers>
+<app-headerlogeo></app-headerlogeo>
 <h2 style="font-size: 24px; color: black;">LISTA DE USUARIOS</h2>
 <div class="table-wrapper">
     <table class="fl-table">
@@ -33,7 +33,7 @@
                     <td>{{usu.usuPerId.perNombre+" "+usu.usuPerId.perApellido}}</td>
                     <td>{{usu.rolId.rolNombre}}</td>
                     <td class="button" >
-                        <div><button type="button" name="button" [routerLink]="['/editarusu',usu.usuId]" >
+                        <div><button type="button" name="button" [routerLink]="['/editarusu',usu.usuId,'editar']" >
                                 <img src="assets/img/lapiz.png" width="20px">
                             </button></div>
                     </td>
