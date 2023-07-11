@@ -149,8 +149,8 @@ export class LoginComponent implements OnInit {
       });
       ban = false;
     }
-    if (this.persona.perApellido.length === 0) {
-      this.toastr.error('Debe ingresar su apellido', '', {
+    if (this.persona.perDireccion.length === 0) {
+      this.toastr.error('Debe ingresar su direccion', '', {
         timeOut: tiempo
       });
       ban = false;
@@ -183,15 +183,15 @@ export class LoginComponent implements OnInit {
       });
     }
 
-    if (this.persona.perNombre.length === 0) {
-      this.toastr.error('Debe ingresar su nombre', '', {
+    if (this.persona.perCedula.length === 0) {
+      this.toastr.error('Debe ingresar su cedula', '', {
         timeOut: tiempo
       });
       ban = false;
     }
 
     if (this.persona.perTelefono.length === 0) {
-      this.toastr.error('Debe ingresar su apellido', '', {
+      this.toastr.error('Debe ingresar su telefono', '', {
         timeOut: tiempo
       });
       ban = false;

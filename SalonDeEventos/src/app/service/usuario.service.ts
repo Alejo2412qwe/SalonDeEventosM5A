@@ -33,11 +33,16 @@ export class UsuarioService {
     return this.http.get(this.url + "/listar").pipe(map(response => response as Usuario[]));
   }
 
-  update(id: number,usuario: Usuario): Observable<Usuario> {
-    return this.http.put<Usuario>(`${this.url}/actualizar/${id}`,usuario);
+  buscarUsuarios(busqueda: string, rol: number): Observable<Usuario[]> {
+    console.log(`${this.url}/busqueda/${busqueda}/${rol}`)
+    return this.http.get(`${this.url}/busqueda/${busqueda}/${rol}`).pipe(map(response => response as Usuario[]));
+  }
+
+  update(id: number, usuario: Usuario): Observable<Usuario> {
+    return this.http.put<Usuario>(`${this.url}/actualizar/${id}`, usuario);
   }
 
   delete(id: number): Observable<Usuario> {
-    return this.http.put<Usuario>(`${this.url}/eliminarE/${id}`,null);
+    return this.http.put<Usuario>(`${this.url}/eliminarE/${id}`, null);
   }
 }

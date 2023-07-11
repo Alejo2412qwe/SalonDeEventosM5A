@@ -14,6 +14,8 @@ import Swal from 'sweetalert2';
 export class ListausuariosComponent implements OnInit {
 
   usuarios: Usuario[] = [];
+  busqueda: string = "";
+  bRol: number = 0;
 
   constructor(private PersonaService: PersonaService, private usuarioService: UsuarioService,
     private activatedRoute: ActivatedRoute) {
@@ -26,6 +28,16 @@ export class ListausuariosComponent implements OnInit {
   listaUsuarios(): void {
     this.usuarioService.getUsuarios().subscribe(
       user => this.usuarios = user
+    );
+  }
+
+  busquedaUsuarios(): void {
+    this.usuarioService.buscarUsuarios(this.busqueda, 0).subscribe(
+      user => {
+        this.usuarios = user
+        console.log(":c");
+      }
+
     );
   }
 

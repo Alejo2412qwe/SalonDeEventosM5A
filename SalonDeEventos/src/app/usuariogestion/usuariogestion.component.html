@@ -30,13 +30,13 @@
 <div>
     <section class="layout">
 
-        <div class="card">
+        <div class="card" [routerLink]="['/editarusu','registrar']">
             <div class="icon">
                 <img src="assets/img/clientes.png" width="40px " alt="">
             </div>
             <strong> CREAR USUARIOS
             </strong>
-            <span> <a href="/editarusu"><img src="assets/img/clientes.png" width="70px " alt=""></a>
+            <span> <a [routerLink]="['/editarusu','registrar',0]"><img src="assets/img/clientes.png" width="70px " alt="" ></a>
             </span>
         </div>
 

@@ -22,23 +22,19 @@ export class DetallesusuarioComponent implements OnInit {
   rol: Rol = new Rol();
   roles: Rol[] = [];
   rolSelect: Rol = new Rol;
-
+  accion: string = "";
 
 
   constructor(private personaService: PersonaService, private usuarioService: UsuarioService, private rolService: RolService,
-    private activatedRoute: ActivatedRoute, private router: Router) {
+    private activatedRoute: ActivatedRoute, private router: Router, private toastr: ToastrService) {
   }
 
   ngOnInit(): void {
-    this.cargarUsu();
+    this.cargarAccion();
     this.cargarRoles();
   }
   cargarRoles(): void {
 
-    // let rolSELEC: Rol = new Rol()
-    // rolSELEC.rolId = 0;
-    // rolSELEC.rolNombre = 'Seleccione un rol';
-    // this.roles.push(rolSELEC);
     this.rolService.getRoles().subscribe(
       rolesArray => {
         for (let rol of rolesArray) {
@@ -46,6 +42,15 @@ export class DetallesusuarioComponent implements OnInit {
         }
       }
     );
+  }
+
+  cargarAccion(): void {
+    this.activatedRoute.params.subscribe(params => {
+      this.accion = params['accion']
+      if (this.accion === 'editar') {
+        this.cargarUsu();
+      }
+    })
   }
 
   cargarRolUsu(): void {
@@ -141,6 +146,183 @@ export class DetallesusuarioComponent implements OnInit {
 
 
     // }
+  }
+
+  // usuario: Usuario = new Usuario();
+  confirmarPass = "";
+  // persona: Persona = new Persona();
+  // rol: Rol = new Rol();
+
+  registrar(): void {
+
+    console.log(this.accion)
+    console.log("persona= "+JSON.stringify(this.persona))
+
+    if (this.validacionesRegistro()) {
+      console.log("VALIDADO")
+      this.usuario.usuEstado = 1;
+      this.personaService.crearPersona(this.persona).subscribe(
+        response => {
+          this.persona.perId = response.perId;
+          this.usuario.usuPerId = this.persona;
+
+          this.cargarRolUsu()
+
+          console.log("usuROL= " + this.usuario.rolId.rolNombre)
+
+          this.usuarioService.crearUsuario(this.usuario).subscribe(response => {
+
+            console.log(response)
+
+            Swal.fire({
+              position: 'center',
+              icon: 'success',
+              title: 'Registro exitoso',
+              showConfirmButton: true
+              // timer: 3500
+            }).then(() => {
+              this.router.navigate(["gestionuser"]);
+            });
+          });
+        }
+      )
+    }
+  }
+
+  validacionesRegistro(): boolean {
+    // const fechaActual = new Date();
+    // console.log(fechaActual);
+    let tiempo: number = 4000;
+
+    let ban: boolean = true;
+
+    if (this.persona.perApellido.length === 0) {
+      this.toastr.error('Debe ingresar su apellido', '', {
+        timeOut: tiempo
+      });
+      ban = false;
+    }
+    // if (this.persona.perApellido.length === 0) {
+    //   this.toastr.error('Debe ingresar su apellido', '', {
+    //     timeOut: tiempo
+    //   });
+    //   ban = false;
+    // }
+
+    if (this.persona.perNombre.length === 0) {
+      this.toastr.error('Debe ingresar su nombre', '', {
+        timeOut: tiempo
+      });
+      ban = false;
+    }
+
+    if (this.persona.perCorreo.length === 0) {
+      this.toastr.error('Debe ingresar su correo', '', {
+        timeOut: tiempo
+      });
+      ban = false;
+    }
+
+
+    //edad
+    let fechaActual = new Date();
+    let edadMinima = 18;
+
+
+    if (this.calcularEdad() < edadMinima) {
+      ban = false;
+      this.toastr.error('Debe ser mayor de edad para registrarse', '', {
+        timeOut: 3000
+      });
+    }
+
+    if (this.persona.perNombre.length === 0) {
+      this.toastr.error('Debe ingresar su nombre', '', {
+        timeOut: tiempo
+      });
+      ban = false;
+    }
+
+    if (this.persona.perTelefono.length === 0) {
+      this.toastr.error('Debe ingresar su apellido', '', {
+        timeOut: tiempo
+      });
+      ban = false;
+    }
+
+    if (this.usuario.usuContrasena.length === 0) {
+      this.toastr.error('Debe ingresar su contraseña', '', {
+        timeOut: tiempo
+      });
+      ban = false;
+    }
+
+    if (this.usuario.usuNombreUsuario.length === 0) {
+      this.toastr.error('Debe ingresar su nombre de usuario', '', {
+        timeOut: tiempo
+      });
+      ban = false;
+    } else {
+      this.usuarioService.usuarioExiste(this.usuario.usuNombreUsuario).subscribe(existe => {
+
+        if (existe) {
+          this.toastr.error('Este usuario ya existe', '', {
+            timeOut: tiempo
+          });
+          ban = false;
+        }
+      });
+    }
+
+    if (this.confirmarPass.length === 0) {
+      this.toastr.error('Debe confirmar su contraseña', '', {
+        timeOut: tiempo
+      });
+      ban = false;
+    } else {
+      if (this.confirmarPass !== this.usuario.usuContrasena) {
+        this.toastr.error('Las 2 contraseñas tienen que coincidir', '', {
+          timeOut: tiempo
+        });
+        ban = false;
+      }
+    }
+
+    return ban;
+  }
+
+  calcularEdad(): number {
+    console.log("nacimiento" + this.persona.perFechaNacimiento)
+    const fechaActual: Date = new Date();
+    // console.log("HOY" + fechaActual)
+    const anioActual: number = fechaActual.getFullYear();
+    const mesActual: number = fechaActual.getMonth() + 1;
+    const diaActual: number = fechaActual.getDate();
+
+    const nacimiento: Date = new Date(this.persona.perFechaNacimiento);
+    const anioNacimiento: number = nacimiento.getFullYear();
+    const mesNacimiento: number = nacimiento.getMonth() + 1;
+    const diaNacimiento: number = nacimiento.getDate() + 1;
+    // console.log("nacimiento" + nacimiento)
+
+    let edad: number = anioActual - anioNacimiento;
+
+    // Verificar si aún no ha cumplido años en el presente año
+    if (mesActual < mesNacimiento || (mesActual === mesNacimiento && diaActual < diaNacimiento)) {
+      edad--;
+    }
+    // console.log("EDAD" + edad)
+
+    return edad;
+  }
+
+  numeros(event: KeyboardEvent) {
+    const allowedKeys = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.', '-', ',', 'Backspace', 'Delete', 'Tab'];
+    const inputKey = event.key;
+
+    if (!allowedKeys.includes(inputKey)) {
+      event.preventDefault();
+    }
   }
 
 }
