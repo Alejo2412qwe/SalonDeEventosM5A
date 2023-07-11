@@ -18,46 +18,27 @@ export class SalonComponent {
   constructor(private salonService: SalonService, private EmpresaService: EmpresaService,
     private router: Router, private toastr: ToastrService, private imgSalonService: ImgSalonService) { }
 
-  empresas: Empresa[] = [];
   seleccionados: Empresa = new Empresa;
   salon: Salon = new Salon();
   empresa: Empresa = new Empresa();
 
-  cargarEmpresas(): void {
-
-    let empresaSELEC: Empresa = new Empresa()
-    empresaSELEC.empId = 0;
-    empresaSELEC.empNombre = 'Seleccione una categoria';
-    this.empresas.push(empresaSELEC);
-    this.EmpresaService.getEmpresas().subscribe(
-      empresasArray => {
-        for (let empresa of empresasArray) {
-          this.empresas.push(empresa)
-        }
-      }
-    );
-  }
-
   registrarSalon(): void {
 
-    this.empresa.empNombre = this.seleccionados.empNombre;
+    this.EmpresaService.getEmpresaPorId(1).subscribe(emp => {
 
-    for (const emp of this.empresas) {
-      if (this.empresa.empNombre === emp.empNombre) {
-        this.salon.empId = emp;
-        break;
-      }
-    }
-    this.salonService.crearSalon(this.salon).subscribe(
-      response => {
-        Swal.fire({
-          position: 'center',
-          icon: 'success',
-          title: 'Registro exitoso',
-          showConfirmButton: true
-        }).then(() => {
-          location.reload();
+      this.salon.empId = emp;
+
+      this.salonService.crearSalon(this.salon).subscribe(
+        response => {
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Registro exitoso',
+            showConfirmButton: true
+          }).then(() => {
+            location.reload();
+          })
         })
-      })
-  };
+    })
+  }
 }

@@ -18,29 +18,34 @@
         <th>DESCRIPCION</th>
         <th>COSTO</th>
         <th>Fecha de Registro</th>
+        <th>UBICACION</th>
         <th>Accion</th>
         <th>Accion</th>
       </tr>
     </thead>
     <tbody>
-      <tr >
-        <td>width</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td class="button">
-          <div><button>
-              <img src="assets/img/lapiz.png" width="20px">
-            </button></div>
-        </td>
+      <ng-container *ngFor="let sal of salones">
+        <tr *ngIf="sal.salEstado === 1">
+          <td>{{sal.salId}}</td>
+          <td>{{sal.salNombre}}</td>
+          <td>{{sal.salDireccion}}</td>
+          <td>{{sal.salCapacidad}}</td>
+          <td>{{sal.salCostoHora}}</td>
+          <td>{{"Latidud "+sal.salLatitud +", Longitud "+sal.salLongitud}}</td>
 
-        <td class="button">
-          <div><button class="2">
-              <img src="assets/img/eliminar.png" width="20px">
-            </button></div>
-        </td>
-      </tr>
+          <td class="button">
+            <div><button type="button" name="button" [routerLink]="['/editarsalon',sal.salId,'editar']">
+                <img src="assets/img/lapiz.png" width="20px">
+              </button></div>
+          </td>
+
+          <td class="button">
+            <div><button class="2" (click)="eliminar(sal.salId)">
+                <img src="assets/img/eliminar.png" width="20px">
+              </button></div>
+          </td>
+        </tr>
+      </ng-container>
     <tbody>
   </table>
 </div>

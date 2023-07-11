@@ -15,8 +15,8 @@ export class EmpresaService {
   constructor(private http: HttpClient) { }
 
 
-   //recuperar categorias activas o inactivas
-   getEmpresas():Observable<Empresa[]>{
-    return this.http.get<Empresa[]>(this.url+"/listar");
+  //recuperar categorias activas o inactivas
+  getEmpresaPorId(id: number): Observable<Empresa> {
+    return this.http.get<Empresa>(`${this.url}/listar/${id}`);
   }
 }

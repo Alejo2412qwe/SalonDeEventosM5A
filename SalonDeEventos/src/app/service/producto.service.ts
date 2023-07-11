@@ -22,6 +22,10 @@ export class productoService {
 
     getProducto(): Observable<ProductoServicio[]> {
         return this.http.get(this.url + "/listar").pipe(map(response => response as ProductoServicio[]));
-      }
+    }
+
+    delete(id: number): Observable<ProductoServicio> {
+        return this.http.put<ProductoServicio>(`${this.url}/eliminarE/${id}`, null);
+    }
 
 }
