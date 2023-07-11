@@ -47,7 +47,7 @@ export class ListasalonesComponent implements OnInit {
           Swal.fire({
             position: 'center',
             icon: 'success',
-            title: `Cliente eliminado exitosamente`,
+            title: `Salon eliminado exitosamente`,
             showConfirmButton: true,
             timer: 1500
           })

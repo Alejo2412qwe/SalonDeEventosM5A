@@ -18,6 +18,7 @@
         <th>DESCRIPCION</th>
         <th>COSTO</th>
         <th>Fecha de Registro</th>
+        <th>UBICACION</th>
         <th>Accion</th>
         <th>Accion</th>
       </tr>
@@ -30,8 +31,7 @@
           <td>{{sal.salDireccion}}</td>
           <td>{{sal.salCapacidad}}</td>
           <td>{{sal.salCostoHora}}</td>
-          <td>{{sal.salLatitud}}</td>
-          <td>{{sal.salLongitud}}</td>
+          <td>{{"Latidud "+sal.salLatitud +", Longitud "+sal.salLongitud}}</td>
 
           <td class="button">
             <div><button type="button" name="button" [routerLink]="['/editarsalon',sal.salId,'editar']">

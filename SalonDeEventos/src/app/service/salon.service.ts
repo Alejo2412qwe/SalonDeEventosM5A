@@ -26,4 +26,8 @@ export class SalonService {
     delete(id: number): Observable<Salon> {
         return this.http.put<Salon>(`${this.url}/eliminarE/${id}`, null);
     }
+
+    update(id: number, salon: Salon): Observable<Salon> {
+        return this.http.put<Salon>(`${this.url}/actualizar/${id}`, salon);
+    }
 }
