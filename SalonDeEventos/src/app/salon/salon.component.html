@@ -21,33 +21,51 @@
                 <section class="layout">
 
                     <div class="inputContainer">
-                        <input type="text" name="salNombre" [(ngModel)]="salon.salNombre" placeholder="Ingresa el nombre" required>
+                        <input type="text" name="salNombre" [(ngModel)]="salon.salNombre"
+                            placeholder="Ingresa el nombre" required>
                     </div>
 
                     <div class="inputContainer">
-                        <input type="text" name="salDireccion" [(ngModel)]="salon.salDireccion" placeholder="Ingresa la direccion" required>
+                        <input type="text" name="salDireccion" [(ngModel)]="salon.salDireccion"
+                            placeholder="Ingresa la direccion" required>
                     </div>
 
                     <div class="inputContainer">
-                        <input type="number" name="salCapacidad" [(ngModel)]="salon.salCapacidad" placeholder="Ingresa la capacidad" required>
+                        <h1>Capacidad:</h1>
+                        <input type="number" name="salCapacidad" [(ngModel)]="salon.salCapacidad"
+                            placeholder="Ingresa la capacidad" required>
                     </div>
 
                     <div class="inputContainer">
-                        <input type="number" name="salCostoHora" [(ngModel)]="salon.salCostoHora" placeholder="Ingresa el costo/hora" required>
+                        <h1>Costo por Hora:</h1>
+                        <input type="number" name="salCostoHora" [(ngModel)]="salon.salCostoHora"
+                            placeholder="Ingresa el costo/hora" required>
                     </div>
 
                     <div class="inputContainer">
-                        <input type="number" name="salLatitud" [(ngModel)]="salon.salLatitud" placeholder="Ingresa la latitud del local" required>
+                        <h1>latitud:</h1>
+
+                        <input type="number" name="salLatitud" [(ngModel)]="salon.salLatitud"
+                            placeholder="Ingresa la latitud del local" required>
                     </div>
 
                     <div class="inputContainer">
-                        <input type="number" name="salLongitud" [(ngModel)]="salon.salLongitud" placeholder="Ingresa la longitud del local" required>
+                        <h1>Longitud:</h1>
+
+                        <input type="number" name="salLongitud" [(ngModel)]="salon.salLongitud"
+                            placeholder="Ingresa la longitud del local" required>
+                    </div>
+
+                    <div></div>
+                    <div style="  text-align: right;
+                    "> <button id="button" (click)="registrarSalon()">Crear un Salon</button>
                     </div>
                 </section>
 
-                <button id="button" (click)="registrarSalon()">Crear un Salon</button>
 
             </form>
+
+
         </div>
 
     </div>

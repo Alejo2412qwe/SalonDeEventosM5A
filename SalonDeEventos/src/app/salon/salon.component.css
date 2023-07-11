@@ -7,14 +7,21 @@
     font-family: 'Roboto Slab', serif;
 }
 
+h1 {
+
+font-size: 18px;
+margin-right: 5%;
+}
+
 .container {
 
     width: 100%;
-    min-height: 80vh;
+    height: 100%;
     padding-left: 8%;
     padding-right: 8%;
     box-sizing: border-box;
     overflow: hidden;
+    margin-bottom: 20px;
 }
 
 .form_main {
@@ -25,12 +32,14 @@
     justify-content: center;
     background-color: rgb(255, 255, 255);
     padding: 30px 30px 30px 30px;
-    box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.062);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.9);
     position: relative;
     overflow: hidden;
-    height: 500px;
+    height: 100%;
     border-radius: 5px;
     margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .form_main::before {
@@ -38,7 +47,7 @@
     content: "";
     width: 500px;
     height: 600px;
-    background: linear-gradient(to right, #E8AA42, #E57C23);
+    background: linear-gradient(to right, #F1C27B, #FFD89C);
     transform: rotate(45deg);
     left: -220px;
     top: 20px;
@@ -97,17 +106,19 @@
 #button {
     z-index: 2;
     position: relative;
-    width: 100%;
+    width: 60%;
     border: none;
-    background: linear-gradient(to right, #E8AA42, #E57C23);
-    height: 90px;
-    color: white;
-    font-size: .8em;
-    font-weight: 500;
-    letter-spacing: 1px;
-    margin: 10px;
+    background: linear-gradient(to right, #F1C27B, #FFD89C);
+    height: 60px;
+    color: rgb(0, 0, 0);
+    font-size: 18px;
+    font-weight: bolder;
+    letter-spacing: 5px;
     cursor: pointer;
     border-radius: 5px;
+    margin-top: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 2);
+
 }
 
 #button:hover {
@@ -178,7 +189,7 @@
 
 .layout {
     width: 100%;
-    height: 508px;
+    height: 100%;
     display: grid;
     grid-template-rows: repeat(2, 1fr);
     grid-template-columns: repeat(2, 1fr);
@@ -232,7 +243,7 @@
 
     .form_main {
 
-        width: 530px;
+        width: 100%;
     }
 
     .cate {
@@ -246,7 +257,7 @@
         font-size: 24px;
         padding: 0 20px;
         color: #000000;
-    
+
     }
 }
 
@@ -265,7 +276,7 @@
 
     .form_main {
 
-        width: 530px;
+        width: 100%;
     }
 }
 
@@ -284,8 +295,8 @@
 
     .form_main {
 
-        width: 480px;
-        height: 600px;
+        width: 100%;
+        height: 100%;
     }
 }
 
@@ -302,8 +313,8 @@
 
     .form_main {
 
-        width: 380px;
-        height: 600px;
+        width: 100%;
+        height: 100%;
     }
 }
 
@@ -320,23 +331,10 @@
 
     .form_main {
 
-        width: 320px;
-        height: 600px;
+        width: 100%;
+        height: 100%;
     }
 
-    .form_main::before {
-        position: absolute;
-        content: "";
-        width: 400px;
-        height: 400px;
-        background: linear-gradient(to right, #E8AA42, #E57C23);
-        transform: rotate(45deg);
-        left: -180px;
-        bottom: 60px;
-        z-index: 0;
-        border-radius: 30px;
-        box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.082);
-    }
 
 }
 
@@ -367,7 +365,7 @@ p.fecha {
     width: 20px;
     margin-right: 10px;
     border-radius: 10px;
-    background: linear-gradient(to right, #E8AA42, #E57C23);
+    background: linear-gradient(to right, #F1C27B, #FFD89C);
     animation: pulse 1.5s infinite ease-in-out;
 }
 
