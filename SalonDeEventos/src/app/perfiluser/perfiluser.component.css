@@ -15,6 +15,7 @@
   align-items: center;
   justify-content: center;
   text-align: center;
+  margin-bottom: 50px;
 
 }
 
@@ -41,6 +42,7 @@
   margin-top: 10px;
   margin-left: 50px;
   margin-right: 50px;
+  margin-bottom: 30px;
 }
 
 button {
@@ -99,22 +101,73 @@ button:active {
 
 .datostotales {
 
-  border: 2px solid #000000;
   margin-left: 50px;
   margin-right: 50px;
+  
   /* border-color: #fee6d0; */
   /* background:linear-gradient(to right, #cecece, #fee6d0); */
 }
 
 .info {
-  margin-left: 50px;
-  font-size: medium;
-  color: #E57C23;
+  font-size: 20px;
+  color: #000000;
   margin-top: 10px;
   font-weight: bold;
+  text-align: center;
+  letter-spacing: 3px;
+  margin-bottom: 20px;
 }
 
 h1 {
 
   color: #000000;
+}
+
+tr {
+  height: 70px;
+}
+
+
+td.datos {
+  padding-top: 20px;
+  background-color: #FFD89C;
+  padding-left: 50px;
+}
+
+td.titulo {
+  padding-top: 20px;
+  background-color: #F1C27B;
+  padding-left: 30px;
+
+}
+
+
+.layout {
+  width: 100%;
+  height: 100%;
+
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.layout2 {
+  width: 100%;
+  height: 100%;
+
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+td.titulo {
+  font-weight: bolder;
+}
+
+tbody{
+
+  font-size: 18px;
+  border-radius: 24px;
 }
