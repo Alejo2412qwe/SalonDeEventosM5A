@@ -43,7 +43,7 @@ const routes: Routes = [
   { path: 'menu', component: HeaderComponent },
   { path: 'editarusu', component: DetallesusuarioComponent },
   { path: 'editarsalon', component: DetallesalonComponent },
-  { path: 'editarusu/:id/:accion', component: DetallesusuarioComponent },
+  { path: 'editarusu/:accion/:id', component: DetallesusuarioComponent },
   {path:'prod',component:ProductoComponent},
   {path:'empresas',component:EmpresaComponent},
   {path:'perfiluser',component:PerfiluserComponent},

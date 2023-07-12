@@ -8,11 +8,11 @@
 </head>
 
 <app-headerlogeo></app-headerlogeo>
-<h2 style="font-size: 24px; color: black;">LISTA DE USUARIOS</h2>
+<h2 style="font-size: 24px; color: black;">LISTA DE USUARIOS ACTIVOS</h2>
 <div class="input-box">
     <i class="fa fa-search"></i>
-    <input type="text" name="usuario" [(ngModel)]="busqueda" (input)="busquedaUsuarios()"
-        placeholder="Buscar" required>
+    <input type="text" name="usuario" [(ngModel)]="busquedaAct" (input)="busquedaUsuariosAct()" placeholder="Buscar"
+        required>
 </div>
 <div class="table-wrapper">
     <table class="fl-table">
@@ -29,22 +29,69 @@
             </tr>
         </thead>
         <tbody>
-            <ng-container *ngFor="let usu of usuarios">
+            <ng-container *ngFor="let usu of usuariosAct">
 
-                <tr *ngIf="usu.usuEstado === 1">
+                <tr *ngIf="usu.usuEstado===1">
                     <td>{{usu.usuId}}</td>
                     <td>{{usu.usuPerId.perCedula}}</td>
                     <td>{{usu.usuNombreUsuario}}</td>
                     <td>{{usu.usuPerId.perNombre+" "+usu.usuPerId.perApellido}}</td>
                     <td>{{usu.rolId.rolNombre}}</td>
-                    <td class="button" >
-                        <div><button type="button" name="button" [routerLink]="['/editarusu','editar',usu.usuId]" >
+                    <td class="button">
+                        <div><button type="button" name="button" [routerLink]="['/editarusu','editar',usu.usuId]">
                                 <img src="assets/img/lapiz.png" width="20px">
                             </button></div>
                     </td>
 
                     <td class="button2">
                         <div><button class="2" name="button" (click)="eliminar(usu.usuId)" [disabled]="usu.usuId === 1">
+                                <img src="assets/img/eliminar.png" width="20px">
+                            </button></div>
+                    </td>
+                </tr>
+            </ng-container>
+
+        <tbody>
+    </table>
+</div>
+
+<h2 style="font-size: 24px; color: black;">LISTA DE USUARIOS INACTIVOS</h2>
+<div class="input-box">
+    <i class="fa fa-search"></i>
+    <input type="text" name="usuario" [(ngModel)]="busquedaInAct" (input)="busquedaUsuariosInact()"  placeholder="Buscar"
+        required>
+</div>
+<div class="table-wrapper">
+    <table class="fl-table">
+        <thead>
+            <tr>
+                <th>Nº Usuario</th>
+                <th>Cedula</th>
+                <th>Usuario</th>
+                <th>Nombre y Apellido</th>
+                <th>Rol</th>
+                <th>Editar</th>
+                <th>Activar</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let usu of usuariosInact">
+
+                <tr *ngIf="usu.usuEstado===0">
+                    <td>{{usu.usuId}}</td>
+                    <td>{{usu.usuPerId.perCedula}}</td>
+                    <td>{{usu.usuNombreUsuario}}</td>
+                    <td>{{usu.usuPerId.perNombre+" "+usu.usuPerId.perApellido}}</td>
+                    <td>{{usu.rolId.rolNombre}}</td>
+                    <td class="button">
+                        <div><button type="button" name="button" [routerLink]="['/editarusu','editar',usu.usuId]">
+                                <img src="assets/img/lapiz.png" width="20px">
+                            </button></div>
+                    </td>
+
+                    <td class="button2">
+                        <div><button class="2" name="button" (click)="activarCuenta(usu.usuId)" [disabled]="usu.usuId === 1">
                                 <img src="assets/img/eliminar.png" width="20px">
                             </button></div>
                     </td>

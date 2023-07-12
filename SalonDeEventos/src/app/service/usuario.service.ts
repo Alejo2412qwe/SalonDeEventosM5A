@@ -42,7 +42,7 @@ export class UsuarioService {
     return this.http.put<Usuario>(`${this.url}/actualizar/${id}`, usuario);
   }
 
-  delete(id: number): Observable<Usuario> {
-    return this.http.put<Usuario>(`${this.url}/eliminarE/${id}`, null);
+  delete(id: number, estado: number): Observable<Usuario> {
+    return this.http.put<Usuario>(`${this.url}/eliminarE/${id}/${estado}`, null);
   }
 }
