@@ -7,8 +7,13 @@
 
 </head>
 
-<app-headerlogeo ></app-headerlogeo>
-<h2 style="font-size: 24px; color: black;">LISTA DE USUARIOS</h2>
+<app-headerlogeo></app-headerlogeo>
+<h2 style="font-size: 24px; color: black;">LISTA DE PRODUCTOS/SERVICIOS ACTIVOS</h2>
+<div class="input-box">
+  <i class="fa fa-search"></i>
+
+  <input type="text" name="usuario" [(ngModel)]="busquedaAct" (input)="busquedaPSAct()" placeholder="Buscar" required>
+</div>
 <div class="table-wrapper">
   <table class="fl-table">
     <thead>
@@ -17,17 +22,68 @@
         <th>NOMBRE DEL PRODUCTO</th>
         <th>DESCRIPCION</th>
         <th>COSTO</th>
+        <th>CATEGORIA</th>
+        <th>TIPO</th>
         <th>Fecha de Registro</th>
         <th>Accion</th>
         <th>Accion</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let pro of producto">
+      <tr *ngFor="let pro of productoAct">
         <td>{{pro.prodId}}</td>
         <td>{{pro.prodNombre}}</td>
         <td>{{pro.prodDescripcion}}</td>
         <td>{{pro.prodPrecio}}</td>
+        <td>{{pro.catId.catNombre}}</td>
+        <td>{{pro.tipId.tipNombre}}</td>
+        <td>{{pro.prodFechaRegistro}}</td>
+        <td class="button">
+          <div><button type="button" name="button" [routerLink]="['/prod','editar',pro.prodId]">
+              <img src="assets/img/lapiz.png" width="20px">
+            </button></div>
+        </td>
+
+        <td class="button">
+          <div><button class="2" (click)="eliminar(pro.prodId)">
+              <img src="assets/img/eliminar.png" width="20px">
+            </button></div>
+        </td>
+      </tr>
+    <tbody>
+  </table>
+</div>
+
+<h2 style="font-size: 24px; color: black;">LISTA DE PRODUCTOS/SERVICIOS INACTIVOS</h2>
+<div class="input-box">
+  <i class="fa fa-search"></i>
+
+  <input type="text" name="usuario" [(ngModel)]="busquedaInAct" (input)="busquedaPSInAct()" placeholder="Buscar"
+    required>
+</div>
+<div class="table-wrapper">
+  <table class="fl-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>NOMBRE DEL PRODUCTO</th>
+        <th>DESCRIPCION</th>
+        <th>COSTO</th>
+        <th>CATEGORIA</th>
+        <th>TIPO</th>
+        <th>Fecha de Registro</th>
+        <th>Accion</th>
+        <th>Accion</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let pro of productoInact">
+        <td>{{pro.prodId}}</td>
+        <td>{{pro.prodNombre}}</td>
+        <td>{{pro.prodDescripcion}}</td>
+        <td>{{pro.prodPrecio}}</td>
+        <td>{{pro.catId.catNombre}}</td>
+        <td>{{pro.tipId.tipNombre}}</td>
         <td>{{pro.prodFechaRegistro}}</td>
         <td class="button">
           <div><button>
@@ -36,7 +92,7 @@
         </td>
 
         <td class="button">
-          <div><button class="2" (click)="eliminar(pro.prodId)">
+          <div><button class="2" name="button" (click)="activar(pro.prodId)">
               <img src="assets/img/eliminar.png" width="20px">
             </button></div>
         </td>

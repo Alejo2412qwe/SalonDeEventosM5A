@@ -44,18 +44,20 @@ const routes: Routes = [
   { path: 'editarusu', component: DetallesusuarioComponent },
   { path: 'editarsalon', component: DetallesalonComponent },
   { path: 'editarusu/:accion/:id', component: DetallesusuarioComponent },
-  {path:'prod',component:ProductoComponent},
-  {path:'empresas',component:EmpresaComponent},
-  {path:'perfiluser',component:PerfiluserComponent},
+  { path: 'editarsalon/:accion/:id', component: DetallesalonComponent },
+  { path: 'prod', component: ProductoComponent },
+  { path: 'prod/:accion/:id', component: ProductoComponent },
+  { path: 'empresas', component: EmpresaComponent },
+  { path: 'perfiluser', component: PerfiluserComponent },
   { path: 'prod', component: ProductoComponent },
   { path: 'listausu', component: ListausuariosComponent },
   { path: 'listares', component: ListareservasComponent },
   { path: 'listaprod', component: ListaproductosComponent },
   { path: 'listasal', component: ListasalonesComponent },
   { path: 'empresas', component: EmpresaComponent },
-  {path: 'gestionuser',component: UsuariogestionComponent},
-  {path: 'gestionProd',component: GestionproductosComponent},
-  {path: 'gestionsalones',component: GestionsalonesComponent}
+  { path: 'gestionuser', component: UsuariogestionComponent },
+  { path: 'gestionProd', component: GestionproductosComponent },
+  { path: 'gestionsalones', component: GestionsalonesComponent }
 
 
 

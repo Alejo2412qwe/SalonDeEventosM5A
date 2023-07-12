@@ -50,9 +50,10 @@
                     <img [src]="preview" alt="Vista previa de imagen" class="card-image" style="margin: inherit;">
                 </div>
             </section>
-            <button id="button" (click)="registrar()">Crear un producto</button>
+            <button id="button" (click)="registrar()" *ngIf="accion ==='registrar'">Crear producto</button>
+            <button id="button" (click)="registrar()" *ngIf="accion ==='editar'">Editar producto</button>
 
-            <!-- <button id="button" (click)="registrar()">Crear un producto</button> -->
+        
         </form>
 
 

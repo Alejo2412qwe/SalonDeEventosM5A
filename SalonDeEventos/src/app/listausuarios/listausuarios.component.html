@@ -58,7 +58,8 @@
 <h2 style="font-size: 24px; color: black;">LISTA DE USUARIOS INACTIVOS</h2>
 <div class="input-box">
     <i class="fa fa-search"></i>
-    <input type="text" name="usuario" [(ngModel)]="busquedaInAct" (input)="busquedaUsuariosInact()"  placeholder="Buscar"
+
+    <input type="text" name="usuario" [(ngModel)]="busquedaInAct" (input)="busquedaUsuariosInact()" placeholder="Buscar"
         required>
 </div>
 <div class="table-wrapper">
@@ -91,7 +92,8 @@
                     </td>
 
                     <td class="button2">
-                        <div><button class="2" name="button" (click)="activarCuenta(usu.usuId)" [disabled]="usu.usuId === 1">
+                        <div><button class="2" name="button" (click)="activarCuenta(usu.usuId)"
+                                [disabled]="usu.usuId === 1">
                                 <img src="assets/img/eliminar.png" width="20px">
                             </button></div>
                     </td>

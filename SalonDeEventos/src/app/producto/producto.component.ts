@@ -3,7 +3,7 @@ import { ProductoServicio } from '../modelo/producto-servicio';
 import { productoService } from '../service/producto.service';
 import { CategoriaService } from '../service/categoria.service';
 import { TipoService } from '../service/tipo.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
 import { Categoria } from '../modelo/categoria';
@@ -21,14 +21,7 @@ import { ImgProductoService } from '../service/imgProducto.service';
 })
 export class ProductoComponent {
 
-  constructor(private productoService: productoService, private categoriaService: CategoriaService, private tipoService: TipoService, private fileService: UploadFileService,
-    private router: Router, private toastr: ToastrService, private imgProductoService: ImgProductoService) { }
-
-  ngOnInit(): void {
-    this.cargarTipos()
-    this.cargarCategorias()
-  }
-
+  accion: string = "";
   tipos: Tipo[] = [];
   categorias: Categoria[] = [];
   producto: ProductoServicio = new ProductoServicio();
@@ -36,6 +29,42 @@ export class ProductoComponent {
   tipo: Tipo = new Tipo();
   tipoSelect: Tipo = new Tipo;
   categoriaSelect: Categoria = new Categoria;
+
+  constructor(private productoService: productoService, private categoriaService: CategoriaService,
+    private tipoService: TipoService, private fileService: UploadFileService,
+    private router: Router, private toastr: ToastrService, private imgProductoService: ImgProductoService,
+    private activatedRoute: ActivatedRoute) { }
+
+  ngOnInit(): void {
+    this.cargarAccion()
+    this.cargarTipos()
+    this.cargarCategorias()
+  }
+
+  cargarAccion(): void {
+    this.activatedRoute.params.subscribe(params => {
+      this.accion = params['accion']
+      console.log(this.accion)
+      if (this.accion === 'editar') {
+        this.cargarProd();
+      }
+    })
+  }
+
+  cargarProd(): void {
+    this.activatedRoute.params.subscribe(params => {
+      let id = params['id']
+      if (id) {
+        this.productoService.buscarId(id).subscribe((prod) => {
+          this.producto = prod
+          this.tipoSelect = prod.tipId
+          this.categoriaSelect = prod.catId
+          // console.log("rol= " + this.rolSelect.rolNombre)
+        })
+      }
+    })
+  }
+
 
   cargarTipos(): void {
 
@@ -117,7 +146,7 @@ export class ProductoComponent {
   }
 
   registrar(): void {
-    this.producto.prodEstado=1;
+    this.producto.prodEstado = 1;
     this.tipo.tipNombre = this.tipoSelect.tipNombre;
 
     for (const tip of this.tipos) {
@@ -127,7 +156,7 @@ export class ProductoComponent {
       }
     }
 
-    this.categoria.catNombre= this.categoriaSelect.catNombre;
+    this.categoria.catNombre = this.categoriaSelect.catNombre;
 
     for (const cat of this.categorias) {
       if (this.categoria.catNombre === cat.catNombre) {

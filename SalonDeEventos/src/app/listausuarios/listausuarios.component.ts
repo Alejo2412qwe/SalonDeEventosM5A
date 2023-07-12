@@ -86,11 +86,7 @@ export class ListausuariosComponent implements OnInit {
       }
     }).then((result) => {
       if (result.isConfirmed) {
-        this.usuarioService.delete(id,0).subscribe(user => {
-          // this.usuarioService.getUsuarios().subscribe(users => 
-          //   {
-          //     this.usuarios = users
-          //   });
+        this.usuarioService.actualizarEst(id,0).subscribe(user => {
 
           this.listaUsuarios();
 
@@ -125,7 +121,7 @@ export class ListausuariosComponent implements OnInit {
       }
     }).then((result) => {
       if (result.isConfirmed) {
-        this.usuarioService.delete(id,1).subscribe(user => {
+        this.usuarioService.actualizarEst(id,1).subscribe(user => {
           // this.usuarioService.getUsuarios().subscribe(users => 
           //   {
           //     this.usuarios = users

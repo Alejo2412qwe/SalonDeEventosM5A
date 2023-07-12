@@ -24,8 +24,25 @@ export class productoService {
         return this.http.get(this.url + "/listar").pipe(map(response => response as ProductoServicio[]));
     }
 
+    buscarId(id: number): Observable<ProductoServicio> {
+        return this.http.get<ProductoServicio>(`${this.url}/buscar/${id}`);
+    }
+
+    buscarProd(busqueda: string, est: number): Observable<ProductoServicio[]> {
+        console.log(`${this.url}/busqueda/${busqueda}/${est}`)
+        return this.http.get(`${this.url}/busqueda/${busqueda}/${est}`).pipe(map(response => response as ProductoServicio[]));
+    }
+
+    listarEst(est: number): Observable<ProductoServicio[]> {
+        return this.http.get(`${this.url}/listar/${est}`).pipe(map(response => response as ProductoServicio[]));
+    }
+
     delete(id: number): Observable<ProductoServicio> {
         return this.http.put<ProductoServicio>(`${this.url}/eliminarE/${id}`, null);
+    }
+
+    actualizarEst(id: number, estado: number): Observable<ProductoServicio> {
+        return this.http.put<ProductoServicio>(`${this.url}/actualizarEst/${id}/${estado}`, null);
     }
 
 }
