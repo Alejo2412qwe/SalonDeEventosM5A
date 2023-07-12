@@ -243,15 +243,14 @@ nav ul li a:hover {
 .card {
     width: 300px;
     height: 350px;
-    background-color: #4158D0;
-    background: url('src/app/header/silla.jpeg');
+    background-color: transparent;
     border-radius: 8px;
-    color: white;
+    color: rgb(0, 0, 0);
     overflow: hidden;
     position: relative;
     transform-style: preserve-3d;
     perspective: 1000px;
-    transition: all 0.5s cubic-bezier(0.23, 1, 0.320, 1);
+    transition: all 2s cubic-bezier(0.23, 0.1, 0.20, 0.1);
     cursor: pointer;
     width: fit-content;
     margin: 0 auto;
@@ -264,11 +263,11 @@ nav ul li a:hover {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    color: white;
+    color: rgb(0, 0, 0);
     align-items: center;
     justify-content: center;
     text-align: center;
-    height: 90%;
+    height: 100%;
 }
 
 .card-content .card-title {
@@ -282,6 +281,7 @@ nav ul li a:hover {
     color: inherit;
     opacity: 0.8;
     font-size: 14px;
+    color: #000000;
 }
 
 .card:hover {
@@ -296,7 +296,7 @@ nav ul li a:hover {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(transparent, rgba(0, 0, 0, 0.1));
+    background: #FFD89C;
     transition: transform 0.5s cubic-bezier(0.23, 1, 0.320, 1);
     z-index: 1;
 }
@@ -346,10 +346,9 @@ nav ul li a:hover {
 
 h1 {
     margin-top: 50px;
-    font-size: 50px;
+    font-size: 20px;
     font-weight: 700;
     color: inherit;
-    text-transform: uppercase;
     text-align: center;
 }
 
@@ -507,31 +506,13 @@ h1 {
     }
 }
 
+
 .ventana-flotante video {
     max-width: 100%;
     max-height: 100%;
 }
 
 button {
-    font-size: 18px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    display: inline-block;
-    text-align: center;
-    font-weight: bold;
-    padding: 0.7em 2em;
-    background: transparent;
-    border-radius: 5px;
-    position: relative;
-    border: transparent;
-    color: #F1C27B;
-    text-decoration: none;
-    transition: 0.1s ease all;
-    z-index: 1;
-    cursor: pointer;
-}
-
-button.Cerrar2 {
     font-size: 18px;
     letter-spacing: 2px;
     text-transform: uppercase;
@@ -550,6 +531,29 @@ button.Cerrar2 {
     cursor: pointer;
 }
 
+button.Cerrar2 {
+    font-size: 18px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    display: inline-block;
+    text-align: center;
+    font-weight: bold;
+    padding: 0.7em 2em;
+    background: #FFD89C;
+    border-radius: 5px;
+    position: relative;
+    border: transparent;
+    color: #000000;
+    text-decoration: none;
+    transition: 0.1s ease all;
+    z-index: 1;
+    cursor: pointer;
+}
+
+button.Accion {
+    background: #FFD89C;
+    color: #000000;
+}
 
 button:before {
     transition: 0.5s all ease;
@@ -599,10 +603,71 @@ button:active {
 
 .layoutlogin {
     width: 100%;
-    height: 100%;
+    height: 80%;
 
     display: grid;
     grid-template-rows: 1fr;
     grid-template-columns: repeat(2, 1fr);
     gap: 8px;
+}
+
+
+.layoutlogin2 {
+    width: 100%;
+    height: 100%;
+
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 8px;
+}
+
+@media only screen and (max-width:780px) {
+
+    .layoutlogin {
+        width: 100%;
+        height: 80%;
+      
+        display: grid;
+        grid-template-rows: repeat(2, 1fr);
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+}
+
+.layoutdentro {
+    width: 100%;
+    height: 100%;
+  
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+  
+
+
+.layoutdentro {
+    width: 100%;
+    height: 100%;
+  
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+  @media only screen and (max-width:830px) {
+
+    .layoutdentro {
+        width: 100%;
+        height: 100%;
+      
+        display: grid;
+        grid-template-rows: 1fr;
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+      video {
+        display: none;
+    }
 }
