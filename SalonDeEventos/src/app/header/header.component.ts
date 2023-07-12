@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Usuario } from '../modelo/usuario';
+import { AllScriptsService } from '../scripts/all-scripts.service';
 
 @Component({
   selector: 'app-header',
@@ -8,7 +9,9 @@ import { Usuario } from '../modelo/usuario';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(private AllScripts: AllScriptsService) {
+    AllScripts.Cargar(["default/ventana"]);
+  }
   user: Usuario = new Usuario();
   ngOnInit(): void {
     const userString = localStorage.getItem('userData');
@@ -19,4 +22,6 @@ export class HeaderComponent implements OnInit {
       console.error('No hay datos de usuario en el Local Storage');
     }
   }
+
+
 }
