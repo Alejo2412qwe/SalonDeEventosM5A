@@ -27,7 +27,7 @@ export class SalonComponent {
     this.EmpresaService.getEmpresaPorId(1).subscribe(emp => {
 
       this.salon.empId = emp;
-
+      this.salon.salEstado=1;
       this.salonService.crearSalon(this.salon).subscribe(
         response => {
           Swal.fire({

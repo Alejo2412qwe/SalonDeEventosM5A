@@ -17,12 +17,15 @@ export class ListasalonesComponent implements OnInit {
 
   ngOnInit(): void {
     this.listaSalones();
-    
+
   }
 
   listaSalones(): void {
     this.salonService.getSalon().subscribe(
-      salones => this.salones = salones
+      salones => {
+        console.log("holo= "+salones.length)
+        this.salones = salones
+      }
     );
   }
 

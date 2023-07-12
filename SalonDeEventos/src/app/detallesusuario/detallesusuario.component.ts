@@ -47,6 +47,7 @@ export class DetallesusuarioComponent implements OnInit {
   cargarAccion(): void {
     this.activatedRoute.params.subscribe(params => {
       this.accion = params['accion']
+      console.log(this.accion)
       if (this.accion === 'editar') {
         this.cargarUsu();
       }
