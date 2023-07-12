@@ -144,7 +144,7 @@ body {
     bottom: 0;
     height: 3px;
     width: 25px;
-    background: linear-gradient(to right, #E8AA42, #E57C23);
+    background: linear-gradient(to right, #F1C27B, #FFD89C);
 }
 
 .forms .signup-form .title:before {
@@ -208,7 +208,7 @@ body {
 
 .forms .form-content .button input {
     color: #fff;
-    background: linear-gradient(to right, #E8AA42, #E57C23);
+    background: linear-gradient(to right, #F1C27B, #FFD89C);
     border-radius: 6px;
     padding: 0;
     cursor: pointer;
