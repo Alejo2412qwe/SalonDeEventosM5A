@@ -9,6 +9,11 @@
 
 <app-headers></app-headers>
 <h2 style="font-size: 24px; color: black;">LISTA DE SALONES</h2>
+<div class="input-box">
+  <i class="fa fa-search"></i>
+
+  <input type="text" name="usuario" [(ngModel)]="busquedaAct" (input)="busquedaPSAct()" placeholder="Buscar" required>
+</div>
 <div class="table-wrapper">
   <table class="fl-table">
     <thead>
@@ -34,7 +39,7 @@
           <td>{{"Latidud "+sal.salLatitud +", Longitud "+sal.salLongitud}}</td>
 
           <td class="button">
-            <div><button type="button" name="button" [routerLink]="['/editarsalon','editar',sal.salId]">
+            <div><button type="button" name="button" [routerLink]="['/salon','editar',sal.salId]">
                 <img src="assets/img/lapiz.png" width="20px">
               </button></div>
           </td>

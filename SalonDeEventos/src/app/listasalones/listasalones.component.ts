@@ -10,20 +10,36 @@ import Swal from 'sweetalert2';
 })
 export class ListasalonesComponent implements OnInit {
 
-
+  salAc: SalonService[] = [];
+  busquedaAct: string = "";
+  busquedaInAct: string = "";
   salones: Salon[] = [];
 
   constructor(private salonService: SalonService) { }
 
   ngOnInit(): void {
     this.listaSalones();
+    this.listarSalonesAct();
 
+  }
+
+  listarSalonesAct(): void {
+    this.salonService.listarEst(1).subscribe(
+      salon => this.salAc = salon
+    );
+  }
+
+  busquedaPSAct(): void {
+    this.salonService.buscarSal(this.busquedaAct).subscribe(
+      sal => {
+        this.salAc = sal
+      }
+    );
   }
 
   listaSalones(): void {
     this.salonService.getSalon().subscribe(
       salones => {
-        console.log("holo= "+salones.length)
         this.salones = salones
       }
     );
