@@ -260,10 +260,10 @@ button.\32{
     text-transform: uppercase;
     letter-spacing: 0.4px;
     color: #000000;
-    background-color: #EB6383;
+    background-color: #CDE990;
     border-style: solid;
     border-width: 2px 2px 2px 2px;
-    border-color: #EB6383;
+    border-color: #93b647;
     border-radius: 40px 40px 40px 40px;
     padding: 16px 24px 16px 28px;
     transform: translate(0px, 0px) rotate(0deg);
@@ -280,4 +280,11 @@ button.\32:hover {
 
 button.\32:active {
     box-shadow: none;
+}
+
+button.\33 {
+    background: #EB6383;
+    border-style: solid;
+    border-width: 2px 2px 2px 2px;
+    border-color: #b32546;
 }

@@ -52,7 +52,7 @@
             z-index: 2;
             padding: 1rem;
             -webkit-backdrop-filter: blur(20px);
-            backdrop-filter: blur(2px);
+            backdrop-filter: blur(5px);
             transition: all ease .3s;
             justify-content: center;
             align-items: center;
@@ -153,8 +153,8 @@
                     </p>
                     <p class="card-para">Lorem ipsum dolor sit
                         amet, consectetur adipiscing elit.</p>
-                        <button onclick="mostrarVentanaLogin()"> Crear Nueva
-                        </button>
+                    <button onclick="mostrarVentanaLogin()"> Crear Nueva
+                    </button>
                 </div>
             </div>
         </div>
@@ -178,37 +178,60 @@
     </section>
 
     <div class="ventana-flotante2">
-        <h1 style="color: white;">Necesitas una cuenta para <br> realizar esta accion</h1>
+        <div style="width: 100%; text-align: right; margin-bottom: 20px;"> <button class="Cerrar2" onclick="cerrarVentanaLogin()"> Salir
+            </button></div>
 
-        <section class="layoutlogin">
+        <section style="width: 80%; height: 80%; border-radius: 10px; background-image: url('assets/img/fondo.png');
+        background-size: cover; 
+        background-position: center; 
+        background-repeat: no-repeat;">
+            <div style="display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;"> <img style="margin-top: 50px;" src="assets/img/png.png" width="40%">
+            </div>
+            <h1 style="color: rgb(0, 0, 0); margin-bottom: 20px;">Necesitas una cuenta para realizar esta accion</h1>
+            <section class="layoutlogin2">
 
-            <div>
-                <section style=" align-items: center;" class="layoutlogin">
-                    <div style="display: flex;
-                    justify-content: center;
-                    align-items: center;"> <button>INICIAR SESION</button>
-                    </div>
-                    <div> <button style="margin-left: 0; margin-right: 0;">CREAR UNA CUENTA</button>
-                    </div>
-                </section>
-            </div>
-            <div>
-            </div>
+                <div style="height: 60%;">
+                    <section class="layoutdentro">
+
+                        <div>
+                            <section style=" align-items: center;" class="layoutlogin">
+                                <div style="display: flex;
+                            justify-content: center;
+                            align-items: center;"> <button style="font-size: 14px;" class="Accion">INICIAR SESION</button>
+                                </div>
+                                <div style="display: flex;
+                            justify-content: center;
+                            align-items: center;"> <button class="Accion" style="font-size: 14px; margin-left: 0; margin-right: 0;">CREAR UNA
+                                        CUENTA</button>
+                                </div>
+                            </section>
+                        </div>
+                        <div style="  display: flex;
+                        justify-content: center;
+                        align-items: center;">
+                            <video src="ruta_del_video/video.mp4" style="width: 70%; margin: auto;" controls>
+                            </video>
+                        </div>
+                    </section>
+
+                </div>
+                <div>
+                </div>
+            </section>
         </section>
-
-        <button class="Cerrar2" onclick="cerrarVentanaLogin()"> Salir
-        </button>
     </div>
 
 
     <div class="ventana-flotante">
 
-        <video src="ruta_del_video/video.mp4" style="width: 70%; margin: auto;" controls>
-            Tu navegador no admite la etiqueta de video.
-        </video>
+
 
         <button class="Cerrar2" onclick="cerrarVentanaFlotante()"> Salir
         </button>
+
     </div>
 
 </body>

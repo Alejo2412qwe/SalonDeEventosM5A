@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router'
 import { UsuarioService } from '../service/usuario.service';
 import { Usuario } from '../modelo/usuario';
 import Swal from 'sweetalert2';
+import { AllScriptsService } from '../scripts/all-scripts.service';
 
 @Component({
   selector: 'app-listausuarios',
@@ -20,8 +21,11 @@ export class ListausuariosComponent implements OnInit {
   bRol: number = 0;
 
   constructor(private PersonaService: PersonaService, private usuarioService: UsuarioService,
-    private activatedRoute: ActivatedRoute) {
+    private activatedRoute: ActivatedRoute, private AllScripts: AllScriptsService) {
+      AllScripts.Cargar(["default/ventana"]);
+
   }
+
 
   ngOnInit(): void {
     this.listaUsuarios();

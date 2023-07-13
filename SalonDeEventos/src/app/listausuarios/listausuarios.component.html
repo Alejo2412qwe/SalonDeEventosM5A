@@ -9,12 +9,16 @@
 
 <app-headerlogeo></app-headerlogeo>
 <h2 style="font-size: 24px; color: black;">LISTA DE USUARIOS ACTIVOS</h2>
-<div class="input-box">
-    <i class="fa fa-search"></i>
-    <input type="text" name="usuario" [(ngModel)]="busquedaAct" (input)="busquedaUsuariosAct()" placeholder="Buscar"
-        required>
-</div>
+
+<section>
+
+
 <div class="table-wrapper">
+    <div class="input-box" style="    margin-bottom: 20px;">
+        <i style="margin-right: 10px; font-size: 28px; color: #E8AA42;" class="fa fa-search"></i>
+        <input style="padding-left: 10px; font-size: 20px; border-radius: 5px; background-color: #f4daaf;" type="text" name="usuario" [(ngModel)]="busquedaAct" (input)="busquedaUsuariosAct()" placeholder="Buscar"
+            required>
+    </div>
     <table class="fl-table">
         <thead>
             <tr>
@@ -44,7 +48,7 @@
                     </td>
 
                     <td class="button2">
-                        <div><button class="2" name="button" (click)="eliminar(usu.usuId)" [disabled]="usu.usuId === 1">
+                        <div><button class="3" name="button" (click)="eliminar(usu.usuId)" [disabled]="usu.usuId === 1">
                                 <img src="assets/img/eliminar.png" width="20px">
                             </button></div>
                     </td>
@@ -54,15 +58,17 @@
         <tbody>
     </table>
 </div>
-
+</section>
+<section>
 <h2 style="font-size: 24px; color: black;">LISTA DE USUARIOS INACTIVOS</h2>
-<div class="input-box">
-    <i class="fa fa-search"></i>
 
-    <input type="text" name="usuario" [(ngModel)]="busquedaInAct" (input)="busquedaUsuariosInact()" placeholder="Buscar"
-        required>
-</div>
 <div class="table-wrapper">
+    <div class="input-box" style="margin-bottom: 20px;">
+        <i style="margin-right: 10px; font-size: 28px; color: #E8AA42; " class="fa fa-search"></i>
+    
+        <input style="padding-left: 10px; font-size: 20px; border-radius: 5px; background-color: #f4daaf;" type="text" name="usuario" [(ngModel)]="busquedaInAct" (input)="busquedaUsuariosInact()" placeholder="Buscar"
+            required>
+    </div>
     <table class="fl-table">
         <thead>
             <tr>
@@ -94,7 +100,7 @@
                     <td class="button2">
                         <div><button class="2" name="button" (click)="activarCuenta(usu.usuId)"
                                 [disabled]="usu.usuId === 1">
-                                <img src="assets/img/eliminar.png" width="20px">
+                                <img src="assets/img/salir.png" width="20px">
                             </button></div>
                     </td>
                 </tr>
@@ -103,5 +109,5 @@
         <tbody>
     </table>
 </div>
-
+</section>
 </html>
