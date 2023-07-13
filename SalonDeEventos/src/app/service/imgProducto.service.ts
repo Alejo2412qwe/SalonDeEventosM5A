@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { ImgProducto } from '../modelo/imgProducto';
 
 @Injectable({
@@ -17,4 +17,12 @@ export class ImgProductoService {
   agregarIMG(persona: ImgProducto): Observable<ImgProducto> {
     return this.http.post<ImgProducto>(`${this.url}/crear`, persona, { headers: this.httpHeaders })
   }
+
+  imgProdId(prod: number): Observable<ImgProducto[]> {
+    return this.http.get<ImgProducto[]>(`${this.url}/busqueda/${prod}`);
+  }
+  buscarProd(prod: number): Observable<ImgProducto[]> {
+    return this.http.get(`${this.url}/busqueda/${prod}`).pipe(map(response => response as ImgProducto[]));
+}
+
 }

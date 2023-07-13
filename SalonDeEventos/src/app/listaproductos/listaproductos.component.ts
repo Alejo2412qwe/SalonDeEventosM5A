@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ProductoServicio } from '../modelo/producto-servicio';
 import { productoService } from '../service/producto.service';
 import Swal from 'sweetalert2';
+import { ImgProductoService } from '../service/imgProducto.service';
+import { ImgProducto } from '../modelo/imgProducto';
 
 @Component({
   selector: 'app-listaproductos',
@@ -12,10 +14,11 @@ export class ListaproductosComponent implements OnInit {
 
   productoAct: ProductoServicio[] = [];
   productoInact: ProductoServicio[] = [];
+  imgProducto: ImgProducto[] = [];
   busquedaAct: string = "";
   busquedaInAct: string = "";
 
-  constructor(private ProductoService: productoService) {
+  constructor(private ProductoService: productoService, private imgProductoService:ImgProductoService) {
   }
 
   ngOnInit(): void {
@@ -35,8 +38,15 @@ export class ListaproductosComponent implements OnInit {
         console.log("buscando")
         this.productoAct = user
       }
-
     );
+  }
+
+  imgProd(prod:number):void{
+    this.imgProductoService.imgProdId(prod).subscribe(
+      img=>{
+        this.imgProducto=img;
+      }
+    )
   }
 
   listarProductosInAct(): void {
