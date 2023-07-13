@@ -44,7 +44,7 @@ const routes: Routes = [
   { path: 'editarusu', component: DetallesusuarioComponent },
   { path: 'editarsalon', component: DetallesalonComponent },
   { path: 'editarusu/:accion/:id', component: DetallesusuarioComponent },
-  { path: 'editarsalon/:accion/:id', component: DetallesalonComponent },
+  { path: 'salon/:accion/:id', component: SalonComponent },
   { path: 'prod', component: ProductoComponent },
   { path: 'prod/:accion/:id', component: ProductoComponent },
   { path: 'empresas', component: EmpresaComponent },
