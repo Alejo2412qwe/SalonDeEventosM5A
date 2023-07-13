@@ -24,9 +24,10 @@
         <th>COSTO</th>
         <th>CATEGORIA</th>
         <th>TIPO</th>
+        <th>IMAGEN</th>
         <th>Fecha de Registro</th>
-        <th>Accion</th>
-        <th>Accion</th>
+        <th>Editar</th>
+        <th>Actualizaar</th>
       </tr>
     </thead>
     <tbody>
@@ -37,6 +38,7 @@
         <td>{{pro.prodPrecio}}</td>
         <td>{{pro.catId.catNombre}}</td>
         <td>{{pro.tipId.tipNombre}}</td>
+        <td><img src="assets/img/png.png" style="width: 180px;"></td>
         <td>{{pro.prodFechaRegistro}}</td>
         <td class="button">
           <div><button type="button" name="button" [routerLink]="['/prod','editar',pro.prodId]">
