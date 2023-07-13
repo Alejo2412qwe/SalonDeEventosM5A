@@ -17,7 +17,7 @@
         <div>
             <form action="" class="form_main">
 
-                <p class="heading">Crear un Nuevo Salon </p>
+                <p class="heading">Crear un Nuevo Salón </p>
                 <section class="layout">
 
                     <div class="inputContainer">
@@ -27,7 +27,7 @@
 
                     <div class="inputContainer">
                         <input type="text" name="salDireccion" [(ngModel)]="salon.salDireccion"
-                            placeholder="Ingresa la direccion" required>
+                            placeholder="Ingresa la dirección" required>
                     </div>
 
                     <div class="inputContainer">
@@ -57,8 +57,9 @@
                     </div>
 
                     <div></div>
-                    <div style="  text-align: right;
-                    "> <button id="button" (click)="registrarSalon()">Crear un Salon</button>
+                    <div style="  text-align: right;"> 
+                        <button id="button" (click)="registrarSalon()" *ngIf="accion ==='registrar'">Crear Salón</button>
+                        <button id="button" (click)="registrarSalon()" *ngIf="accion ==='editar'">Editar Salón</button>
                     </div>
                 </section>
 

@@ -23,6 +23,10 @@ export class SalonService {
         return this.http.get(this.url + "/listar").pipe(map(response => response as Salon[]));
     }
 
+    getSalonId(id: number): Observable<Salon> {
+        return this.http.get<Salon>(`${this.url}/salonporid/${id}`);
+    }
+
     delete(id: number): Observable<Salon> {
         return this.http.put<Salon>(`${this.url}/eliminarE/${id}`, null);
     }

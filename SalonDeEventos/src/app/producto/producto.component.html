@@ -1,7 +1,7 @@
 <app-headerlogeo></app-headerlogeo>
 
 
-    <div class="CONTENDOR" style="height: 100%;">
+    <div class="CONTENDOR" >
         <form action="#" class="form_main" name="formProd">
 
             <p class="heading">Crear un Producto</p>
@@ -12,7 +12,7 @@
                 </div>
 
                 <div class="inputContainer">
-                    <h2 class="nombre" style="font-size: 18px;">Elige la categoria</h2>
+                    <h2 class="nombre" style="font-size: 18px;">Elige la categoría</h2>
                     <select name="categorias" [(ngModel)]="categoriaSelect" required class="select">
                         <option *ngFor="let categoria of categorias" [ngValue]="categoria">
                             {{categoria.catNombre}}
@@ -26,7 +26,7 @@
 
                 <div class="inputContainer">
                     <input name="prodDescripcion" type="text" [(ngModel)]="producto.prodDescripcion"
-                        placeholder="Ingresa la descripcion" required>
+                        placeholder="Ingresa la descripción" required>
                 </div>
 
                 <div class="inputContainer">

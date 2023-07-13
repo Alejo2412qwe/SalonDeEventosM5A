@@ -17,6 +17,9 @@
     box-sizing: border-box;
     overflow: hidden;
 }
+.CONTENDOR{
+    padding: 50px;
+}
 
 .form_main {
     width: 100%;
@@ -51,7 +54,7 @@
     font-size: 2em;
     color: #2e2e2e;
     font-weight: 700;
-    margin: 30px 0 10px 0;
+    margin: 10px 0 10px 0;
     z-index: 2;
 }
 
@@ -97,7 +100,7 @@
 #button {
     z-index: 2;
     position: relative;
-    width: 100%;
+    width: 50%;
     border: none;
     background: linear-gradient(to right, #E8AA42, #E57C23);
     height: 90px;
@@ -269,7 +272,7 @@
         width: 530px;
     }
 }
-
+/* 
 @media only screen and (max-width:680px) {
 
     .layout {
@@ -339,7 +342,7 @@
         box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.082);
     }
 
-}
+} */
 
 .letras {
 
@@ -430,4 +433,70 @@ p.fecha {
     gap: 8px;
     margin-left: 5%;
     margin-right: 5%;
+  }
+  @media screen and (max-width: 558px) {
+    .layout {
+      display: flex;
+      flex-direction: column;
+    }
+  
+    .inputContainer {
+      margin-bottom: 10px;
+    }
+  
+    .select {
+      max-width: 100%;
+    }
+  
+    .form_main {
+      padding: 5px;
+    }
+  
+    .heading {
+      font-size: 24px;
+    }
+  
+    .card {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+  
+    .card-image {
+      width: 100%;
+    }
+  }
+  @media screen and (max-width: 684px) {
+    .layout {
+      display: flex;
+      flex-direction: column;
+    }
+  
+    .inputContainer {
+      margin-bottom: 10px;
+    }
+  
+    .select {
+      max-width: 100%;
+    }
+  
+    .form_main {
+      padding: 5px;
+    }
+  
+  
+    .card {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+  
+    .card-image {
+      width: 100%;
+    }
+    .heading {
+        font-size: 20px;
+      }
+    
+      #button {
+        width: 100%;
+      }
   }

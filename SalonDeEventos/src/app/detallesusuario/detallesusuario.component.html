@@ -3,7 +3,7 @@
 <div class="forms">
     <div class="form-content">
         <div class="signup-form">
-            <div class="title" style="font-weight: bolder;">Editar Cuenta"</div>
+            <div class="title" style="font-weight: bolder;">CREAR USUARIO</div>
             <!-- <form action=""> -->
             <div class="title2"
                 style="margin-top: 20px; margin-bottom: 10px; font-size: 18px; text-align: center; font-weight: bolder;">
@@ -52,18 +52,20 @@
                 </div>
                 <div class="input-box" *ngIf="accion ==='registrar'">
                     <i class="fas fa-calendar"></i>
-                    <input type="date" name="perFechaNacimiento" [(ngModel)]="persona.perFechaNacimiento"
+                    <input type="date" style="color: #75758B;" name="perFechaNacimiento" [(ngModel)]="persona.perFechaNacimiento"
                         placeholder="Fecha de nacimiento" required>
-                        <a>:C</a>
+                        
                 </div>                   
 
             </section>
-
+            <br>
+            <div>
             <div class="title2"
-                style="margin-top: 30px; margin-bottom: 10px; font-size: 18px; text-align: center; font-weight: bolder;">
+                style="margin-top: 50px; margin-bottom: 10px; font-size: 18px; text-align: center; font-weight: bolder;">
                 Datos del Usuario</div>
-                
+            </div>
             <section class="layout3">
+                
                 <div class="input-box">
                     <i class="fas fa-envelope"></i>
                     <input type="text" name="usuario" [(ngModel)]="usuario.usuNombreUsuario"
@@ -82,7 +84,7 @@
             </div>
             <div class="inputContainer">
                 <!-- *ngIf="usuario.usuId !== 1" -->
-                <h2 class="nombre" style="font-size: 18px;">Elige rol</h2>
+                <h2 class="nombre" >Elige rol</h2>
                 <select name="roles" [(ngModel)]="rolSelect" class="select" [disabled]="usuario.usuId === 1">
                     <option value="" selected disabled>Selecciona un rol</option>
 
