@@ -57,8 +57,9 @@
                     </div>
 
                     <div></div>
-                    <div style="  text-align: right;
-                    "> <button id="button" (click)="registrarSalon()">Crear un Salón</button>
+                    <div style="  text-align: right;"> 
+                        <button id="button" (click)="registrarSalon()" *ngIf="accion ==='registrar'">Crear Salón</button>
+                        <button id="button" (click)="registrarSalon()" *ngIf="accion ==='editar'">Editar Salón</button>
                     </div>
                 </section>
 
