@@ -19,12 +19,13 @@ export class SalonService {
         return this.http.post<Salon>(this.url + "/crear", salon, { headers: this.httpHeaders })
     }
 
-    buscarSal(busqueda: string): Observable<SalonService[]> {
-        return this.http.get(`${this.url}/busqueda/${busqueda}`).pipe(map(response => response as SalonService[]));
+    buscarSal(busqueda: string, est: number): Observable<Salon[]> {
+        console.log(`${this.url}/busqueda/${busqueda}/${est}`)
+        return this.http.get(`${this.url}/busqueda/${busqueda}/${est}`).pipe(map(response => response as Salon[]));
     }
 
-    listarEst(est: number): Observable<SalonService[]> {
-        return this.http.get(`${this.url}/listar/${est}`).pipe(map(response => response as SalonService[]));
+    listarEst(est: number): Observable<Salon[]> {
+        return this.http.get(`${this.url}/listar/${est}`).pipe(map(response => response as Salon[]));
     }
 
     getSalon(): Observable<Salon[]> {

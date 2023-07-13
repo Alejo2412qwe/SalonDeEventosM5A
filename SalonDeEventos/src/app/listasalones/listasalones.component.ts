@@ -10,7 +10,8 @@ import Swal from 'sweetalert2';
 })
 export class ListasalonesComponent implements OnInit {
 
-  salAc: SalonService[] = [];
+  salAc: Salon[] = [];
+  salInac: Salon[] = [];
   busquedaAct: string = "";
   busquedaInAct: string = "";
   salones: Salon[] = [];
@@ -18,9 +19,8 @@ export class ListasalonesComponent implements OnInit {
   constructor(private salonService: SalonService) { }
 
   ngOnInit(): void {
-    this.listaSalones();
-    this.listarSalonesAct();
-
+    this.listarSalonesAct()
+    this.listarSalonesInact()
   }
 
   listarSalonesAct(): void {
@@ -29,18 +29,17 @@ export class ListasalonesComponent implements OnInit {
     );
   }
 
-  busquedaPSAct(): void {
-    this.salonService.buscarSal(this.busquedaAct).subscribe(
-      sal => {
-        this.salAc = sal
-      }
+  listarSalonesInact(): void {
+    this.salonService.listarEst(0).subscribe(
+      salon => this.salInac = salon
     );
   }
 
-  listaSalones(): void {
-    this.salonService.getSalon().subscribe(
-      salones => {
-        this.salones = salones
+  busquedaPSAct(): void {
+    console.log(this.busquedaAct)
+    this.salonService.buscarSal(this.busquedaAct, 1).subscribe(
+      sal => {
+        this.salAc = sal
       }
     );
   }
