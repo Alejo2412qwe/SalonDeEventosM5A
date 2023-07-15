@@ -4,6 +4,8 @@ import { productoService } from '../service/producto.service';
 import Swal from 'sweetalert2';
 import { ImgProductoService } from '../service/imgProducto.service';
 import { ImgProducto } from '../modelo/imgProducto';
+import { CategoriaService } from '../service/categoria.service';
+import { Categoria } from '../modelo/categoria';
 
 @Component({
   selector: 'app-listaproductos',
@@ -14,17 +16,65 @@ export class ListaproductosComponent implements OnInit {
 
   productoAct: ProductoServicio[] = [];
   productoInact: ProductoServicio[] = [];
-  imgProducto: ImgProducto[] = [];
   busquedaAct: string = "";
   busquedaInAct: string = "";
+  categoria: Categoria = new Categoria;
+  estado: string = "ACTIVOS";
+  categorias: Categoria[] = [];
 
-  constructor(private ProductoService: productoService, private imgProductoService:ImgProductoService) {
+
+  constructor(private ProductoService: productoService, private imgProductoService: ImgProductoService,
+    private categoriaService: CategoriaService) {
   }
 
   ngOnInit(): void {
     this.listarProductosAct();
     this.listarProductosInAct();
+    this.cargarCategorias();
   }
+
+
+  openCrearCate() {
+    Swal.fire({
+      title: 'Agregar Categoria',
+      html:
+        '<input id="swal-input1" class="swal2-input" placeholder="Nombre">',
+      showCancelButton: true,
+      confirmButtonText: 'Crear',
+      cancelButtonText: 'Cancelar',
+      preConfirm: () => {
+        const name = (document.getElementById('swal-input1') as HTMLInputElement).value;
+        this.categoria.catNombre = name;
+        this.crearCategoria();
+      }
+    });
+  }
+
+
+  crearCategoria(): void {
+    this.categoriaService.crearCategoria(this.categoria).subscribe(
+      cat => {
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Categoria registrada exitosamente',
+          showConfirmButton: true,
+        });
+        this.cargarCategorias()
+      }
+      
+    )
+  }
+
+  cargarCategorias(): void {
+
+    this.categoriaService.getCategoria().subscribe(
+      categoriaArray => {
+        this.categorias=categoriaArray
+      }
+    );
+  }
+
 
   listarProductosAct(): void {
     this.ProductoService.listarEst(1).subscribe(
@@ -39,14 +89,6 @@ export class ListaproductosComponent implements OnInit {
         this.productoAct = user
       }
     );
-  }
-
-  imgProd(prod:number):void{
-    this.imgProductoService.imgProdId(prod).subscribe(
-      img=>{
-        this.imgProducto=img;
-      }
-    )
   }
 
   listarProductosInAct(): void {
@@ -66,7 +108,7 @@ export class ListaproductosComponent implements OnInit {
   }
 
   eliminar(id: number): void {
-    console.log("id= "+id)
+    console.log("id= " + id)
     Swal.fire({
       title: `¿Seguro que desea eliminar el producto?`,
       showDenyButton: true,
@@ -81,7 +123,7 @@ export class ListaproductosComponent implements OnInit {
       }
     }).then((result) => {
       if (result.isConfirmed) {
-        this.ProductoService.actualizarEst(id,0).subscribe(user => {
+        this.ProductoService.actualizarEst(id, 0).subscribe(user => {
 
           this.listarProductosAct()
           this.listarProductosInAct()
@@ -103,7 +145,7 @@ export class ListaproductosComponent implements OnInit {
   }
 
   activar(id: number): void {
-    console.log("id= "+id)
+    console.log("id= " + id)
     Swal.fire({
       title: `¿Seguro que desea habilitar el producto?`,
       showDenyButton: true,
@@ -118,7 +160,7 @@ export class ListaproductosComponent implements OnInit {
       }
     }).then((result) => {
       if (result.isConfirmed) {
-        this.ProductoService.actualizarEst(id,1).subscribe(user => {
+        this.ProductoService.actualizarEst(id, 1).subscribe(user => {
 
           this.listarProductosAct()
           this.listarProductosInAct()
