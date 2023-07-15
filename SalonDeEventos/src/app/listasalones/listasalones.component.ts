@@ -14,7 +14,6 @@ export class ListasalonesComponent implements OnInit {
   salInac: Salon[] = [];
   busquedaAct: string = "";
   busquedaInAct: string = "";
-  salones: Salon[] = [];
 
   constructor(private salonService: SalonService) { }
 
@@ -44,6 +43,15 @@ export class ListasalonesComponent implements OnInit {
     );
   }
 
+  busquedaPSInact(): void {
+    console.log(this.busquedaAct)
+    this.salonService.buscarSal(this.busquedaAct, 0).subscribe(
+      sal => {
+        this.salAc = sal
+      }
+    );
+  }
+
   eliminar(id: number): void {
     Swal.fire({
       title: `¿Seguro que desea eliminar el salon?`,
@@ -60,7 +68,9 @@ export class ListasalonesComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         this.salonService.delete(id).subscribe(salon => {
-          this.salonService.getSalon().subscribe(salones => this.salones = salones)
+
+          this.listarSalonesAct();
+          this.listarSalonesInact();
 
           Swal.fire({
             position: 'center',
