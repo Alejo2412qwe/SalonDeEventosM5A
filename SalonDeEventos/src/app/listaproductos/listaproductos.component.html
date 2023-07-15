@@ -8,99 +8,138 @@
 </head>
 
 <app-headerlogeo></app-headerlogeo>
-<h2 style="font-size: 24px; color: black;">LISTA DE PRODUCTOS/SERVICIOS ACTIVOS</h2>
-<div class="input-box">
-  <i class="fa fa-search"></i>
+<h2 style="font-size: 24px; color: black;">LISTA DE PRODUCTOS/SERVICIOS</h2>
+<div class="inputContainer">
+  <h2 class="nombre" style="font-size: 18px;">Filtrar Productos</h2>
 
-  <input type="text" name="usuario" [(ngModel)]="busquedaAct" (input)="busquedaPSAct()" placeholder="Buscar" required>
-</div>
-<div class="table-wrapper">
-  <table class="fl-table">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>NOMBRE DEL PRODUCTO</th>
-        <th>DESCRIPCIÓN</th>
-        <th>COSTO</th>
-        <th>CATEGORIA</th>
-        <th>TIPO</th>
-        <th>IMAGEN</th>
-        <th>Fecha de Registro</th>
-        <th>Editar</th>
-        <th>Actualizaar</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let pro of productoAct">
-        <td>{{pro.prodId}}</td>
-        <td>{{pro.prodNombre}}</td>
-        <td>{{pro.prodDescripcion}}</td>
-        <td>{{pro.prodPrecio}}</td>
-        <td>{{pro.catId.catNombre}}</td>
-        <td>{{pro.tipId.tipNombre}}</td>
-        <td><img src="assets/img/png.png" style="width: 180px;"></td>
-        <td>{{pro.prodFechaRegistro}}</td>
-        <td class="button">
-          <div><button type="button" name="button" [routerLink]="['/prod','editar',pro.prodId]">
-              <img src="assets/img/lapiz.png" width="20px">
-            </button></div>
-        </td>
+  <select name="categorias" [(ngModel)]="estado" required class="select">
+    <option selected>ACTIVOS</option>
+    <option>INACTIVOS</option>
+  </select>
 
-        <td class="button">
-          <div><button class="2" (click)="eliminar(pro.prodId)">
-              <img src="assets/img/eliminar.png" width="20px">
-            </button></div>
-        </td>
-      </tr>
-    <tbody>
-  </table>
 </div>
 
-<h2 style="font-size: 24px; color: black;">LISTA DE PRODUCTOS/SERVICIOS INACTIVOS</h2>
-<div class="input-box">
-  <i class="fa fa-search"></i>
+<div [hidden]="estado !== 'ACTIVOS'">
+  <div class="input-box">
+    <i class="fa fa-search"></i>
 
-  <input type="text" name="usuario" [(ngModel)]="busquedaInAct" (input)="busquedaPSInAct()" placeholder="Buscar"
-    required>
+    <input type="text" name="usuario" [(ngModel)]="busquedaAct" (input)="busquedaPSAct()" placeholder="Buscar" required>
+  </div>
+  <div class="table-wrapper">
+    <table class="fl-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>NOMBRE DEL PRODUCTO</th>
+          <th>DESCRIPCIÓN</th>
+          <th>COSTO</th>
+          <th>CATEGORIA</th>
+          <th>TIPO</th>
+          <th>Fecha de Registro</th>
+          <th>Editar</th>
+          <th>Eliminar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let pro of productoAct">
+          <td>{{pro.prodId}}</td>
+          <td>{{pro.prodNombre}}</td>
+          <td>{{pro.prodDescripcion}}</td>
+          <td>{{pro.prodPrecio}}</td>
+          <td>{{pro.catId.catNombre}}</td>
+          <td>{{pro.tipId.tipNombre}}</td>
+          <td>{{pro.prodFechaRegistro}}</td>
+          <td class="button">
+            <div><button type="button" name="button" [routerLink]="['/prod','editar',pro.prodId]">
+                <img src="assets/img/lapiz.png" width="20px">
+              </button></div>
+          </td>
+
+          <td class="button">
+            <div><button class="2" (click)="eliminar(pro.prodId)">
+                <img src="assets/img/eliminar.png" width="20px">
+              </button></div>
+          </td>
+        </tr>
+      <tbody>
+    </table>
+  </div>
 </div>
-<div class="table-wrapper">
-  <table class="fl-table">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>NOMBRE DEL PRODUCTO</th>
-        <th>DESCRIPCIÓN</th>
-        <th>COSTO</th>
-        <th>CATEGORÍA</th>
-        <th>TIPO</th>
-        <th>FECHA DE REGISTRO</th>
-        <th>ACCIÓN</th>
-        <th>ACCIÓN</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let pro of productoInact">
-        <td>{{pro.prodId}}</td>
-        <td>{{pro.prodNombre}}</td>
-        <td>{{pro.prodDescripcion}}</td>
-        <td>{{pro.prodPrecio}}</td>
-        <td>{{pro.catId.catNombre}}</td>
-        <td>{{pro.tipId.tipNombre}}</td>
-        <td>{{pro.prodFechaRegistro}}</td>
-        <td class="button">
-          <div><button>
-              <img src="assets/img/lapiz.png" width="20px">
-            </button></div>
-        </td>
 
-        <td class="button">
-          <div><button class="2" name="button" (click)="activar(pro.prodId)">
-              <img src="assets/img/eliminar.png" width="20px">
-            </button></div>
-        </td>
-      </tr>
-    <tbody>
-  </table>
+
+<!-- <h2 style="font-size: 24px; color: black;">LISTA DE PRODUCTOS/SERVICIOS INACTIVOS</h2> -->
+<div [hidden]="estado !== 'INACTIVOS'">
+  <div class="input-box">
+    <i class="fa fa-search"></i>
+
+    <input type="text" name="usuario" [(ngModel)]="busquedaInAct" (input)="busquedaPSInAct()" placeholder="Buscar"
+      required>
+  </div>
+  <div class="table-wrapper">
+    <table class="fl-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>NOMBRE DEL PRODUCTO</th>
+          <th>DESCRIPCIÓN</th>
+          <th>COSTO</th>
+          <th>CATEGORÍA</th>
+          <th>TIPO</th>
+          <th>FECHA DE REGISTRO</th>
+          <th>EDITAR</th>
+          <th>ACTIVAR</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let pro of productoInact">
+          <td>{{pro.prodId}}</td>
+          <td>{{pro.prodNombre}}</td>
+          <td>{{pro.prodDescripcion}}</td>
+          <td>{{pro.prodPrecio}}</td>
+          <td>{{pro.catId.catNombre}}</td>
+          <td>{{pro.tipId.tipNombre}}</td>
+          <td>{{pro.prodFechaRegistro}}</td>
+          <td class="button">
+            <div><button type="button" name="button" [routerLink]="['/prod','editar',pro.prodId]">
+                <img src="assets/img/lapiz.png" width="20px">
+              </button></div>
+          </td>
+
+          <td class="button">
+            <div><button class="2" name="button" (click)="activar(pro.prodId)">
+                <img src="assets/img/eliminar.png" width="20px">
+              </button></div>
+          </td>
+        </tr>
+      <tbody>
+    </table>
+  </div>
+</div>
+
+<div>
+  <div>
+    <h2 style="font-size: 18px; color: black;">Gestionar Categorias</h2>
+    <button type="button" name="button" (click)="openCrearCate()">
+      <img src="assets/img/lapiz.png" width="20px">
+    </button>
+  </div>
+
+  <div class="table-wrapper">
+    <table class="fl-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>CATEGORIA</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let cat of categorias">
+          <td>{{cat.catId}}</td>
+          <td>{{cat.catNombre}}</td>
+        </tr>
+      <tbody>
+    </table>
+  </div>
 </div>
 
 </html>

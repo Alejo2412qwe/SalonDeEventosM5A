@@ -29,6 +29,8 @@ export class ProductoComponent {
   tipo: Tipo = new Tipo();
   tipoSelect: Tipo = new Tipo;
   categoriaSelect: Categoria = new Categoria;
+  images: ImgProducto[] = [];
+
 
   constructor(private productoService: productoService, private categoriaService: CategoriaService,
     private tipoService: TipoService, private fileService: UploadFileService,
@@ -40,6 +42,8 @@ export class ProductoComponent {
     this.cargarTipos()
     this.cargarCategorias()
   }
+
+  
 
   cargarAccion(): void {
     this.activatedRoute.params.subscribe(params => {
@@ -59,10 +63,18 @@ export class ProductoComponent {
           this.producto = prod
           this.tipoSelect = prod.tipId
           this.categoriaSelect = prod.catId
-          // console.log("rol= " + this.rolSelect.rolNombre)
+          this.imgsProd(this.producto.prodId)
         })
       }
     })
+  }
+
+  imgsProd(prod: number): void {
+    this.imgProductoService.imgsProdId(prod).subscribe(
+      img => {
+        this.images = img;
+      }
+    )
   }
 
 
@@ -146,7 +158,10 @@ export class ProductoComponent {
   }
 
   registrar(): void {
-    this.producto.prodEstado = 1;
+    if(this.accion==='registrar'){
+      this.producto.prodEstado = 1;
+    }
+   
     this.tipo.tipNombre = this.tipoSelect.tipNombre;
 
     for (const tip of this.tipos) {
@@ -166,6 +181,7 @@ export class ProductoComponent {
     }
 
     let imgProducto: ImgProducto[] = [];
+
     this.productoService.crearProducto(this.producto).subscribe(
       productonew => {
 
@@ -226,7 +242,6 @@ export class ProductoComponent {
         );
       });
   };
-
 
 
   // registrar(): void {

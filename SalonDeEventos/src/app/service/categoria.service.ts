@@ -15,8 +15,11 @@ export class CategoriaService {
 
   constructor(private http: HttpClient) { }
 
-  getCategoria():Observable<Categoria[]>{
-    return this.http.get<Categoria[]>(this.url+"/listar");
+  getCategoria(): Observable<Categoria[]> {
+    return this.http.get<Categoria[]>(this.url + "/listar");
+  }
 
+  crearCategoria(categoria: Categoria): Observable<Categoria> {
+    return this.http.post<Categoria>(this.url + "/crear", categoria, { headers: this.httpHeaders })
   }
 }

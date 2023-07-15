@@ -18,11 +18,8 @@ export class ImgProductoService {
     return this.http.post<ImgProducto>(`${this.url}/crear`, persona, { headers: this.httpHeaders })
   }
 
-  imgProdId(prod: number): Observable<ImgProducto[]> {
-    return this.http.get<ImgProducto[]>(`${this.url}/busqueda/${prod}`);
-  }
-  buscarProd(prod: number): Observable<ImgProducto[]> {
+  imgsProdId(prod:number): Observable<ImgProducto[]> {
     return this.http.get(`${this.url}/busqueda/${prod}`).pipe(map(response => response as ImgProducto[]));
-}
+  }
 
 }
