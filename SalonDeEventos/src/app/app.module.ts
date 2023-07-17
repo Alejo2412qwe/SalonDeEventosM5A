@@ -31,6 +31,9 @@ import { GestionproductosComponent } from './gestionproductos/gestionproductos.c
 import { HeaderlogeoComponent } from './headerlogeo/headerlogeo.component';
 import { DetallesalonComponent } from './detallesalon/detallesalon.component';
 import { GestionsalonesComponent } from './gestionsalones/gestionsalones.component';
+import { GestionreservasComponent } from './gestionreservas/gestionreservas.component';
+import { GestioncotizacionesComponent } from './gestioncotizaciones/gestioncotizaciones.component';
+import { ListacotizacionesComponent } from './listacotizaciones/listacotizaciones.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -57,7 +60,10 @@ const routes: Routes = [
   { path: 'empresas', component: EmpresaComponent },
   { path: 'gestionuser', component: UsuariogestionComponent },
   { path: 'gestionProd', component: GestionproductosComponent },
-  { path: 'gestionsalones', component: GestionsalonesComponent }
+  { path: 'gestionsalones', component: GestionsalonesComponent },
+  { path: 'gestionreservas', component: GestionreservasComponent },
+  { path: 'gestioncotizaciones', component: GestioncotizacionesComponent },
+  { path: 'listacotizaciones', component: ListacotizacionesComponent}
 
 
 
@@ -90,6 +96,9 @@ const routes: Routes = [
     HeaderlogeoComponent,
     DetallesalonComponent,
     GestionsalonesComponent,
+    GestionreservasComponent,
+    GestioncotizacionesComponent,
+    ListacotizacionesComponent,
 
   ],
   imports: [
