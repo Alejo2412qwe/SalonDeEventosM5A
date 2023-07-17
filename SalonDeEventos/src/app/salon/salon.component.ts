@@ -9,6 +9,7 @@ import { Empresa } from '../modelo/empresa';
 import { EmpresaService } from '../service/empresa.service';
 import { UploadFileService } from '../service/uploadFile.service';
 import { FileModel } from '../modelo/fileModel';
+import { ImgSalon } from '../modelo/imgSalon';
 
 @Component({
   selector: 'app-salon',
@@ -25,19 +26,82 @@ export class SalonComponent {
   seleccionados: Empresa = new Empresa;
   salon: Salon = new Salon();
   empresa: Empresa = new Empresa();
+  selectedFiles: File[] = [];
+  filePreviews: string[] = [];
 
   ngOnInit(): void {
     this.cargarAccion()
   }
 
   registrarSalon(): void {
+    if (this.accion === 'registrar') {
+      this.salon.salEstado = 1;
+    }
+
+    let imgSalon: ImgSalon[] = [];
 
     this.EmpresaService.getEmpresaPorId(1).subscribe(emp => {
 
       this.salon.empId = emp;
-      this.salon.salEstado = 1;
       this.salonService.crearSalon(this.salon).subscribe(
-        response => {
+        salonNew => {
+
+          this.fileService.uploadFiles(this.selectedFiles).subscribe(
+            (response: FileModel[]) => {
+
+
+              for (let file of response) {
+                let sal: ImgSalon = new ImgSalon();
+                sal.imgSalNombre = file.name;
+                // prod.imgProdUrl = file.url;
+
+                this.fileService.getFileName(sal.imgSalNombre).subscribe(fileName => {
+                  sal.imgSalUrl = fileName.url;
+                  sal.salId = salonNew;
+                  // console.log("idprod= " + sal.prodId.prodId);
+                  // console.log("nombre= " + prod.imgProdNombre);
+                  // console.log("URL= " + prod.imgProdUrl);
+                  imgSalon.push(sal)
+                  console.log("=============================")
+                  this.imgSalonService.agregarIMG(sal).subscribe(img => {
+                    // console.log("idprod= " + img?.prodId?.prodId);
+                    // console.log("nombre= " + img?.imgProdNombre);
+                    // console.log("URL= " + img?.imgProdUrl);
+                  });
+                });
+
+
+                // this.imgProductoService.agregarIMG(prod).subscribe(img => {
+
+                // });
+
+              }
+              for (let file of response) {
+
+
+              }
+
+              console.log('Archivos subidos correctamente:', response);
+
+              // Realiza las operaciones necesarias con los archivos subidos
+              // ...
+              Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Registro exitoso',
+                showConfirmButton: true
+              }).then(() => {
+                location.reload();
+              });
+            },
+            (error: any) => {
+              console.error('Error al subir los archivos:', error);
+              // Maneja el error adecuadamente
+              // ...
+            }
+          );
+
+
           Swal.fire({
             position: 'center',
             icon: 'success',
@@ -72,8 +136,6 @@ export class SalonComponent {
     })
   }
 
-  selectedFiles: File[] = [];
-  filePreviews: string[] = [];
 
   onFileChange(event: any): void {
     this.selectedFiles = Array.from(event.target.files);
