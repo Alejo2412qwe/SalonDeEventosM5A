@@ -14,22 +14,23 @@
 
   <input type="text" name="usuario" [(ngModel)]="busquedaAct" (input)="busquedaPSAct()" placeholder="Buscar" required>
 </div>
+
 <div class="table-wrapper">
   <table class="fl-table">
     <thead>
       <tr>
         <th>ID</th>
-        <th>NOMBRE DEL PRODUCTO</th>
+        <th>SALON</th>
         <th>DESCRIPCIÓN</th>
         <th>COSTO</th>
         <th>FECHA DE REGISTRO</th>
         <th>UBICACIÓN</th>
-        <th>ACCIÓN</th>
-        <th>ACCIÓN</th>
+        <th>EDITAR</th>
+        <th>ELIMINAR</th>
       </tr>
     </thead>
     <tbody>
-      <ng-container *ngFor="let sal of salAc">
+      <tr *ngFor="let sal of salAc">
         <td>{{sal.salId}}</td>
         <td>{{sal.salNombre}}</td>
         <td>{{sal.salDireccion}}</td>
@@ -38,19 +39,75 @@
         <td>{{"Latidud "+sal.salLatitud +", Longitud "+sal.salLongitud}}</td>
 
         <td class="button">
-          <div><button type="button" name="button" [routerLink]="['/salon','editar',sal.salId]">
+          <div>
+            <button type="button" name="button" [routerLink]="['/salon','editar',sal.salId]">
               <img src="assets/img/lapiz.png" width="20px">
-            </button></div>
+            </button>
+          </div>
         </td>
 
         <td class="button">
-          <div><button class="2" (click)="eliminar(sal.salId)">
+          <div>
+            <button class="2" (click)="actualizarEst(sal.salId,0)">
               <img src="assets/img/eliminar.png" width="20px">
-            </button></div>
+            </button>
+          </div>
         </td>
-      </ng-container>
+      </tr>
     <tbody>
   </table>
+
+</div>
+
+<h2 style="font-size: 24px; color: black;">LISTA DE SALONES INACTIVOS</h2>
+
+<div class="input-box">
+  <i class="fa fa-search"></i>
+
+  <input type="text" name="usuario" [(ngModel)]="busquedaAct" (input)="busquedaPSAct()" placeholder="Buscar" required>
+</div>
+<div class="table-wrapper">
+  <table class="fl-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>SALON</th>
+        <th>DESCRIPCIÓN</th>
+        <th>COSTO</th>
+        <th>FECHA DE REGISTRO</th>
+        <th>UBICACIÓN</th>
+        <th>EDITAR</th>
+        <th>ACTIVAR</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let sal of salInac">
+        <td>{{sal.salId}}</td>
+        <td>{{sal.salNombre}}</td>
+        <td>{{sal.salDireccion}}</td>
+        <td>{{sal.salCapacidad}}</td>
+        <td>{{sal.salCostoHora}}</td>
+        <td>{{"Latidud "+sal.salLatitud +", Longitud "+sal.salLongitud}}</td>
+
+        <td class="button">
+          <div>
+            <button type="button" name="button" [routerLink]="['/salon','editar',sal.salId]">
+              <img src="assets/img/lapiz.png" width="20px">
+            </button>
+          </div>
+        </td>
+
+        <td class="button">
+          <div>
+            <button class="2" (click)="actualizarEst(sal.salId,1)">
+              <img src="assets/img/eliminar.png" width="20px">
+            </button>
+          </div>
+        </td>
+      </tr>
+    <tbody>
+  </table>
+
 </div>
 
 </html>

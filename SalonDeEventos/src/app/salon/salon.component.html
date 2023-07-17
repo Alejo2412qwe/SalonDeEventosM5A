@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    <app-headerlogeo></app-headerlogeo> 
+    <app-headerlogeo></app-headerlogeo>
 
     <div class="container">
         <div>
@@ -55,10 +55,17 @@
                         <input type="number" name="salLongitud" [(ngModel)]="salon.salLongitud"
                             placeholder="Ingresa la longitud del local" required>
                     </div>
+                    <div class="inputContainer">
+                        <input type="file" (change)="onFileChange($event)" multiple>
+
+                        <!-- <button (click)="uploadFiles()">Subir archivos</button> -->
+
+                    </div>
 
                     <div></div>
-                    <div style="  text-align: right;"> 
-                        <button id="button" (click)="registrarSalon()" *ngIf="accion ==='registrar'">Crear Salón</button>
+                    <div style="  text-align: right;">
+                        <button id="button" (click)="registrarSalon()" *ngIf="accion ==='registrar'">Crear
+                            Salón</button>
                         <button id="button" (click)="registrarSalon()" *ngIf="accion ==='editar'">Editar Salón</button>
                     </div>
                 </section>

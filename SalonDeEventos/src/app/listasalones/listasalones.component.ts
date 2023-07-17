@@ -15,6 +15,7 @@ export class ListasalonesComponent implements OnInit {
   busquedaAct: string = "";
   busquedaInAct: string = "";
 
+
   constructor(private salonService: SalonService) { }
 
   ngOnInit(): void {
@@ -52,7 +53,7 @@ export class ListasalonesComponent implements OnInit {
     );
   }
 
-  eliminar(id: number): void {
+  actualizarEst(id: number, est:number): void {
     Swal.fire({
       title: `¿Seguro que desea eliminar el salon?`,
       showDenyButton: true,
@@ -67,7 +68,7 @@ export class ListasalonesComponent implements OnInit {
       }
     }).then((result) => {
       if (result.isConfirmed) {
-        this.salonService.delete(id).subscribe(salon => {
+        this.salonService.actualizarEst(id,est).subscribe(salon => {
 
           this.listarSalonesAct();
           this.listarSalonesInact();

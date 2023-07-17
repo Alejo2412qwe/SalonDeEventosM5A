@@ -62,7 +62,7 @@ export class ListaproductosComponent implements OnInit {
         });
         this.cargarCategorias()
       }
-      
+
     )
   }
 
@@ -70,7 +70,7 @@ export class ListaproductosComponent implements OnInit {
 
     this.categoriaService.getCategoria().subscribe(
       categoriaArray => {
-        this.categorias=categoriaArray
+        this.categorias = categoriaArray
       }
     );
   }

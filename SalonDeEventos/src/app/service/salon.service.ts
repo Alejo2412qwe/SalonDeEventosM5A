@@ -36,8 +36,8 @@ export class SalonService {
         return this.http.get<Salon>(`${this.url}/salonporid/${id}`);
     }
 
-    delete(id: number): Observable<Salon> {
-        return this.http.put<Salon>(`${this.url}/eliminarE/${id}`, null);
+    actualizarEst(id: number, est:number): Observable<Salon> {
+        return this.http.put<Salon>(`${this.url}/actualizarEst/${id}/${est}`, null);
     }
 
     update(id: number, salon: Salon): Observable<Salon> {

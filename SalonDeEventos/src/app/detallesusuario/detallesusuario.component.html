@@ -84,9 +84,10 @@
             </div>
             <div class="inputContainer">
                 <!-- *ngIf="usuario.usuId !== 1" -->
+                
                 <h2 class="nombre" >Elige rol</h2>
                 <select name="roles" [(ngModel)]="rolSelect" class="select" [disabled]="usuario.usuId === 1">
-                    <option value="" selected disabled>Selecciona un rol</option>
+                    <!-- <option value="" disabled>Selecciona un rol</option> -->
 
                     <option *ngFor="let rol of roles" [ngValue]="rol">
                         {{rol.rolNombre}}
