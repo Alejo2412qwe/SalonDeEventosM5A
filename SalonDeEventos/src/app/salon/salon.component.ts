@@ -11,6 +11,8 @@ import { UploadFileService } from '../service/uploadFile.service';
 import { FileModel } from '../modelo/fileModel';
 import { ImgSalon } from '../modelo/imgSalon';
 
+
+
 @Component({
   selector: 'app-salon',
   templateUrl: './salon.component.html',
@@ -28,6 +30,8 @@ export class SalonComponent {
   empresa: Empresa = new Empresa();
   selectedFiles: File[] = [];
   filePreviews: string[] = [];
+
+  
 
   ngOnInit(): void {
     this.cargarAccion()
