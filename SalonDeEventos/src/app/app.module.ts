@@ -36,6 +36,7 @@ import { GestioncotizacionesComponent } from './gestioncotizaciones/gestioncotiz
 import { ListacotizacionesComponent } from './listacotizaciones/listacotizaciones.component';
 import { VistasalonesComponent } from './vistasalones/vistasalones.component';
 import { VersalonComponent } from './versalon/versalon.component';
+import { ConocenosComponent } from './conocenos/conocenos.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -67,9 +68,8 @@ const routes: Routes = [
   { path: 'gestionreservas', component: GestionreservasComponent },
   { path: 'gestioncotizaciones', component: GestioncotizacionesComponent },
   { path: 'salones', component: VistasalonesComponent },
-   { path: 'listacotizaciones', component: ListacotizacionesComponent }
-
-
+   { path: 'listacotizaciones', component: ListacotizacionesComponent },
+   { path: 'conocenos', component: ConocenosComponent }
 
 ]
 
@@ -104,7 +104,8 @@ const routes: Routes = [
     GestioncotizacionesComponent,
     ListacotizacionesComponent,
     VersalonComponent,
-    VistasalonesComponent
+    VistasalonesComponent,
+    ConocenosComponent
 
   ],
   imports: [
