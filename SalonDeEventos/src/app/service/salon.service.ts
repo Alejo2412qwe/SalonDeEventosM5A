@@ -43,4 +43,8 @@ export class SalonService {
     update(id: number, salon: Salon): Observable<Salon> {
         return this.http.put<Salon>(`${this.url}/actualizar/${id}`, salon);
     }
+
+    buscarSalon(id: number): Observable<Salon> {
+        return this.http.get<Salon>(`${this.url}/salonporid/${id}`);
+      }
 }
