@@ -19,6 +19,9 @@ section{
   -webkit-flex-wrap: wrap;
   -webkit-justify-content: space-around;
 }
+.hola{
+  text-align: justify;
+}
 .col {
   -webkit-box-flex: 1;
   -webkit-flex: 1;
