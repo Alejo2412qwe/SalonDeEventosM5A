@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Reserva } from '../modelo/reserva';
 import { ImagenService } from '../service/imagen.service';
 import { HttpHeaders, HttpResponse } from '@angular/common/http';
+import { CotizacionService } from '../service/cotizacion.service';
 
 @Component({
   selector: 'app-cotizacion',
@@ -14,11 +15,127 @@ import { HttpHeaders, HttpResponse } from '@angular/common/http';
 export class CotizacionComponent implements OnInit {
 
   imageToShow: any;
+  reserva: Reserva = new Reserva();
+  accion: string = "";
 
-  constructor(private imagenService: ImagenService) { }
+  fechaRegistro: Date = new Date();
+
+  alertaOcupado:string="";
+
+  zonaHorariaCliente: string;
+
+  constructor(private imagenService: ImagenService, private activatedRoute: ActivatedRoute, private cotizacionService: CotizacionService,
+    private reservaService: ReservaService, private toastr: ToastrService) { 
+      this.zonaHorariaCliente = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    console.log('Zona horaria del cliente:', this.zonaHorariaCliente);
+    }
+
   ngOnInit(): void {
     this.obtenerImagen(4);
+    this.obtenerUsuario();
+    this.cargarCoti();
+    this.obtenerUsuario();
   }
+
+
+  cargarCoti(): void {
+    this.activatedRoute.params.subscribe(params => {
+      let id = params['id']
+      if (id) {
+        this.cotizacionService.buscarId(id).subscribe((cot) => {
+          this.reserva.reCotiId = cot;
+        })
+      }
+    })
+  }
+
+  cargarAccion(): void {
+    this.activatedRoute.params.subscribe(params => {
+      this.accion = params['accion']
+      console.log(this.accion)
+
+    })
+  }
+
+  obtenerUsuario() {
+    // Recuperar el string del localStorage
+    const userString = localStorage.getItem('userData');
+
+    // Verificar si el string existe en el localStorage
+    if (userString) {
+      const login = JSON.parse(userString);
+
+      this.reserva.usuId = login;
+    }
+
+  }
+
+
+
+  crearReserva(): void {
+
+    this.reserva.resFechaRegistro = this.fechaRegistro;
+    this.reserva.resEstado = 1; //PENDIENTE
+
+    if (this.reserva.resImagenRerserva === 0) {
+      this.reserva.resComprobante = "Pendiente";
+    } else {
+      this.reserva.resComprobante = "EN REVISION";
+    }
+
+    const reserva: Date = new Date(this.reserva.resFechaEvento);
+    const anio: number = reserva.getFullYear();
+    const mes: number = reserva.getMonth() + 1;
+    const dia: number = reserva.getDate() + 1;
+
+    // this.reserva.resFechaEvento=reserva;
+
+    
+
+    this.reservaService.fechaOcupada(dia, mes, anio).subscribe(ocupado => {
+      if (!ocupado) {
+        alert("evento= "+this.reserva.resFechaEvento)
+        this.alertaOcupado="Fecha disponible"
+        this.reservaService.crearReserva(this.reserva).subscribe(res => {
+          alert("reserva en revision")
+
+
+
+        })
+      }else{
+        this.alertaOcupado="Fecha no disponible"
+        this.toastr.error('La fecha que seleccionaste se encuentra ocupada actualmente', '', {
+          timeOut: 2500
+        });
+      }
+    })
+
+
+  }
+
+
+  validaciones(): Boolean {
+
+    let ban: boolean = true;
+
+
+
+
+
+
+    return ban;
+  }
+
+
+
+
+
+
+
+
+
+
+  /////////////////////////////////////////
 
 
   obtenerImagen(id: number): void {

@@ -8,9 +8,11 @@ import { Cotizacion } from '../modelo/cotizacion';
 import { Usuario } from '../modelo/usuario';
 import { CotizacionService } from '../service/cotizacion.service';
 import { Salon } from '../modelo/salon';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SalonService } from '../service/salon.service';
 import { AdicionalesService } from '../service/adicionales.service';
+import Swal from 'sweetalert2';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-reserva',
@@ -35,7 +37,8 @@ export class ReservaComponent {
   constructor(private ProductoService: productoService, private imgProductoService: ImgProductoService,
     private categoriaService: CategoriaService, private changeDetectorRef: ChangeDetectorRef,
     private cotizacionService: CotizacionService, private activatedRoute: ActivatedRoute,
-    private salservice: SalonService, private adicionalesService: AdicionalesService) {
+    private salservice: SalonService, private adicionalesService: AdicionalesService,
+    private router: Router) {
   }
 
   ngOnInit(): void {
@@ -140,16 +143,36 @@ export class ReservaComponent {
     this.cotizacionService.crearCotizacion(this.cotizacion).subscribe(
       coti => {
         this.crearAdicionales(coti);
+        Swal.fire({
+          title: `¿Desea continuar con la reserva?`,
+          showDenyButton: true,
+          showCancelButton: false,
+          confirmButtonText: 'Si',
+          denyButtonText: 'Quizas mas tarde',
+          customClass: {
+            actions: 'my-actions',
+            cancelButton: 'order-1 right-gap',
+            confirmButton: 'order-2',
+            denyButton: 'order-3',
+          }
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.router.navigate(["cot","reservar", coti.cotiId]);
+
+          } else if (result.isDenied) {
+            Swal.fire('Verifique sus datos antes de cambiarlos', '', 'info')
+          }
+        })
       }
     );
   }
 
-  crearAdicionales(cot:Cotizacion): void {
-    for(let add of this.adicionales){
+  crearAdicionales(cot: Cotizacion): void {
+    for (let add of this.adicionales) {
 
-      add.cotiId=cot;
+      add.cotiId = cot;
       this.adicionalesService.crearAdicional(add).subscribe();
-      
+
 
     }
   }

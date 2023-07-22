@@ -23,4 +23,8 @@ export class CotizacionService {
     crearCotizacion(coti: Cotizacion): Observable<Cotizacion> {
         return this.http.post<Cotizacion>(`${this.url}/crear`, coti, { headers: this.httpHeaders })
     }
+
+    buscarId(id: number): Observable<Cotizacion> {
+        return this.http.get<Cotizacion>(`${this.url}/buscar/${id}`);
+    }
 }

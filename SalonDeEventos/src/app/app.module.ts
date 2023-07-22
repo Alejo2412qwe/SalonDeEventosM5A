@@ -44,7 +44,7 @@ const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent }, 
   { path: 'map', component:  MapComponent},
-  { path: 'cot', component: CotizacionComponent },
+  { path: 'cot/:accion/:id', component: CotizacionComponent },
   { path: 'res/:id', component: ReservaComponent },
   { path: 'admin', component: AdminComponent },
   { path: 'salon', component: SalonComponent },

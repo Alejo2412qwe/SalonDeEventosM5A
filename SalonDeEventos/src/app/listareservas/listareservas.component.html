@@ -9,11 +9,19 @@
 
 <app-headers></app-headers>
 <h2 style="font-size: 24px; color: black;">LISTA DE RESERVAS</h2>
+<select name="estados" [(ngModel)]="estado" required class="select">
+    <option value="0">Rechazado</option>
+    <option value="1">Pendiente</option>
+    <option value="2">Aprobado</option>
+</select>
 <div class="table-wrapper">
     <table class="fl-table">
         <thead>
             <tr>
-                <th>COMPROBANTE</th>
+                <th>N°</th>
+                <th>CEDULA</th>
+                <th>NOMBRE</th>
+                <th>CORREO</th>
                 <th>ESTADO</th>
                 <th>FECHA SOLICITADA</th>
                 <th>Acción</th>
@@ -23,14 +31,19 @@
         <tbody>
             <ng-container *ngFor="let res of reservas">
                 <tr>
-                    <td>{{ res.resComprobante }}</td>
-                    <td>
-                      <span *ngIf="res.resEstado === 1">Aprobado</span>
-                      <span *ngIf="res.resEstado === 0">En espera</span>
-                    </td>
+                    <td>{{ res.resId }}</td>
+                    <td>{{ res.usuId.usuPerId.perCedula }}</td>
+                    <td>{{ res.usuId.usuPerId.perNombre+" "+res.usuId.usuPerId.perApellido }}</td>
+                    <td>{{ res.usuId.usuPerId.perCorreo }}</td>
+                    <td>{{estados(res.resEstado)}}</td>
                     <td>{{ res.resFechaRegistro | date: 'dd/MM/yyyy' }}</td>
-                    <td><button style="margin-right: 10px;">Aprobar</button><button>Ver detalle</button></td>
-                  </tr>
+                    <td>
+                        <div><button type="button" name="button" [routerLink]="['/cot','validar',res.resId]">
+                                <img src="assets/img/lapiz.png" width="20px">
+                            </button></div>
+                    </td>
+
+                </tr>
             </ng-container>
         <tbody>
     </table>

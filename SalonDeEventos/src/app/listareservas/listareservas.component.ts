@@ -12,6 +12,8 @@ import { Reserva } from '../modelo/reserva';
 export class ListareservasComponent implements OnInit {
   reservas: Reserva[] = [];
 
+  estado: number = 1;
+
   constructor(private reservaService: ReservaService) { }
 
   ngOnInit(): void {
@@ -23,6 +25,25 @@ export class ListareservasComponent implements OnInit {
         this.reservas = reservas;
       }
     );
+  }
+
+  estados(est: number): string {
+    let estado: string = "";
+
+    switch (est) {
+      case 0:
+        estado = "Rechazado";
+        break;
+      case 1:
+        estado = "Pendiente";
+        break;
+      case 2:
+        estado = "Aprobado";
+        break;
+
+    }
+
+    return estado;
   }
 
 
