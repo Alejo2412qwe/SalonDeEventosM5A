@@ -163,7 +163,6 @@ nav ul li a:hover {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 50px 0;
     flex-wrap: nowrap;
 }
 
@@ -379,7 +378,6 @@ nav ul li a:hover {
 }
 
 .card:hover {
-    transform: rotateY(10deg) rotateX(10deg) scale(1.05);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
@@ -408,7 +406,7 @@ nav ul li a:hover {
 
     display: flex;
     justify-content: center;
-    height: 100px;
+    height: 100%;
 
 }
 
@@ -416,7 +414,7 @@ nav ul li a:hover {
 
     display: flex;
     justify-content: center;
-    height: 100px;
+    height: 100%;
 
 }
 
@@ -424,7 +422,7 @@ nav ul li a:hover {
 
     display: flex;
     justify-content: center;
-    height: 100px;
+    height: 100%;
 }
 
 h1 {
@@ -452,7 +450,6 @@ h1 {
 }
 
 .flip:hover {
-    transform: rotateY(180deg);
 }
 
 /* Content */
@@ -570,6 +567,33 @@ h1 {
 
 }
 
+button {
+  padding: 1.3em 3em;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  color: #000;
+  background-color: #fff;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+}
+
+button:hover {
+  background-color: #F1C27B;
+  box-shadow: 0px 15px 20px #b07d31;
+  color: #fff;
+  transform: translateY(-7px);
+}
+
+button:active {
+  transform: translateY(-1px);
+}
+
 @media only screen and (max-width:1200px) {
 
     .layout2 {
@@ -593,93 +617,6 @@ h1 {
 .ventana-flotante video {
     max-width: 100%;
     max-height: 100%;
-}
-
-button {
-    font-size: 18px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    display: inline-block;
-    text-align: center;
-    font-weight: bold;
-    padding: 0.7em 2em;
-    background: transparent;
-    border-radius: 5px;
-    position: relative;
-    border: transparent;
-    color: #000000;
-    text-decoration: none;
-    transition: 0.1s ease all;
-    z-index: 1;
-    cursor: pointer;
-}
-
-button.Cerrar2 {
-    font-size: 18px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    display: inline-block;
-    text-align: center;
-    font-weight: bold;
-    padding: 0.7em 2em;
-    background: #FFD89C;
-    border-radius: 5px;
-    position: relative;
-    border: transparent;
-    color: #000000;
-    text-decoration: none;
-    transition: 0.1s ease all;
-    z-index: 1;
-    cursor: pointer;
-}
-
-button.Accion {
-    background: #FFD89C;
-    color: #000000;
-}
-
-button:before {
-    transition: 0.5s all ease;
-    position: absolute;
-    top: 0;
-    left: 50%;
-    right: 50%;
-    bottom: 0;
-    opacity: 0;
-    content: '';
-    background-color: #E8AA42;
-    z-index: -1;
-}
-
-button.Cerrar2:before {
-    transition: 0.5s all ease;
-    position: absolute;
-    top: 0;
-    left: 50%;
-    right: 50%;
-    bottom: 0;
-    opacity: 0;
-    content: '';
-    background-color: #B04759;
-    z-index: -1;
-    border-radius: 3px;
-}
-
-button:hover,
-button:focus {
-    color: white;
-}
-
-button:hover:before,
-button:focus:before {
-    transition: 0.5s all ease;
-    left: 0;
-    right: 0;
-    opacity: 1;
-}
-
-button:active {
-    transform: scale(0.9);
 }
 
 
@@ -960,4 +897,14 @@ main > div > a:hover {
   .swiper {
     width: 85%;
   }
+}
+
+.col {
+  display: flex;
+  justify-content: center;
+}
+
+.col img {
+  max-width: 100%;
+  display: block; /* Para eliminar cualquier espacio en blanco debajo de la imagen */
 }

@@ -29,6 +29,7 @@
     width: 170px;
     cursor: pointer;
     margin: 10px;
+    background-color: transparent;
 }
 
 .menu-icon {
