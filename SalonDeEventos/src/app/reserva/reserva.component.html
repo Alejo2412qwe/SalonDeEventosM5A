@@ -39,24 +39,27 @@
                             placeholder="Ingresa los detalles" required>
                     </div>
                     <div class="inputContainer">
-                        <input type="time" name="HoraInicio" placeholder="Hora de Inicio" required step="900" 
-                        [(ngModel)]="selectedTimeIni" (ngModelChange)="calcularMonto()">
+                        <input type="time" name="HoraInicio" placeholder="Hora de Inicio" required step="900"
+                            [(ngModel)]="selectedTimeIni" (ngModelChange)="calcularMonto()">
                     </div>
 
                     <div class="inputContainer">
-                        <input type="time" name="HoraFin" placeholder="Hora de Fin" required step="900" 
-                        [(ngModel)]="selectedTimeFin" (ngModelChange)="calcularMonto()">
+                        <input type="time" name="HoraFin" placeholder="Hora de Fin" required step="900"
+                            [(ngModel)]="selectedTimeFin" (ngModelChange)="calcularMonto()">
                     </div>
 
 
 
+                    <div class="inputContainer">
 
+                        <button class="boton1" style="font-size: 12px;" (click)="crearCotizacion()">
+                            Crear una cotización</button>
+
+                    </div>
 
 
                 </section>
 
-                <button class="boton1" style="font-size: 12px;     margin-left: 50%;" (click)="crearCotizacion()">
-                    Crear una cotización</button>
 
             </form>
         </div>
@@ -106,22 +109,23 @@
                     style="text-align: justify; display: block; text-align: center; margin-top: 50px; font-size: 26px;">DETALLES
                 </span>
                 <br>
-                <span style="text-align: justify; font-size: 15px;">
+                <span style="text-align: justify; font-size: 15px; margin-top: -30px;">
                     <br> Precio: {{prod.prodPrecio}}
                     <br> Categoria: {{prod.catId.catNombre}}
                     <br> Descripcion: {{prod.prodDescripcion}}
 
                 </span>
 
-                <span style="text-align: justify; font-size: 24px; margin-top: 200px; display: inline-flexbox;">
-                    <div style="text-align: justify; font-size: 15px;">
-                        Cantidad: <input name="prodPrecio" type="number" [(ngModel)]="nuevoAdicional.adiCantidad"
-                            required min="0" style=" width: 60px;">
-                    </div>
+                <span style="margin-top: 80px;">
+                    <h1 style="font-size: 18px; font-weight: bolder; margin-right: 20px;">Cantidad:</h1><input name="prodPrecio" type="number" [(ngModel)]="nuevoAdicional.adiCantidad" required min="0"
+                        style=" width: 140px;">
+                </span>
+                <span style="text-align: justify; font-size: 24px; margin-top: 130px; display: inline-flexbox;">
 
-
-                    <button class="boton1" (click)="agregarAdicional(prod)"> Agregar </button>
-                    <button class="boton1" (click)="quitarAdiccional(prod.prodId)"> Quitar </button>
+                    <button style="font-size: 10px; width: 140px; margin-right: 5px;" class="boton1" (click)="agregarAdicional(prod)">
+                        Agregar </button>
+                    <button style="font-size: 10px; width: 140px; margin-left: 5px;" class="boton1"
+                        (click)="quitarAdiccional(prod.prodId)"> Quitar </button>
                 </span>
 
             </div>
