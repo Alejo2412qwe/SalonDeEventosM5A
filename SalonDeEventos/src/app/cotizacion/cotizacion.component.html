@@ -50,11 +50,17 @@
             </div>
 
 
-
         </section>
-        <p style="text-align: center;">Deseas confirmar tu reserva?
+        <p style="text-align: center;">Deseas confirmar tu reserva? </p>
+        
+        <div>
+            <h2>Subir Imagen</h2>
+            <input type="file" (change)="onFileSelected($event)" accept="image/*">
+            <button (click)="uploadImage()">Subir Imagen</button>
 
-        </p>
+        </div>
+
+
         <section class="layout3">
 
             <div style="text-align: center;">

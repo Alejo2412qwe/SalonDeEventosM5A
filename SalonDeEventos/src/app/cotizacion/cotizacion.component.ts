@@ -24,15 +24,17 @@ export class CotizacionComponent implements OnInit {
 
   zonaHorariaCliente: string;
 
+  selectedFile: File | null = null;
+
   constructor(private imagenService: ImagenService, private activatedRoute: ActivatedRoute, private cotizacionService: CotizacionService,
-    private reservaService: ReservaService, private toastr: ToastrService) {
+    private reservaService: ReservaService, private toastr: ToastrService, private imageService:ImagenService) {
     this.zonaHorariaCliente = Intl.DateTimeFormat().resolvedOptions().timeZone;
     console.log('Zona horaria del cliente:', this.zonaHorariaCliente);
   }
 
   ngOnInit(): void {
     this.cargarAccion();
-    this.obtenerImagen(4);
+    this.obtenerImagen(1);
 
   }
 
@@ -90,7 +92,31 @@ export class CotizacionComponent implements OnInit {
 
   }
 
+  onFileSelected(event: any): void {
+    this.selectedFile = event.target.files[0];
+  }
 
+  uploadImage(): void {
+    if (!this.selectedFile) {
+      alert('Por favor, selecciona una imagen.');
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = (event: any) => {
+      const imageData = new Uint8Array(event.target.result);
+      this.imagenService.guardarImagen2(imageData)
+        .subscribe(
+          (imageId: string) => {
+            alert('Imagen subida con éxito. ID de imagen: ' + imageId);
+          },
+          (error: any) => {
+            alert('Error al subir la imagen. Por favor, inténtalo de nuevo.');
+          }
+        );
+    };
+    reader.readAsArrayBuffer(this.selectedFile);
+  }
 
   crearReserva(): void {
 
