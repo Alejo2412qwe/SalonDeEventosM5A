@@ -14,13 +14,16 @@ export class ListareservasComponent implements OnInit {
 
   estado: number = 1;
 
+
   constructor(private reservaService: ReservaService) { }
 
   ngOnInit(): void {
     this.listarReservas()
   }
   listarReservas(): void {
-    this.reservaService.getReserva().subscribe(
+
+    this.reservaService.listarEst(this.estado).subscribe(
+    // this.reservaService.getReserva().subscribe(
       (reservas: Reserva[]) => {
         this.reservas = reservas;
       }

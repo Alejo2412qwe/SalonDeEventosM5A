@@ -34,6 +34,10 @@ export class ReservaService {
         return this.http.get<boolean>(`${this.url}/fechaOcupada/${dia}/${mes}/${anio}`);
     }
 
+    listarEst(est: number): Observable<Reserva[]> {
+        return this.http.get(`${this.url}/listarEst/${est}`).pipe(map(response => response as Reserva[]));
+    }
+
     // guardarImagen(imagenBytes: Uint8Array): Observable<string> {
     //     return this.http.post<string>(this.urlImg, imagenBytes);
     // }
