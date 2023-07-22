@@ -437,4 +437,12 @@ p.fecha {
         background: linear-gradient(to right, #F1C27B, #FFD89C);
         box-shadow: 0 0 0 0 rgba(168, 189, 213, 0.7);
     }
+    
 }
+
+.image-container {
+    max-width: 100%; /* La imagen no excederá el 100% del contenedor */
+    max-height: 500px; /* Altura máxima predefinida */
+    object-fit: contain; /* La imagen se adapta manteniendo la relación de aspecto */
+  }
+  

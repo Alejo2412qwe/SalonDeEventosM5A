@@ -37,10 +37,13 @@ import { ListacotizacionesComponent } from './listacotizaciones/listacotizacione
 import { VistasalonesComponent } from './vistasalones/vistasalones.component';
 import { VersalonComponent } from './versalon/versalon.component';
 import { ConocenosComponent } from './conocenos/conocenos.component';
+import { MapComponent } from './salon/map/map.component';
+import { ReactiveFormsModule } from '@angular/forms'
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent },
+  { path: 'login', component: LoginComponent }, 
+  { path: 'map', component:  MapComponent},
   { path: 'cot', component: CotizacionComponent },
   { path: 'res', component: ReservaComponent },
   { path: 'admin', component: AdminComponent },
@@ -68,8 +71,8 @@ const routes: Routes = [
   { path: 'gestionreservas', component: GestionreservasComponent },
   { path: 'gestioncotizaciones', component: GestioncotizacionesComponent },
   { path: 'salones', component: VistasalonesComponent },
-   { path: 'listacotizaciones', component: ListacotizacionesComponent },
-   { path: 'conocenos', component: ConocenosComponent }
+  { path: 'listacotizaciones', component: ListacotizacionesComponent },
+  { path: 'conocenos', component: ConocenosComponent }
 
 ]
 
@@ -105,7 +108,8 @@ const routes: Routes = [
     ListacotizacionesComponent,
     VersalonComponent,
     VistasalonesComponent,
-    ConocenosComponent
+    ConocenosComponent,
+    MapComponent
 
   ],
   imports: [
@@ -117,6 +121,7 @@ const routes: Routes = [
     CommonModule,
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(), // ToastrModule added
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
