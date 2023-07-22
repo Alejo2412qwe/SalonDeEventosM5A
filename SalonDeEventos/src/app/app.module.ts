@@ -45,7 +45,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent }, 
   { path: 'map', component:  MapComponent},
   { path: 'cot', component: CotizacionComponent },
-  { path: 'res', component: ReservaComponent },
+  { path: 'res/:id', component: ReservaComponent },
   { path: 'admin', component: AdminComponent },
   { path: 'salon', component: SalonComponent },
   { path: 'emp', component: EmpleadoComponent },

@@ -22,27 +22,41 @@
                         <p class="cate" style="font-size: 18px;">Elige la categoria</p>
                     </div>
                     <div class="inputContainer">
-                        <select class="select">
+                        <select class="select" name="TipoEvento" [(ngModel)]="cotizacion.cotiTipoEvento">
                             <option>Boda</option>
                             <option>Graduación</option>
                             <option>Bautizo</option>
                             <option>Confirmación</option>
                             <option>Cumpleaños</option>
                         </select>
+                        <input type="text" name="TipoEvento" [(ngModel)]="cotizacion.cotiTipoEvento"
+                            placeholder="Otro..." required>
+                    </div>
+
+
+                    <div class="inputContainer">
+                        <input type="text" name="Descripcion" [(ngModel)]="cotizacion.cotiDescripcion"
+                            placeholder="Ingresa los detalles" required>
+                    </div>
+                    <div class="inputContainer">
+                        <input type="time" name="HoraInicio" placeholder="Hora de Inicio" required step="900" 
+                        [(ngModel)]="selectedTimeIni" (ngModelChange)="calcularMonto()">
                     </div>
 
                     <div class="inputContainer">
-
-                        <input type="date" placeholder="Ingresa tu fecha de nacimiento" required>
+                        <input type="time" name="HoraFin" placeholder="Hora de Fin" required step="900" 
+                        [(ngModel)]="selectedTimeFin" (ngModelChange)="calcularMonto()">
                     </div>
 
-                    <div class="inputContainer">
-                        <input type="text" placeholder="Ingresa los detalles" required>
-                    </div>
+
+
+
+
+
                 </section>
 
-                <button class="boton1" style="font-size: 12px;     margin-left: 50%;
-                ">Crear una cotización</button>
+                <button class="boton1" style="font-size: 12px;     margin-left: 50%;" (click)="crearCotizacion()">
+                    Crear una cotización</button>
 
             </form>
         </div>
@@ -67,36 +81,54 @@
                     <p>Monetización:</p>
                 </div>
                 <div>
-                    <p class="monto">$ 0.00</p>
+                    <p class="monto">{{cotizacion.cotiMonto}}</p>
                 </div>
                 <div>
                     <p>Fecha de Registro:</p>
                 </div>
                 <div>
-                    <p class="fecha">2023/06/23</p>
+                    <p class="fecha">{{ fechaRegistro | date:'dd/MM/yyyy' }}</p>
                 </div>
             </section>
         </div>
 
     </section>
-    <div class="container4">
+    <section style="margin-top: 50px;" class="layout2">
+        <ng-container *ngFor="let prod of productoAct">
+            <div class="card2">
+                <div style="width: 100%; " class="icon">
+                    <img class=" salon" src="assets/img/salonfino.jpeg" width="90%"
+                        style="border-radius: 10px;   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);">
+                    <h3 style="margin-top: 20px;">{{prod.prodNombre}}</h3>
 
-        <div>
+                </div>
+                <span
+                    style="text-align: justify; display: block; text-align: center; margin-top: 50px; font-size: 26px;">DETALLES
+                </span>
+                <br>
+                <span style="text-align: justify; font-size: 15px;">
+                    <br> Precio: {{prod.prodPrecio}}
+                    <br> Categoria: {{prod.catId.catNombre}}
+                    <br> Descripcion: {{prod.prodDescripcion}}
 
-            <h1 style="margin-bottom: 20px;">Resultados</h1>
-        </div>
-            <img [src]="imageToShow" *ngIf="imageToShow" alt="Imagen" class="image-container">
+                </span>
 
-        <div><h1 style="margin-top: 40px;">¿Que deseas hacer con esta cotizaion?</h1></div>
+                <span style="text-align: justify; font-size: 24px; margin-top: 200px; display: inline-flexbox;">
+                    <div style="text-align: justify; font-size: 15px;">
+                        Cantidad: <input name="prodPrecio" type="number" [(ngModel)]="nuevoAdicional.adiCantidad"
+                            required min="0" style=" width: 60px;">
+                    </div>
 
-        <section class="layouthor">
-            <div><button class="boton1">En espera</button></div>
-            <div><button class="boton2">Descartar</button></div>
-            <div><button class="boton3">Aceptar</button></div>
 
-        </section>
+                    <button class="boton1" (click)="agregarAdicional(prod)"> Agregar </button>
+                    <button class="boton1" (click)="quitarAdiccional(prod.prodId)"> Quitar </button>
+                </span>
 
-    </div>
+            </div>
+
+        </ng-container>
+
+    </section>
 
 
 

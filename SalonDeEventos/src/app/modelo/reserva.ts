@@ -20,12 +20,12 @@ export class Reserva {
         reCotiId?: Cotizacion,
         usuId?: Usuario
     ) {
-        this.resId = resId||0;
-        this.resEstado = resEstado||0;
-        this.resComprobante = resComprobante||"";
-        this.resFechaRegistro = resFechaRegistro||new Date;
-        this.resFechaEvento = resFechaEvento||new Date;
-        this.reCotiId = reCotiId||new Cotizacion;
-        this.usuId = usuId|| new Usuario;
+        this.resId = resId || 0;
+        this.resEstado = resEstado || 0;
+        this.resComprobante = resComprobante || "";
+        this.resFechaRegistro = resFechaRegistro || new Date();
+        this.resFechaEvento = resFechaEvento || new Date();
+        this.reCotiId = reCotiId || new Cotizacion(); // Elimina "new Reserva"
+        this.usuId = usuId || new Usuario();
     }
 }

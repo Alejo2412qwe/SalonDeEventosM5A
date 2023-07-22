@@ -19,4 +19,8 @@ export class CotizacionService {
     getCotizacion(): Observable<Cotizacion[]> {
         return this.http.get(this.url + "/listar").pipe(map(response => response as Cotizacion[]));
     }
+
+    crearCotizacion(coti: Cotizacion): Observable<Cotizacion> {
+        return this.http.post<Cotizacion>(`${this.url}/crear`, coti, { headers: this.httpHeaders })
+    }
 }

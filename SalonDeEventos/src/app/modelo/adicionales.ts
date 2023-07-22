@@ -19,8 +19,8 @@ export class Adicionales {
         this.adiId = adiId||0;
         this.adiCantidad = adiCantidad||0;
         this.adiFechaRegistro = adiFechaRegistro||new Date;
-        this.cotiId = cotiId || new Cotizacion;
-        this.prodId = prodId||new ProductoServicio;
+        this.cotiId = cotiId || new Cotizacion();
+        this.prodId = prodId||new ProductoServicio();
     }
 
 }

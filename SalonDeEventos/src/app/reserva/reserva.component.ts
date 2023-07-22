@@ -1,10 +1,17 @@
-import { Component } from '@angular/core';
-import { ReservaService } from '../service/reserva.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
-import { Reserva } from '../modelo/reserva';
-import { ImagenService } from '../service/imagen.service';
-import { HttpHeaders, HttpResponse } from '@angular/common/http';
+import { Component, ChangeDetectorRef } from '@angular/core';
+import { productoService } from '../service/producto.service';
+import { ImgProductoService } from '../service/imgProducto.service';
+import { CategoriaService } from '../service/categoria.service';
+import { ProductoServicio } from '../modelo/producto-servicio';
+import { Adicionales } from '../modelo/adicionales';
+import { Cotizacion } from '../modelo/cotizacion';
+import { Usuario } from '../modelo/usuario';
+import { CotizacionService } from '../service/cotizacion.service';
+import { Salon } from '../modelo/salon';
+import { ActivatedRoute } from '@angular/router';
+import { SalonService } from '../service/salon.service';
+import { AdicionalesService } from '../service/adicionales.service';
+
 @Component({
   selector: 'app-reserva',
   templateUrl: './reserva.component.html',
@@ -12,35 +19,180 @@ import { HttpHeaders, HttpResponse } from '@angular/common/http';
 })
 export class ReservaComponent {
 
-  imageToShow: any;
+  productoAct: ProductoServicio[] = [];
+  fechaRegistro: Date = new Date();
+  adicionales: Adicionales[] = [];
+  nuevoAdicional: Adicionales = new Adicionales();
 
-  constructor(private imagenService: ImagenService) { }
+  cotizacion: Cotizacion = new Cotizacion();
+  salon: Salon = new Salon();
+  usuario: Usuario = new Usuario();
+
+  selectedTimeIni: string = ""; // Puedes utilizar string ya que el valor del input time es un string en formato "HH:mm"
+  selectedTimeFin: string = ""; // Puedes utilizar string ya que el valor del input time es un string en formato "HH:mm"
+
+
+  constructor(private ProductoService: productoService, private imgProductoService: ImgProductoService,
+    private categoriaService: CategoriaService, private changeDetectorRef: ChangeDetectorRef,
+    private cotizacionService: CotizacionService, private activatedRoute: ActivatedRoute,
+    private salservice: SalonService, private adicionalesService: AdicionalesService) {
+  }
+
   ngOnInit(): void {
-    this.obtenerImagen(4);
+    this.listarProductosAct()
+    this.obtenerUsuario()
+    this.obtenerSalon()
   }
 
 
-  obtenerImagen(id: number): void {
-    this.imagenService.obtenerImagenPorId(id)
-      .subscribe(
-        (response: HttpResponse<any>) => {
-          const headers: HttpHeaders = response.headers;
-          const contentType = headers.get('content-type');
-          this.imageToShow = 'data:' + contentType + ';base64,' + this.arrayBufferToBase64(response.body);
-        },
-        error => {
-          console.log('Error al obtener la imagen:', error);
-        }
-      );
+  obtenerSalon(): void {
+    this.activatedRoute.params.subscribe(params => {
+      let id = params['id']
+      if (id) {
+        this.salservice.buscarSalon(id).subscribe((sal) => {
+          this.salon = sal;
+          // Asignar el objeto 'sal' completo en lugar de 'sal.salId'
+          console.log("rol= " + this.salon.salNombre)
+          this.cotizacion.salId = this.salon;
+
+        })
+      }
+    })
   }
 
-  // Función para convertir el array de bytes en una cadena base64
-  arrayBufferToBase64(buffer: ArrayBuffer): string {
-    let binary = '';
-    const bytes = new Uint8Array(buffer);
-    for (let i = 0; i < bytes.byteLength; i++) {
-      binary += String.fromCharCode(bytes[i]);
+
+  obtenerUsuario() {
+    // Recuperar el string del localStorage
+    const userString = localStorage.getItem('userData');
+
+    // Verificar si el string existe en el localStorage
+    if (userString) {
+      const login = JSON.parse(userString);
+
+      this.usuario = login;
+
+      this.cotizacion.usuId = this.usuario;
     }
-    return window.btoa(binary);
+
   }
+
+  listarProductosAct(): void {
+    this.ProductoService.listarEst(1).subscribe(
+      producto => this.productoAct = producto
+    );
+  }
+
+  agregarAdicional(p: ProductoServicio) {
+    // const 
+
+    this.nuevoAdicional.prodId = p;
+    console.log("cant= " + this.nuevoAdicional.adiCantidad)
+    this.adicionales.push(this.nuevoAdicional);
+
+    console.log("add= " + this.adicionales.length)
+
+    this.nuevoAdicional = new Adicionales()
+
+    this.calcularMonto();
+  }
+
+  quitarAdiccional(id: number) {
+    this.adicionales = this.adicionales.filter(producto => producto.prodId.prodId !== id);
+    console.log("remove= " + this.adicionales.length)
+    this.calcularMonto();
+  }
+
+  calcularMonto() {
+    this.cotizacion.cotiMonto = 0;
+    for (let add of this.adicionales) {
+      this.cotizacion.cotiMonto = this.cotizacion.cotiMonto + (add.prodId.prodPrecio * add.adiCantidad)
+    }
+
+    const diferenciaTiempo = this.calcularTiempoEntreHoras();
+    const [hours, minutes] = diferenciaTiempo.split(':').map(Number); // Separamos las horas y minutos del string
+    console.log("H" + hours + "   M" + minutes);
+
+    this.cotizacion.cotiMonto = this.cotizacion.cotiMonto + (this.salon.salCostoHora * hours)
+
+    let min = 0;
+
+    if (minutes > 0) {
+      min = minutes / 60;
+    }
+
+    this.cotizacion.cotiMonto = this.cotizacion.cotiMonto + (this.salon.salCostoHora * min)
+
+    this.changeDetectorRef.detectChanges();
+
+
+  }
+
+  crearCotizacion(): void {
+
+    this.cotizacion.cotiEstado = 1;
+
+    this.cotizacion.cotiHoraInicio = this.parseTimeToDate(this.selectedTimeIni);
+    this.cotizacion.cotiHoraFin = this.parseTimeToDate(this.selectedTimeFin);
+
+    this.cotizacion.cotiFechaRegistro = this.fechaRegistro;
+
+
+    this.cotizacionService.crearCotizacion(this.cotizacion).subscribe(
+      coti => {
+        this.crearAdicionales(coti);
+      }
+    );
+  }
+
+  crearAdicionales(cot:Cotizacion): void {
+    for(let add of this.adicionales){
+
+      add.cotiId=cot;
+      this.adicionalesService.crearAdicional(add).subscribe();
+      
+
+    }
+  }
+
+  parseTimeToDate(timeString: string): Date {
+    const today = new Date(); // Obtenemos la fecha actual
+    const [hours, minutes] = timeString.split(':').map(Number); // Separamos las horas y minutos del string
+
+    // Creamos un nuevo objeto Date con la fecha actual y las horas y minutos seleccionados
+    const selectedDate = new Date(today.getFullYear(), today.getMonth(), today.getDate(), hours, minutes);
+
+    return selectedDate;
+  }
+
+  calcularTiempoEntreHoras(): string {
+    const horaIni = this.parseTimeToDate(this.selectedTimeIni);
+    const horaFin = this.parseTimeToDate(this.selectedTimeFin);
+
+    if (horaIni && horaFin) {
+      console.log("VALIDO");
+
+      let diferenciaEnMilisegundos = horaFin.getTime() - horaIni.getTime();
+
+      // Ajustamos la diferencia si la hora de fin es menor que la hora de inicio (pasamos a un día completo)
+      if (horaFin < horaIni) {
+        const diferenciaDiaCompleto = 24 * 60 * 60 * 1000; // 24 horas en milisegundos
+        diferenciaEnMilisegundos += diferenciaDiaCompleto;
+      }
+
+      // Calculamos las horas y minutos de la diferencia
+      const horas = Math.floor(diferenciaEnMilisegundos / 3600000); // 1 hora tiene 3600000 milisegundos
+      const minutos = Math.floor((diferenciaEnMilisegundos % 3600000) / 60000); // 1 minuto tiene 60000 milisegundos
+
+      // Creamos una cadena con el formato "HH:mm" para mostrar la diferencia
+      const tiempoEntreHoras = `${horas.toString().padStart(2, '0')}:${minutos.toString().padStart(2, '0')}`;
+
+      return tiempoEntreHoras;
+    }
+
+    return "no vale";
+  }
+
+
+
+
 }

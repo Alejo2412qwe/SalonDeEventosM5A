@@ -20,7 +20,7 @@ export class VersalonComponent implements OnInit {
 
   ngOnInit(): void {
     this.listarSalones();
-    this.cargarUsu();
+    this.cargarSal();
 
   }
 
@@ -36,7 +36,7 @@ export class VersalonComponent implements OnInit {
     );
   }
 
-  cargarUsu(): void {
+  cargarSal(): void {
     this.activatedRoute.params.subscribe(params => {
       let id = params['id']
       if (id) {

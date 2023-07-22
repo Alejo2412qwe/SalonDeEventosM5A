@@ -27,14 +27,14 @@ export class Salon {
         empId?: Empresa
     ) {
         this.salId = salId || 0;
-        this.salNombre = salNombre|| "";
+        this.salNombre = salNombre || "";
         this.salDireccion = salDireccion || "";
         this.salCapacidad = salCapacidad || 0;
         this.salCostoHora = salCostoHora || 0;
         this.salEstado = salEstado || 0;
         this.salLongitud = salLongitud || 0;
         this.salLatitud = salLatitud || 0;
-        this.salFechaRegistro = salFechaRegistro || new Date ;
-        this.empId = empId || new Empresa;
+        this.salFechaRegistro = salFechaRegistro || new Date();
+        this.empId = empId || new Empresa(); // Elimina "new Salon"
     }
 }
