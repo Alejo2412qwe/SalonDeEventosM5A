@@ -20,21 +20,20 @@ export class CotizacionComponent implements OnInit {
 
   fechaRegistro: Date = new Date();
 
-  alertaOcupado:string="";
+  alertaOcupado: string = "";
 
   zonaHorariaCliente: string;
 
   constructor(private imagenService: ImagenService, private activatedRoute: ActivatedRoute, private cotizacionService: CotizacionService,
-    private reservaService: ReservaService, private toastr: ToastrService) { 
-      this.zonaHorariaCliente = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    private reservaService: ReservaService, private toastr: ToastrService) {
+    this.zonaHorariaCliente = Intl.DateTimeFormat().resolvedOptions().timeZone;
     console.log('Zona horaria del cliente:', this.zonaHorariaCliente);
-    }
+  }
 
   ngOnInit(): void {
+    this.cargarAccion();
     this.obtenerImagen(4);
-    this.obtenerUsuario();
-    this.cargarCoti();
-    this.obtenerUsuario();
+
   }
 
 
@@ -53,9 +52,30 @@ export class CotizacionComponent implements OnInit {
     this.activatedRoute.params.subscribe(params => {
       this.accion = params['accion']
       console.log(this.accion)
-
+      if (this.accion === 'reservar') {
+        this.obtenerUsuario();
+        this.cargarCoti();
+        // alert("reserva"+this.c)
+      } else {
+        this.cargarReserva();
+        alert("validacion")
+      }
     })
   }
+
+  cargarReserva(): void {
+    this.activatedRoute.params.subscribe(params => {
+      let id = params['id']
+      if (id) {
+        this.reservaService.buscarId(id).subscribe((res) => {
+          this.reserva = res;
+          alert(this.reserva.resFechaEvento)
+        })
+      }
+    })
+    
+  }
+
 
   obtenerUsuario() {
     // Recuperar el string del localStorage
@@ -90,20 +110,20 @@ export class CotizacionComponent implements OnInit {
 
     // this.reserva.resFechaEvento=reserva;
 
-    
+
 
     this.reservaService.fechaOcupada(dia, mes, anio).subscribe(ocupado => {
       if (!ocupado) {
-        alert("evento= "+this.reserva.resFechaEvento)
-        this.alertaOcupado="Fecha disponible"
+        alert("evento= " + this.reserva.resFechaEvento)
+        this.alertaOcupado = "Fecha disponible"
         this.reservaService.crearReserva(this.reserva).subscribe(res => {
           alert("reserva en revision")
 
 
 
         })
-      }else{
-        this.alertaOcupado="Fecha no disponible"
+      } else {
+        this.alertaOcupado = "Fecha no disponible"
         this.toastr.error('La fecha que seleccionaste se encuentra ocupada actualmente', '', {
           timeOut: 2500
         });
