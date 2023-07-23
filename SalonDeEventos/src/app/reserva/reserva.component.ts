@@ -184,7 +184,7 @@ export class ReservaComponent {
             this.router.navigate(["cot", "reservar", coti.cotiId]);
 
           } else if (result.isDenied) {
-            Swal.fire('Verifique sus datos antes de cambiarlos', '', 'info')
+            Swal.fire('Cotizacion registrada con exito', '', 'success')
           }
         })
       }

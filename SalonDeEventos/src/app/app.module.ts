@@ -57,6 +57,7 @@ const routes: Routes = [
   { path: 'editarusu/:accion/:id', component: DetallesusuarioComponent },
   { path: 'versal/:accion/:id', component: VersalonComponent },
   { path: 'mires/:id', component: MisReservasComponent },
+  { path: 'micot/:id', component: MisCotizacionesComponent },
   { path: 'salon/:accion/:id', component: SalonComponent },
   { path: 'prod', component: ProductoComponent },
   { path: 'prod/:accion/:id', component: ProductoComponent },
