@@ -26,4 +26,8 @@ export class ImgProductoService {
     return this.http.get(`${this.url}/busquedaEst/${est}`).pipe(map(response => response as ImgProducto[]));
   }
 
+  imgsProd(): Observable<ImgProducto[]> {
+    return this.http.get(`${this.url}/listar`).pipe(map(response => response as ImgProducto[]));
+  }
+
 }

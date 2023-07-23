@@ -13,6 +13,7 @@ import { SalonService } from '../service/salon.service';
 import { AdicionalesService } from '../service/adicionales.service';
 import Swal from 'sweetalert2';
 import { ToastrService } from 'ngx-toastr';
+import { ImgProducto } from '../modelo/imgProducto';
 
 @Component({
   selector: 'app-reserva',
@@ -31,7 +32,7 @@ export class ReservaComponent {
   usuario: Usuario = new Usuario();
 
   accion: string = "";
-
+  images: ImgProducto[] = [];
   selectedTimeIni: string = ""; // Puedes utilizar string ya que el valor del input time es un string en formato "HH:mm"
   selectedTimeFin: string = ""; // Puedes utilizar string ya que el valor del input time es un string en formato "HH:mm"
 
@@ -40,7 +41,7 @@ export class ReservaComponent {
     private categoriaService: CategoriaService, private changeDetectorRef: ChangeDetectorRef,
     private cotizacionService: CotizacionService, private activatedRoute: ActivatedRoute,
     private salservice: SalonService, private adicionalesService: AdicionalesService,
-    private router: Router) {
+    private router: Router, private imgProd: ImgProductoService) {
   }
 
   ngOnInit(): void {
@@ -57,6 +58,7 @@ export class ReservaComponent {
     this.listarProductosAct()
     this.obtenerUsuario()
     this.obtenerSalon_Coti()
+    this.imgsSalon()
   }
 
   obtenerSalon_Coti(): void {
@@ -238,6 +240,30 @@ export class ReservaComponent {
   }
 
 
+  imgsSalon(): void {
+    this.imgProd.imgsProd().subscribe(
+      img => {
+        this.images = img;
+      }
+    )
+  }
 
+  ObtenerFoto(id: number): string {
+
+    let url: string = "";
+
+    for (let img of this.images) {
+
+      if (img.imgProdId == id) {
+
+        url = img.imgProdUrl
+
+        break;
+      }
+
+    }
+
+    return url;
+  }
 
 }

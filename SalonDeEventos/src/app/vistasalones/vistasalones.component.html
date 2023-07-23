@@ -18,15 +18,10 @@
 
     <section style="margin-top: 50px;" class="layout2">
         <ng-container *ngFor="let sal of salones">
-            <!-- <td>{{sal.salId}}</td>
-            <td>{{sal.salNombre}}</td>
-            <td>{{sal.salDireccion}}</td>
-            <td>{{sal.salCapacidad}}</td>
-            <td>{{sal.salCostoHora}}</td>
-            <td>{{"Latidud "+sal.salLatitud +", Longitud "+sal.salLongitud}}</td> -->
+
             <div class="card2">
                 <div style="width: 100%; " class="icon">
-                    <img class=" salon" src="assets/img/salonfino.jpeg" width="90%"
+                    <img class=" salon" [src] = "ObtenerFoto(sal.salId)" width="90%"
                         style="border-radius: 10px;   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);">
                     <h3 style="margin-top: 20px;">{{sal.salNombre}}</h3>
 
