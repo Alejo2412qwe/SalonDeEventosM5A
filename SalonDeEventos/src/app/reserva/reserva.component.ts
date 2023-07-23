@@ -53,12 +53,17 @@ export class ReservaComponent {
     this.activatedRoute.params.subscribe(params => {
       this.accion = params['accion']
       console.log(this.accion)
-    })
+      // if (this.accion==='detalle') {
 
-    this.listarProductosAct()
-    this.obtenerUsuario()
+      // }else{
+
+      // }
+
+    })
     this.obtenerSalon_Coti()
-    this.imgsSalon()
+    // this.listarProductosAct()
+    // this.obtenerUsuario()
+    // this.imgsSalon()
   }
 
   obtenerSalon_Coti(): void {
@@ -69,7 +74,8 @@ export class ReservaComponent {
         if (this.accion === 'micotizacion') {
           this.cotizacionService.buscarId(id).subscribe(cot => {
             this.cotizacion = cot;
-
+            this.selectedTimeIni = cot.cotiHoraInicio;
+            this.selectedTimeFin= cot.cotiHoraFin;
           })
 
         } else {
@@ -85,6 +91,10 @@ export class ReservaComponent {
 
       }
     })
+
+    this.listarProductosAct()
+    this.obtenerUsuario()
+    this.imgsSalon()
   }
 
 
