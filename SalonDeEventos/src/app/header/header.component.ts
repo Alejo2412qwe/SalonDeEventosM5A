@@ -3,7 +3,8 @@ import { Usuario } from '../modelo/usuario';
 import { AllScriptsService } from '../scripts/all-scripts.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { SafeResourceUrl } from '@angular/platform-browser';
-
+import { Router } from '@angular/router';
+import { ElementRef, Renderer2 } from '@angular/core';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -11,7 +12,7 @@ import { SafeResourceUrl } from '@angular/platform-browser';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private AllScripts: AllScriptsService, private sanitizer: DomSanitizer) {
+  constructor(private renderer: Renderer2, private el: ElementRef, private AllScripts: AllScriptsService, private sanitizer: DomSanitizer, private router: Router) {
     AllScripts.Cargar(["default/ventana"]);
   }
   user: Usuario = new Usuario();
@@ -20,9 +21,13 @@ export class HeaderComponent implements OnInit {
 
     if (userString !== null) {
       this.user = JSON.parse(userString);
+      this.router.navigate(['/perfil']);
     } else {
       console.error('No hay datos de usuario en el Local Storage');
+
     }
+
+
   }
 
   getMapUrl(latitud: number, longitud: number): SafeResourceUrl {
@@ -33,4 +38,55 @@ export class HeaderComponent implements OnInit {
   }
 
 
+  mostrarVentanaLogin(): void {
+    const userString = localStorage.getItem('userData');
+
+    if (userString !== null) {
+      this.router.navigate(['/perfiluser']);
+
+    } else {
+      const ventanaFlotante = this.el.nativeElement.querySelector('.ventana-flotante2');
+      this.renderer.setStyle(ventanaFlotante, 'display', 'flex');
+    }
+
+  }
+
+  mostrarVentanaLogin2(): void {
+    const userString = localStorage.getItem('userData');
+
+    if (userString !== null) {
+      this.router.navigate(['/salones']);
+
+    } else {
+      const ventanaFlotante = this.el.nativeElement.querySelector('.ventana-flotante2');
+      this.renderer.setStyle(ventanaFlotante, 'display', 'flex');
+    }
+
+  }
+
+  mostrarVentanaLogin3(): void {
+    const userString = localStorage.getItem('userData');
+
+    if (userString !== null) {
+      this.router.navigate(['/salones']);
+
+    } else {
+      const ventanaFlotante = this.el.nativeElement.querySelector('.ventana-flotante2');
+      this.renderer.setStyle(ventanaFlotante, 'display', 'flex');
+    }
+
+  }
+  
+
+  header(): void {
+    const userString = localStorage.getItem('userData');
+
+    if (userString !== null) {
+
+    } else {
+      const ventanaFlotante = this.el.nativeElement.querySelector('.ventana-flotante2');
+      this.renderer.setStyle(ventanaFlotante, 'display', 'flex');
+    }
+
+  }
 }

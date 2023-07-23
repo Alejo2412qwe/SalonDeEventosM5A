@@ -18,7 +18,7 @@
     <p class="titulo" style="text-align: center; font-size: 36px; font-weight: bolder;">DATOS DE LA RESERVA</p>
     <section class="background"
         style=" width: 80% ;  margin-left: auto; margin-right: auto; margin-bottom: 100px; margin-top: 100px;">
-        <section class="layout" style="margin-bottom: px;">
+        <section class="layout" style="margin-bottom: px; ">
             <div>
                 <p style="padding-left: 10%; font-weight: bolder;">Por favor, rellene todos los campos. </p>
             </div>
@@ -28,7 +28,6 @@
             <div>
                 <p style="padding-left: 10%; font-weight: bolder;">Reserva N° <label for="">{{numReserva}}</label> </p>
 
-                <p class="fecha"> Fecha de Registro: &nbsp;&nbsp;{{ fechaRegistro | date:'dd/MM/yyyy' }}</p>
             </div>
         </section>
 
@@ -36,13 +35,16 @@
 
         <section class="layout4">
 
+            <div style="width: 100%;">
+                <p style="text-align: center; font-size: 26px; font-weight: bolder;" class="heading">Datos Personales</p>
+            </div>
             <div>
-                <p class="heading">Datos Personales</p>
+                <p class="fecha"> &nbsp;&nbsp;{{ fechaRegistro | date:'dd/MM/yyyy' }}</p>
+            </div>
+            <div>
+                <p>Fecha de Registro:</p>
             </div>
 
-            <div>
-                <p>Cedula:</p>
-            </div>
             <div>
                 <p class="fecha">{{usuario.usuPerId.perCedula}}</p>
             </div>
