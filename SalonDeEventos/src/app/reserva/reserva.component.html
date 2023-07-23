@@ -56,8 +56,8 @@
                             [hidden]="accion !== 'cotizar'">
                             Crear una cotización</button>
 
-                        <button class="boton1" style="font-size: 12px;" [routerLink]="['/cot','reservar',cotizacion.cotiId]"
-                            [hidden]="accion !== 'mireserva'">
+                        <button class="boton1" style="font-size: 12px;"
+                            [routerLink]="['/cot','reservar',cotizacion.cotiId]" [hidden]="accion !== 'mireserva'">
                             Crear una cotización</button>
 
                     </div>
@@ -131,11 +131,37 @@
     <div style="width: 100%;">
         <h1 style="text-align: center; font-weight: bolder;">Productos Adicionales</h1>
     </div>
+    <div class="table-wrapper">
+        <table class="fl-table">
+            <thead>
+                <tr>
+                    <th>NOMBRE DEL PRODUCTO</th>
+                    <th>COSTO</th>
+                    <th>CANTIDAD</th>
+                    <th>ACCION</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let adi of adicionales">
+                    <td>{{adi.prodId.prodNombre}}</td>
+                    <td>{{adi.adiCantidad * adi.prodId.prodPrecio}}</td>
+                    <td>{{adi.adiCantidad}}</td>
+                    <td><button style="font-size: 10px; width: 140px; margin-left: 5px;" class="boton1" (click)="quitarAdiccional(adi.prodId.prodId)"
+                        > Quitar </button></td>
+
+                </tr>
+            <tbody>
+        </table>
+    </div>
+    <div style="width: 100%;">
+        <h1 style="text-align: center; font-weight: bolder;">Productos Adicionales</h1>
+    </div>
     <section style="margin-top: 50px;" class="layout2">
         <ng-container *ngFor="let prod of productoAct">
             <div class="card2">
                 <div style="width: 100%; " class="icon">
-                    <img class=" salon" [src] = "ObtenerFoto(prod.prodId)" width="90%"
+                    <img class=" salon" [src]="ObtenerFoto(prod.prodId)" width="90%"
                         style="border-radius: 10px;   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);">
                     <h3 style="margin-top: 20px;">{{prod.prodNombre}}</h3>
 
@@ -160,9 +186,7 @@
 
                     <button style="font-size: 10px; width: 140px; margin-right: 5px;" class="boton1"
                         (click)="agregarAdicional(prod)">
-                        Agregar </button>
-                    <button style="font-size: 10px; width: 140px; margin-left: 5px;" class="boton1"
-                        (click)="quitarAdiccional(prod.prodId)"> Quitar </button>
+                        Agregar </button>               
                 </span>
 
             </div>
