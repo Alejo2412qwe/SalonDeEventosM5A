@@ -24,6 +24,8 @@ export class DetallesusuarioComponent implements OnInit {
   rolSelect: Rol = new Rol;
   accion: string = "";
 
+  sesion: Usuario = new Usuario();
+
 
   constructor(private personaService: PersonaService, private usuarioService: UsuarioService, private rolService: RolService,
     private activatedRoute: ActivatedRoute, private router: Router, private toastr: ToastrService) {
@@ -32,6 +34,7 @@ export class DetallesusuarioComponent implements OnInit {
   ngOnInit(): void {
     this.cargarAccion();
     this.cargarRoles();
+    this.obtenerUsuario();
   }
   cargarRoles(): void {
 
@@ -42,6 +45,19 @@ export class DetallesusuarioComponent implements OnInit {
         }
       }
     );
+  }
+
+  obtenerUsuario() {
+    // Recuperar el string del localStorage
+    const userString = localStorage.getItem('userData');
+
+    // Verificar si el string existe en el localStorage
+    if (userString) {
+      const login = JSON.parse(userString);
+      this.sesion = login;
+
+    }
+
   }
 
   cargarAccion(): void {
@@ -157,7 +173,7 @@ export class DetallesusuarioComponent implements OnInit {
   registrar(): void {
 
     console.log(this.accion)
-    console.log("persona= "+JSON.stringify(this.persona))
+    console.log("persona= " + JSON.stringify(this.persona))
 
     if (this.validacionesRegistro()) {
       console.log("VALIDADO")

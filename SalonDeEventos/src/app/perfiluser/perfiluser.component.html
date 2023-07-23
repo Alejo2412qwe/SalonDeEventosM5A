@@ -12,8 +12,8 @@
   <div class="row">
     <div class="perfil">
       <h1 class="nombreuser">BIENVENIDO</h1>
-      <p class="correo">Nombre de usuario</p>
-      <button id="button">Editar Usuario</button>
+      <p class="correo">{{usuario.usuPerId.perNombre+" "+usuario.usuPerId.perApellido}}</p>
+      <button id="button" [routerLink]="['/editarusu','editar',usuario.usuId]">Editar Usuario</button>
     </div>
     <div class="col-md-6">
       <section class="layout">
@@ -55,27 +55,27 @@
         <tbody>
           <tr>
             <td class="titulo">Nombres</td>
-            <td class="datos">Juan Carlos</td>
+            <td class="datos">{{usuario.usuPerId.perNombre}}</td>
           </tr>
           <tr>
             <td class="titulo">Apellidos</td>
-            <td class="datos">Mogrovejo Ortix</td>
+            <td class="datos">{{usuario.usuPerId.perApellido}}</td>
           </tr>
           <tr>
             <td class="titulo">Correo Electrónico</td>
-            <td class="datos">Juan-mogrovejo@gmail.com</td>
+            <td class="datos">{{usuario.usuPerId.perCorreo}}</td>
           </tr>
           <tr>
             <td class="titulo">Dirección</td>
-            <td class="datos">Av.César Andrade y Cordero</td>
+            <td class="datos">{{usuario.usuPerId.perDireccion}}</td>
           </tr>
           <tr>
             <td class="titulo">Teléfono</td>
-            <td class="datos">0985860636</td>
+            <td class="datos">{{usuario.usuPerId.perTelefono}}</td>
           </tr>
           <tr>
             <td class="titulo">Fecha de Nacimiento</td>
-            <td class="datos">27/08/2000</td>
+            <td class="datos">{{formatDate(usuario.usuPerId.perFechaNacimiento)}}</td>
           </tr>
         </tbody>
       </table>
@@ -88,12 +88,27 @@
         <tbody>
           <tr>
             <td class="titulo">Nombre de usuario</td>
-            <td class="datos">Juan-carlos</td>
+            <td class="datos">{{usuario.usuNombreUsuario}}</td>
+          </tr>
+          <tr>
+            <td class="titulo">Rol</td>
+            <td class="datos">{{usuario.rolId.rolNombre}}</td>
+          </tr>
+          <tr>
+            <td class="titulo">Fecha de registro</td>
+            <td class="datos">{{formatDate(usuario.usuFechaRegistro)}}</td>
           </tr>
         </tbody>
       </table>
+      <div>
+        <button id="button" [routerLink]="['/mires',usuario.usuId]">Mis Cotizaciones</button>
+    
+        <button id="button" [routerLink]="['/mires',usuario.usuId]">Mis Reservas</button>
+      </div>
     </div>
   </div>
+
+
 </section>
 <!-- <div class="container">
     <section class="layout">

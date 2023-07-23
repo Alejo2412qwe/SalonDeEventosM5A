@@ -30,6 +30,8 @@ export class ReservaComponent {
   salon: Salon = new Salon();
   usuario: Usuario = new Usuario();
 
+  accion: string = "";
+
   selectedTimeIni: string = ""; // Puedes utilizar string ya que el valor del input time es un string en formato "HH:mm"
   selectedTimeFin: string = ""; // Puedes utilizar string ya que el valor del input time es un string en formato "HH:mm"
 
@@ -42,23 +44,43 @@ export class ReservaComponent {
   }
 
   ngOnInit(): void {
-    this.listarProductosAct()
-    this.obtenerUsuario()
-    this.obtenerSalon()
+    this.cargarAccion()
   }
 
+  cargarAccion(): void {
 
-  obtenerSalon(): void {
+    this.activatedRoute.params.subscribe(params => {
+      this.accion = params['accion']
+      console.log(this.accion)
+    })
+
+    this.listarProductosAct()
+    this.obtenerUsuario()
+    this.obtenerSalon_Coti()
+  }
+
+  obtenerSalon_Coti(): void {
     this.activatedRoute.params.subscribe(params => {
       let id = params['id']
       if (id) {
-        this.salservice.buscarSalon(id).subscribe((sal) => {
-          this.salon = sal;
-          // Asignar el objeto 'sal' completo en lugar de 'sal.salId'
-          console.log("rol= " + this.salon.salNombre)
-          this.cotizacion.salId = this.salon;
 
-        })
+        if (this.accion === 'micotizacion') {
+          this.cotizacionService.buscarId(id).subscribe(cot => {
+            this.cotizacion = cot;
+
+          })
+
+        } else {
+          this.salservice.buscarSalon(id).subscribe((sal) => {
+            this.salon = sal;
+
+            // Asignar el objeto 'sal' completo en lugar de 'sal.salId'
+            console.log("rol= " + this.salon.salNombre)
+            this.cotizacion.salId = this.salon;
+
+          })
+        }
+
       }
     })
   }
@@ -157,7 +179,7 @@ export class ReservaComponent {
           }
         }).then((result) => {
           if (result.isConfirmed) {
-            this.router.navigate(["cot","reservar", coti.cotiId]);
+            this.router.navigate(["cot", "reservar", coti.cotiId]);
 
           } else if (result.isDenied) {
             Swal.fire('Verifique sus datos antes de cambiarlos', '', 'info')

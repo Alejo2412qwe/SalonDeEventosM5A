@@ -38,14 +38,16 @@ import { VistasalonesComponent } from './vistasalones/vistasalones.component';
 import { VersalonComponent } from './versalon/versalon.component';
 import { ConocenosComponent } from './conocenos/conocenos.component';
 import { MapComponent } from './salon/map/map.component';
-import { ReactiveFormsModule } from '@angular/forms'
+import { ReactiveFormsModule } from '@angular/forms';
+import { MisCotizacionesComponent } from './mis-cotizaciones/mis-cotizaciones.component';
+import { MisReservasComponent } from './mis-reservas/mis-reservas.component'
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent }, 
   { path: 'map', component:  MapComponent},
   { path: 'cot/:accion/:id', component: CotizacionComponent },
-  { path: 'res/:id', component: ReservaComponent },
+  { path: 'res/:accion/:id', component: ReservaComponent },
   { path: 'admin', component: AdminComponent },
   { path: 'salon', component: SalonComponent },
   { path: 'emp', component: EmpleadoComponent },
@@ -54,6 +56,7 @@ const routes: Routes = [
   { path: 'editarsalon', component: DetallesalonComponent },
   { path: 'editarusu/:accion/:id', component: DetallesusuarioComponent },
   { path: 'versal/:accion/:id', component: VersalonComponent },
+  { path: 'mires/:id', component: MisReservasComponent },
   { path: 'salon/:accion/:id', component: SalonComponent },
   { path: 'prod', component: ProductoComponent },
   { path: 'prod/:accion/:id', component: ProductoComponent },
@@ -109,7 +112,9 @@ const routes: Routes = [
     VersalonComponent,
     VistasalonesComponent,
     ConocenosComponent,
-    MapComponent
+    MapComponent,
+    MisCotizacionesComponent,
+    MisReservasComponent
 
   ],
   imports: [

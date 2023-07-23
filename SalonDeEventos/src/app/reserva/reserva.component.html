@@ -52,7 +52,12 @@
 
                     <div class="inputContainer">
 
-                        <button class="boton1" style="font-size: 12px;" (click)="crearCotizacion()">
+                        <button class="boton1" style="font-size: 12px;" (click)="crearCotizacion()"
+                            [hidden]="accion !== 'cotizar'">
+                            Crear una cotización</button>
+
+                        <button class="boton1" style="font-size: 12px;" [routerLink]="['/cot','reservar',cotizacion.cotiId]"
+                            [hidden]="accion !== 'mireserva'">
                             Crear una cotización</button>
 
                     </div>
@@ -116,7 +121,7 @@
                 <div>
                     <p class="fecha">{{ fechaRegistro | date:'dd/MM/yyyy' }}</p>
                 </div>
-                
+
             </section>
         </div>
 
@@ -142,12 +147,14 @@
                 </span>
 
                 <span style="margin-top: -90px;">
-                    <h1 style="font-size: 18px; font-weight: bolder; margin-right: 20px;">Cantidad:</h1><input name="prodPrecio" type="number" [(ngModel)]="nuevoAdicional.adiCantidad" required min="0"
+                    <h1 style="font-size: 18px; font-weight: bolder; margin-right: 20px;">Cantidad:</h1><input
+                        name="prodPrecio" type="number" [(ngModel)]="nuevoAdicional.adiCantidad" required min="0"
                         style=" width: 140px;">
                 </span>
                 <span style="text-align: justify; font-size: 24px; margin-top: 130px; display: inline-flexbox;">
 
-                    <button style="font-size: 10px; width: 140px; margin-right: 5px;" class="boton1" (click)="agregarAdicional(prod)">
+                    <button style="font-size: 10px; width: 140px; margin-right: 5px;" class="boton1"
+                        (click)="agregarAdicional(prod)">
                         Agregar </button>
                     <button style="font-size: 10px; width: 140px; margin-left: 5px;" class="boton1"
                         (click)="quitarAdiccional(prod.prodId)"> Quitar </button>
