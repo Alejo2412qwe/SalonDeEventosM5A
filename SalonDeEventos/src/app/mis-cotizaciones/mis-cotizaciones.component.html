@@ -13,15 +13,14 @@
     <table class="fl-table">
         <thead>
             <tr>
+                <th>N°</th>
+                <th>FECHA DE REGISTRO</th>
                 <th>TIPO DE EVENTO</th>
-                <!-- <th>FECHA EVENTO</th> -->
                 <th>DESCRIPCION</th>
-                <th>ESTADO</th>
-                <th>MONTO</th>
                 <th>HORA INICIO</th>
                 <th>HORA FIN</th>
+                <th>COSTO</th>
                 <th>SALON</th>
-                <th>USUARIO</th>
                 <th>ACCION</th>
 
             </tr>
@@ -29,19 +28,16 @@
         <tbody>
             <ng-container *ngFor="let cot of cotizaciones">
                 <tr>
+                    <td>{{cot.cotiId}}</td>
+                    <td>{{cot.cotiFechaRegistro | date: 'dd/MM/yyyy' }}</td>
                     <td>{{cot.cotiTipoEvento}}</td>
-                    <!-- <td>{{ cot.cotiFechaEvento | date: 'dd/MM/yyyy' }}</td> -->
                     <td>{{ cot.cotiDescripcion}}</td>
-                    <td>
-                        <span *ngIf="cot.cotiEstado === 1">Aprobado</span>
-                        <span *ngIf="cot.cotiEstado === 0">En espera</span>
-                    </td>
-                    <td>{{ cot.cotiMonto  }}</td>
-                    <td>{{ cot.cotiHoraInicio | date: ' HH:mm:ss' }}</td>
-                    <td>{{ cot.cotiHoraFin | date: ' HH:mm:ss' }}</td>
-                    <td>{{ getSalonName(cot.salId) }}</td>
-                    <td>{{ getUsuarioName(cot.usuId) }}</td>
-                <td><button style="margin-right: 10px;">Aprobar</button><button>Ver detalle</button></td>
+                    <td>{{ cot.cotiHoraInicio}}</td>
+                    <td>{{ cot.cotiHoraFin}}</td>
+                    <td>${{ cot.cotiMonto}}</td>
+                    <td>{{ cot.salId.salNombre }}</td>
+                
+                <td><button [routerLink]="['/cot','detalle',cot.cotiId]">Ver detalle</button></td>
                 </tr>
             </ng-container>
         <tbody>
