@@ -27,4 +27,9 @@ export class CotizacionService {
     buscarId(id: number): Observable<Cotizacion> {
         return this.http.get<Cotizacion>(`${this.url}/buscar/${id}`);
     }
+
+    misCotizacion(id: number): Observable<Cotizacion[]> {
+        return this.http.get(`${this.url}/misCotizacion/${id}`).pipe(map(response => response as Cotizacion[]));
+    }
+
 }
