@@ -14,7 +14,7 @@
         <thead>
             <tr>
                 <th>TIPO DE EVENTO</th>
-                <th>FECHA EVENTO</th>
+                <!-- <th>FECHA EVENTO</th> -->
                 <th>DESCRIPCION</th>
                 <th>ESTADO</th>
                 <th>MONTO</th>
@@ -30,7 +30,7 @@
             <ng-container *ngFor="let cot of cotizaciones">
                 <tr>
                     <td>{{cot.cotiTipoEvento}}</td>
-                    <td>{{ cot.cotiFechaEvento | date: 'dd/MM/yyyy' }}</td>
+                    <!-- <td>{{ cot.cotiFechaEvento | date: 'dd/MM/yyyy' }}</td> -->
                     <td>{{ cot.cotiDescripcion}}</td>
                     <td>
                         <span *ngIf="cot.cotiEstado === 1">Aprobado</span>

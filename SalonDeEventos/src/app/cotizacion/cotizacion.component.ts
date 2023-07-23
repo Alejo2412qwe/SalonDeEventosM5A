@@ -6,6 +6,8 @@ import { Reserva } from '../modelo/reserva';
 import { ImagenService } from '../service/imagen.service';
 import { HttpHeaders, HttpResponse } from '@angular/common/http';
 import { CotizacionService } from '../service/cotizacion.service';
+import { Usuario } from '../modelo/usuario';
+import { Cotizacion } from '../modelo/cotizacion';
 
 @Component({
   selector: 'app-cotizacion',
@@ -15,26 +17,34 @@ import { CotizacionService } from '../service/cotizacion.service';
 export class CotizacionComponent implements OnInit {
 
   imageToShow: any;
+
   reserva: Reserva = new Reserva();
+
   accion: string = "";
 
   fechaRegistro: Date = new Date();
 
   alertaOcupado: string = "";
 
-  zonaHorariaCliente: string;
+  usuario: Usuario = new Usuario();
+
+  cotizacion: Cotizacion = new Cotizacion()
+
+  numReserva: number = 0;
+
+  selectedDate: Date = new Date();
 
   selectedFile: File | null = null;
 
   constructor(private imagenService: ImagenService, private activatedRoute: ActivatedRoute, private cotizacionService: CotizacionService,
-    private reservaService: ReservaService, private toastr: ToastrService, private imageService:ImagenService) {
-    this.zonaHorariaCliente = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    console.log('Zona horaria del cliente:', this.zonaHorariaCliente);
+    private reservaService: ReservaService, private toastr: ToastrService, private imageService: ImagenService) {
+    // this.zonaHorariaCliente = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    // console.log('Zona horaria del cliente:', this.zonaHorariaCliente);
   }
 
   ngOnInit(): void {
     this.cargarAccion();
-    this.obtenerImagen(1);
+    this.obtenerImagen(4);
 
   }
 
@@ -44,7 +54,8 @@ export class CotizacionComponent implements OnInit {
       let id = params['id']
       if (id) {
         this.cotizacionService.buscarId(id).subscribe((cot) => {
-          this.reserva.reCotiId = cot;
+          this.cotizacion = cot;
+
         })
       }
     })
@@ -54,13 +65,14 @@ export class CotizacionComponent implements OnInit {
     this.activatedRoute.params.subscribe(params => {
       this.accion = params['accion']
       console.log(this.accion)
+
       if (this.accion === 'reservar') {
         this.obtenerUsuario();
         this.cargarCoti();
-        // alert("reserva"+this.c)
+
       } else {
         this.cargarReserva();
-        alert("validacion")
+
       }
     })
   }
@@ -71,12 +83,40 @@ export class CotizacionComponent implements OnInit {
       if (id) {
         this.reservaService.buscarId(id).subscribe((res) => {
           this.reserva = res;
-          alert(this.reserva.resFechaEvento)
+          this.usuario = this.reserva.reCotiId.usuId;
+          this.cotizacion = this.reserva.reCotiId
+          this.numReserva = this.reserva.resId;
+          this.selectedDate = this.reserva.resFechaEvento;
+          alert("evento= " + this.selectedDate);
+          console.log("hola= " + this.reserva.reCotiId.usuId.usuPerId.perCedula)
         })
       }
     })
-    
+
   }
+
+  formatDate(date: Date): string {
+    // Formatea la fecha como 'yyyy-MM-dd' para que coincida con el formato del campo de entrada
+    // console.log(date)
+    const nacimiento: Date = new Date(date);
+    const year = nacimiento.getFullYear();
+    const month = ('0' + (nacimiento.getMonth() + 1)).slice(-2);
+    const day = ('0' + nacimiento.getDate()).slice(-2);
+    return `${year}-${month}-${day}`;
+  }
+
+  validarReserva(id:number, est:number):void{
+    this.reservaService.validarReserva(id,est).subscribe(
+      res=>{
+        this.reserva=res;
+      }
+    )
+  }
+
+  // updateDate(event: any): void {
+  //   // Convierte la cadena de fecha del campo de entrada en un objeto Date
+  //   this.selectedDate = new Date(event.target.value);
+  // }
 
 
   obtenerUsuario() {
@@ -86,8 +126,8 @@ export class CotizacionComponent implements OnInit {
     // Verificar si el string existe en el localStorage
     if (userString) {
       const login = JSON.parse(userString);
+      this.usuario = login;
 
-      this.reserva.usuId = login;
     }
 
   }
@@ -119,9 +159,13 @@ export class CotizacionComponent implements OnInit {
   }
 
   crearReserva(): void {
-
+    this.reserva.usuId = this.usuario;
+    this.reserva.reCotiId = this.cotizacion;
     this.reserva.resFechaRegistro = this.fechaRegistro;
+    this.reserva.resFechaEvento = this.selectedDate;
     this.reserva.resEstado = 1; //PENDIENTE
+
+    console.log("EVENTOO= " + this.reserva.resFechaEvento)
 
     if (this.reserva.resImagenRerserva === 0) {
       this.reserva.resComprobante = "Pendiente";
@@ -139,11 +183,13 @@ export class CotizacionComponent implements OnInit {
 
 
     this.reservaService.fechaOcupada(dia, mes, anio).subscribe(ocupado => {
+
+      console.log("dia= " + dia + "mes= " + mes + "anio= " + anio)
       if (!ocupado) {
-        alert("evento= " + this.reserva.resFechaEvento)
+        // alert("evento= " + this.reserva.resFechaEvento)
         this.alertaOcupado = "Fecha disponible"
         this.reservaService.crearReserva(this.reserva).subscribe(res => {
-          alert("reserva en revision")
+          // alert("reserva en revision")
 
 
 

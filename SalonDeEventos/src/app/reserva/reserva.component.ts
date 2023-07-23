@@ -134,8 +134,8 @@ export class ReservaComponent {
 
     this.cotizacion.cotiEstado = 1;
 
-    this.cotizacion.cotiHoraInicio = this.parseTimeToDate(this.selectedTimeIni);
-    this.cotizacion.cotiHoraFin = this.parseTimeToDate(this.selectedTimeFin);
+    this.cotizacion.cotiHoraInicio = this.selectedTimeIni;
+    this.cotizacion.cotiHoraFin = this.selectedTimeFin;
 
     this.cotizacion.cotiFechaRegistro = this.fechaRegistro;
 

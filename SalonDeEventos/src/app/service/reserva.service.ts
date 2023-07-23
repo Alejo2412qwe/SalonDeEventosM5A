@@ -38,6 +38,11 @@ export class ReservaService {
         return this.http.get(`${this.url}/listarEst/${est}`).pipe(map(response => response as Reserva[]));
     }
 
+
+    validarReserva(id: number, estado: number): Observable<Reserva> {
+        return this.http.put<Reserva>(`${this.url}/validarReserva/${id}/${estado}`, null);
+    }
+
     // guardarImagen(imagenBytes: Uint8Array): Observable<string> {
     //     return this.http.post<string>(this.urlImg, imagenBytes);
     // }

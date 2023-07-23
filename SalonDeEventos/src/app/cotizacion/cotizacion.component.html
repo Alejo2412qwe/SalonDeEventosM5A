@@ -26,11 +26,59 @@
 
         <section class="layout">
             <div>
-                <p style="padding-left: 10%; font-weight: bolder;">Cotizacion: # <label for="">COT001</label> </p>
+                <p style="padding-left: 10%; font-weight: bolder;">Reserva N° <label for="">{{numReserva}}</label> </p>
 
                 <p class="fecha"> Fecha de Registro: &nbsp;&nbsp;{{ fechaRegistro | date:'dd/MM/yyyy' }}</p>
             </div>
         </section>
+
+        <!-- <div style="height: 400px;"> -->
+
+        <section class="layout4">
+
+            <div>
+                <p class="heading">Datos Personales</p>
+            </div>
+
+            <div>
+                <p>Cedula:</p>
+            </div>
+            <div>
+                <p class="fecha">{{usuario.usuPerId.perCedula}}</p>
+            </div>
+            <div>
+                <p>Nombre:</p>
+            </div>
+            <div>
+                <p class="fecha">{{usuario.usuPerId.perNombre +" "+usuario.usuPerId.perApellido}}</p>
+            </div>
+            <div>
+                <p>Telefono:</p>
+            </div>
+            <div>
+                <p class="fecha">{{usuario.usuPerId.perTelefono}}</p>
+            </div>
+            <div>
+                <p>Correo Electronico:</p>
+            </div>
+            <div>
+                <p class="fecha">{{usuario.usuPerId.perCorreo}}</p>
+            </div>
+            <div>
+                <p>Salon:</p>
+            </div>
+            <div>
+                <p class="monto">{{cotizacion.salId.salNombre}}</p>
+            </div>
+            <div>
+                <p>Dirección:</p>
+            </div>
+            <div>
+                <p class="fecha">{{cotizacion.salId.salDireccion}}</p>
+            </div>
+
+        </section>
+        <!-- </div> -->
 
         <section class="layout2">
 
@@ -40,20 +88,34 @@
                     </label>
                 </div>
                 <div class="datos">
-                    <input type="date" name="resFechaEvento" [(ngModel)]="reserva.resFechaEvento"
-                        placeholder="Fecha del Evento" required id="dia"
-                        style=" background-color:#f4e6cd; height: 50px; width: 324px; font-weight: bolder; padding-left: 35px;border: none; border-bottom: 2px solid rgba(0, 0, 0, 0.2);   box-shadow: 3px 3px #cecccc;">
+                    <!-- <input type="date" name="resFechaEvento" [ngModel]="formatDate(reserva.resFechaEvento)"
+                        (ngModelChange)="updateDate($event)" placeholder="Fecha del Evento" required id="dia"
+                        style=" background-color:#f4e6cd; height: 50px; width: 324px; font-weight: bolder; padding-left: 35px;border: none; border-bottom: 2px solid rgba(0, 0, 0, 0.2);   box-shadow: 3px 3px #cecccc;"> -->
+
+                    <div class="input-box" *ngIf="accion ==='validar'">
+                        <input type="date" style="color: #75758B;" name="resFechaEvento" [ngModel]="formatDate(selectedDate)"
+                            placeholder="Fecha de nacimiento" required
+                            style=" background-color:#f4e6cd; height: 50px; width: 324px; font-weight: bolder; padding-left: 35px;border: none; border-bottom: 2px solid rgba(0, 0, 0, 0.2);   box-shadow: 3px 3px #cecccc;">
+                    </div>
 
 
+                    <div class="input-box" *ngIf="accion ==='reservar'">
+                        <input type="date" style="color: #75758B;" name="resFechaEvento" [(ngModel)]="selectedDate"
+                            placeholder="Fecha de nacimiento" required
+                            style=" background-color:#f4e6cd; height: 50px; width: 324px; font-weight: bolder; padding-left: 35px;border: none; border-bottom: 2px solid rgba(0, 0, 0, 0.2);   box-shadow: 3px 3px #cecccc;">
+                    </div>
                     <p>{{alertaOcupado}}</p>
+
                 </div>
+
+
             </div>
 
 
         </section>
-        <p style="text-align: center;">Deseas confirmar tu reserva? </p>
-        
-        <div>
+        <p style="text-align: center;">Deseas confirmar reserva </p>
+
+        <div [hidden]="accion !== 'reservar'">
             <h2>Subir Imagen</h2>
             <input type="file" (change)="onFileSelected($event)" accept="image/*">
             <button (click)="uploadImage()">Subir Imagen</button>
@@ -76,7 +138,7 @@
 
             <div style="text-align: center;">
 
-                <div class="buttons" style="margin-top: 20px;">
+                <div class="buttons" style="margin-top: 20px;" [hidden]="accion !== 'reservar'">
 
                     <button class="btn"><span></span>
                         <p data-start="good luck!" data-text="CANCELAR!" data-title="CANCELAR"></p>
@@ -89,7 +151,7 @@
         <section class="layout5">
             <div class="foto" style="border: 1px solid;"></div>
 
-            <div class="foto" style="border: 1px solid;"></div>
+            <div class="foto" style="border: 1px solid;" [hidden]="accion !== 'reservar'"></div>
         </section>
     </section>
     <div class="container4" [hidden]="accion !== 'validar'">
@@ -97,18 +159,18 @@
 
         <div>
 
-            <h1 style="margin-bottom: 20px;">Resultados</h1>
+            <h1 style="margin-bottom: 20px;">COMPROBANTE DE PAGO</h1>
         </div>
         <img [src]="imageToShow" *ngIf="imageToShow" alt="Imagen" class="image-container">
 
         <div>
-            <h1 style="margin-top: 40px;">¿Que deseas hacer con esta cotizaion?</h1>
+            <h1 style="margin-top: 40px;">¿Que deseas hacer con esta reserva?</h1>
         </div>
 
         <section class="layouthor">
-            <div><button class="boton1">En espera</button></div>
-            <div><button class="boton2">Descartar</button></div>
-            <div><button class="boton3">Aceptar</button></div>
+            <div><button class="boton1" (click)="validarReserva(reserva.resId,1)">En espera</button></div>
+            <div><button class="boton3" (click)="validarReserva(reserva.resId,0)">Descartar</button></div>
+            <div><button class="boton2"(click)="validarReserva(reserva.resId,2)">Aceptar</button></div>
 
         </section>
 

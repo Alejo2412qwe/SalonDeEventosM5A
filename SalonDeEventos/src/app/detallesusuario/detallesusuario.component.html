@@ -50,6 +50,7 @@
                         [ngModel]="formatDate(persona.perFechaNacimiento)" (ngModelChange)="updateDate($event)"
                         placeholder="Fecha de nacimiento" required>
                 </div>
+                
                 <div class="input-box" *ngIf="accion ==='registrar'">
                     <i class="fas fa-calendar"></i>
                     <input type="date" style="color: #75758B;" name="perFechaNacimiento" [(ngModel)]="persona.perFechaNacimiento"
