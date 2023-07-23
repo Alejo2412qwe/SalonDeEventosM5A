@@ -10,6 +10,8 @@ import { EmpresaService } from '../service/empresa.service';
 import { UploadFileService } from '../service/uploadFile.service';
 import { FileModel } from '../modelo/fileModel';
 import { ImgSalon } from '../modelo/imgSalon';
+import { ImgProductoService } from '../service/imgProducto.service';
+import { ImgProducto } from '../modelo/imgProducto';
 
 
 
@@ -22,7 +24,7 @@ export class SalonComponent {
 
   constructor(private salonService: SalonService, private EmpresaService: EmpresaService,
     private router: Router, private toastr: ToastrService, private imgSalonService: ImgSalonService,
-    private activatedRoute: ActivatedRoute, private fileService: UploadFileService) { }
+    private activatedRoute: ActivatedRoute, private fileService: UploadFileService, private proimagen: ImgProductoService) { }
 
   accion: string = "";
   seleccionados: Empresa = new Empresa;
@@ -30,6 +32,7 @@ export class SalonComponent {
   empresa: Empresa = new Empresa();
   selectedFiles: File[] = [];
   filePreviews: string[] = [];
+  images: ImgProducto[] = [];
 
   
 
@@ -185,5 +188,7 @@ export class SalonComponent {
       }
     );
   }
+
+
 
 }

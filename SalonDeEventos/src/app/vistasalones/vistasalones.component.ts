@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Salon } from '../modelo/salon';
 import { SalonService } from '../service/salon.service';
+import { ImgSalon } from '../modelo/imgSalon';
+import { ImgSalonService } from '../service/imgSalon.service';
 
 @Component({
   selector: 'app-vistasalones',
@@ -9,15 +11,16 @@ import { SalonService } from '../service/salon.service';
 })
 export class VistasalonesComponent implements OnInit {
 
-  constructor(private salservice: SalonService) {
+  constructor(private salservice: SalonService, private salimagen: ImgSalonService) {
 
   }
 
   salones: Salon[] = [];
+  images: ImgSalon[] = [];
 
   ngOnInit(): void {
     this.listarSalones();
-  
+    this.imgsSalon();
   }
 
   listarSalones(): void {
@@ -32,4 +35,29 @@ export class VistasalonesComponent implements OnInit {
     );
   }
 
+  imgsSalon(): void {
+    this.salimagen.imgsProd().subscribe(
+      img => {
+        this.images = img;
+      }
+    )
+  }
+
+  ObtenerFoto(id: number): string {
+
+    let url: string = "";
+
+    for (let img of this.images) {
+
+      if (img.imgSalId == id) {
+
+        url = img.imgSalUrl
+
+        break;
+      }
+
+    }
+
+    return url;
+  }
 }

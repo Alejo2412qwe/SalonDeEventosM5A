@@ -22,4 +22,8 @@ export class ImgSalonService {
     return this.http.get(`${this.url}/urls/${prod}`).pipe(map(response => response as ImgSalon[]));
   }
 
+  imgsProd(): Observable<ImgSalon[]> {
+    return this.http.get(`${this.url}/listar`).pipe(map(response => response as ImgSalon[]));
+  }
+
 }
