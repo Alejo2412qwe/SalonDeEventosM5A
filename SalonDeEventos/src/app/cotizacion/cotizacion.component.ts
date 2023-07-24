@@ -40,9 +40,8 @@ export class CotizacionComponent implements OnInit {
   selectedFile: File | null = null;
 
   constructor(private imagenService: ImagenService, private activatedRoute: ActivatedRoute, private cotizacionService: CotizacionService,
-    private reservaService: ReservaService, private toastr: ToastrService, private imageService: ImagenService, private fileService: UploadFileService) {
-    // this.zonaHorariaCliente = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    // console.log('Zona horaria del cliente:', this.zonaHorariaCliente);
+    private reservaService: ReservaService, private toastr: ToastrService, private imageService: ImagenService, private fileService: UploadFileService,
+    private router: Router) {
   }
 
   ngOnInit(): void {
@@ -89,7 +88,6 @@ export class CotizacionComponent implements OnInit {
           this.cotizacion = this.reserva.reCotiId
           this.numReserva = this.reserva.resId;
           this.selectedDate = this.reserva.resFechaEvento;
-          console.log("hola= " + this.reserva.reCotiId.usuId.usuPerId.perCedula)
         })
       }
     })
@@ -97,8 +95,6 @@ export class CotizacionComponent implements OnInit {
   }
 
   formatDate(date: Date): string {
-    // Formatea la fecha como 'yyyy-MM-dd' para que coincida con el formato del campo de entrada
-    // console.log(date)
     const nacimiento: Date = new Date(date);
     const year = nacimiento.getFullYear();
     const month = ('0' + (nacimiento.getMonth() + 1)).slice(-2);
@@ -183,7 +179,7 @@ export class CotizacionComponent implements OnInit {
       if (!ocupado) {
         this.alertaOcupado = "Fecha disponible"
 
-        if (this.selectedFiles && this.selectedFiles.length > 0 ) {
+        if (this.selectedFiles && this.selectedFiles.length > 0) {
           this.fileService.uploadFiles(this.selectedFiles).subscribe(
             (response: FileModel[]) => {
 
@@ -196,12 +192,32 @@ export class CotizacionComponent implements OnInit {
                 this.fileService.getFileName(name).subscribe(fileName => {
                   this.reserva.resComprobante = fileName.url;
 
-                  console.log("URL= "+fileName.url)
+                  console.log("URL= " + fileName.url)
 
                   this.reservaService.crearReserva(this.reserva).subscribe(res => {
 
 
+                    Swal.fire({
+                      title: `¿Desea continuar con la reserva?`,
+                      showDenyButton: true,
+                      showCancelButton: false,
+                      confirmButtonText: 'Estas seguro que desear ',
+                      denyButtonText: 'Quizás más tarde',
+                      customClass: {
+                        actions: 'my-actions',
+                        cancelButton: 'order-1 right-gap',
+                        confirmButton: 'order-2',
+                        denyButton: 'order-3',
+                      }
+                    }).then((result) => {
+                      if (result.isConfirmed) {
+                        Swal.fire('Su reserva se envió con éxito', 'Se encuentra en proceso de verificación, puede consultar el estado del proceso en su perfil.', 'success')
+                        this.router.navigate(["menu"]);
 
+                      } else if (result.isDenied) {
+
+                      }
+                    })
                   })
                 });
 
@@ -218,8 +234,27 @@ export class CotizacionComponent implements OnInit {
           );
         } else {
           this.reservaService.crearReserva(this.reserva).subscribe(res => {
+            Swal.fire({
+              title: `Recuerde revisar los datos de su reserva, una vez enviado no se podrá cambiar.`,
+              showDenyButton: true,
+              showCancelButton: false,
+              confirmButtonText: 'Enviar',
+              denyButtonText: 'Revisar',
+              customClass: {
+                actions: 'my-actions',
+                cancelButton: 'order-1 right-gap',
+                confirmButton: 'order-2',
+                denyButton: 'order-3',
+              }
+            }).then((result) => {
+              if (result.isConfirmed) {
+                Swal.fire('Su reserva se envió con éxito', 'Se encuentra en proceso de verificación, puede consultar el estado del proceso en su perfil.', 'success')
+                this.router.navigate(["menu"]);
 
+              } else if (result.isDenied) {
 
+              }
+            })
 
           })
         }

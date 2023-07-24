@@ -182,7 +182,7 @@ export class ReservaComponent {
             title: `¿Desea continuar con la reserva?`,
             showDenyButton: true,
             showCancelButton: false,
-            confirmButtonText: 'Sí',
+            confirmButtonText: 'Sí, quiero reservar.',
             denyButtonText: 'Quizás más tarde',
             customClass: {
               actions: 'my-actions',
@@ -195,7 +195,8 @@ export class ReservaComponent {
               this.router.navigate(["cot", "reservar", coti.cotiId]);
 
             } else if (result.isDenied) {
-              Swal.fire('Cotización registrada con éxito', '', 'success')
+              Swal.fire('Cotización registrada con éxito.', 'Puedes consultarla en tu perfil.', 'success')
+              this.router.navigate(["menu"]);
             }
           })
         }
