@@ -19,7 +19,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./cotizacion.component.scss']
 })
 export class CotizacionComponent implements OnInit {
-//reserva :c
+  //reserva :c
   imageToShow: any;
 
   reserva: Reserva = new Reserva();
@@ -41,7 +41,7 @@ export class CotizacionComponent implements OnInit {
   selectedFile: File | null = null;
 
   constructor(private imagenService: ImagenService, private activatedRoute: ActivatedRoute, private cotizacionService: CotizacionService,
-    private reservaService: ReservaService, private toastr: ToastrService, private imageService: ImagenService, 
+    private reservaService: ReservaService, private toastr: ToastrService, private imageService: ImagenService,
     private fileService: UploadFileService,
     private router: Router) {
   }
@@ -109,7 +109,7 @@ export class CotizacionComponent implements OnInit {
       res => {
         this.reserva = res;
 
-      
+
         Swal.fire({
           title: `¿Está seguro de cambiar el estado de la reserva?`,
           showDenyButton: true,
@@ -259,36 +259,32 @@ export class CotizacionComponent implements OnInit {
             }
           );
         } else {
-          this.reservaService.crearReserva(this.reserva).subscribe(res => {
-            Swal.fire({
-              title: `Recuerde revisar los datos de su reserva, una vez enviado no se podrá cambiar.`,
-              showDenyButton: true,
-              showCancelButton: false,
-              confirmButtonText: 'Enviar',
-              denyButtonText: 'Revisar',
-              customClass: {
-                actions: 'my-actions',
-                cancelButton: 'order-1 right-gap',
-                confirmButton: 'order-2',
-                denyButton: 'order-3',
-              }
-            }).then((result) => {
-              if (result.isConfirmed) {
-                Swal.fire('Su reserva se envió con éxito', 'Se encuentra en proceso de verificación, puede consultar el estado del proceso en su perfil.', 'success')
-                this.router.navigate(["menu"]);
 
-              } else if (result.isDenied) {
+          Swal.fire({
+            title: `Recuerde revisar los datos de su reserva, una vez enviado no se podrá cambiar.`,
+            showDenyButton: true,
+            showCancelButton: false,
+            confirmButtonText: 'Enviar',
+            denyButtonText: 'Revisar',
+            customClass: {
+              actions: 'my-actions',
+              cancelButton: 'order-1 right-gap',
+              confirmButton: 'order-2',
+              denyButton: 'order-3',
+            }
+          }).then((result) => {
+            if (result.isConfirmed) {
+              this.reservaService.crearReserva(this.reserva).subscribe(res => {
+              })
+              Swal.fire('Su reserva se envió con éxito', 'Se encuentra en proceso de verificación, puede consultar el estado del proceso en su perfil.', 'success')
+              this.router.navigate(["menu"]);
 
-              }
-            })
+            } else if (result.isDenied) {
 
+            }
           })
+
         }
-
-
-
-
-
 
       } else {
         this.alertaOcupado = "Fecha no disponible"
