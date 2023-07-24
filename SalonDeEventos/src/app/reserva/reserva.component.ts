@@ -172,7 +172,7 @@ export class ReservaComponent {
     this.cotizacion.cotiHoraFin = this.selectedTimeFin;
 
     this.cotizacion.cotiFechaRegistro = this.fechaRegistro;
-
+    console.log(JSON.stringify(this.cotizacion));
 
     this.cotizacionService.crearCotizacion(this.cotizacion).subscribe(
       coti => {

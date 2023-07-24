@@ -54,11 +54,11 @@
 
                         <button class="boton1" style="font-size: 12px;" (click)="crearCotizacion()"
                             [hidden]="accion !== 'cotizar'">
-                            Crear una cotización</button>
+                            Guardar Cotizacion</button>
 
-                        <button class="boton1" style="font-size: 12px;"
-                            [routerLink]="['/cot','reservar',cotizacion.cotiId]" [hidden]="accion !== 'mireserva'">
-                            Crear una cotización</button>
+                        <button class="boton1" style="font-size: 12px;" (click)="crearCotizacion()"
+                            [routerLink]="['/cot','reservar',cotizacion.cotiId]" [hidden]="accion !== 'micotizacion'">
+                            Reservar</button>
 
                     </div>
 
