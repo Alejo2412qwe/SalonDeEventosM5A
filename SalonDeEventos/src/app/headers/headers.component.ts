@@ -1,26 +1,34 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ElementRef, Renderer2 } from '@angular/core';
 
 @Component({
   selector: 'app-headers',
   templateUrl: './headers.component.html',
   styleUrls: ['./headers.component.css']
 })
-export class HeadersComponent {
+export class HeadersComponent implements OnInit {
+
+  constructor(private renderer: Renderer2, private el: ElementRef) { }
+  ngOnInit(): void {
+    this.obtenervacio();
+  }
+
   cerrarSesion(): void {
     localStorage.removeItem('userData');
 
-    this.obtenerUsuario();
+
   }
 
-  obtenerUsuario(): void {
+  obtenervacio(): void {
     const userString = localStorage.getItem('userData');
 
-    if (userString !== null) {
+    if (userString === null) {
 
-      alert(JSON.parse(userString))
-
+      const ventanaFlotante = this.el.nativeElement.querySelector('.boton1');
+      this.renderer.setStyle(ventanaFlotante, 'display', 'none');
     } else {
-      console.error('No hay datos de usuario en el Local Storage');
+      const ventanaFlotante = this.el.nativeElement.querySelector('.boton2');
+      this.renderer.setStyle(ventanaFlotante, 'display', 'none');
 
     }
   }

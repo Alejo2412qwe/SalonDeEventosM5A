@@ -36,7 +36,7 @@ export class ListaproductosComponent implements OnInit {
 
   openCrearCate() {
     Swal.fire({
-      title: 'Agregar Categoria',
+      title: 'Agregar Categoría',
       html:
         '<input id="swal-input1" class="swal2-input" placeholder="Nombre">',
       showCancelButton: true,
@@ -57,7 +57,7 @@ export class ListaproductosComponent implements OnInit {
         Swal.fire({
           position: 'center',
           icon: 'success',
-          title: 'Categoria registrada exitosamente',
+          title: 'Categoría registrada exitosamente',
           showConfirmButton: true,
         });
         this.cargarCategorias()

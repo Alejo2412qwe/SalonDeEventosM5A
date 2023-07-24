@@ -18,6 +18,7 @@
 
     <section style="margin-top: 50px;" class="layout2">
         <ng-container *ngFor="let sal of salones">
+            <ng-container *ngIf = "sal.salEstado ==1">
 
             <div class="card2">
                 <div style="width: 100%; " class="icon">
@@ -40,7 +41,8 @@
                 </span>
 
             </div>
-            
+        </ng-container>
+
         </ng-container>
 
     </section>
