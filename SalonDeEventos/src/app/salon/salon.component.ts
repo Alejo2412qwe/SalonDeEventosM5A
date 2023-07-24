@@ -34,91 +34,93 @@ export class SalonComponent {
   filePreviews: string[] = [];
   images: ImgProducto[] = [];
 
-  
+
 
   ngOnInit(): void {
     this.cargarAccion()
   }
 
   registrarSalon(): void {
-    if (this.accion === 'registrar') {
-      this.salon.salEstado = 1;
-    }
+    if (this.validarSalon()) {
+      if (this.accion === 'registrar') {
+        this.salon.salEstado = 1;
+      }
 
-    let imgSalon: ImgSalon[] = [];
+      let imgSalon: ImgSalon[] = [];
 
-    this.EmpresaService.getEmpresaPorId(1).subscribe(emp => {
+      this.EmpresaService.getEmpresaPorId(1).subscribe(emp => {
 
-      this.salon.empId = emp;
-      this.salonService.crearSalon(this.salon).subscribe(
-        salonNew => {
+        this.salon.empId = emp;
+        this.salonService.crearSalon(this.salon).subscribe(
+          salonNew => {
 
-          this.fileService.uploadFiles(this.selectedFiles).subscribe(
-            (response: FileModel[]) => {
+            this.fileService.uploadFiles(this.selectedFiles).subscribe(
+              (response: FileModel[]) => {
 
 
-              for (let file of response) {
-                let sal: ImgSalon = new ImgSalon();
-                sal.imgSalNombre = file.name;
-                // prod.imgProdUrl = file.url;
+                for (let file of response) {
+                  let sal: ImgSalon = new ImgSalon();
+                  sal.imgSalNombre = file.name;
+                  // prod.imgProdUrl = file.url;
 
-                this.fileService.getFileName(sal.imgSalNombre).subscribe(fileName => {
-                  sal.imgSalUrl = fileName.url;
-                  sal.salId = salonNew;
-                  // console.log("idprod= " + sal.prodId.prodId);
-                  // console.log("nombre= " + prod.imgProdNombre);
-                  // console.log("URL= " + prod.imgProdUrl);
-                  imgSalon.push(sal)
-                  console.log("=============================")
-                  this.imgSalonService.agregarIMG(sal).subscribe(img => {
-                    // console.log("idprod= " + img?.prodId?.prodId);
-                    // console.log("nombre= " + img?.imgProdNombre);
-                    // console.log("URL= " + img?.imgProdUrl);
+                  this.fileService.getFileName(sal.imgSalNombre).subscribe(fileName => {
+                    sal.imgSalUrl = fileName.url;
+                    sal.salId = salonNew;
+                    // console.log("idprod= " + sal.prodId.prodId);
+                    // console.log("nombre= " + prod.imgProdNombre);
+                    // console.log("URL= " + prod.imgProdUrl);
+                    imgSalon.push(sal)
+                    console.log("=============================")
+                    this.imgSalonService.agregarIMG(sal).subscribe(img => {
+                      // console.log("idprod= " + img?.prodId?.prodId);
+                      // console.log("nombre= " + img?.imgProdNombre);
+                      // console.log("URL= " + img?.imgProdUrl);
+                    });
                   });
+
+
+                  // this.imgProductoService.agregarIMG(prod).subscribe(img => {
+
+                  // });
+
+                }
+                for (let file of response) {
+
+
+                }
+
+                console.log('Archivos subidos correctamente:', response);
+
+                // Realiza las operaciones necesarias con los archivos subidos
+                // ...
+                Swal.fire({
+                  position: 'center',
+                  icon: 'success',
+                  title: 'Registro exitoso',
+                  showConfirmButton: true
+                }).then(() => {
+                  location.reload();
                 });
-
-
-                // this.imgProductoService.agregarIMG(prod).subscribe(img => {
-
-                // });
-
+              },
+              (error: any) => {
+                console.error('Error al subir los archivos:', error);
+                // Maneja el error adecuadamente
+                // ...
               }
-              for (let file of response) {
+            );
 
 
-              }
-
-              console.log('Archivos subidos correctamente:', response);
-
-              // Realiza las operaciones necesarias con los archivos subidos
-              // ...
-              Swal.fire({
-                position: 'center',
-                icon: 'success',
-                title: 'Registro exitoso',
-                showConfirmButton: true
-              }).then(() => {
-                location.reload();
-              });
-            },
-            (error: any) => {
-              console.error('Error al subir los archivos:', error);
-              // Maneja el error adecuadamente
-              // ...
-            }
-          );
-
-
-          Swal.fire({
-            position: 'center',
-            icon: 'success',
-            title: 'Registro exitoso',
-            showConfirmButton: true
-          }).then(() => {
-            location.reload();
+            Swal.fire({
+              position: 'center',
+              icon: 'success',
+              title: 'Registro exitoso',
+              showConfirmButton: true
+            }).then(() => {
+              location.reload();
+            })
           })
-        })
-    })
+      })
+    }
   }
 
   cargarSalon(): void {
@@ -189,6 +191,54 @@ export class SalonComponent {
     );
   }
 
+  validarSalon(): boolean {
+    let tiempo: number = 4000;
 
+    let ban: boolean = true;
+
+    if (this.salon.salNombre.length === 0) {
+      this.toastr.error('Debe ingresar un nombre para el salón', '', {
+        timeOut: tiempo
+      });
+      ban = false;
+    }
+
+    if (this.salon.salLongitud === 0) {
+      this.toastr.error('Debe ingresar una longitud', '', {
+        timeOut: tiempo
+      });
+      ban = false;
+    }
+
+    if (this.salon.salLatitud === 0) {
+      this.toastr.error('Debe ingresar una latitud', '', {
+        timeOut: tiempo
+      });
+      ban = false;
+    }
+
+    if (this.salon.salDireccion.length === 0) {
+      this.toastr.error('Debe ingresar una direccion', '', {
+        timeOut: tiempo
+      });
+      ban = false;
+    }
+
+    if (this.salon.salCapacidad === 0) {
+      this.toastr.error('Debe ingresar una capacidad', '', {
+        timeOut: tiempo
+      });
+      ban = false;
+    }
+
+    if (this.salon.salCostoHora === 0) {
+      this.toastr.error('Debe ingresar un costo de hora valido', '', {
+        timeOut: tiempo
+      });
+      ban = false;
+    }
+
+    return ban;
+  }
 
 }

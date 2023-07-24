@@ -75,7 +75,7 @@ export class ReservaComponent {
           this.cotizacionService.buscarId(id).subscribe(cot => {
             this.cotizacion = cot;
             this.selectedTimeIni = cot.cotiHoraInicio;
-            this.selectedTimeFin= cot.cotiHoraFin;
+            this.selectedTimeFin = cot.cotiHoraFin;
           })
 
         } else {
@@ -165,40 +165,52 @@ export class ReservaComponent {
   }
 
   crearCotizacion(): void {
+    if (this.validarCotizacion()) {
 
-    this.cotizacion.cotiEstado = 1;
+      this.cotizacion.cotiEstado = 1;
 
-    this.cotizacion.cotiHoraInicio = this.selectedTimeIni;
-    this.cotizacion.cotiHoraFin = this.selectedTimeFin;
+      this.cotizacion.cotiHoraInicio = this.selectedTimeIni;
+      this.cotizacion.cotiHoraFin = this.selectedTimeFin;
 
-    this.cotizacion.cotiFechaRegistro = this.fechaRegistro;
-    console.log(JSON.stringify(this.cotizacion));
+      this.cotizacion.cotiFechaRegistro = this.fechaRegistro;
+      console.log(JSON.stringify(this.cotizacion));
 
-    this.cotizacionService.crearCotizacion(this.cotizacion).subscribe(
-      coti => {
-        this.crearAdicionales(coti);
-        Swal.fire({
-          title: `¿Desea continuar con la reserva?`,
-          showDenyButton: true,
-          showCancelButton: false,
-          confirmButtonText: 'Si',
-          denyButtonText: 'Quizas mas tarde',
-          customClass: {
-            actions: 'my-actions',
-            cancelButton: 'order-1 right-gap',
-            confirmButton: 'order-2',
-            denyButton: 'order-3',
-          }
-        }).then((result) => {
-          if (result.isConfirmed) {
-            this.router.navigate(["cot", "reservar", coti.cotiId]);
+      this.cotizacionService.crearCotizacion(this.cotizacion).subscribe(
+        coti => {
+          this.crearAdicionales(coti);
+          Swal.fire({
+            title: `¿Desea continuar con la reserva?`,
+            showDenyButton: true,
+            showCancelButton: false,
+            confirmButtonText: 'Sí',
+            denyButtonText: 'Quizás más tarde',
+            customClass: {
+              actions: 'my-actions',
+              cancelButton: 'order-1 right-gap',
+              confirmButton: 'order-2',
+              denyButton: 'order-3',
+            }
+          }).then((result) => {
+            if (result.isConfirmed) {
+              this.router.navigate(["cot", "reservar", coti.cotiId]);
 
-          } else if (result.isDenied) {
-            Swal.fire('Cotizacion registrada con exito', '', 'success')
-          }
-        })
-      }
-    );
+            } else if (result.isDenied) {
+              Swal.fire('Cotización registrada con éxito', '', 'success')
+            }
+          })
+        }
+      );
+    }
+  };
+
+  validarCotizacion(): boolean {
+    if (!this.cotizacion.cotiTipoEvento || !this.cotizacion.cotiDescripcion || !this.selectedTimeIni || !this.selectedTimeFin) {
+      return false;
+    }
+    if (!this.usuario.usuPerId || !this.usuario.usuPerId.perCedula || !this.usuario.usuPerId.perNombre || !this.usuario.usuPerId.perTelefono || !this.usuario.usuPerId.perCorreo) {
+      return false;
+    }
+    return true;
   }
 
   crearAdicionales(cot: Cotizacion): void {

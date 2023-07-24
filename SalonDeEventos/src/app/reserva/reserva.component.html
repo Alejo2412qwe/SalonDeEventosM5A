@@ -39,11 +39,15 @@
                             placeholder="Ingresa los detalles" required>
                     </div>
                     <div class="inputContainer">
+                        
+                        <h1 style="font-size: 16px;">Hora de inicio:</h1>
                         <input type="time" name="HoraInicio" placeholder="Hora de Inicio" required step="900"
                             [(ngModel)]="selectedTimeIni" (ngModelChange)="calcularMonto()">
                     </div>
 
                     <div class="inputContainer">
+                        <h1 style="font-size: 16px;">Hora de fin:</h1>
+
                         <input type="time" name="HoraFin" placeholder="Hora de Fin" required step="900"
                             [(ngModel)]="selectedTimeFin" (ngModelChange)="calcularMonto()">
                     </div>
@@ -54,7 +58,7 @@
 
                         <button class="boton1" style="font-size: 12px;" (click)="crearCotizacion()"
                             [hidden]="accion !== 'cotizar'">
-                            Guardar Cotizacion</button>
+                            Guardar Cotización</button>
 
                         <button class="boton1" style="font-size: 12px;" (click)="crearCotizacion()"
                             [routerLink]="['/cot','reservar',cotizacion.cotiId]" [hidden]="accion !== 'micotizacion'">
@@ -98,13 +102,13 @@
                     <p class="fecha">{{usuario.usuPerId.perNombre}}</p>
                 </div>
                 <div>
-                    <p>Telefono:</p>
+                    <p>Teléfono:</p>
                 </div>
                 <div>
                     <p class="fecha">{{usuario.usuPerId.perTelefono}}</p>
                 </div>
                 <div>
-                    <p>Correo Electronico:</p>
+                    <p>Correo Electrónico:</p>
                 </div>
                 <div>
                     <p class="fecha">{{usuario.usuPerId.perCorreo}}</p>
@@ -138,7 +142,7 @@
                     <th>NOMBRE DEL PRODUCTO</th>
                     <th>COSTO</th>
                     <th>CANTIDAD</th>
-                    <th>ACCION</th>
+                    <th>ACCIÓN</th>
 
                 </tr>
             </thead>
@@ -166,14 +170,12 @@
                     <h3 style="margin-top: 20px;">{{prod.prodNombre}}</h3>
 
                 </div>
-                <span
-                    style="text-align: justify; display: block; text-align: center; margin-top: 50px; font-size: 26px;">DETALLES
-                </span>
+
                 <br>
                 <span style="text-align: justify; font-size: 15px; margin-top: -30px;">
                     <br> Precio: {{prod.prodPrecio}}
                     <br> Categoria: {{prod.catId.catNombre}}
-                    <br> Descripcion: {{prod.prodDescripcion}}
+                    <br> Descripción: {{prod.prodDescripcion}}
 
                 </span>
 
