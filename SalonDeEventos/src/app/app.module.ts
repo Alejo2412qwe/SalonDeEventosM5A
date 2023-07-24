@@ -43,7 +43,7 @@ import { MisCotizacionesComponent } from './mis-cotizaciones/mis-cotizaciones.co
 import { MisReservasComponent } from './mis-reservas/mis-reservas.component'
 
 const routes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '', redirectTo: '/menu', pathMatch: 'full' },
   { path: 'login', component: LoginComponent }, 
   { path: 'map', component:  MapComponent},
   { path: 'cot/:accion/:id', component: CotizacionComponent },
