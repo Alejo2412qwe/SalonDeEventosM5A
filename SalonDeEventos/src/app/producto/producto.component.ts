@@ -82,7 +82,7 @@ export class ProductoComponent {
 
     let tipoSELEC: Tipo = new Tipo()
     tipoSELEC.tipId = 0;
-    tipoSELEC.tipNombre = 'Seleccione una categoria';
+    tipoSELEC.tipNombre = 'Seleccione una categoría';
     this.tipos.push(tipoSELEC);
     this.tipoService.getTipos().subscribe(
       tiposArray => {
@@ -97,7 +97,7 @@ export class ProductoComponent {
 
     let categotiaSELEC: Categoria = new Categoria()
     categotiaSELEC.catId = 0;
-    categotiaSELEC.catNombre = 'Seleccione una categoria';
+    categotiaSELEC.catNombre = 'Seleccione una categoría';
     this.categorias.push(categotiaSELEC);
     this.categoriaService.getCategoria().subscribe(
       categoriaArray => {
@@ -277,7 +277,7 @@ export class ProductoComponent {
     }
 
     if (this.categoriaSelect.catNombre.length === 0) {
-      this.toastr.error('Debe elegir una categoria', '', {
+      this.toastr.error('Debe elegir una categoría', '', {
         timeOut: tiempo
       });
       ban = false;
