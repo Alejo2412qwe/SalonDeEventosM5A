@@ -43,8 +43,8 @@ export class ReservaService {
     }
 
 
-    validarReserva(id: number, estado: number, res: Reserva): Observable<Reserva> {
-        return this.http.put<Reserva>(`${this.url}/validarReserva/${id}/${estado}`, res);
+    validarReserva(id: number, estado: number): Observable<Reserva> {
+        return this.http.put<Reserva>(`${this.url}/validarReserva/${id}/${estado}`, null);
     }
 
     // guardarImagen(imagenBytes: Uint8Array): Observable<string> {

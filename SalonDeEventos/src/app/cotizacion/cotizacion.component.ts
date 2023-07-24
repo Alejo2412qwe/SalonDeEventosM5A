@@ -109,7 +109,7 @@ export class CotizacionComponent implements OnInit {
   validarReserva(id: number, est: number): void {
     this.reserva.usuId=this.usuario;
     alert(this.reserva.usuId.usuNombreUsuario+" === "+this.usuario)
-    this.reservaService.validarReserva(id, est,this.reserva).subscribe(
+    this.reservaService.validarReserva(id, est).subscribe(
       res => {
         this.reserva = res;
 

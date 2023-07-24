@@ -165,7 +165,7 @@ export class ReservaComponent {
   }
 
   crearCotizacion(): void {
-
+    alert("coti= " + this.cotizacion.cotiId)
 
     this.cotizacion.cotiEstado = 1;
 
