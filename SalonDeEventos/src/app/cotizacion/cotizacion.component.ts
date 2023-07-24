@@ -1,3 +1,4 @@
+//a//
 import { Component, OnInit } from '@angular/core';
 import { ReservaService } from '../service/reserva.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -336,14 +337,6 @@ export class CotizacionComponent implements OnInit {
     // All fields are valid
     return true;
   }
-
-
-
-
-
-
-
-
 
 
   /////////////////////////////////////////
