@@ -32,6 +32,7 @@ export class HeaderComponent implements OnInit {
 
     }
     this.mostrarboton();
+    this.mostrarboton2();
 
   }
 
@@ -85,17 +86,35 @@ export class HeaderComponent implements OnInit {
   mostrarboton(): void {
     const userString = localStorage.getItem('userData');
 
-    if (this.user.rolId.rolId == 1) {
-      const ventanaFlotante = this.el.nativeElement.querySelector('.boton7');
-      this.renderer.setStyle(ventanaFlotante, 'display', 'flex');
+    if (this.user.rolId.rolId != 1) {
 
-    } else {
       const ventanaFlotante = this.el.nativeElement.querySelector('.boton7');
       this.renderer.setStyle(ventanaFlotante, 'display', 'none');
+    } else {
+
+
+      const ventanaFlotante = this.el.nativeElement.querySelector('.boton7');
+      this.renderer.setStyle(ventanaFlotante, 'display', 'flex');
     }
 
   }
 
+
+  mostrarboton2(): void {
+    const userString = localStorage.getItem('userData');
+
+    if (this.user.rolId.rolId != 2) {
+      const ventanaFlotante = this.el.nativeElement.querySelector('.boton8');
+      this.renderer.setStyle(ventanaFlotante, 'display', 'none');
+
+    } else {
+
+
+      const ventanaFlotante = this.el.nativeElement.querySelector('.boton8');
+      this.renderer.setStyle(ventanaFlotante, 'display', 'flex');
+    }
+
+  }
 
   header(): void {
     const userString = localStorage.getItem('userData');
