@@ -124,7 +124,7 @@ export class CotizacionComponent implements OnInit {
         }).then((result) => {
           if (result.isConfirmed) {
             Swal.fire('Reserva actualizada con exito.', 'success')
-            this.router.navigate(["menu"]);
+            this.router.navigate(["listares"]);
 
 
           } else if (result.isDenied) {
