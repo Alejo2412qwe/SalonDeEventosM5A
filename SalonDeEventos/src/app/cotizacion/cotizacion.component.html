@@ -161,13 +161,16 @@
             </div>
         </section>
         <!-- <section class="layout5"> -->
-            <div class="foto" style="border: 1px solid;"></div>
-            <h1 style="margin-bottom: 20px;">COMPROBANTE DE PAGO</h1>
+        <div class="foto" style="border: 1px solid;"></div>
+        <h1 style="margin-bottom: 20px;">COMPROBANTE DE PAGO</h1>
+        <div style="width: 100%; display: flex; justify-content: center; align-items: center;">
             <img [src]="reserva.resComprobante" alt="Imagen" class="image-container">
-            <div class="foto" style="border: 1px solid;" [hidden]="accion !== 'reservar'"></div>
+        </div>
+        
+        <div class="foto" style="border: 1px solid;" [hidden]="accion !== 'reservar'"></div>
         <!-- </section> -->
     </section>
-    <div class="container4" [hidden]="accion !== 'validar'">
+    <div class="container4" style="width: 100%;" [hidden]="accion !== 'validar'">
 
         <div>
             <h1 style="margin-top: 40px;">¿Que deseas hacer con esta reserva?</h1>
