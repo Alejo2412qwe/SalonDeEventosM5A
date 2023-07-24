@@ -18,7 +18,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./cotizacion.component.scss']
 })
 export class CotizacionComponent implements OnInit {
-
+//reserva :c
   imageToShow: any;
 
   reserva: Reserva = new Reserva();
