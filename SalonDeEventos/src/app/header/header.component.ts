@@ -21,6 +21,13 @@ export class HeaderComponent implements OnInit {
 
   usu: Usuario[] = [];
   ngOnInit(): void {
+    this.obtenerUsuario();
+    this.mostrarboton();
+    this.mostrarboton2();
+
+  }
+
+  obtenerUsuario(): void {
     const userString = localStorage.getItem('userData');
 
     if (userString !== null) {
@@ -31,9 +38,6 @@ export class HeaderComponent implements OnInit {
       console.error('No hay datos de usuario en el Local Storage');
 
     }
-    this.mostrarboton();
-    this.mostrarboton2();
-
   }
 
   getMapUrl(latitud: number, longitud: number): SafeResourceUrl {
