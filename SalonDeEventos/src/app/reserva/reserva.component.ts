@@ -182,7 +182,7 @@ export class ReservaComponent {
             title: `¿Desea continuar con la reserva?`,
             showDenyButton: true,
             showCancelButton: false,
-            confirmButtonText: 'Sí',
+            confirmButtonText: 'Sí, quiero continuar',
             denyButtonText: 'Quizás más tarde',
             customClass: {
               actions: 'my-actions',
