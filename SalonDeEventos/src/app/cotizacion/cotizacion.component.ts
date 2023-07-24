@@ -90,6 +90,7 @@ export class CotizacionComponent implements OnInit {
           this.cotizacion = this.reserva.reCotiId
           this.numReserva = this.reserva.resId;
           this.selectedDate = this.reserva.resFechaEvento;
+          // alert("seect= "+this.selectedDate)
         })
       }
     })
@@ -104,8 +105,11 @@ export class CotizacionComponent implements OnInit {
     return `${year}-${month}-${day}`;
   }
 
+  
   validarReserva(id: number, est: number): void {
-    this.reservaService.validarReserva(id, est).subscribe(
+    this.reserva.usuId=this.usuario;
+    alert(this.reserva.usuId.usuNombreUsuario+" === "+this.usuario)
+    this.reservaService.validarReserva(id, est,this.reserva).subscribe(
       res => {
         this.reserva = res;
 
