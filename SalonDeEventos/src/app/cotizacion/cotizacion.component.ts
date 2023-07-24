@@ -189,40 +189,48 @@ export class CotizacionComponent implements OnInit {
       if (!ocupado) {
         this.alertaOcupado = "Fecha disponible"
 
+        if (this.selectedFile) {
+          this.fileService.uploadFiles(this.selectedFiles).subscribe(
+            (response: FileModel[]) => {
 
 
-        this.fileService.uploadFiles(this.selectedFiles).subscribe(
-          (response: FileModel[]) => {
+              for (let file of response) {
+                let url = "";
+                let name = "";
+                name = file.name;
 
-
-            for (let file of response) {
-              let url = "";
-              let name = "";
-              name = file.name;
-
-              this.fileService.getFileName(name).subscribe(fileName => {
-                this.reserva.resComprobante = fileName.url;
-
-
-
-                this.reservaService.crearReserva(this.reserva).subscribe(res => {
+                this.fileService.getFileName(name).subscribe(fileName => {
+                  this.reserva.resComprobante = fileName.url;
 
 
 
-                })
-              });
+                  this.reservaService.crearReserva(this.reserva).subscribe(res => {
 
+
+
+                  })
+                });
+
+              }
+              console.log('Archivos subidos correctamente:', response);
+
+
+            },
+            (error: any) => {
+              console.error('Error al subir los archivos:', error);
+              // Maneja el error adecuadamente
+              // ...
             }
-            console.log('Archivos subidos correctamente:', response);
+          );
+        } else {
+          this.reservaService.crearReserva(this.reserva).subscribe(res => {
 
 
-          },
-          (error: any) => {
-            console.error('Error al subir los archivos:', error);
-            // Maneja el error adecuadamente
-            // ...
-          }
-        );
+
+          })
+        }
+
+
 
 
 
