@@ -875,9 +875,9 @@ p.fecha {
 }
 
 .image-container {
-  max-width: 100%;
+  max-width: 60%;
   /* La imagen no excederá el 100% del contenedor */
-  max-height: 100%;
+  max-height: 60%;
   /* Altura máxima predefinida */
   object-fit: contain;
   /* La imagen se adapta manteniendo la relación de aspecto */

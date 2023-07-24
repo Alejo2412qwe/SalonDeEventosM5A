@@ -8,6 +8,9 @@ import { HttpHeaders, HttpResponse } from '@angular/common/http';
 import { CotizacionService } from '../service/cotizacion.service';
 import { Usuario } from '../modelo/usuario';
 import { Cotizacion } from '../modelo/cotizacion';
+import { UploadFileService } from '../service/uploadFile.service';
+import { FileModel } from '../modelo/fileModel';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-cotizacion',
@@ -37,14 +40,13 @@ export class CotizacionComponent implements OnInit {
   selectedFile: File | null = null;
 
   constructor(private imagenService: ImagenService, private activatedRoute: ActivatedRoute, private cotizacionService: CotizacionService,
-    private reservaService: ReservaService, private toastr: ToastrService, private imageService: ImagenService) {
+    private reservaService: ReservaService, private toastr: ToastrService, private imageService: ImagenService, private fileService: UploadFileService) {
     // this.zonaHorariaCliente = Intl.DateTimeFormat().resolvedOptions().timeZone;
     // console.log('Zona horaria del cliente:', this.zonaHorariaCliente);
   }
 
   ngOnInit(): void {
     this.cargarAccion();
-    this.obtenerImagen(4);
 
   }
 
@@ -87,7 +89,6 @@ export class CotizacionComponent implements OnInit {
           this.cotizacion = this.reserva.reCotiId
           this.numReserva = this.reserva.resId;
           this.selectedDate = this.reserva.resFechaEvento;
-          alert("evento= " + this.selectedDate);
           console.log("hola= " + this.reserva.reCotiId.usuId.usuPerId.perCedula)
         })
       }
@@ -105,10 +106,10 @@ export class CotizacionComponent implements OnInit {
     return `${year}-${month}-${day}`;
   }
 
-  validarReserva(id:number, est:number):void{
-    this.reservaService.validarReserva(id,est).subscribe(
-      res=>{
-        this.reserva=res;
+  validarReserva(id: number, est: number): void {
+    this.reservaService.validarReserva(id, est).subscribe(
+      res => {
+        this.reserva = res;
       }
     )
   }
@@ -186,14 +187,46 @@ export class CotizacionComponent implements OnInit {
 
       console.log("dia= " + dia + "mes= " + mes + "anio= " + anio)
       if (!ocupado) {
-        // alert("evento= " + this.reserva.resFechaEvento)
         this.alertaOcupado = "Fecha disponible"
-        this.reservaService.crearReserva(this.reserva).subscribe(res => {
-          // alert("reserva en revision")
 
 
 
-        })
+        this.fileService.uploadFiles(this.selectedFiles).subscribe(
+          (response: FileModel[]) => {
+
+
+            for (let file of response) {
+              let url = "";
+              let name = "";
+              name = file.name;
+
+              this.fileService.getFileName(name).subscribe(fileName => {
+                this.reserva.resComprobante = fileName.url;
+
+
+
+                this.reservaService.crearReserva(this.reserva).subscribe(res => {
+
+
+
+                })
+              });
+
+            }
+            console.log('Archivos subidos correctamente:', response);
+
+
+          },
+          (error: any) => {
+            console.error('Error al subir los archivos:', error);
+            // Maneja el error adecuadamente
+            // ...
+          }
+        );
+
+
+
+
       } else {
         this.alertaOcupado = "Fecha no disponible"
         this.toastr.error('La fecha que seleccionaste se encuentra ocupada actualmente', '', {
@@ -228,7 +261,53 @@ export class CotizacionComponent implements OnInit {
 
 
   /////////////////////////////////////////
+  selectedFiles: File[] = [];
+  filePreviews: string[] = [];
 
+  onFileChange(event: any): void {
+    this.selectedFiles = Array.from(event.target.files);
+    this.filePreviews = [];
+    console.log("select= " + this.selectedFiles.length)
+
+    for (const file of this.selectedFiles) {
+      this.getPreviewUrl(file).then((previewUrl) => {
+        this.filePreviews.push(previewUrl);
+        console.log("PREVIEW= " + this.filePreviews.length)
+
+      });
+    }
+  }
+
+  getPreviewUrl(file: File): Promise<string> {
+    return new Promise<string>((resolve, reject) => {
+      const reader = new FileReader();
+
+      reader.onload = (e: any) => {
+        resolve(e.target.result);
+      };
+
+      reader.onerror = (e) => {
+        reject(e);
+      };
+
+      reader.readAsDataURL(file);
+    });
+  }
+
+  uploadFiles(): void {
+    this.fileService.uploadFiles(this.selectedFiles).subscribe(
+      (response: FileModel[]) => {
+        console.log('Archivos subidos correctamente:', response);
+        // Realiza las operaciones necesarias con los archivos subidos
+        // ...
+      },
+      (error: any) => {
+        console.error('Error al subir los archivos:', error);
+        // Maneja el error adecuadamente
+        // ...
+      }
+    );
+  }
 
   obtenerImagen(id: number): void {
     this.imagenService.obtenerImagenPorId(id)

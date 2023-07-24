@@ -216,11 +216,6 @@ export class ProductoComponent {
               // });
 
             }
-            for (let file of response) {
-
-
-            }
-
             console.log('Archivos subidos correctamente:', response);
 
             // Realiza las operaciones necesarias con los archivos subidos

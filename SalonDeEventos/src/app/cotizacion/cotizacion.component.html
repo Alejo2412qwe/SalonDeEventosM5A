@@ -36,7 +36,8 @@
         <section class="layout4">
 
             <div style="width: 100%;">
-                <p style="text-align: center; font-size: 26px; font-weight: bolder;" class="heading">Datos Personales</p>
+                <p style="text-align: center; font-size: 26px; font-weight: bolder;" class="heading">Datos Personales
+                </p>
             </div>
             <div>
                 <p class="fecha"> &nbsp;&nbsp;{{ fechaRegistro | date:'dd/MM/yyyy' }}</p>
@@ -95,8 +96,8 @@
                         style=" background-color:#f4e6cd; height: 50px; width: 324px; font-weight: bolder; padding-left: 35px;border: none; border-bottom: 2px solid rgba(0, 0, 0, 0.2);   box-shadow: 3px 3px #cecccc;"> -->
 
                     <div class="input-box" *ngIf="accion ==='validar'">
-                        <input type="date" style="color: #75758B;" name="resFechaEvento" [ngModel]="formatDate(selectedDate)"
-                            placeholder="Fecha de nacimiento" required
+                        <input type="date" style="color: #75758B;" name="resFechaEvento"
+                            [ngModel]="formatDate(selectedDate)" placeholder="Fecha de nacimiento" required
                             style=" background-color:#f4e6cd; height: 50px; width: 324px; font-weight: bolder; padding-left: 35px;border: none; border-bottom: 2px solid rgba(0, 0, 0, 0.2);   box-shadow: 3px 3px #cecccc;">
                     </div>
 
@@ -119,8 +120,17 @@
 
         <div [hidden]="accion !== 'reservar'">
             <h2>Subir Imagen</h2>
-            <input type="file" (change)="onFileSelected($event)" accept="image/*">
-            <button (click)="uploadImage()">Subir Imagen</button>
+            <input type="file" accept="image/*" (change)="onFileChange($event)" multiple>
+            <section class="layout7">
+                <!-- <ng-container *ngIf="accion ==='registrar'"> -->
+
+                <div class="card" *ngFor="let preview of filePreviews" style="height: 100%; width: 120px;">
+                    <img [src]="preview" alt="Vista previa de imagen" class="card-image" style="margin: inherit;">
+                </div>
+
+
+
+            </section>
 
         </div>
 
@@ -158,12 +168,12 @@
     </section>
     <div class="container4" [hidden]="accion !== 'validar'">
 
-
         <div>
 
             <h1 style="margin-bottom: 20px;">COMPROBANTE DE PAGO</h1>
+            <img [src]="reserva.resComprobante" alt="Imagen" class="image-container">
+
         </div>
-        <img [src]="imageToShow" *ngIf="imageToShow" alt="Imagen" class="image-container">
 
         <div>
             <h1 style="margin-top: 40px;">¿Que deseas hacer con esta reserva?</h1>
@@ -172,7 +182,7 @@
         <section class="layouthor">
             <div><button class="boton1" (click)="validarReserva(reserva.resId,1)">En espera</button></div>
             <div><button class="boton3" (click)="validarReserva(reserva.resId,0)">Descartar</button></div>
-            <div><button class="boton2"(click)="validarReserva(reserva.resId,2)">Aceptar</button></div>
+            <div><button class="boton2" (click)="validarReserva(reserva.resId,2)">Aceptar</button></div>
 
         </section>
 
