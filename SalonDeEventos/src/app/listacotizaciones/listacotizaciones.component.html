@@ -19,6 +19,7 @@
                 <th>FECHA INICIO</th>
                 <th>FECHA FIN</th>
                 <th>SALON SELECCIONADO</th>
+                <th>ACCIÓN</th>
 
             </tr>
         </thead>
@@ -31,6 +32,7 @@
                     <td>{{cot.cotiHoraInicio}}</td>
                     <td>{{cot.cotiHoraFin}}</td>
                     <td>{{cot.salId.salNombre}}</td>
+                    <td><button [routerLink]="['/res','micotizacion',cot.cotiId]">Ver detalle</button></td>
 
                 </tr>
             </ng-container>
