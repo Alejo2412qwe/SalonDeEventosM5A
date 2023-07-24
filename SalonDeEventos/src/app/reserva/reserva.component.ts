@@ -12,8 +12,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { SalonService } from '../service/salon.service';
 import { AdicionalesService } from '../service/adicionales.service';
 import Swal from 'sweetalert2';
-import { ToastrService } from 'ngx-toastr';
 import { ImgProducto } from '../modelo/imgProducto';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-reserva',
@@ -41,7 +41,7 @@ export class ReservaComponent {
     private categoriaService: CategoriaService, private changeDetectorRef: ChangeDetectorRef,
     private cotizacionService: CotizacionService, private activatedRoute: ActivatedRoute,
     private salservice: SalonService, private adicionalesService: AdicionalesService,
-    private router: Router, private imgProd: ImgProductoService) {
+    private router: Router, private imgProd: ImgProductoService, private toastr: ToastrService,) {
   }
 
   ngOnInit(): void {
@@ -165,16 +165,16 @@ export class ReservaComponent {
   }
 
   crearCotizacion(): void {
-    if (this.validarCotizacion()) {
 
-      this.cotizacion.cotiEstado = 1;
 
-      this.cotizacion.cotiHoraInicio = this.selectedTimeIni;
-      this.cotizacion.cotiHoraFin = this.selectedTimeFin;
+    this.cotizacion.cotiEstado = 1;
 
-      this.cotizacion.cotiFechaRegistro = this.fechaRegistro;
-      console.log(JSON.stringify(this.cotizacion));
+    this.cotizacion.cotiHoraInicio = this.selectedTimeIni;
+    this.cotizacion.cotiHoraFin = this.selectedTimeFin;
 
+    this.cotizacion.cotiFechaRegistro = this.fechaRegistro;
+    console.log(JSON.stringify(this.cotizacion));
+    if (this.validacionesRegistro()) {
       this.cotizacionService.crearCotizacion(this.cotizacion).subscribe(
         coti => {
           this.crearAdicionales(coti);
@@ -202,15 +202,41 @@ export class ReservaComponent {
       );
     }
   };
+  validacionesRegistro(): boolean {
 
-  validarCotizacion(): boolean {
-    if (!this.cotizacion.cotiTipoEvento || !this.cotizacion.cotiDescripcion || !this.selectedTimeIni || !this.selectedTimeFin) {
-      return false;
+    console.log(this.cotizacion.cotiTipoEvento)
+    let tiempo: number = 4000;
+
+    let ban: boolean = true;
+
+    if (this.cotizacion.cotiTipoEvento.length === 0) {
+      this.toastr.error('Debes elegir un tipo de evento', '', {
+        timeOut: tiempo
+      });
+      ban = false;
     }
-    if (!this.usuario.usuPerId || !this.usuario.usuPerId.perCedula || !this.usuario.usuPerId.perNombre || !this.usuario.usuPerId.perTelefono || !this.usuario.usuPerId.perCorreo) {
-      return false;
+    if (this.cotizacion.cotiDescripcion.length === 0) {
+      this.toastr.error('Debe ingresar una descripcion', '', {
+        timeOut: tiempo
+      });
+      ban = false;
     }
-    return true;
+
+    if (this.cotizacion.cotiHoraInicio.length === 0) {
+      this.toastr.error('Debe ingresar una hora inicial', '', {
+        timeOut: tiempo
+      });
+      ban = false;
+    }
+
+    if (this.cotizacion.cotiHoraFin.length === 0) {
+      this.toastr.error('Debe ingresar una hora final', '', {
+        timeOut: tiempo
+      });
+      ban = false;
+    }
+
+    return ban;
   }
 
   crearAdicionales(cot: Cotizacion): void {
@@ -289,5 +315,5 @@ export class ReservaComponent {
   }
 
 
-  
+
 }
