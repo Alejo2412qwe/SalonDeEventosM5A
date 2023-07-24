@@ -182,7 +182,7 @@ export class CotizacionComponent implements OnInit {
       if (!ocupado) {
         this.alertaOcupado = "Fecha disponible"
 
-        if (this.selectedFile) {
+        if (this.selectedFiles && this.selectedFiles.length > 0 ) {
           this.fileService.uploadFiles(this.selectedFiles).subscribe(
             (response: FileModel[]) => {
 
@@ -195,7 +195,7 @@ export class CotizacionComponent implements OnInit {
                 this.fileService.getFileName(name).subscribe(fileName => {
                   this.reserva.resComprobante = fileName.url;
 
-
+                  console.log("URL= "+fileName.url)
 
                   this.reservaService.crearReserva(this.reserva).subscribe(res => {
 
