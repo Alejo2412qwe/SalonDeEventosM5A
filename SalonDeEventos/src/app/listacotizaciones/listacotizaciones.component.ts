@@ -12,21 +12,30 @@ import { Usuario } from '../modelo/usuario';
 export class ListacotizacionesComponent implements OnInit{
   cotizaciones: Cotizacion[] = [];
   salones: Salon[] = [];
+    idUsu: number = 0;
+
   constructor(private cotizacionService: CotizacionService) { }
 
   ngOnInit(): void {
     this.listarCotizaciones();
   }
+
   listarCotizaciones(): void {
     this.cotizacionService.getCotizacion().subscribe(
-      (cotizacion: Cotizacion[]) => {
+      cotizacion => {
         this.cotizaciones = cotizacion;
+        for(let cot of cotizacion){
+
+          console.log(cot.cotiMonto)
+        }
       }
     );
   }
+
   getSalonName(salon: Salon): string {
     return salon ? salon.salNombre : '';
   }
+
   getUsuarioName(usuario: Usuario): string {
     return usuario ? usuario.usuNombreUsuario : '';
   }
