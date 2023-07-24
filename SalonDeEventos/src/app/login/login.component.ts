@@ -137,8 +137,7 @@ export class LoginComponent implements OnInit {
   }
 
   validacionesRegistro(): boolean {
-    // const fechaActual = new Date();
-    // console.log(fechaActual);
+
     let tiempo: number = 4000;
 
     let ban: boolean = true;
