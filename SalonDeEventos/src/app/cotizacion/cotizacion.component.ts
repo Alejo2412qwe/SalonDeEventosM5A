@@ -171,10 +171,10 @@ export class CotizacionComponent implements OnInit {
       this.imagenService.guardarImagen2(imageData)
         .subscribe(
           (imageId: string) => {
-            alert('Imagen subida con éxito. ID de imagen: ' + imageId);
+            // alert('Imagen subida con éxito. ID de imagen: ' + imageId);
           },
           (error: any) => {
-            alert('Error al subir la imagen. Por favor, inténtalo de nuevo.');
+            // alert('Error al subir la imagen. Por favor, inténtalo de nuevo.');
           }
         );
     };
@@ -198,104 +198,130 @@ export class CotizacionComponent implements OnInit {
     const dia: number = reserva.getDate() + 1;
 
     // this.reserva.resFechaEvento=reserva;
+    if (this.validarFecha()) {
+      this.reservaService.fechaOcupada(dia, mes, anio).subscribe(ocupado => {
 
-    this.reservaService.fechaOcupada(dia, mes, anio).subscribe(ocupado => {
+        console.log("dia= " + dia + "mes= " + mes + "anio= " + anio)
+        if (!ocupado) {
+          this.alertaOcupado = "Fecha disponible"
 
-      console.log("dia= " + dia + "mes= " + mes + "anio= " + anio)
-      if (!ocupado) {
-        this.alertaOcupado = "Fecha disponible"
-
-        if (this.selectedFiles && this.selectedFiles.length > 0) {
-          this.fileService.uploadFiles(this.selectedFiles).subscribe(
-            (response: FileModel[]) => {
-
-
-              for (let file of response) {
-                let url = "";
-                let name = "";
-                name = file.name;
-
-                this.fileService.getFileName(name).subscribe(fileName => {
-                  this.reserva.resComprobante = fileName.url;
-
-                  console.log("URL= " + fileName.url)
-
-                  this.reservaService.crearReserva(this.reserva).subscribe(res => {
+          if (this.selectedFiles && this.selectedFiles.length > 0) {
+            this.fileService.uploadFiles(this.selectedFiles).subscribe(
+              (response: FileModel[]) => {
 
 
-                    Swal.fire({
-                      title: `¿Desea continuar con la reserva?`,
-                      showDenyButton: true,
-                      showCancelButton: false,
-                      confirmButtonText: 'Estas seguro que desear ',
-                      denyButtonText: 'Quizás más tarde',
-                      customClass: {
-                        actions: 'my-actions',
-                        cancelButton: 'order-1 right-gap',
-                        confirmButton: 'order-2',
-                        denyButton: 'order-3',
-                      }
-                    }).then((result) => {
-                      if (result.isConfirmed) {
-                        Swal.fire('Su reserva se envió con éxito', 'Se encuentra en proceso de verificación, puede consultar el estado del proceso en su perfil.', 'success')
-                        this.router.navigate(["menu"]);
+                for (let file of response) {
+                  let url = "";
+                  let name = "";
+                  name = file.name;
 
-                      } else if (result.isDenied) {
+                  this.fileService.getFileName(name).subscribe(fileName => {
+                    this.reserva.resComprobante = fileName.url;
 
-                      }
+                    console.log("URL= " + fileName.url)
+
+                    this.reservaService.crearReserva(this.reserva).subscribe(res => {
+
+
+                      Swal.fire({
+                        title: `¿Desea continuar con la reserva?`,
+                        showDenyButton: true,
+                        showCancelButton: false,
+                        confirmButtonText: 'Sí, quiero continuar',
+                        denyButtonText: 'Quizás más tarde',
+                        customClass: {
+                          actions: 'my-actions',
+                          cancelButton: 'order-1 right-gap',
+                          confirmButton: 'order-2',
+                          denyButton: 'order-3',
+                        }
+                      }).then((result) => {
+                        if (result.isConfirmed) {
+                          Swal.fire('Su reserva se envió con éxito', 'Se encuentra en proceso de verificación, puede consultar el estado del proceso en su perfil.', 'success')
+                          this.router.navigate(["menu"]);
+
+                        } else if (result.isDenied) {
+
+                        }
+                      })
                     })
-                  })
-                });
+                  });
+
+                }
+                console.log('Archivos subidos correctamente:', response);
+
+
+              },
+              (error: any) => {
+                console.error('Error al subir los archivos:', error);
+                // Maneja el error adecuadamente
+                // ...
+              }
+            );
+          } else {
+
+            Swal.fire({
+              title: `Recuerde revisar los datos de su reserva, una vez enviado no se podrá cambiar.`,
+              showDenyButton: true,
+              showCancelButton: false,
+              confirmButtonText: 'Enviar',
+              denyButtonText: 'Revisar',
+              customClass: {
+                actions: 'my-actions',
+                cancelButton: 'order-1 right-gap',
+                confirmButton: 'order-2',
+                denyButton: 'order-3',
+              }
+            }).then((result) => {
+              if (result.isConfirmed) {
+                this.reservaService.crearReserva(this.reserva).subscribe(res => {
+                })
+                Swal.fire('Su reserva se envió con éxito', 'Se encuentra en proceso de verificación, puede consultar el estado del proceso en su perfil.', 'success')
+                this.router.navigate(["menu"]);
+
+              } else if (result.isDenied) {
 
               }
-              console.log('Archivos subidos correctamente:', response);
+            })
 
+          }
 
-            },
-            (error: any) => {
-              console.error('Error al subir los archivos:', error);
-              // Maneja el error adecuadamente
-              // ...
-            }
-          );
         } else {
-
-          Swal.fire({
-            title: `Recuerde revisar los datos de su reserva, una vez enviado no se podrá cambiar.`,
-            showDenyButton: true,
-            showCancelButton: false,
-            confirmButtonText: 'Enviar',
-            denyButtonText: 'Revisar',
-            customClass: {
-              actions: 'my-actions',
-              cancelButton: 'order-1 right-gap',
-              confirmButton: 'order-2',
-              denyButton: 'order-3',
-            }
-          }).then((result) => {
-            if (result.isConfirmed) {
-              this.reservaService.crearReserva(this.reserva).subscribe(res => {
-              })
-              Swal.fire('Su reserva se envió con éxito', 'Se encuentra en proceso de verificación, puede consultar el estado del proceso en su perfil.', 'success')
-              this.router.navigate(["menu"]);
-
-            } else if (result.isDenied) {
-
-            }
-          })
-
+          this.alertaOcupado = "Fecha no disponible"
+          this.toastr.error('La fecha que seleccionaste se encuentra ocupada actualmente', '', {
+            timeOut: 2500
+          });
         }
-
-      } else {
-        this.alertaOcupado = "Fecha no disponible"
-        this.toastr.error('La fecha que seleccionaste se encuentra ocupada actualmente', '', {
-          timeOut: 2500
-        });
-      }
-    })
+      })
+    }
 
 
   }
+
+  validarFecha(): boolean {
+    let ban: boolean = true;
+    let hoy: Date = new Date();
+
+    // Establecer las fechas de hoy y de la reserva sin la hora
+    const hoySinHora: Date = new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate());
+
+    let fechaEvento: Date = new Date(this.reserva.resFechaEvento)
+    const resFechaSinHora: Date = new Date(
+      fechaEvento.getFullYear(),
+      fechaEvento.getMonth(),
+      fechaEvento.getDate()
+    );
+    // Comparar las fechas sin la hora
+    if (resFechaSinHora <= hoySinHora) {
+      this.toastr.error('Fecha no disponible.', '', {
+        timeOut: 3000
+      });
+      ban = false;
+    }
+
+    return ban;
+  }
+
 
 
   validarDatosReserva(): boolean {

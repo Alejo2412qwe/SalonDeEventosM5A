@@ -20,7 +20,7 @@ export class AuthGuard implements CanActivate {
 
     
     const loggedIn = userData ? true : false;
-    alert(loggedIn)
+    // alert(loggedIn)
     if (loggedIn) {
       return true; // El usuario está autenticado y puede acceder a la ruta.
     } else {
