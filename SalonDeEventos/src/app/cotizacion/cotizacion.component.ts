@@ -181,8 +181,6 @@ export class CotizacionComponent implements OnInit {
 
     // this.reserva.resFechaEvento=reserva;
 
-
-
     this.reservaService.fechaOcupada(dia, mes, anio).subscribe(ocupado => {
 
       console.log("dia= " + dia + "mes= " + mes + "anio= " + anio)

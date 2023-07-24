@@ -264,7 +264,7 @@ export class ReservaComponent {
 
     for (let img of this.images) {
 
-      if (img.imgProdId == id) {
+      if (img.prodId.prodId == id) {
 
         url = img.imgProdUrl
 
