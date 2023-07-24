@@ -40,7 +40,8 @@ export class CotizacionComponent implements OnInit {
   selectedFile: File | null = null;
 
   constructor(private imagenService: ImagenService, private activatedRoute: ActivatedRoute, private cotizacionService: CotizacionService,
-    private reservaService: ReservaService, private toastr: ToastrService, private imageService: ImagenService, private fileService: UploadFileService,
+    private reservaService: ReservaService, private toastr: ToastrService, private imageService: ImagenService, 
+    private fileService: UploadFileService,
     private router: Router) {
   }
 
@@ -106,6 +107,30 @@ export class CotizacionComponent implements OnInit {
     this.reservaService.validarReserva(id, est).subscribe(
       res => {
         this.reserva = res;
+
+      
+        Swal.fire({
+          title: `¿Está seguro de cambiar el estado de la reserva?`,
+          showDenyButton: true,
+          showCancelButton: false,
+          confirmButtonText: 'Sí, estoy seguro.',
+          denyButtonText: 'No, estoy seguro',
+          customClass: {
+            actions: 'my-actions',
+            cancelButton: 'order-1 right-gap',
+            confirmButton: 'order-2',
+            denyButton: 'order-3',
+          }
+        }).then((result) => {
+          if (result.isConfirmed) {
+            Swal.fire('Reserva actualizada con exito.', 'success')
+            this.router.navigate(["listares"]);
+
+
+          } else if (result.isDenied) {
+
+          }
+        })
       }
     )
   }

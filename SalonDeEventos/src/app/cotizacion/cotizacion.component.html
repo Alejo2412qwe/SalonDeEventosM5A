@@ -79,7 +79,7 @@
             <div>
                 <p class="fecha">{{cotizacion.salId.salDireccion}}</p>
             </div>
-            
+
 
         </section>
         <!-- </div> -->
@@ -119,13 +119,13 @@
         </section>
         <p style="text-align: center;">Deseas confirmar reserva </p>
 
-        <div [hidden]="accion !== 'reservar'">
+        <div [hidden]="!(accion === 'reservar' || accion === 'detalle')">
             <h2>Subir Imagen</h2>
             <input type="file" accept="image/*" (change)="onFileChange($event)">
             <section class="layout7">
                 <!-- <ng-container *ngIf="accion ==='registrar'"> -->
 
-                <div class="card" *ngFor="let preview of filePreviews" style="height: 100%; width: 120px;">
+                <div class="card" *ngFor="let preview of filePreviews" style="height: 100%; width: 120px;" >
                     <img [src]="preview" alt="Vista previa de imagen" class="card-image" style="margin: inherit;">
                 </div>
 
@@ -161,13 +161,13 @@
                 </div>
             </div>
         </section>
-        <!-- <section class="layout5"> -->
+
         <div class="foto" style="border: 1px solid;"></div>
         <h1 style="margin-bottom: 20px;">COMPROBANTE DE PAGO</h1>
         <div style="width: 100%; display: flex; justify-content: center; align-items: center;">
             <img [src]="reserva.resComprobante" alt="Imagen" class="image-container">
         </div>
-        
+
         <div class="foto" style="border: 1px solid;" [hidden]="accion !== 'reservar'"></div>
         <!-- </section> -->
     </section>
