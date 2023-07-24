@@ -168,11 +168,6 @@ export class CotizacionComponent implements OnInit {
 
     console.log("EVENTOO= " + this.reserva.resFechaEvento)
 
-    if (this.reserva.resImagenRerserva === 0) {
-      this.reserva.resComprobante = "Pendiente";
-    } else {
-      this.reserva.resComprobante = "EN REVISION";
-    }
 
     const reserva: Date = new Date(this.reserva.resFechaEvento);
     const anio: number = reserva.getFullYear();
