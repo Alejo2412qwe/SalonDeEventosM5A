@@ -160,6 +160,7 @@ export class CotizacionComponent implements OnInit {
   }
 
   crearReserva(): void {
+
     this.reserva.usuId = this.usuario;
     this.reserva.reCotiId = this.cotizacion;
     this.reserva.resFechaRegistro = this.fechaRegistro;
@@ -240,16 +241,40 @@ export class CotizacionComponent implements OnInit {
   }
 
 
-  validaciones(): Boolean {
+  validarDatosReserva(): boolean {
+    if (this.accion === 'validar') {
+      // Check if selectedDate is empty or undefined
+      if (!this.selectedDate) {
+        return false;
+      }
+    } else if (this.accion === 'reservar') {
+      // Check if selectedDate is empty or undefined
+      if (!this.selectedDate) {
+        return false;
+      }
 
-    let ban: boolean = true;
+      // Add more specific validations for other fields related to the reservation, if required.
 
+      // For example, you can check if numReserva is empty or contains only whitespace characters.
+      if (!this.numReserva || this.numReserva.toString() === '') {
+        return false;
+      }
 
+      // Add more validations for other fields like usuario, cotizacion, fechaRegistro, etc.
 
+      // For example, check if usuario object has valid values
+      if (!this.usuario.usuPerId || !this.usuario.usuPerId.perCedula || !this.usuario.usuPerId.perNombre || !this.usuario.usuPerId.perTelefono || !this.usuario.usuPerId.perCorreo) {
+        return false;
+      }
 
+      // Check if cotizacion object has valid values
+      if (!this.cotizacion.salId || !this.cotizacion.salId.salNombre || !this.cotizacion.salId.salDireccion) {
+        return false;
+      }
+    }
 
-
-    return ban;
+    // All fields are valid
+    return true;
   }
 
 
