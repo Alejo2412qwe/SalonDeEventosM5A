@@ -43,7 +43,7 @@ export class ProductoComponent {
     this.cargarCategorias()
   }
 
-  
+
 
   cargarAccion(): void {
     this.activatedRoute.params.subscribe(params => {
@@ -158,107 +158,130 @@ export class ProductoComponent {
   }
 
   registrar(): void {
-    if(this.accion==='registrar'){
-      this.producto.prodEstado = 1;
-    }
-   
-    this.tipo.tipNombre = this.tipoSelect.tipNombre;
 
-    for (const tip of this.tipos) {
-      if (this.tipo.tipNombre === tip.tipNombre) {
-        this.producto.tipId = tip;
-        break;
+    if (this.validarProducto()) {
+      if (this.accion === 'registrar') {
+        this.producto.prodEstado = 1;
       }
-    }
 
-    this.categoria.catNombre = this.categoriaSelect.catNombre;
+      this.tipo.tipNombre = this.tipoSelect.tipNombre;
 
-    for (const cat of this.categorias) {
-      if (this.categoria.catNombre === cat.catNombre) {
-        this.producto.catId = cat;
-        break;
+      for (const tip of this.tipos) {
+        if (this.tipo.tipNombre === tip.tipNombre) {
+          this.producto.tipId = tip;
+          break;
+        }
       }
-    }
 
-    let imgProducto: ImgProducto[] = [];
+      this.categoria.catNombre = this.categoriaSelect.catNombre;
 
-    this.productoService.crearProducto(this.producto).subscribe(
-      productonew => {
+      for (const cat of this.categorias) {
+        if (this.categoria.catNombre === cat.catNombre) {
+          this.producto.catId = cat;
+          break;
+        }
+      }
+
+      let imgProducto: ImgProducto[] = [];
+
+      this.productoService.crearProducto(this.producto).subscribe(
+        productonew => {
 
 
-        this.fileService.uploadFiles(this.selectedFiles).subscribe(
-          (response: FileModel[]) => {
+          this.fileService.uploadFiles(this.selectedFiles).subscribe(
+            (response: FileModel[]) => {
 
 
-            for (let file of response) {
-              let prod: ImgProducto = new ImgProducto();
-              prod.imgProdNombre = file.name;
-              // prod.imgProdUrl = file.url;
+              for (let file of response) {
+                let prod: ImgProducto = new ImgProducto();
+                prod.imgProdNombre = file.name;
+                // prod.imgProdUrl = file.url;
 
-              this.fileService.getFileName(prod.imgProdNombre).subscribe(fileName => {
-                prod.imgProdUrl = fileName.url;
-                prod.prodId = productonew;
-                console.log("idprod= " + prod.prodId.prodId);
-                console.log("nombre= " + prod.imgProdNombre);
-                console.log("URL= " + prod.imgProdUrl);
-                imgProducto.push(prod)
-                console.log("=============================")
-                this.imgProductoService.agregarIMG(prod).subscribe(img => {
-                  console.log("idprod= " + img?.prodId?.prodId);
-                  console.log("nombre= " + img?.imgProdNombre);
-                  console.log("URL= " + img?.imgProdUrl);
+                this.fileService.getFileName(prod.imgProdNombre).subscribe(fileName => {
+                  prod.imgProdUrl = fileName.url;
+                  prod.prodId = productonew;
+                  console.log("idprod= " + prod.prodId.prodId);
+                  console.log("nombre= " + prod.imgProdNombre);
+                  console.log("URL= " + prod.imgProdUrl);
+                  imgProducto.push(prod)
+                  console.log("=============================")
+                  this.imgProductoService.agregarIMG(prod).subscribe(img => {
+                    console.log("idprod= " + img?.prodId?.prodId);
+                    console.log("nombre= " + img?.imgProdNombre);
+                    console.log("URL= " + img?.imgProdUrl);
+                  });
                 });
+
+
+                // this.imgProductoService.agregarIMG(prod).subscribe(img => {
+
+                // });
+
+              }
+              console.log('Archivos subidos correctamente:', response);
+
+              // Realiza las operaciones necesarias con los archivos subidos
+              // ...
+              Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Registro exitoso',
+                showConfirmButton: true
+              }).then(() => {
+                location.reload();
               });
-
-
-              // this.imgProductoService.agregarIMG(prod).subscribe(img => {
-
-              // });
-
+            },
+            (error: any) => {
+              console.error('Error al subir los archivos:', error);
+              // Maneja el error adecuadamente
+              // ...
             }
-            console.log('Archivos subidos correctamente:', response);
-
-            // Realiza las operaciones necesarias con los archivos subidos
-            // ...
-            Swal.fire({
-              position: 'center',
-              icon: 'success',
-              title: 'Registro exitoso',
-              showConfirmButton: true
-            }).then(() => {
-              location.reload();
-            });
-          },
-          (error: any) => {
-            console.error('Error al subir los archivos:', error);
-            // Maneja el error adecuadamente
-            // ...
-          }
-        );
-      });
+          );
+        });
+    }
   };
 
 
-  // registrar(): void {
+  validarProducto() {
 
-  //   this.tipo.tipNombre = this.seleccionados.tipNombre;
+    let tiempo: number = 4000;
 
-  //   for (const tip of this.tipos) {
-  //     if (this.tipo.tipNombre === tip.tipNombre) {
-  //       this.producto.tipId = tip;
-  //       break;
-  //     }
-  //   }
-  //   this.productoService.crearProducto(this.producto).subscribe(
-  //     response => {
-  //       Swal.fire({
-  //         position: 'center',
-  //         icon: 'success',
-  //         title: 'Registro exitoso',
-  //         showConfirmButton: true
-  //       }).then(() => {
-  //         location.reload();
-  //       });
-  //     });
-  // };
+    let ban: boolean = true;
+
+    if (this.producto.prodPrecio === 0) {
+      this.toastr.error('Debe ingresar un precio', '', {
+        timeOut: tiempo
+      });
+      ban = false;
+    }
+
+    if (this.producto.prodNombre.length === 0) {
+      this.toastr.error('Debe ingresar un nombre para el producto', '', {
+        timeOut: tiempo
+      });
+      ban = false;
+    }
+
+    if (this.producto.prodDescripcion.length === 0) {
+      this.toastr.error('Debe ingresar una descripción', '', {
+        timeOut: tiempo
+      });
+      ban = false;
+    }
+
+    if (this.tipoSelect.tipNombre.length === 0) {
+      this.toastr.error('Debe elegir un tipo para el producto', '', {
+        timeOut: tiempo
+      });
+      ban = false;
+    }
+
+    if (this.categoriaSelect.catNombre.length === 0) {
+      this.toastr.error('Debe elegir una categoria', '', {
+        timeOut: tiempo
+      });
+      ban = false;
+    }
+    return ban;
+  }
 };
