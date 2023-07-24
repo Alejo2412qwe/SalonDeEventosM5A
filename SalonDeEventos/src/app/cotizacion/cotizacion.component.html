@@ -119,7 +119,7 @@
         </section>
         <p style="text-align: center;">Deseas confirmar reserva </p>
 
-        <div [hidden]="accion !== 'reservar'">
+        <div [hidden]="accion !== 'reservar'" [hidden]="accion !== 'detalle'">
             <h2>Subir Imagen</h2>
             <input type="file" accept="image/*" (change)="onFileChange($event)">
             <section class="layout7">
