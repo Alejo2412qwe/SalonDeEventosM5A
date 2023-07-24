@@ -5,6 +5,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { SafeResourceUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { ElementRef, Renderer2 } from '@angular/core';
+import { UsuarioService } from '../service/usuario.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -12,21 +13,25 @@ import { ElementRef, Renderer2 } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private renderer: Renderer2, private el: ElementRef, private AllScripts: AllScriptsService, private sanitizer: DomSanitizer, private router: Router) {
+  constructor(private renderer: Renderer2, private UsuarioService: UsuarioService, private el: ElementRef, private AllScripts: AllScriptsService, private sanitizer: DomSanitizer, private router: Router) {
     AllScripts.Cargar(["default/ventana"]);
   }
+  idrol: number = 2; // Ejemplo: supongamos que el usuario tiene un rol con id 2
   user: Usuario = new Usuario();
+
+  usu: Usuario[] = [];
   ngOnInit(): void {
     const userString = localStorage.getItem('userData');
 
     if (userString !== null) {
       this.user = JSON.parse(userString);
       this.router.navigate(['/perfil']);
+
     } else {
       console.error('No hay datos de usuario en el Local Storage');
 
     }
-
+    this.mostrarboton();
 
   }
 
@@ -76,7 +81,21 @@ export class HeaderComponent implements OnInit {
     }
 
   }
-  
+
+  mostrarboton(): void {
+    const userString = localStorage.getItem('userData');
+
+    if (this.user.rolId.rolId == 1) {
+      const ventanaFlotante = this.el.nativeElement.querySelector('.boton7');
+      this.renderer.setStyle(ventanaFlotante, 'display', 'flex');
+
+    } else {
+      const ventanaFlotante = this.el.nativeElement.querySelector('.boton7');
+      this.renderer.setStyle(ventanaFlotante, 'display', 'none');
+    }
+
+  }
+
 
   header(): void {
     const userString = localStorage.getItem('userData');
@@ -89,4 +108,12 @@ export class HeaderComponent implements OnInit {
     }
 
   }
+
+
+
+
 }
+
+
+
+
