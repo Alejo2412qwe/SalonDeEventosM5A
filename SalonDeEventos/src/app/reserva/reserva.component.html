@@ -39,7 +39,7 @@
                             placeholder="Ingresa los detalles" required>
                     </div>
                     <div class="inputContainer">
-                        
+
                         <h1 style="font-size: 16px;">Hora de inicio:</h1>
                         <input type="time" name="HoraInicio" placeholder="Hora de Inicio" required step="900"
                             [(ngModel)]="selectedTimeIni" (ngModelChange)="calcularMonto()">
@@ -60,9 +60,16 @@
                             [hidden]="accion !== 'cotizar'">
                             Guardar Cotización</button>
 
-                        <button class="boton1" style="font-size: 12px;" 
-                            [routerLink]="['/cot','reservar',cotizacion.cotiId]" [hidden]="accion !== 'micotizacion'" (click)="cargar()">
+                        <button class="boton1" style="font-size: 12px;"
+                            [routerLink]="['/cot','reservar',cotizacion.cotiId]" 
+                            [hidden]="!(accion !== 'micotizacion' || reservado === true)"
+                            (click)="cargar()">
                             Reservar</button>
+
+                        <button class="boton1" style="font-size: 12px;"
+                             [hidden]="!(accion !== 'micotizacion' || reservado === false)"
+                            (click)="cotiReservada()">
+                            Reserva realizada</button>
 
                     </div>
 
@@ -125,7 +132,7 @@
                 <div>
                     <p class="fecha">{{ fechaRegistro | date:'dd/MM/yyyy' }}</p>
                 </div>
-            
+
                 <div>
                     <p>Salon:</p>
                 </div>
@@ -163,8 +170,9 @@
                     <td>{{adi.prodId.prodNombre}}</td>
                     <td>{{adi.adiCantidad * adi.prodId.prodPrecio}}</td>
                     <td>{{adi.adiCantidad}}</td>
-                    <td [hidden]="accion==='micotizacion'"><button style="font-size: 10px; width: 140px; margin-left: 5px;" class="boton1" (click)="quitarAdiccional(adi.prodId.prodId)"
-                        > Quitar </button></td>
+                    <td [hidden]="accion==='micotizacion'"><button
+                            style="font-size: 10px; width: 140px; margin-left: 5px;" class="boton1"
+                            (click)="quitarAdiccional(adi.prodId.prodId)"> Quitar </button></td>
 
                 </tr>
             <tbody>
@@ -192,15 +200,16 @@
                 </span>
 
                 <span style="margin-top: -90px;" [hidden]="accion==='micotizacion'">
-                    <h1 style="font-size: 18px; font-weight: bolder; margin-right: 20px;" >Cantidad:</h1><input
+                    <h1 style="font-size: 18px; font-weight: bolder; margin-right: 20px;">Cantidad:</h1><input
                         name="prodPrecio" type="number" [(ngModel)]="nuevoAdicional.adiCantidad" required min="0"
                         style=" width: 140px;">
                 </span>
-                <span style="text-align: justify; font-size: 24px; margin-top: 130px; display: inline-flexbox;" [hidden]="accion==='micotizacion'">
+                <span style="text-align: justify; font-size: 24px; margin-top: 130px; display: inline-flexbox;"
+                    [hidden]="accion==='micotizacion'">
 
                     <button style="font-size: 10px; width: 140px; margin-right: 5px;" class="boton1"
                         (click)="agregarAdicional(prod)">
-                        Agregar </button>               
+                        Agregar </button>
                 </span>
 
             </div>

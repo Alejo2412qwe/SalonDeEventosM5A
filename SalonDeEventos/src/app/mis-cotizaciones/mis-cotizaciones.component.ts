@@ -12,8 +12,11 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class MisCotizacionesComponent {
   cotizaciones: Cotizacion[] = [];
+  cotizacionesFiltro: Cotizacion[] = [];
   salones: Salon[] = [];
   idUsu: number = 0;
+  estado: number = 0;
+
 
   constructor(private cotizacionService: CotizacionService, private activatedRoute: ActivatedRoute) { }
 
@@ -22,10 +25,30 @@ export class MisCotizacionesComponent {
     this.listarCotizaciones();
   }
 
+  // filtro(): void {
+  //   this.cotizacionesFiltro=[];
+
+  //   switch (this.estado) {
+  //     case 0:
+  //       this.cotizacionesFiltro  =this.cotizaciones;      
+  //       break;
+  //     case 1:
+  //       // estado = "Pendiente";
+  //       break;
+  //     case 2:
+  //       // estado = "Aprobado";
+  //       break;
+
+  //   }
+
+
+  // }
+
   listarCotizaciones(): void {
     this.cotizacionService.misCotizacion(this.idUsu).subscribe(
       cotizacion => {
         this.cotizaciones = cotizacion;
+        this.cotizacionesFiltro = cotizacion;
       }
     );
   }

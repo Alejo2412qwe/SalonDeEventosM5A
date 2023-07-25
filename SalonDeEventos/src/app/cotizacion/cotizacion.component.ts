@@ -217,7 +217,7 @@ export class CotizacionComponent implements OnInit {
 
       this.reservaService.fechaOcupada(dia, mes, anio).subscribe(ocupado => {
 
-        if (ocupado && this.accion ==='reservar') {
+        if (ocupado && this.accion === 'reservar') {
 
           this.alertaOcupado = "Fecha no disponible"
           this.toastr.error('La fecha que seleccionaste se encuentra ocupada actualmente', '', {
@@ -318,10 +318,11 @@ export class CotizacionComponent implements OnInit {
 
   validarFecha(): boolean {
     let ban: boolean = true;
+    let banFecha: boolean = true;
     let hoy: Date = new Date();
 
     // Establecer las fechas de hoy y de la reserva sin la hora
-    const fechaRango: Date = new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()+5);
+    const fechaRango: Date = new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate() + 5);
 
 
     let fechaEvento: Date = new Date(this.reserva.resFechaEvento)
@@ -331,12 +332,25 @@ export class CotizacionComponent implements OnInit {
       fechaEvento.getDate()
     );
     // Comparar las fechas sin la hora
-    if (resFecha < fechaRango && this.accion ==='reservar') {
-      this.toastr.error('Recuerde que se debe reservar con un mínimo de 5 días de anticipación','Seleccione la Fecha del Evento', {
+    if (resFecha < fechaRango && this.accion === 'reservar') {
+      this.toastr.error('Recuerde que se debe reservar con un mínimo de 5 días de anticipación', 'Seleccione la Fecha del Evento', {
         timeOut: 3000
       });
       ban = false;
+      banFecha = false;
     }
+
+    const fechaRango2: Date = new Date(hoy.getFullYear() + 1, hoy.getMonth(), hoy.getDate());
+    if (resFecha > fechaRango2 && this.accion === 'reservar' && banFecha) {
+
+      this.toastr.error('Solo se puede reservar en el lapso de un año', 'Seleccione la Fecha del Evento', {
+        timeOut: 3000
+      });
+
+      ban = false;
+    }
+
+    // alert("ba= "+ban)
 
 
     return ban;

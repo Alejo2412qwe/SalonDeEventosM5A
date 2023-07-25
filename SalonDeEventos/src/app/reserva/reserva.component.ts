@@ -30,6 +30,7 @@ export class ReservaComponent {
   cotizacion: Cotizacion = new Cotizacion();
   salon: Salon = new Salon();
   usuario: Usuario = new Usuario();
+  reservado: boolean = false;
 
   accion: string = "";
   images: ImgProducto[] = [];
@@ -47,6 +48,8 @@ export class ReservaComponent {
   ngOnInit(): void {
     this.cargarAccion()
   }
+
+
 
   cargarAccion(): void {
 
@@ -74,6 +77,11 @@ export class ReservaComponent {
             this.adicionalesService.adicionalesCoti(id).subscribe(adicionales => {
               this.adicionales = adicionales;
             })
+            this.cotizacionService.cotizacionReservada(id).subscribe(ban => {
+              this.reservado = ban;
+            })
+
+
           })
 
         } else {
@@ -329,11 +337,20 @@ export class ReservaComponent {
         Swal.showLoading();
       }
     });
-  
+
     // Cierra la alerta después de 3 segundos
     setTimeout(() => {
       Swal.close();
     }, 2000); // 3000 milisegundos = 3 segundos
+  }
+
+  cotiReservada() {
+    Swal.fire({
+      title: 'La reserva ya existe',
+      text: 'Ya realizo esta reserva, consulte en su perfil.',
+      icon: 'info', // Puedes cambiar el icono a 'success', 'warning', 'error', etc.
+      confirmButtonText: 'OK'
+    });
   }
 
 }

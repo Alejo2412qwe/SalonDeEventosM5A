@@ -32,4 +32,8 @@ export class CotizacionService {
         return this.http.get(`${this.url}/misCotizacion/${id}`).pipe(map(response => response as Cotizacion[]));
     }
 
+    cotizacionReservada(idCot: number): Observable<boolean> {
+        return this.http.get<boolean>(`${this.url}/cotizacionReservada/${idCot}`);
+    }
+
 }
