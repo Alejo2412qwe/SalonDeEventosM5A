@@ -3,7 +3,8 @@
 <div class="forms">
     <div class="form-content">
         <div class="signup-form">
-            <div class="title" style="font-weight: bolder;">CREAR USUARIO</div>
+            <div class="title" style="font-weight: bolder;" [hidden]="accion!=='registrar'">CREAR USUARIO</div>
+            <div class="title" style="font-weight: bolder;" [hidden]="accion!=='editar'">EDITAR PERFIL</div>
             <!-- <form action=""> -->
             <div class="title2"
                 style="margin-top: 20px; margin-bottom: 10px; font-size: 18px; text-align: center; font-weight: bolder;">

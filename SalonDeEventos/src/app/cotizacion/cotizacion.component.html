@@ -96,8 +96,8 @@
                         (ngModelChange)="updateDate($event)" placeholder="Fecha del Evento" required id="dia"
                         style=" background-color:#f4e6cd; height: 50px; width: 324px; font-weight: bolder; padding-left: 35px;border: none; border-bottom: 2px solid rgba(0, 0, 0, 0.2);   box-shadow: 3px 3px #cecccc;"> -->
 
-                    <div class="input-box" *ngIf="accion ==='validar'">
-                        <input type="date" style="color: #75758B;" name="resFechaEvento"
+                    <div class="input-box" >
+                        <input type="date" style="color: #75758B;" name="resFechaEvento"  [disabled]="accion ==='detalle'"
                             [ngModel]="formatDate(selectedDate)" placeholder="Fecha de nacimiento" required
                             style=" background-color:#f4e6cd; height: 50px; width: 324px; font-weight: bolder; padding-left: 35px;border: none; border-bottom: 2px solid rgba(0, 0, 0, 0.2);   box-shadow: 3px 3px #cecccc;">
                     </div>

@@ -32,6 +32,9 @@ export class CotizacionComponent implements OnInit {
 
   usuario: Usuario = new Usuario();
 
+
+  empleado: Usuario = new Usuario();
+
   cotizacion: Cotizacion = new Cotizacion()
 
   numReserva: number = 0;
@@ -68,9 +71,9 @@ export class CotizacionComponent implements OnInit {
     this.activatedRoute.params.subscribe(params => {
       this.accion = params['accion']
       console.log(this.accion)
-
+      this.obtenerUsuario();
       if (this.accion === 'reservar') {
-        this.obtenerUsuario();
+
         this.cargarCoti();
 
       } else {
@@ -105,11 +108,11 @@ export class CotizacionComponent implements OnInit {
     return `${year}-${month}-${day}`;
   }
 
-  
+
   validarReserva(id: number, est: number): void {
-    this.reserva.usuId=this.usuario;
-    alert(this.reserva.usuId.usuNombreUsuario+" === "+this.usuario)
-    this.reservaService.validarReserva(id, est).subscribe(
+    this.reserva.usuId = this.empleado;
+    // alert(this.reserva.usuId.usuId+" === "+this.usuario)
+    this.reservaService.validarReserva(id, est, this.reserva).subscribe(
       res => {
         this.reserva = res;
 
@@ -153,7 +156,14 @@ export class CotizacionComponent implements OnInit {
     // Verificar si el string existe en el localStorage
     if (userString) {
       const login = JSON.parse(userString);
-      this.usuario = login;
+
+      if (this.accion === 'reservar') {
+
+        this.usuario = login;
+      } else {
+        this.empleado = login;
+      }
+
 
     }
 
@@ -195,20 +205,26 @@ export class CotizacionComponent implements OnInit {
 
     console.log("EVENTOO= " + this.reserva.resFechaEvento)
 
-
-    const reserva: Date = new Date(this.reserva.resFechaEvento);
-    const anio: number = reserva.getFullYear();
-    const mes: number = reserva.getMonth() + 1;
-    const dia: number = reserva.getDate() + 1;
-
     // this.reserva.resFechaEvento=reserva;
     if (this.validarFecha()) {
+
+      let ban: boolean = true;
+      const reserva: Date = new Date(this.reserva.resFechaEvento);
+      const anio: number = reserva.getFullYear();
+      const mes: number = reserva.getMonth() + 1;
+      const dia: number = reserva.getDate() + 1;
+
+
       this.reservaService.fechaOcupada(dia, mes, anio).subscribe(ocupado => {
 
-        console.log("dia= " + dia + "mes= " + mes + "anio= " + anio)
-        if (!ocupado) {
-          this.alertaOcupado = "Fecha disponible"
+        if (ocupado && this.accion ==='validar') {
 
+          this.alertaOcupado = "Fecha no disponible"
+          this.toastr.error('La fecha que seleccionaste se encuentra ocupada actualmente', '', {
+            timeOut: 2500
+          });
+        } else {
+          this.alertaOcupado = "Fecha disponible"
           if (this.selectedFiles && this.selectedFiles.length > 0) {
             this.fileService.uploadFiles(this.selectedFiles).subscribe(
               (response: FileModel[]) => {
@@ -289,14 +305,12 @@ export class CotizacionComponent implements OnInit {
             })
 
           }
-
-        } else {
-          this.alertaOcupado = "Fecha no disponible"
-          this.toastr.error('La fecha que seleccionaste se encuentra ocupada actualmente', '', {
-            timeOut: 2500
-          });
         }
       })
+
+
+
+
     }
 
 
@@ -316,15 +330,17 @@ export class CotizacionComponent implements OnInit {
       fechaEvento.getDate()
     );
     // Comparar las fechas sin la hora
-    if (resFechaSinHora <= hoySinHora) {
-      this.toastr.error('Fecha no disponible.', '', {
+    if (resFechaSinHora <= hoySinHora && this.accion ==='validar') {
+      this.toastr.error('Recuerde que se debe reservar con un mínimo de 7 días de anticipación','Seleccione la Fecha del Evento', {
         timeOut: 3000
       });
       ban = false;
     }
 
+
     return ban;
   }
+
 
 
 

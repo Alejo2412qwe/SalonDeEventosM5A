@@ -145,7 +145,7 @@ export class ReservaComponent {
       this.cotizacion.cotiMonto = this.cotizacion.cotiMonto + (add.prodId.prodPrecio * add.adiCantidad)
     }
 
-    const diferenciaTiempo = this.calcularTiempoEntreHoras();
+    const diferenciaTiempo = this.calcularTiempoEntreHoras(this.parseTimeToDate(this.selectedTimeIni), this.parseTimeToDate(this.selectedTimeFin));
     const [hours, minutes] = diferenciaTiempo.split(':').map(Number); // Separamos las horas y minutos del string
     console.log("H" + hours + "   M" + minutes);
 
@@ -165,7 +165,7 @@ export class ReservaComponent {
   }
 
   crearCotizacion(): void {
-    alert("coti= " + this.cotizacion.cotiId)
+    // alert("coti= " + this.cotizacion.cotiId)
 
     this.cotizacion.cotiEstado = 1;
 
@@ -236,6 +236,15 @@ export class ReservaComponent {
       ban = false;
     }
 
+    const diferenciaTiempo = this.calcularTiempoEntreHoras(this.parseTimeToDate(this.selectedTimeIni), this.parseTimeToDate(this.selectedTimeFin));
+    const [hours, minutes] = diferenciaTiempo.split(':').map(Number); // Separamos las horas y minutos del string
+    if (hours<4) {
+      this.toastr.error('No se puede reservar un salón por menos de 4 horas', '', {
+        timeOut: tiempo
+      });
+      ban = false;
+    }
+
     return ban;
   }
 
@@ -259,9 +268,9 @@ export class ReservaComponent {
     return selectedDate;
   }
 
-  calcularTiempoEntreHoras(): string {
-    const horaIni = this.parseTimeToDate(this.selectedTimeIni);
-    const horaFin = this.parseTimeToDate(this.selectedTimeFin);
+  calcularTiempoEntreHoras(horaIni: Date, horaFin: Date): string {
+    // const horaIni = this.parseTimeToDate(this.selectedTimeIni);
+    // const horaFin = this.parseTimeToDate(this.selectedTimeFin);
 
     if (horaIni && horaFin) {
       console.log("VALIDO");
