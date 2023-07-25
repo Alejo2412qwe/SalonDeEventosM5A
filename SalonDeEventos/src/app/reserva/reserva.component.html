@@ -61,7 +61,7 @@
                             Guardar Cotización</button>
 
                         <button class="boton1" style="font-size: 12px;" 
-                            [routerLink]="['/cot','reservar',cotizacion.cotiId]" [hidden]="accion !== 'micotizacion'">
+                            [routerLink]="['/cot','reservar',cotizacion.cotiId]" [hidden]="accion !== 'micotizacion'" (click)="cargar()">
                             Reservar</button>
 
                     </div>
@@ -154,7 +154,7 @@
                     <th>NOMBRE DEL PRODUCTO</th>
                     <th>COSTO</th>
                     <th>CANTIDAD</th>
-                    <th>ACCIÓN</th>
+                    <th [hidden]="accion==='micotizacion'">ACCIÓN</th>
 
                 </tr>
             </thead>
@@ -163,7 +163,7 @@
                     <td>{{adi.prodId.prodNombre}}</td>
                     <td>{{adi.adiCantidad * adi.prodId.prodPrecio}}</td>
                     <td>{{adi.adiCantidad}}</td>
-                    <td><button style="font-size: 10px; width: 140px; margin-left: 5px;" class="boton1" (click)="quitarAdiccional(adi.prodId.prodId)"
+                    <td [hidden]="accion==='micotizacion'"><button style="font-size: 10px; width: 140px; margin-left: 5px;" class="boton1" (click)="quitarAdiccional(adi.prodId.prodId)"
                         > Quitar </button></td>
 
                 </tr>
@@ -191,12 +191,12 @@
 
                 </span>
 
-                <span style="margin-top: -90px;">
-                    <h1 style="font-size: 18px; font-weight: bolder; margin-right: 20px;">Cantidad:</h1><input
+                <span style="margin-top: -90px;" [hidden]="accion==='micotizacion'">
+                    <h1 style="font-size: 18px; font-weight: bolder; margin-right: 20px;" >Cantidad:</h1><input
                         name="prodPrecio" type="number" [(ngModel)]="nuevoAdicional.adiCantidad" required min="0"
                         style=" width: 140px;">
                 </span>
-                <span style="text-align: justify; font-size: 24px; margin-top: 130px; display: inline-flexbox;">
+                <span style="text-align: justify; font-size: 24px; margin-top: 130px; display: inline-flexbox;" [hidden]="accion==='micotizacion'">
 
                     <button style="font-size: 10px; width: 140px; margin-right: 5px;" class="boton1"
                         (click)="agregarAdicional(prod)">

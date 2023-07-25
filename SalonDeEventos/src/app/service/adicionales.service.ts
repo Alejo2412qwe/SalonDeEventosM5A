@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
-import { Observable } from 'rxjs';
+import { Observable, map } from "rxjs";
 import { Adicionales } from '../modelo/adicionales';
 
 @Injectable({
@@ -17,4 +17,8 @@ export class AdicionalesService {
   crearAdicional(adicionales: Adicionales): Observable<Adicionales> {
     return this.http.post<Adicionales>(this.url + "/crear", adicionales, { headers: this.httpHeaders })
   }
+
+  adicionalesCoti(id: number): Observable<Adicionales[]> {
+    return this.http.get(`${this.url}/adicionalesCoti/${id}`).pipe(map(response => response as Adicionales[]));
+}
 }

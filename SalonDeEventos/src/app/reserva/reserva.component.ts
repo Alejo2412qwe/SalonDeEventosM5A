@@ -41,7 +41,7 @@ export class ReservaComponent {
     private categoriaService: CategoriaService, private changeDetectorRef: ChangeDetectorRef,
     private cotizacionService: CotizacionService, private activatedRoute: ActivatedRoute,
     private salservice: SalonService, private adicionalesService: AdicionalesService,
-    private router: Router, private imgProd: ImgProductoService, private toastr: ToastrService,) {
+    private router: Router, private imgProd: ImgProductoService, private toastr: ToastrService) {
   }
 
   ngOnInit(): void {
@@ -53,11 +53,6 @@ export class ReservaComponent {
     this.activatedRoute.params.subscribe(params => {
       this.accion = params['accion']
       console.log(this.accion)
-      // if (this.accion==='detalle') {
-
-      // }else{
-
-      // }
 
     })
     this.obtenerSalon_Coti()
@@ -76,6 +71,9 @@ export class ReservaComponent {
             this.cotizacion = cot;
             this.selectedTimeIni = cot.cotiHoraInicio;
             this.selectedTimeFin = cot.cotiHoraFin;
+            this.adicionalesService.adicionalesCoti(id).subscribe(adicionales => {
+              this.adicionales = adicionales;
+            })
           })
 
         } else {
@@ -166,7 +164,7 @@ export class ReservaComponent {
 
   crearCotizacion(): void {
     // alert("coti= " + this.cotizacion.cotiId)
-
+    // this.cargar()
     this.cotizacion.cotiEstado = 1;
 
     this.cotizacion.cotiHoraInicio = this.selectedTimeIni;
@@ -238,7 +236,7 @@ export class ReservaComponent {
 
     const diferenciaTiempo = this.calcularTiempoEntreHoras(this.parseTimeToDate(this.selectedTimeIni), this.parseTimeToDate(this.selectedTimeFin));
     const [hours, minutes] = diferenciaTiempo.split(':').map(Number); // Separamos las horas y minutos del string
-    if (hours<4) {
+    if (hours < 4) {
       this.toastr.error('No se puede reservar un salón por menos de 4 horas', '', {
         timeOut: tiempo
       });
@@ -323,6 +321,19 @@ export class ReservaComponent {
     return url;
   }
 
-
+  cargar(): void {
+    Swal.fire({
+      title: 'Estamos cargando su reserva...',
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading();
+      }
+    });
+  
+    // Cierra la alerta después de 3 segundos
+    setTimeout(() => {
+      Swal.close();
+    }, 2000); // 3000 milisegundos = 3 segundos
+  }
 
 }
