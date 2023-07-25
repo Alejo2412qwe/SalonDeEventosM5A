@@ -217,7 +217,7 @@ export class CotizacionComponent implements OnInit {
 
       this.reservaService.fechaOcupada(dia, mes, anio).subscribe(ocupado => {
 
-        if (ocupado && this.accion ==='validar') {
+        if (ocupado && this.accion ==='reservar') {
 
           this.alertaOcupado = "Fecha no disponible"
           this.toastr.error('La fecha que seleccionaste se encuentra ocupada actualmente', '', {
@@ -321,17 +321,18 @@ export class CotizacionComponent implements OnInit {
     let hoy: Date = new Date();
 
     // Establecer las fechas de hoy y de la reserva sin la hora
-    const hoySinHora: Date = new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate());
+    const fechaRango: Date = new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()+5);
+
 
     let fechaEvento: Date = new Date(this.reserva.resFechaEvento)
-    const resFechaSinHora: Date = new Date(
+    const resFecha: Date = new Date(
       fechaEvento.getFullYear(),
       fechaEvento.getMonth(),
       fechaEvento.getDate()
     );
     // Comparar las fechas sin la hora
-    if (resFechaSinHora <= hoySinHora && this.accion ==='validar') {
-      this.toastr.error('Recuerde que se debe reservar con un mínimo de 7 días de anticipación','Seleccione la Fecha del Evento', {
+    if (resFecha < fechaRango && this.accion ==='reservar') {
+      this.toastr.error('Recuerde que se debe reservar con un mínimo de 5 días de anticipación','Seleccione la Fecha del Evento', {
         timeOut: 3000
       });
       ban = false;
