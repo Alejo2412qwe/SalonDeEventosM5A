@@ -32,7 +32,7 @@
             <ng-container *ngFor="let res of reservas">
                 <tr>
                     <td>{{ res.resId }}</td>
-                    <td>{{ res.usuId.usuPerId.perCedula }}</td>
+                    <td>{{ res.reCotiId.usuId.usuPerId.perCedula }}</td>
                     <td>{{ res.usuId.usuPerId.perNombre+" "+res.usuId.usuPerId.perApellido }}</td>
                     <td>{{ res.usuId.usuPerId.perCorreo }}</td>
                     <td>{{estados(res.resEstado)}}</td>
