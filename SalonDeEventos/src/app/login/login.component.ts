@@ -91,6 +91,12 @@ export class LoginComponent implements OnInit {
       });
       ban = false;
     }
+    if (this.usuario.usuEstado === 0) {
+      this.toastr.error('Consulte con el administrador','Usuario inactivo', {
+        timeOut: tiempo
+      });
+      ban = false;
+    }
 
     return ban;
   }
