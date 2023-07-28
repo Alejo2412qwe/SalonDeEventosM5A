@@ -24,6 +24,7 @@ export class LoginComponent implements OnInit {
 
   usuariologin: string = "";
   passlogin: string = "";
+  estadoLogin = 0;
   // usuarioLogin:Usuario=new Usuario;
 
   login(): void {
@@ -31,31 +32,36 @@ export class LoginComponent implements OnInit {
       this.usuarioService.usuarioExiste(this.usuariologin).subscribe(existe => {
         console.log("boolean= " + existe);
         if (existe) {
-
           this.usuarioService.login(this.usuariologin, this.passlogin).subscribe(login => {
             if (login) {
+              this.estadoLogin = login.usuEstado;
 
-              Swal.fire({
-                position: 'center',
-                icon: 'success',
-                title: 'Bienvenido',
-                showConfirmButton: false,
-                timer: 1000
-              }).then(() => {
-                const usertString = JSON.stringify(login);
+              if (this.validarEstado()) {
 
-                localStorage.setItem('userData', usertString);
+                Swal.fire({
+                  position: 'center',
+                  icon: 'success',
+                  title: 'Bienvenido',
+                  showConfirmButton: false,
+                  timer: 1000
+                }).then(() => {
+                  const usertString = JSON.stringify(login);
 
-                if (login.rolId.rolId === 1) {
-                  this.router.navigate(["admin"]);
-                }
-                if (login.rolId.rolId === 2) {
-                  this.router.navigate(["emp"]);
-                }
-                if (login.rolId.rolId === 3) {
-                  this.router.navigate(["menu"]);
-                }
-              });
+                  localStorage.setItem('userData', usertString);
+
+                  if (login.rolId.rolId === 1) {
+                    this.router.navigate(["admin"]);
+                  }
+                  if (login.rolId.rolId === 2) {
+                    this.router.navigate(["emp"]);
+                  }
+                  if (login.rolId.rolId === 3) {
+                    this.router.navigate(["menu"]);
+                  }
+                });
+
+              }
+
             } else {
               this.toastr.error('', 'Contraseña incorrecta', {
                 timeOut: 3000
@@ -72,6 +78,16 @@ export class LoginComponent implements OnInit {
     }
   }
 
+
+  validarEstado(): boolean {
+    if (this.estadoLogin === 0) {
+      this.toastr.error('Consulte con el administrador', 'Usuario inactivo', {
+        timeOut: 4000
+      });
+      return false;
+    }
+    return true;
+  }
   validacionesLogin(): boolean {
     // const fechaActual = new Date();
     // console.log(fechaActual);
@@ -91,12 +107,6 @@ export class LoginComponent implements OnInit {
       });
       ban = false;
     }
-    if (this.usuario.usuEstado === 0) {
-      this.toastr.error('Consulte con el administrador','Usuario inactivo', {
-        timeOut: tiempo
-      });
-      ban = false;
-    }
 
     return ban;
   }
@@ -111,7 +121,7 @@ export class LoginComponent implements OnInit {
 
   registrar(): void {
     if (this.validacionesRegistro()) {
-      this.usuario.usuEstado=1;
+      this.usuario.usuEstado = 1;
       this.personaService.crearPersona(this.persona).subscribe(
         response => {
           this.persona.perId = response.perId;
