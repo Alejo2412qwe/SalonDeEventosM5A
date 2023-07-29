@@ -189,7 +189,7 @@ export class ReservaComponent {
             showDenyButton: true,
             showCancelButton: false,
             confirmButtonText: 'Sí, quiero continuar',
-            denyButtonText: 'Quizás más tarde',
+            denyButtonText: 'Guardar Cotización',
             customClass: {
               actions: 'my-actions',
               cancelButton: 'order-1 right-gap',
@@ -199,9 +199,14 @@ export class ReservaComponent {
           }).then((result) => {
             if (result.isConfirmed) {
               this.router.navigate(["cot", "reservar", coti.cotiId]);
-
+              console.log(coti.usuId);
             } else if (result.isDenied) {
-              Swal.fire('Cotización registrada con éxito', '', 'success')
+              Swal.fire({
+               title: 'Cotización registrada con éxito',
+               text: 'Puede continuar con la reserva cuando desee',
+               icon: 'success'})
+               this.router.navigate(["/micot",this.usuario.usuId]);
+
             }
           })
         }
@@ -222,7 +227,7 @@ export class ReservaComponent {
       ban = false;
     }
     if (this.cotizacion.cotiDescripcion.length === 0) {
-      this.toastr.error('Debe ingresar una descripcion', '', {
+      this.toastr.error('Debe ingresar una descripción', '', {
         timeOut: tiempo
       });
       ban = false;
@@ -347,7 +352,7 @@ export class ReservaComponent {
   cotiReservada() {
     Swal.fire({
       title: 'La reserva ya existe',
-      text: 'Ya realizo esta reserva, consulte en su perfil.',
+      text: 'Ya realizó esta reserva, consulte en su perfil.',
       icon: 'info', // Puedes cambiar el icono a 'success', 'warning', 'error', etc.
       confirmButtonText: 'OK'
     });

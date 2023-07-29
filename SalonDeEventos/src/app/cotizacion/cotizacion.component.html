@@ -108,6 +108,7 @@
                             placeholder="Fecha de nacimiento" required
                             style=" background-color:#f4e6cd; height: 50px; width: 324px; font-weight: bolder; padding-left: 35px;border: none; border-bottom: 2px solid rgba(0, 0, 0, 0.2);   box-shadow: 3px 3px #cecccc;">
                     </div>
+                    
                     <p>{{alertaOcupado}}</p>
 
                 </div>
@@ -140,18 +141,20 @@
 
             <div style="text-align: center;">
 
-                <div class="buttons" style="margin-top: 20px;">
+                <div class="buttons" style="margin-top: 20px;"  [hidden]="accion !== 'reservar'">
 
                     <button class="btn" (click)="crearReserva()"><span></span>
                         <p data-start="good luck!" data-text="CONFIRMAR!" data-title="CONFIRMAR"></p>
                     </button>
 
+                    
+
                 </div>
             </div>
-
+            
             <div style="text-align: center;">
 
-                <div class="buttons" style="margin-top: 20px;" [hidden]="accion !== 'reservar'">
+                <div class="buttons" style="margin-top: 20px;"[hidden]="accion !== 'reservar'" >
 
                     <button class="btn" routerLink="/salones"><span></span>
                         <p data-start="good luck!" data-text="CANCELAR!" data-title="CANCELAR"></p>
@@ -160,6 +163,18 @@
 
                 </div>
             </div>
+            <div style="text-align: center;">
+
+                <div class="buttons" style="margin-top: 20px;" [hidden]="!(accion === 'detalle')" >
+
+                    <button class="btn" (click)="crearReserva()"><span></span>
+                        <p data-start="good luck!" data-text="EDITAR!" data-title="EDITAR"></p>
+                    </button>
+
+
+                </div>
+            </div>
+
         </section>
 
         <div class="foto" style="border: 1px solid;"></div>
@@ -174,7 +189,7 @@
     <div class="container4" style="width: 100%;" [hidden]="accion !== 'validar'">
 
         <div>
-            <h1 style="margin-top: 40px;">¿Que deseas hacer con esta reserva?</h1>
+            <h1 style="margin-top: 40px;">¿Qué deseas hacer con esta reserva?</h1>
         </div>
 
         <section class="layouthor">

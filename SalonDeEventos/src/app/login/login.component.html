@@ -46,7 +46,7 @@
                   required>
               </div>
               <div class="button input-box">
-                <input type="submit" (click)="login()" value="Iniciar Sesion">
+                <input type="submit" (click)="login()" value="Iniciar Sesión">
               </div>
               <div class="text sign-up-text">¿No tienes una cuenta? <label for="flip">Registrate</label></div>
             </div>
@@ -66,7 +66,7 @@
               <div class="input-box">
                 <i class="fas fa-user"></i>
                 <input type="text" name="perCedula" [(ngModel)]="persona.perCedula" class="form-control"
-                  placeholder="Cedula" required (keydown)="numeros($event)">
+                  placeholder="Cédula" required (keydown)="numeros($event)">
               </div>
               <div class="input-box">
                 <i class="fas fa-user"></i>
@@ -95,29 +95,29 @@
               </div>
 
               <div class="input-box">
-                <i class="fas fa-phone"></i>
+                <i class="fas fa-thumbtack"></i>
                 <input type="text" name="perDireccion" [(ngModel)]="persona.perDireccion" placeholder="Dirección"
                   required>
               </div>
             </section>
 
-            <div class="title2"
-              style="margin-top: 30px; margin-bottom: 10px; font-size: 18px; text-align: center; font-weight: bolder;">
+            <div class="title2" 
+            style="margin-top: 20px; margin-bottom: 10px; font-size: 18px; text-align: center; font-weight: bolder;">
               Datos del Usuario</div>
             <section class="layout3">
               <div class="input-box">
-                <i class="fas fa-envelope"></i>
+                <i class="fas fa-user"></i>
                 <input type="text" name="usuNombreUsuario" [(ngModel)]="usuario.usuNombreUsuario"
                   placeholder="Nombre de usuario" required>
               </div>
               <div class="input-box">
-                <i class="fas fa-envelope"></i>
+                <i class="fas fa-lock"></i>
                 <input type="password" name="usuContrasena" [(ngModel)]="usuario.usuContrasena"
                   placeholder="Contraseña " required>
               </div>
             </section>
             <div class="input-box">
-              <i class="fas fa-envelope"></i>
+              <i class="fas fa-lock"></i>
               <input type="password" name="confirmarPass" [(ngModel)]="confirmarPass"
                 placeholder="Verifica tu contraseña" required>
             </div>

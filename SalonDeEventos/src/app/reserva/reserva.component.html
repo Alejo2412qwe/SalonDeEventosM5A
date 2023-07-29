@@ -19,7 +19,7 @@
 
                     <div>
 
-                        <p class="cate" style="font-size: 18px;">Elige la categoria</p>
+                        <p class="cate" style="font-size: 18px;">Tipo de evento</p>
                     </div>
                     <div class="inputContainer">
                         <select class="select" name="TipoEvento" [(ngModel)]="cotizacion.cotiTipoEvento">
@@ -40,13 +40,13 @@
                     </div>
                     <div class="inputContainer">
 
-                        <h1 style="font-size: 16px;">Hora de inicio:</h1>
+                        <h1 style="font-size: 16px;">Hora inicio:</h1>
                         <input type="time" name="HoraInicio" placeholder="Hora de Inicio" required step="900"
                             [(ngModel)]="selectedTimeIni" (ngModelChange)="calcularMonto()">
                     </div>
 
                     <div class="inputContainer">
-                        <h1 style="font-size: 16px;">Hora de fin:</h1>
+                        <h1 style="font-size: 16px;">Hora fin:</h1>
 
                         <input type="time" name="HoraFin" placeholder="Hora de Fin" required step="900"
                             [(ngModel)]="selectedTimeFin" (ngModelChange)="calcularMonto()">
@@ -97,7 +97,7 @@
 
                 </div>
                 <div>
-                    <p>Cedula del Reservante:</p>
+                    <p>Cédula del Reservante:</p>
                 </div>
                 <div>
                     <p class="fecha">{{usuario.usuPerId.perCedula}}</p>
@@ -134,13 +134,13 @@
                 </div>
 
                 <div>
-                    <p>Salon:</p>
+                    <p>Salón:</p>
                 </div>
                 <div>
                     <p class="fecha">{{cotizacion.salId.salNombre}}</p>
                 </div>
                 <div>
-                    <p>Costo(hr) del Salon:</p>
+                    <p>Costo(hr) del Salón:</p>
                 </div>
                 <div>
                     <p class="fecha">{{cotizacion.salId.salCostoHora}}</p>
@@ -194,7 +194,7 @@
                 <br>
                 <span style="text-align: justify; font-size: 15px; margin-top: -30px;">
                     <br> Precio: {{prod.prodPrecio}}
-                    <br> Categoria: {{prod.catId.catNombre}}
+                    <br> Categoría: {{prod.catId.catNombre}}
                     <br> Descripción: {{prod.prodDescripcion}}
 
                 </span>

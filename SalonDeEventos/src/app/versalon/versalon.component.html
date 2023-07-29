@@ -3,12 +3,12 @@
 <meta class="viewport" content="width-device-width, initial-scale=1.0">
 <title>HEADER</title>
 
-<app-headerlogeo></app-headerlogeo>
+<app-headers></app-headers>
 
 <body>
 
   <div class="container">
-    <h1 style="color: #ffffff;">{{salon.salNombre}}</h1>
+    <h1 style="color: #ffffff;">{{salon.salNombre}}<br>Salón</h1>
     <button type="button" name="button" class="button" [routerLink]="['/res','cotizar',salon.salId]">
       Ir a cotización
     </button>
@@ -39,7 +39,7 @@
       <div class="img img-first" style="width: 90%;"></div>
       <div class="card" style="border: transparent;">
         <h3>CAPACIDAD </h3>
-        <p>{{salon.salCapacidad}}
+        <p>{{salon.salCapacidad}} personas.
         </p>
       </div>
     </div>
@@ -47,7 +47,7 @@
       <div class="img img-second"></div>
       <div class="card" style="border: transparent;">
         <h3>COSTO POR HORA</h3>
-        <p>{{salon.salCostoHora}}
+        <p>{{salon.salCostoHora}} dólares.
         </p>
       </div>
     </div>
