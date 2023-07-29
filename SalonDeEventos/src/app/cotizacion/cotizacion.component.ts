@@ -40,6 +40,7 @@ export class CotizacionComponent implements OnInit {
   numReserva: number = 0;
 
   selectedDate: Date = new Date();
+  alertaOcupadoColor: string = "";
 
   selectedFile: File | null = null;
 
@@ -228,11 +229,13 @@ export class CotizacionComponent implements OnInit {
         if (ocupado && this.accion === 'reservar') {
 
           this.alertaOcupado = "Fecha no disponible"
+          this.alertaOcupadoColor = "red";
           this.toastr.error('La fecha que seleccionaste se encuentra ocupada actualmente', '', {
             timeOut: 2500
           });
         } else {
           this.alertaOcupado = "Fecha disponible"
+          this.alertaOcupadoColor = "green";
           if (this.selectedFiles && this.selectedFiles.length > 0) {
             this.fileService.uploadFiles(this.selectedFiles).subscribe(
               (response: FileModel[]) => {

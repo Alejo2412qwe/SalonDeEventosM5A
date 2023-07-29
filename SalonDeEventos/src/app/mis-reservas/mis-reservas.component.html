@@ -36,7 +36,8 @@
 
 <app-headers></app-headers>
 <h2 style="font-size: 24px; color: black;">LISTA DE RESERVAS</h2>
-<select name="estados" [(ngModel)]="estado" required class="select" (click)="listarReservas()">
+<select name="estados" style="padding-left: 10px; font-size: 20px; border-radius: 5px; background-color: #f4daaf; margin-left: 70px;"
+[(ngModel)]="estado" required class="select" (click)="listarReservas()">
     <option value="0">Rechazado</option>
     <option value="1">Pendiente</option>
     <option value="2">Aprobado</option>
@@ -46,12 +47,12 @@
         <thead>
             <tr>
                 <th>N°</th>
-                <th>CEDULA</th>
+                <th>CÉDULA</th>
                 <th>NOMBRE</th>
                 <th>CORREO</th>
                 <th>ESTADO</th>
                 <th>FECHA SOLICITADA</th>
-                <th>Acción</th>
+                <th>ACCIÓN</th>
 
             </tr>
         </thead>

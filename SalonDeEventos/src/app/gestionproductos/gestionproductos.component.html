@@ -15,34 +15,37 @@
 
 <div>
     <section class="layout">
+        <a [routerLink]="['/prod','registrar',0]">
+            <div class="card">
+                <div class="icon">
+                    <img src="assets/img/globo.png" width="40px " alt="">
+                </div>
+                <strong> CREAR PRODUCTO
+                </strong>
+                <div class="card__body">
+                    Crear nuevos productos
+                </div>
+                <span> <img src="assets/img/globo.png" width="70px " alt="">
+                </span>
+            </div>
+        </a>
 
-        <div class="card">
-            <div class="icon">
-                <img src="assets/img/globo.png" width="40px " alt="">
+        <a href="/listaprod">
+            <div class="card">
+                <div class="icon">
+                    <img src="assets/img/silla.png" width="40px " alt="">
+                </div>
+                <strong> TABLA DE REGISTROS
+                </strong>
+                <div class="card__body">
+                    Gestionar los salones del sistema
+                </div>
+                <span> <img src="assets/img/silla.png" width="70px " alt="">
+                </span>
             </div>
-            <strong> CREAR PRODUCTO 
-            </strong>
-            <div class="card__body">
-                Crear nuevos productos
-            </div>
-            <span> <a [routerLink]="['/prod','registrar',0]"><img src="assets/img/globo.png" width="70px " alt=""></a>
-            </span>
-        </div>
+        </a>
 
-        <div class="card">
-            <div class="icon">
-                <img src="assets/img/silla.png" width="40px " alt="">
-            </div>
-            <strong> TABLA DE REGISTROS
-            </strong>
-            <div class="card__body">
-                Gestionar los salones del sistema
-            </div>
-            <span> <a href="/listaprod"><img src="assets/img/silla.png" width="70px " alt=""></a>
-            </span>
-        </div>
 
-       
     </section>
 </div>
 

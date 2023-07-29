@@ -108,8 +108,10 @@
                             placeholder="Fecha de nacimiento" required
                             style=" background-color:#f4e6cd; height: 50px; width: 324px; font-weight: bolder; padding-left: 35px;border: none; border-bottom: 2px solid rgba(0, 0, 0, 0.2);   box-shadow: 3px 3px #cecccc;">
                     </div>
+
+                    <div class="mensaje" [style.color]="alertaOcupadoColor">{{ alertaOcupado }}</div>
                     
-                    <p>{{alertaOcupado}}</p>
+                    <!-- <p >{{alertaOcupado}} </p> -->
 
                 </div>
 
