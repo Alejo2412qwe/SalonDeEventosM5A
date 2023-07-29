@@ -126,9 +126,9 @@
             <section class="layout7">
                 <!-- <ng-container *ngIf="accion ==='registrar'"> -->
 
-                <div class="card" *ngFor="let preview of filePreviews" style="height: 100%; width: 120px;" >
+                <!-- <div class="card" *ngFor="let preview of filePreviews" style="height: 100%; width: 120px;" >
                     <img [src]="preview" alt="Vista previa de imagen" class="card-image" style="margin: inherit;">
-                </div>
+                </div> -->
 
 
 
@@ -179,8 +179,8 @@
 
         <div class="foto" style="border: 1px solid;"></div>
         <h1 style="margin-bottom: 20px;">COMPROBANTE DE PAGO</h1>
-        <div style="width: 100%; display: flex; justify-content: center; align-items: center;">
-            <img [src]="reserva.resComprobante" alt="Imagen" class="image-container">
+        <div *ngFor="let preview of filePreviews" style="width: 100%; display: flex; justify-content: center; align-items: center;">
+            <img [src]="preview" alt="Imagen" class="image-container">
         </div>
 
         <div class="foto" style="border: 1px solid;" [hidden]="accion !== 'reservar'"></div>

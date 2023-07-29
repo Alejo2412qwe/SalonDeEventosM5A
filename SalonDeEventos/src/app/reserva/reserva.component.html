@@ -17,39 +17,44 @@
                 <p class="heading">Crear una Cotización</p>
                 <section class="layout">
 
-                    <div>
-
+                    <div >
                         <p class="cate" style="font-size: 18px;">Tipo de evento</p>
                     </div>
                     <div class="inputContainer">
-                        <select class="select" name="TipoEvento" [(ngModel)]="cotizacion.cotiTipoEvento">
+
+                        <select class="select" name="TipoEvento" [(ngModel)]="cotizacion.cotiTipoEvento"
+                            [disabled]="accion === 'micotizacion'">
                             <option>Boda</option>
                             <option>Graduación</option>
                             <option>Bautizo</option>
                             <option>Confirmación</option>
                             <option>Cumpleaños</option>
                         </select>
-                        <input type="text" name="TipoEvento" [(ngModel)]="cotizacion.cotiTipoEvento"
-                            placeholder="Otro..." required>
+                        <div class="inputContainer">
+                            <input type="text" name="TipoEvento" [(ngModel)]="cotizacion.cotiTipoEvento"
+                                placeholder="Otro..." required [disabled]="accion === 'micotizacion'">
+                        </div>
                     </div>
 
 
                     <div class="inputContainer">
                         <input type="text" name="Descripcion" [(ngModel)]="cotizacion.cotiDescripcion"
-                            placeholder="Ingresa los detalles" required>
+                            placeholder="Ingresa los detalles" required [disabled]="accion === 'micotizacion'">
                     </div>
                     <div class="inputContainer">
 
                         <h1 style="font-size: 16px;">Hora inicio:</h1>
                         <input type="time" name="HoraInicio" placeholder="Hora de Inicio" required step="900"
-                            [(ngModel)]="selectedTimeIni" (ngModelChange)="calcularMonto()">
+                            [(ngModel)]="selectedTimeIni" (ngModelChange)="calcularMonto()"
+                            [disabled]="accion === 'micotizacion'">
                     </div>
 
                     <div class="inputContainer">
                         <h1 style="font-size: 16px;">Hora fin:</h1>
 
                         <input type="time" name="HoraFin" placeholder="Hora de Fin" required step="900"
-                            [(ngModel)]="selectedTimeFin" (ngModelChange)="calcularMonto()">
+                            [(ngModel)]="selectedTimeFin" (ngModelChange)="calcularMonto()"
+                            [disabled]="accion === 'micotizacion'">
                     </div>
 
 
@@ -61,14 +66,12 @@
                             Guardar Cotización</button>
 
                         <button class="boton1" style="font-size: 12px;"
-                            [routerLink]="['/cot','reservar',cotizacion.cotiId]" 
-                            [hidden]="(accion === 'cotizar' || reservado === false) "
-                            (click)="cargar()">
+                            [routerLink]="['/cot','reservar',cotizacion.cotiId]"
+                            [hidden]="(accion === 'cotizar' || reservado === false) " (click)="cargar()">
                             Reservar</button>
 
                         <button class="boton1" style="font-size: 12px;"
-                             [hidden]="(accion === 'cotizar' || reservado === true)"
-                            (click)="cotiReservada()">
+                            [hidden]="(accion === 'cotizar' || reservado === true)" (click)="cotiReservada()">
                             Reserva realizada</button>
 
                     </div>

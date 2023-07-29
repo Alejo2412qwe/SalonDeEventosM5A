@@ -47,12 +47,7 @@ export class ReservaService {
         return this.http.put<Reserva>(`${this.url}/validarReserva/${id}/${estado}`, res);
     }
 
-    // guardarImagen(imagenBytes: Uint8Array): Observable<string> {
-    //     return this.http.post<string>(this.urlImg, imagenBytes);
-    // }
-
-    // guardarImagen(imagenBytes: Uint8Array): Promise<string> {
-    //     const url = '/api/guardar-imagen';
-    //     return this.http.post<string>(this.urlImg, imagenBytes).toPromise();
-    // }
+    numReserva():Observable<number>{
+        return this.http.get<number>(`${this.url}/numReserva`);
+    }
 }

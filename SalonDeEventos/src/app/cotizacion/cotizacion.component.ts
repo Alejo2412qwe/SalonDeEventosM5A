@@ -51,7 +51,7 @@ export class CotizacionComponent implements OnInit {
 
   ngOnInit(): void {
     this.cargarAccion();
-
+    this.reservaNum();
   }
 
 
@@ -81,6 +81,14 @@ export class CotizacionComponent implements OnInit {
 
       }
     })
+  }
+
+  reservaNum(): void {
+    if (this.accion === 'reservar') {
+      this.reservaService.numReserva().subscribe(num => {
+        this.numReserva = num;
+      })
+    }
   }
 
   cargarReserva(): void {
