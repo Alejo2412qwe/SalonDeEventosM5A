@@ -42,12 +42,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MisCotizacionesComponent } from './mis-cotizaciones/mis-cotizaciones.component';
 import { MisReservasComponent } from './mis-reservas/mis-reservas.component'
 import { AuthGuard } from './guard/auth.guard';
+import { ReportesComponent } from './reportes/reportes.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/menu', pathMatch: 'full' },
   // { path: '**', redirectTo: '/menu', pathMatch: 'full' }, 
   { path: 'login', component: LoginComponent },
   { path: 'map', component: MapComponent },
+  { path: 'reportes', component: ReportesComponent },
   { path: 'cot/:accion/:id', component: CotizacionComponent, canActivate: [AuthGuard] },
   { path: 'res/:accion/:id', component: ReservaComponent, canActivate: [AuthGuard] },
   { path: 'admin', component: AdminComponent, canActivate: [AuthGuard] },
@@ -117,7 +119,8 @@ const routes: Routes = [
     ConocenosComponent,
     MapComponent,
     MisCotizacionesComponent,
-    MisReservasComponent
+    MisReservasComponent,
+    ReportesComponent
 
   ],
   imports: [

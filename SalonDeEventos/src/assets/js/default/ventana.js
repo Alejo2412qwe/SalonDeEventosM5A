@@ -22,6 +22,14 @@ function mostrarVentanaFlotante() {
     ventanaFlotante.style.display = 'none';
   }
 
+  function cerrarVentanaLogin3() {
+    const ventanaFlotante = document.querySelector('.ventana-flotante3');
+    ventanaFlotante.style.display = 'none';
+  }
+  function cerrarVentanaLogin4() {
+    const ventanaFlotante = document.querySelector('.ventana-flotante4');
+    ventanaFlotante.style.display = 'none';
+  }
 
   function hola() {
     var swiper = new Swiper(".swiper", {
