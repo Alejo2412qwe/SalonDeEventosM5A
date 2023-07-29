@@ -83,14 +83,11 @@
                 <input type="password" name="confirmarPass" [(ngModel)]="confirmarPass"
                     placeholder="Verifica tu contraseña" required>
             </div>
-            <div class="inputContainer" [hidden]="sesion.rolId.rolId !==1">
+            <div class="input-box" [hidden]="sesion.rolId.rolId !==1">
                 <!-- *ngIf="usuario.usuId !== 1" -->
-
                 <h2 class="nombre">Elige rol</h2>
                 <select  style="font-size: 16px; border-radius: 5px; background-color: #f4daaf; padding: 2px"
                 name="roles" [(ngModel)]="rolSelect" class="select" [disabled]="usuario.usuId === 1">
-
-
                     <option *ngFor="let rol of roles" [ngValue]="rol">
                         {{rol.rolNombre}}
                     </option>
