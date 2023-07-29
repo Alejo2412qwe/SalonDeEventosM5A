@@ -25,6 +25,9 @@ export class DetallesusuarioComponent implements OnInit {
   accion: string = "";
 
   sesion: Usuario = new Usuario();
+  pass = "";
+  confirmarPass = "";
+
 
 
   constructor(private personaService: PersonaService, private usuarioService: UsuarioService, private rolService: RolService,
@@ -112,69 +115,86 @@ export class DetallesusuarioComponent implements OnInit {
 
 
   update(): void {
-    // if (this.validacionesRegistro()) {
-    console.log("usu=- " + this.usuario.usuId)
-    console.log("per=- " + this.persona.perId)
-    Swal.fire({
-      title: `¿Esta seguro de modificar sus datos?`,
-      showDenyButton: true,
-      showCancelButton: false,
-      confirmButtonText: 'Si',
-      denyButtonText: 'No',
-      customClass: {
-        actions: 'my-actions',
-        cancelButton: 'order-1 right-gap',
-        confirmButton: 'order-2',
-        denyButton: 'order-3',
-      }
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.personaService.update(this.persona.perId, this.persona).subscribe(
-          response => {
-            this.persona.perId = response.perId;
-            this.usuario.usuPerId = this.persona;
-
-            this.cargarRolUsu()
-
-            console.log("usuROL= " + this.usuario.rolId.rolNombre)
-
-            this.usuarioService.update(this.usuario.usuId, this.usuario).subscribe(response => {
-
-              console.log(response)
-
-              Swal.fire({
-                position: 'center',
-                icon: 'success',
-                title: 'Sus datos se actualizaron correctamente',
-                showConfirmButton: true
-                // timer: 3500
-              }).then(() => {
-                this.router.navigate(["listausu"]);
-              });
-            });
-
+    if (this.validacionesUpdate()) {
+      if (this.newPass()) {
+        console.log("usu=- " + this.usuario.usuId)
+        console.log("per=- " + this.persona.perId)
+        Swal.fire({
+          title: `¿Esta seguro de modificar sus datos?`,
+          showDenyButton: true,
+          showCancelButton: false,
+          confirmButtonText: 'Si',
+          denyButtonText: 'No',
+          customClass: {
+            actions: 'my-actions',
+            cancelButton: 'order-1 right-gap',
+            confirmButton: 'order-2',
+            denyButton: 'order-3',
           }
-        )
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.personaService.update(this.persona.perId, this.persona).subscribe(
+              response => {
+                this.persona.perId = response.perId;
+                this.usuario.usuPerId = this.persona;
 
-      } else if (result.isDenied) {
-        Swal.fire('Verifique sus datos antes de cambiarlos', '', 'info')
+                this.cargarRolUsu()
+
+                console.log("usuROL= " + this.usuario.rolId.rolNombre)
+
+                this.usuarioService.update(this.usuario.usuId, this.usuario).subscribe(response => {
+
+                  console.log(response)
+
+                  Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Sus datos se actualizaron correctamente',
+                    showConfirmButton: true
+                    // timer: 3500
+                  }).then(() => {
+                    this.router.navigate(["perfiluser"]);
+                  });
+                });
+
+              }
+            )
+
+          } else if (result.isDenied) {
+            Swal.fire('Verifique sus datos antes de cambiarlos', '', 'info')
+          }
+        })
       }
-    })
 
-
-    // }
+    }
   }
 
-  // usuario: Usuario = new Usuario();
-  confirmarPass = "";
-  // persona: Persona = new Persona();
-  // rol: Rol = new Rol();
+  newPass(): boolean {
+    let ban: boolean = true;
+    if (this.pass) {
+
+      if (this.confirmarPass.length === 0) {
+        this.toastr.error('Debe confirmar su contraseña', '', {
+          timeOut: 3500
+        });
+        ban = false;
+      } else {
+        if (this.pass === this.confirmarPass) {
+          this.usuario.usuContrasena = this.pass;
+        } else {
+          this.toastr.error('La contraseña no coincide con su confirmación', '', {
+            timeOut: 3500
+          });
+          ban = false;
+        }
+      }
+
+    }
+    return ban;
+  }
 
   registrar(): void {
-
-    console.log(this.accion)
-    console.log("persona= " + JSON.stringify(this.persona))
-
+    this.usuario.usuContrasena = this.pass;
     if (this.validacionesRegistro()) {
       console.log("VALIDADO")
       this.usuario.usuEstado = 1;
@@ -206,6 +226,79 @@ export class DetallesusuarioComponent implements OnInit {
     }
   }
 
+  validacionesUpdate(): boolean {
+    // const fechaActual = new Date();
+    // console.log(fechaActual);
+    let tiempo: number = 4000;
+
+    let ban: boolean = true;
+
+    if (this.persona.perApellido.length === 0) {
+      this.toastr.error('Debe ingresar su apellido', '', {
+        timeOut: tiempo
+      });
+      ban = false;
+    }
+
+
+    if (this.persona.perNombre.length === 0) {
+      this.toastr.error('Debe ingresar su nombre', '', {
+        timeOut: tiempo
+      });
+      ban = false;
+    }
+
+    if (this.persona.perCorreo.length === 0) {
+      this.toastr.error('Debe ingresar su correo', '', {
+        timeOut: tiempo
+      });
+      ban = false;
+    }
+
+
+    //edad
+    let fechaActual = new Date();
+    let edadMinima = 18;
+
+
+    if (this.calcularEdad() < edadMinima) {
+      ban = false;
+      this.toastr.error('Debe ser mayor de edad para registrarse', '', {
+        timeOut: 3000
+      });
+    }
+
+    if (this.persona.perNombre.length === 0) {
+      this.toastr.error('Debe ingresar su nombre', '', {
+        timeOut: tiempo
+      });
+      ban = false;
+    }
+
+    if (this.persona.perTelefono.length === 0) {
+      this.toastr.error('Debe ingresar su apellido', '', {
+        timeOut: tiempo
+      });
+      ban = false;
+    }
+
+    if (this.usuario.usuContrasena.length === 0) {
+      this.toastr.error('Debe ingresar su contraseña', '', {
+        timeOut: tiempo
+      });
+      ban = false;
+    }
+
+    if (this.usuario.usuNombreUsuario.length === 0) {
+      this.toastr.error('Debe ingresar su nombre de usuario', '', {
+        timeOut: tiempo
+      });
+      ban = false;
+    }
+
+
+    return ban;
+  }
   validacionesRegistro(): boolean {
     // const fechaActual = new Date();
     // console.log(fechaActual);

@@ -6,6 +6,7 @@ import { ImgProductoService } from '../service/imgProducto.service';
 import { ImgProducto } from '../modelo/imgProducto';
 import { CategoriaService } from '../service/categoria.service';
 import { Categoria } from '../modelo/categoria';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-listaproductos',
@@ -21,10 +22,11 @@ export class ListaproductosComponent implements OnInit {
   categoria: Categoria = new Categoria;
   estado: string = "ACTIVOS";
   categorias: Categoria[] = [];
+  newCategoria: string = "";
 
 
   constructor(private ProductoService: productoService, private imgProductoService: ImgProductoService,
-    private categoriaService: CategoriaService) {
+    private categoriaService: CategoriaService, private toastr: ToastrService) {
   }
 
   ngOnInit(): void {
@@ -43,27 +45,43 @@ export class ListaproductosComponent implements OnInit {
       confirmButtonText: 'Crear',
       cancelButtonText: 'Cancelar',
       preConfirm: () => {
-        const name = (document.getElementById('swal-input1') as HTMLInputElement).value;
-        this.categoria.catNombre = name;
+        this.newCategoria = (document.getElementById('swal-input1') as HTMLInputElement).value;
+        this.categoria.catNombre = this.newCategoria;
         this.crearCategoria();
       }
     });
   }
 
+  validarCate(): boolean {
+    let ban: boolean = true;
+
+    if (this.categoria.catNombre.length === 0) {
+      this.toastr.error('Ingrese una categoría', '', {
+        timeOut: 3500
+      });
+      ban=false;
+    }
+    return ban;
+  }
+
 
   crearCategoria(): void {
-    this.categoriaService.crearCategoria(this.categoria).subscribe(
-      cat => {
-        Swal.fire({
-          position: 'center',
-          icon: 'success',
-          title: 'Categoría registrada exitosamente',
-          showConfirmButton: true,
-        });
-        this.cargarCategorias()
-      }
 
-    )
+    if (this.validarCate()) {
+      this.categoriaService.crearCategoria(this.categoria).subscribe(
+        cat => {
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Categoría registrada exitosamente',
+            showConfirmButton: true,
+          });
+          this.cargarCategorias()
+        }
+
+      )
+    }
+
   }
 
   cargarCategorias(): void {
