@@ -12,7 +12,8 @@
 <div class="inputContainer">
   <h2 class="nombre" style="font-size: 18px;">Filtrar Productos</h2>
 
-  <select name="categorias" [(ngModel)]="estado" required class="select">
+  <select style="padding-left: 10px; font-size: 20px; border-radius: 5px; background-color: #f4daaf; margin-left: 70px;"
+  name="categorias" [(ngModel)]="estado" required class="select">
     <option>ACTIVOS</option>
     <option>INACTIVOS</option>
   </select>
@@ -20,10 +21,12 @@
 </div>
 
 <div [hidden]="estado !== 'ACTIVOS'">
-  <div class="input-box">
-    <i class="fa fa-search"></i>
+  <div class="input-box" style="margin-left: 40px; font-size: 28px; color: #E8AA42; ">
+    <i 
+    class="fa fa-search"></i>
 
-    <input type="text" name="usuario" [(ngModel)]="busquedaAct" (input)="busquedaPSAct()" placeholder="Buscar" required>
+    <input style="padding-left: 10px; font-size: 20px; border-radius: 5px; background-color: #f4daaf;"
+    type="text" name="usuario" [(ngModel)]="busquedaAct" (input)="busquedaPSAct()" placeholder="Buscar" required>
   </div>
   <div class="table-wrapper">
     <table class="fl-table">
