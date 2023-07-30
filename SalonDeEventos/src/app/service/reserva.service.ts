@@ -50,4 +50,12 @@ export class ReservaService {
     numReserva():Observable<number>{
         return this.http.get<number>(`${this.url}/numReserva`);
     }
+
+
+    reporteFechas(fechaIni: string, fechFin: string): Observable<Reserva[]> {
+        return this.http.get(`${this.url}/reservaFechas/${fechaIni}/${fechFin}`).pipe(map(response => response as Reserva[]));
+    }
+
+
+
 }

@@ -43,44 +43,57 @@ import { MisCotizacionesComponent } from './mis-cotizaciones/mis-cotizaciones.co
 import { MisReservasComponent } from './mis-reservas/mis-reservas.component'
 import { AuthGuard } from './guard/auth.guard';
 import { ReportesComponent } from './reportes/reportes.component';
+import { AdminGuard } from './guard/admin.guard';
+import { EmpleadoGuard } from './guard/empleado.guard';
+
 
 const routes: Routes = [
+  //TODOS//
   { path: '', redirectTo: '/menu', pathMatch: 'full' },
-  // { path: '**', redirectTo: '/menu', pathMatch: 'full' }, 
   { path: 'login', component: LoginComponent },
   { path: 'map', component: MapComponent },
-  { path: 'reportes', component: ReportesComponent },
+  { path: 'menu', component: HeaderComponent },
+  { path: 'conocenos', component: ConocenosComponent },
+
+
+
+  //ADMINISTRADOR//
+  { path: 'reportes', component: ReportesComponent, canActivate: [AdminGuard] },
+  { path: 'admin', component: AdminComponent, canActivate: [AdminGuard] },
+  { path: 'salon', component: SalonComponent, canActivate: [AdminGuard] },
+  { path: 'gestionuser', component: UsuariogestionComponent, canActivate: [AdminGuard] },
+  { path: 'gestionProd', component: GestionproductosComponent, canActivate: [AdminGuard] },
+  { path: 'gestionsalones', component: GestionsalonesComponent, canActivate: [AdminGuard] },
+  { path: 'gestionreservas', component: GestionreservasComponent, canActivate: [AdminGuard] },
+  { path: 'gestioncotizaciones', component: GestioncotizacionesComponent, canActivate: [AdminGuard] },
+  { path: 'editarsalon', component: DetallesalonComponent, canActivate: [AdminGuard] },
+  { path: 'salon/:accion/:id', component: SalonComponent, canActivate: [AdminGuard]  },
+  { path: 'prod', component: ProductoComponent, canActivate: [AdminGuard] },
+  { path: 'prod/:accion/:id', component: ProductoComponent, canActivate: [AdminGuard] },
+  { path: 'empresas', component: EmpresaComponent, canActivate: [AdminGuard] },
+  { path: 'prod', component: ProductoComponent, canActivate: [AdminGuard] },
+  { path: 'listausu', component: ListausuariosComponent, canActivate: [AdminGuard] },
+  { path: 'listaprod', component: ListaproductosComponent, canActivate: [AdminGuard] },
+  { path: 'listasal', component: ListasalonesComponent, canActivate: [AdminGuard] },
+  { path: 'empresas', component: EmpresaComponent, canActivate: [AdminGuard] },
+  { path: 'listacotizaciones', component: ListacotizacionesComponent, canActivate: [AdminGuard] },
+
+
+  //EMPLEADO//
+  { path: 'listares', component: ListareservasComponent, canActivate: [EmpleadoGuard] },
+  { path: 'emp', component: EmpleadoComponent, canActivate: [EmpleadoGuard] },
+
+
+  //CLIENTE
   { path: 'cot/:accion/:id', component: CotizacionComponent, canActivate: [AuthGuard] },
   { path: 'res/:accion/:id', component: ReservaComponent, canActivate: [AuthGuard] },
-  { path: 'admin', component: AdminComponent, canActivate: [AuthGuard] },
-  { path: 'salon', component: SalonComponent, canActivate: [AuthGuard] },
-  { path: 'emp', component: EmpleadoComponent, canActivate: [AuthGuard] },
-  { path: 'menu', component: HeaderComponent },
   { path: 'editarusu', component: DetallesusuarioComponent, canActivate: [AuthGuard] },
-  { path: 'editarsalon', component: DetallesalonComponent, canActivate: [AuthGuard] },
   { path: 'editarusu/:accion/:id', component: DetallesusuarioComponent, canActivate: [AuthGuard] },
-  { path: 'versal/:accion/:id', component: VersalonComponent },
+  { path: 'versal/:accion/:id', component: VersalonComponent , canActivate: [AuthGuard]},
   { path: 'mires/:id', component: MisReservasComponent, canActivate: [AuthGuard] },
   { path: 'micot/:id', component: MisCotizacionesComponent, canActivate: [AuthGuard] },
-  { path: 'salon/:accion/:id', component: SalonComponent },
-  { path: 'prod', component: ProductoComponent, canActivate: [AuthGuard] },
-  { path: 'prod/:accion/:id', component: ProductoComponent, canActivate: [AuthGuard] },
-  { path: 'empresas', component: EmpresaComponent, canActivate: [AuthGuard] },
   { path: 'perfiluser', component: PerfiluserComponent, canActivate: [AuthGuard] },
-  { path: 'prod', component: ProductoComponent, canActivate: [AuthGuard] },
-  { path: 'listausu', component: ListausuariosComponent, canActivate: [AuthGuard] },
-  { path: 'listares', component: ListareservasComponent, canActivate: [AuthGuard] },
-  { path: 'listaprod', component: ListaproductosComponent, canActivate: [AuthGuard] },
-  { path: 'listasal', component: ListasalonesComponent, canActivate: [AuthGuard] },
-  { path: 'empresas', component: EmpresaComponent, canActivate: [AuthGuard] },
-  { path: 'gestionuser', component: UsuariogestionComponent, canActivate: [AuthGuard] },
-  { path: 'gestionProd', component: GestionproductosComponent, canActivate: [AuthGuard] },
-  { path: 'gestionsalones', component: GestionsalonesComponent, canActivate: [AuthGuard] },
-  { path: 'gestionreservas', component: GestionreservasComponent, canActivate: [AuthGuard] },
-  { path: 'gestioncotizaciones', component: GestioncotizacionesComponent, canActivate: [AuthGuard] },
-  { path: 'salones', component: VistasalonesComponent },
-  { path: 'listacotizaciones', component: ListacotizacionesComponent, canActivate: [AuthGuard] },
-  { path: 'conocenos', component: ConocenosComponent }
+  { path: 'salones', component: VistasalonesComponent, canActivate: [AuthGuard] }
 
 ]
 

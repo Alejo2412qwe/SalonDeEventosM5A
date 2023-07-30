@@ -67,10 +67,25 @@
 <div class="ventana-flotante2">
     <div style="width: 100%; text-align: right; margin-bottom: 20px;"> <button class="Cerrar2"
             onclick="cerrarVentanaLogin()"> Salir
-        </button></div>
+        </button>
+    </div>
 
     <div class="comprobante">
-        <h3 style="text-align: center;">Reporte entre dos Fechas</h3>
+        <h3 style="text-align: center;">Reporte de reservas entre:</h3>
+        <div>
+            <p style="display: inline-block; margin-left: 70px;margin-top: 30px">Fecha Inicio:
+                <input type="date" style="color: #75758B;" name="fechaIni" placeholder="Fecha Inicio" [(ngModel)]="fechaIni" required
+                    style="background-color:#f4e6cd; height: 50px; width: 324px; font-weight: bolder; padding-left: 35px; border: none; border-bottom: 2px solid rgba(0, 0, 0, 0.2); box-shadow: 3px 3px #cecccc;"
+                    (ngModelChange)="obtenerReporteFecha()">
+            </p>
+
+            <p style="display: inline-block; margin-left: 50px;">Fecha Fin:
+                <input type="date" style="color: #75758B;" name="fechaFin" placeholder="Fecha Fin" [(ngModel)]="fechaFin" required
+                    style="background-color:#f4e6cd; height: 50px; width: 324px; font-weight: bolder; padding-left: 35px; border: none; border-bottom: 2px solid rgba(0, 0, 0, 0.2); box-shadow: 3px 3px #cecccc;"
+                    (ngModelChange)="obtenerReporteFecha()">
+            </p>
+        </div>
+
         <div class="datos">
             <div class="table-wrapper">
                 <table class="fl-table">
@@ -82,19 +97,20 @@
                             <th>CORREO</th>
                             <th>ESTADO</th>
                             <th>FECHA SOLICITADA</th>
-                            <th>Acción</th>
+                            <th>Fecha Evento</th>
 
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>
-                            </td>
+                        <tr *ngFor="let res of reporteFechas">
+                            <td>{{res.resId}}</td>
+                            <td>{{res.reCotiId.usuId.usuPerId.perCedula}}</td>
+                            <td>{{res.reCotiId.usuId.usuPerId.perNombre}} {{res.reCotiId.usuId.usuPerId.perApellido}}</td>
+                            <td>{{res.reCotiId.usuId.usuPerId.perCorreo}}</td>
+                            <td>{{res.resEstado}}</td>
+                            <td>{{res.resFechaRegistro}}</td>
+                            <td>{{res.resFechaEvento}}</td>
+
 
                         </tr>
                     <tbody>
