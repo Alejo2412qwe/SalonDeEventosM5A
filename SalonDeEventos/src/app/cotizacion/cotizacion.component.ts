@@ -213,17 +213,18 @@ export class CotizacionComponent implements OnInit {
         { text: 'Detalles de la reserva' },
         { text: 'Tipo de evento: ' + data.evento },
         { text: 'Hora Inicio: ' + data.horaIni},
-        {text: 'Hora Fin: ' + data.horaIni },
+        {text: 'Hora Fin: ' + data.horaFin },
         { text: 'Descripción: ' + data.descripcion },
         { text: 'Costo: ' + data.monto },
-        { text: 'Fecha del evento:: ' + data.fechaEvento },
+        { text: 'Fecha del evento: ' + data.fechaEvento },
 
       ],
       styles: {
         header: {
           fontSize: 18,
           bold: true,
-          // alignment: 'center' // Alineación centrada para el título
+          
+          // alignment: 'center' 
         }
       }
     };
