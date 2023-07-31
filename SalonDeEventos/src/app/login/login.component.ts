@@ -183,6 +183,12 @@ export class LoginComponent implements OnInit {
         timeOut: tiempo
       });
       ban = false;
+    } else {
+      const regexCorreo = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      this.toastr.error('Correo invalido', '', {
+        timeOut: tiempo
+      });
+      ban = regexCorreo.test(this.persona.perCorreo);
     }
 
 
@@ -199,10 +205,26 @@ export class LoginComponent implements OnInit {
     }
 
     if (this.persona.perCedula.length === 0) {
-      this.toastr.error('Debe ingresar su cedula', '', {
+      this.toastr.error('Debe ingresar su cédula', '', {
         timeOut: tiempo
       });
       ban = false;
+    } else {
+      this.personaService.cedulaRegistra(this.persona.perCedula).subscribe(existe => {
+        if (!existe) {
+          this.toastr.error('El número de cédula que ingreso ya se encuentra registrado', '', {
+            timeOut: tiempo
+          });
+          ban = false;
+        } else {
+          if(!this.validarCedula(this.persona.perCedula)){
+            this.toastr.error('El número de cédula que ingreso es incorrecto o no es una cédula ecuatoriana', '', {
+              timeOut: tiempo
+            });
+            ban = false;
+          }
+        }
+      })
     }
 
     if (this.persona.perTelefono.length === 0) {
@@ -251,6 +273,45 @@ export class LoginComponent implements OnInit {
     }
 
     return ban;
+  }
+
+
+  validarCedula(cedula: string): boolean {
+    // Verificar si la cédula tiene 10 dígitos numéricos
+    if (!/^\d{10}$/.test(cedula)) {
+      return false;
+    }
+  
+    // Obtener los dígitos de la cédula como números
+    const digitos = cedula.split('').map(Number);
+  
+    // Extraer los dígitos en posiciones pares e impares
+    const pares = [digitos[1], digitos[3], digitos[5], digitos[7]];
+    const impares = [digitos[0], digitos[2], digitos[4], digitos[6], digitos[8]];
+  
+    // Multiplicar los dígitos en posiciones impares por 2 y restar nueve si el resultado es mayor a nueve
+    for (let i = 0; i < impares.length; i++) {
+      impares[i] *= 2;
+      if (impares[i] > 9) {
+        impares[i] -= 9;
+      }
+    }
+  
+    // Sumar los dígitos en posiciones pares y los resultados de las operaciones en posiciones impares
+    const sumaImpares = impares.reduce((sum, digit) => sum + digit, 0);
+    const sumaPares = pares.reduce((sum, digit) => sum + digit, 0);
+  
+    // Calcular el total de la suma
+    const totalSuma = sumaImpares + sumaPares;
+  
+    // Obtener el módulo 10 de la suma total
+    const modulo = totalSuma % 10;
+  
+    // Calcular el dígito verificador
+    const digitoVerificador = modulo === 0 ? 0 : 10 - modulo;
+  
+    // Comparar el dígito verificador calculado con el último dígito de la cédula
+    return digitoVerificador === digitos[9];
   }
 
   calcularEdad(): number {

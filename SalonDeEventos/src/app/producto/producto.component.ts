@@ -183,60 +183,60 @@ export class ProductoComponent {
       }
 
       let imgProducto: ImgProducto[] = [];
+      this.producto.prodPrecio=parseFloat(this.producto.prodPrecio.toFixed(2));
 
       this.productoService.crearProducto(this.producto).subscribe(
         productonew => {
 
+          if (!this.selectedFiles) {
+            this.fileService.uploadFiles(this.selectedFiles).subscribe(
+              (response: FileModel[]) => {
 
-          this.fileService.uploadFiles(this.selectedFiles).subscribe(
-            (response: FileModel[]) => {
 
+                for (let file of response) {
+                  let prod: ImgProducto = new ImgProducto();
+                  prod.imgProdNombre = file.name;
+                  // prod.imgProdUrl = file.url;
 
-              for (let file of response) {
-                let prod: ImgProducto = new ImgProducto();
-                prod.imgProdNombre = file.name;
-                // prod.imgProdUrl = file.url;
+                  this.fileService.getFileName(prod.imgProdNombre).subscribe(fileName => {
+                    prod.imgProdUrl = fileName.url;
+                    imgProducto.push(prod)
+                    console.log("=============================")
+                    this.imgProductoService.agregarIMG(prod).subscribe(img => {
 
-                this.fileService.getFileName(prod.imgProdNombre).subscribe(fileName => {
-                  prod.imgProdUrl = fileName.url;
-                  prod.prodId = productonew;
-                  console.log("idprod= " + prod.prodId.prodId);
-                  console.log("nombre= " + prod.imgProdNombre);
-                  console.log("URL= " + prod.imgProdUrl);
-                  imgProducto.push(prod)
-                  console.log("=============================")
-                  this.imgProductoService.agregarIMG(prod).subscribe(img => {
-                    console.log("idprod= " + img?.prodId?.prodId);
-                    console.log("nombre= " + img?.imgProdNombre);
-                    console.log("URL= " + img?.imgProdUrl);
+                    });
                   });
+
+                }
+                console.log('Archivos subidos correctamente:', response);
+
+                Swal.fire({
+                  position: 'center',
+                  icon: 'success',
+                  title: 'Registro exitoso',
+                  showConfirmButton: true
+                }).then(() => {
+                  location.reload();
                 });
-
-
-                // this.imgProductoService.agregarIMG(prod).subscribe(img => {
-
-                // });
-
+              },
+              (error: any) => {
+                console.error('Error al subir los archivos:', error);
               }
-              console.log('Archivos subidos correctamente:', response);
+            );
+          } else {
 
-              // Realiza las operaciones necesarias con los archivos subidos
-              // ...
-              Swal.fire({
-                position: 'center',
-                icon: 'success',
-                title: 'Registro exitoso',
-                showConfirmButton: true
-              }).then(() => {
-                location.reload();
-              });
-            },
-            (error: any) => {
-              console.error('Error al subir los archivos:', error);
-              // Maneja el error adecuadamente
-              // ...
-            }
-          );
+            Swal.fire({
+              position: 'center',
+              icon: 'success',
+              title: 'Registro exitoso',
+              showConfirmButton: true
+            }).then(() => {
+              location.reload();
+            });
+
+
+          }
+
         });
     }
   };

@@ -93,8 +93,10 @@
                 <option value="1">Pendiente</option>
                 <option value="2">Aprobado</option>
             </select>
-
+            <p>{{viewEstado(estado)}}</p>
             <button (click)="generarPDF()" style="display: inline-block; margin-left: 70px;margin-top: 30px">Generar
+                PDF</button>
+            <button (click)="descargarPDF()" style="display: inline-block; margin-left: 70px;margin-top: 30px">Descargar
                 PDF</button>
         </div>
 

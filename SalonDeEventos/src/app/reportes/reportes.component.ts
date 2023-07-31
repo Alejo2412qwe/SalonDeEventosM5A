@@ -44,6 +44,8 @@ export class ReportesComponent implements OnInit {
       fechaFin: this.fechaFormateada(this.fechaFin),
       tableHeaders: ['N°', 'CEDULA', 'NOMBRE', 'CORREO', 'FECHA EVENTO', 'SALÓN', 'COSTO'],
       reporteFechas: this.reporteFechas,
+      total: this.calcularTotal(),
+
     };
 
     // Definir el contenido del PDF utilizando la estructura de pdfmake
@@ -67,10 +69,12 @@ export class ReportesComponent implements OnInit {
               // this.fechaFormateada(res.resFechaRegistro),
               this.fechaFormateada(res.resFechaEvento),
               res.reCotiId.salId.salNombre,
-              res.reCotiId.cotiMonto
+              '$' + res.reCotiId.cotiMonto
             ])]
           }
-        }
+        },
+        { text: '\n' },
+        { text: 'TOTAL: $' + data.total },
       ],
       styles: {
         header: {
@@ -84,28 +88,76 @@ export class ReportesComponent implements OnInit {
     // Generar el PDF
     const pdfDocGenerator = pdfMake.createPdf(documentDefinition);
     pdfDocGenerator.open();
-
-    pdfDocGenerator.getBase64((data) => {
-      // Llamar al servicio enviarCorreo para enviar el PDF al backend
-      this.enviarCorreo(data, this.destinatario);
-    });    // pdfDocGenerator.download('reporte.pdf');
   }
 
 
-  enviarCorreo(pdfData: string, destinatario: string) {
-    this.reservaService.enviarCorreoConPDF(pdfData, destinatario).subscribe(
-      response => {
-        console.log('Correo enviado:', response);
-        // Aquí puedes realizar acciones adicionales si es necesario
-      },
-      error => {
-        console.error('Error al enviar el correo:', error);
-        // Aquí puedes manejar el error de acuerdo a tus necesidades
+  descargarPDF() {
+    // Datos del reporte (debes reemplazar esto con tus datos reales)
+    const data = {
+
+      title: 'Reporte de reservas',
+      estado: this.viewEstado(this.estado),
+      fechaInicio: this.fechaFormateada(this.fechaIni),
+      fechaFin: this.fechaFormateada(this.fechaFin),
+      tableHeaders: ['N°', 'CEDULA', 'NOMBRE', 'CORREO', 'FECHA EVENTO', 'SALÓN', 'COSTO'],
+      reporteFechas: this.reporteFechas,
+      total: this.calcularTotal(),
+    };
+
+    // Definir el contenido del PDF utilizando la estructura de pdfmake
+    const documentDefinition = {
+      content: [
+        { text: data.title, style: 'header' },
+        { text: 'Desde: ' + data.fechaInicio },
+        { text: 'Hasta: ' + data.fechaFin },
+        { text: 'Estado: ' + data.estado },
+        { text: '\n' }, // Agrega un salto de línea antes de la tabla
+        {
+          table: {
+            headerRows: 1,
+            // widths: [20, 'auto', 100, 100, 'auto', 'auto', 'auto'],
+            widths: ['auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto'],
+            body: [data.tableHeaders, ...data.reporteFechas.map(res => [
+              res.resId,
+              res.reCotiId.usuId.usuPerId.perCedula,
+              res.reCotiId.usuId.usuPerId.perNombre + ' ' + res.reCotiId.usuId.usuPerId.perApellido,
+              res.reCotiId.usuId.usuPerId.perCorreo,
+              // this.fechaFormateada(res.resFechaRegistro),
+              this.fechaFormateada(res.resFechaEvento),
+              res.reCotiId.salId.salNombre,
+              '$' + res.reCotiId.cotiMonto
+            ])]
+          }
+        },
+        { text: '\n' },
+        { text: 'TOTAL: ' + data.total },
+      ],
+      styles: {
+        header: {
+          fontSize: 18,
+          bold: true,
+          // alignment: 'center' // Alineación centrada para el título
+        }
       }
-    );
+    };
+
+    // Generar el PDF
+    const pdfDocGenerator = pdfMake.createPdf(documentDefinition);
+    pdfDocGenerator.download('Reporte de reservas');
   }
+
+  calcularTotal(): number {
+    let total: number = 0;
+
+    for (let r of this.reporteFechas) {
+      total = total + r.reCotiId.cotiMonto;
+    }
+    return total;
+  }
+
 
   viewEstado(est: number): string {
+   
     let estado: string = "";
 
     switch (est) {
@@ -118,6 +170,7 @@ export class ReportesComponent implements OnInit {
       case 2:
         estado = "Aprobado";
         break;
+      default: ":c"
 
     }
 

@@ -33,8 +33,11 @@ export class PersonaService {
     return this.http.get(this.url + "/listar").pipe(map(response => response as Persona[]));
   }
 
-  update(id: number,persona: Persona): Observable<Persona> {
-    return this.http.put<Persona>(`${this.url}/actualizar/${id}`,persona);
+  update(id: number, persona: Persona): Observable<Persona> {
+    return this.http.put<Persona>(`${this.url}/actualizar/${id}`, persona);
   }
 
+  cedulaRegistra(cedula: string): Observable<boolean> {
+    return this.http.get<boolean>(`${this.url}/cedulaRegistra/${cedula}`);
+  }
 }

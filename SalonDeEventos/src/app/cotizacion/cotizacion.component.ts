@@ -12,6 +12,10 @@ import { Cotizacion } from '../modelo/cotizacion';
 import { UploadFileService } from '../service/uploadFile.service';
 import { FileModel } from '../modelo/fileModel';
 import Swal from 'sweetalert2';
+import * as pdfMake from "pdfmake/build/pdfmake";
+import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+
+(<any>pdfMake).vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
   selector: 'app-cotizacion',
@@ -142,6 +146,7 @@ export class CotizacionComponent implements OnInit {
         }).then((result) => {
           if (result.isConfirmed) {
             Swal.fire('Reserva actualizada con éxito.', 'success')
+            this.generarPDF();
             this.router.navigate(["listares"]);
 
 
@@ -153,11 +158,125 @@ export class CotizacionComponent implements OnInit {
     )
   }
 
-  // updateDate(event: any): void {
-  //   // Convierte la cadena de fecha del campo de entrada en un objeto Date
-  //   this.selectedDate = new Date(event.target.value);
-  // }
 
+
+  generarPDF() {
+    // Datos del reporte (debes reemplazar esto con tus datos reales)
+    const data = {
+
+      title: 'EL ESTADO DE SU RESERVA HA SIDO ACTUALIZADO',
+      nombre: this.usuario.usuPerId.perNombre,
+      apellido: this.usuario.usuPerId.perApellido,
+      cedula: this.usuario.usuPerId.perCedula,
+      correo: this.usuario.usuPerId.perCorreo,
+      direccion: this.usuario.usuPerId.perDireccion,
+      telefono: this.usuario.usuPerId.perTelefono,
+
+      salonNombre: this.cotizacion.salId.salNombre,
+      salonDireccion: this.cotizacion.salId.salDireccion,
+      salonCapacidad: this.cotizacion.salId.salCapacidad,
+
+      estado: this.viewEstado(this.reserva.resEstado),
+      evento: this.cotizacion.cotiTipoEvento,
+      horaIni: this.cotizacion.cotiHoraInicio,
+      horaFin: this.cotizacion.cotiHoraFin,
+      descripcion: this.cotizacion.cotiDescripcion,
+      monto: this.cotizacion.cotiMonto,
+      fechaEvento: this.fechaFormateada(this.reserva.resFechaEvento),
+      fechaReserva: this.fechaFormateada(this.reserva.resFechaRegistro),
+
+
+    };
+
+    // Definir el contenido del PDF utilizando la estructura de pdfmake
+    const documentDefinition = {
+      content: [
+        { text: data.title, style: 'header' },
+        { text: 'Su reserva se encuentra en estado: ' + data.estado },
+        { text: '\n' },
+        { text: 'Datos personales' },
+        { text: 'Nombre: ' + data.nombre },
+        { text: 'Apellido: ' + data.apellido },
+        { text: 'Cedula: ' + data.cedula },
+        { text: 'Correo: ' + data.correo },
+        { text: 'Teléfono: ' + data.telefono },
+        { text: 'Dirección: ' + data.direccion },
+
+        { text: '\n' },
+        { text: 'Datos del salón' },
+        { text: 'Salón: ' + data.salonNombre },
+        { text: 'Capacidad: ' + data.salonCapacidad },
+        { text: 'Dirección: ' + data.salonDireccion },
+
+        { text: '\n' },
+        { text: 'Reserva realizada el día: ' + data.fechaReserva },
+        { text: 'Detalles de la reserva' },
+        { text: 'Tipo de evento: ' + data.evento },
+        { text: 'Hora Inicio: ' + data.horaIni},
+        {text: 'Hora Fin: ' + data.horaIni },
+        { text: 'Descripción: ' + data.descripcion },
+        { text: 'Costo: ' + data.monto },
+        { text: 'Fecha del evento:: ' + data.fechaEvento },
+
+      ],
+      styles: {
+        header: {
+          fontSize: 18,
+          bold: true,
+          // alignment: 'center' // Alineación centrada para el título
+        }
+      }
+    };
+
+    // Generar el PDF
+    const pdfDocGenerator = pdfMake.createPdf(documentDefinition);
+    pdfDocGenerator.open();
+
+    pdfDocGenerator.getBase64((data) => {
+      // Llamar al servicio enviarCorreo para enviar el PDF al backend
+      this.enviarCorreo(data, this.usuario.usuPerId.perCorreo);
+    });    // pdfDocGenerator.download('reporte.pdf');
+  }
+
+
+  enviarCorreo(pdfData: string, destinatario: string) {
+    this.reservaService.enviarCorreoConPDF(pdfData, destinatario).subscribe(
+      response => {
+        console.log('Correo enviado:', response);
+        // Aquí puedes realizar acciones adicionales si es necesario
+      },
+      error => {
+        console.error('Error al enviar el correo:', error);
+        // Aquí puedes manejar el error de acuerdo a tus necesidades
+      }
+    );
+  }
+
+  viewEstado(est: number): string {
+    let estado: string = "";
+
+    switch (est) {
+      case 0:
+        estado = "RECHAZADO";
+        break;
+      case 1:
+        estado = "PENDIENTE";
+        break;
+      case 2:
+        estado = "APROBADO";
+        break;
+
+    }
+
+    return estado;
+  }
+  fechaFormateada(f: Date): string {
+    const fecha: Date = new Date(f)
+    const dia = fecha.getDate().toString().padStart(2, '0');
+    const mes = (fecha.getMonth() + 1).toString().padStart(2, '0');
+    const anio = fecha.getFullYear().toString();
+    return `${dia}-${mes}-${anio}`;
+  }
 
   obtenerUsuario() {
     // Recuperar el string del localStorage

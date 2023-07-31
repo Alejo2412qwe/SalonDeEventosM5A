@@ -164,6 +164,7 @@ export class ReservaComponent {
     }
 
     this.cotizacion.cotiMonto = this.cotizacion.cotiMonto + (this.salon.salCostoHora * min)
+    this.cotizacion.cotiMonto= parseFloat(this.cotizacion.cotiMonto.toFixed(2));
 
     this.changeDetectorRef.detectChanges();
 
