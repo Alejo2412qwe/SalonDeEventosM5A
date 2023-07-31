@@ -102,6 +102,7 @@ export class CotizacionComponent implements OnInit {
           this.cotizacion = this.reserva.reCotiId
           this.numReserva = this.reserva.resId;
           this.selectedDate = this.reserva.resFechaEvento;
+          this.filePreviews.push(this.reserva.resComprobante)
           // alert("seect= "+this.selectedDate)
         })
       }

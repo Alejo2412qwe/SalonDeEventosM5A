@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Reserva } from "../modelo/reserva";
 import { Observable, map } from "rxjs";
@@ -47,15 +47,21 @@ export class ReservaService {
         return this.http.put<Reserva>(`${this.url}/validarReserva/${id}/${estado}`, res);
     }
 
-    numReserva():Observable<number>{
+    numReserva(): Observable<number> {
         return this.http.get<number>(`${this.url}/numReserva`);
     }
 
 
-    reporteFechas(fechaIni: string, fechFin: string): Observable<Reserva[]> {
-        return this.http.get(`${this.url}/reservaFechas/${fechaIni}/${fechFin}`).pipe(map(response => response as Reserva[]));
+    reporteFechas(fechaIni: string, fechFin: string, est: number): Observable<Reserva[]> {
+        return this.http.get(`${this.url}/reservaFechas/${fechaIni}/${fechFin}/${est}`).pipe(map(response => response as Reserva[]));
     }
 
+    enviarCorreoConPDF(pdfData: string, destinatario: string): Observable<any> {
+        console.log(pdfData)
 
+        const url = `${this.url}/enviar-correo?destinatario=${encodeURIComponent(destinatario)}`;
+        // const body = { pdfData: pdfData };
+        return this.http.post<any>(url, pdfData);
+      }
 
 }

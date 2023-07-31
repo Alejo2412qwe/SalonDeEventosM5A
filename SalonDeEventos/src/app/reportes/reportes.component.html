@@ -74,16 +74,28 @@
         <h3 style="text-align: center;">Reporte de reservas entre:</h3>
         <div>
             <p style="display: inline-block; margin-left: 70px;margin-top: 30px">Fecha Inicio:
-                <input type="date" style="color: #75758B;" name="fechaIni" placeholder="Fecha Inicio" [(ngModel)]="fechaIni" required
+                <input type="date" style="color: #75758B;" name="fechaIni" placeholder="Fecha Inicio"
+                    [(ngModel)]="fechaIni" required
                     style="background-color:#f4e6cd; height: 50px; width: 324px; font-weight: bolder; padding-left: 35px; border: none; border-bottom: 2px solid rgba(0, 0, 0, 0.2); box-shadow: 3px 3px #cecccc;"
                     (ngModelChange)="obtenerReporteFecha()">
             </p>
 
             <p style="display: inline-block; margin-left: 50px;">Fecha Fin:
-                <input type="date" style="color: #75758B;" name="fechaFin" placeholder="Fecha Fin" [(ngModel)]="fechaFin" required
+                <input type="date" style="color: #75758B;" name="fechaFin" placeholder="Fecha Fin"
+                    [(ngModel)]="fechaFin" required
                     style="background-color:#f4e6cd; height: 50px; width: 324px; font-weight: bolder; padding-left: 35px; border: none; border-bottom: 2px solid rgba(0, 0, 0, 0.2); box-shadow: 3px 3px #cecccc;"
                     (ngModelChange)="obtenerReporteFecha()">
             </p>
+            <select name="estados"
+                style="padding-left: 10px; font-size: 20px; border-radius: 5px; background-color: #f4daaf; margin-left: 70px;"
+                [(ngModel)]="estado" required class="select" (click)="obtenerReporteFecha()">
+                <option value="0">Rechazado</option>
+                <option value="1">Pendiente</option>
+                <option value="2">Aprobado</option>
+            </select>
+
+            <button (click)="generarPDF()" style="display: inline-block; margin-left: 70px;margin-top: 30px">Generar
+                PDF</button>
         </div>
 
         <div class="datos">
@@ -97,7 +109,9 @@
                             <th>CORREO</th>
                             <th>ESTADO</th>
                             <th>FECHA SOLICITADA</th>
-                            <th>Fecha Evento</th>
+                            <th>FECHA EVENTO</th>
+                            <th>SALÓN</th>
+                            <th>COSTO</th>
 
                         </tr>
                     </thead>
@@ -105,12 +119,14 @@
                         <tr *ngFor="let res of reporteFechas">
                             <td>{{res.resId}}</td>
                             <td>{{res.reCotiId.usuId.usuPerId.perCedula}}</td>
-                            <td>{{res.reCotiId.usuId.usuPerId.perNombre}} {{res.reCotiId.usuId.usuPerId.perApellido}}</td>
+                            <td>{{res.reCotiId.usuId.usuPerId.perNombre}} {{res.reCotiId.usuId.usuPerId.perApellido}}
+                            </td>
                             <td>{{res.reCotiId.usuId.usuPerId.perCorreo}}</td>
                             <td>{{res.resEstado}}</td>
-                            <td>{{res.resFechaRegistro}}</td>
-                            <td>{{res.resFechaEvento}}</td>
-
+                            <td>{{fechaFormateada(res.resFechaRegistro)}}</td>
+                            <td>{{fechaFormateada(res.resFechaEvento)}}</td>
+                            <td>{{res.reCotiId.salId.salNombre}}</td>
+                            <td>{{res.reCotiId.cotiMonto}}</td>
 
                         </tr>
                     <tbody>
