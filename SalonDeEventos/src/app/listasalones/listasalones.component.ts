@@ -35,6 +35,27 @@ export class ListasalonesComponent implements OnInit {
     );
   }
 
+  listaSalones(): void {
+    this.salInac= [];
+    this.salInac=[];
+    this.salonService.getSalon().subscribe(
+      salon => {
+
+        for (let sal of salon) {
+          if (sal.salEstado === 1) {
+            this.salAc.push(sal)
+          } else {
+            if (sal.salEstado === 0) {
+              this.salInac.push(sal)
+            }
+          }
+        }
+
+
+      }
+    );
+  }
+
   busquedaPSAct(): void {
     console.log(this.busquedaAct)
     this.salonService.buscarSal(this.busquedaAct, 1).subscribe(
@@ -88,4 +109,51 @@ export class ListasalonesComponent implements OnInit {
       }
     })
   }
+
+
+  activarCuenta(id: number): void {
+    Swal.fire({
+      title: `¿Seguro que desea activar este salón?`,
+      showDenyButton: true,
+      showCancelButton: false,
+      confirmButtonText: 'Si',
+      denyButtonText: 'No',
+      customClass: {
+        actions: 'my-actions',
+        cancelButton: 'order-1 right-gap',
+        confirmButton: 'order-2',
+        denyButton: 'order-3',
+      }
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.salonService.actualizarEst(id,1).subscribe(salon => {
+          // this.usuarioService.getUsuarios().subscribe(users => 
+          //   {
+          //     this.usuarios = users
+          //   });
+
+          this.listaSalones();
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: `Salón activado exitosamente`,
+            showConfirmButton: true,
+            timer: 1500
+          })
+        })
+        Swal.fire('Saved!', '', 'success')
+
+      } else if (result.isDenied) {
+        Swal.fire('Changes are not saved', '', 'info')
+      }
+    })
+  }
+
+
 }
+
+
+
+
+
+
