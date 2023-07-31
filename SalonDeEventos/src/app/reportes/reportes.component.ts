@@ -51,6 +51,9 @@ export class ReportesComponent implements OnInit {
     // Definir el contenido del PDF utilizando la estructura de pdfmake
     const documentDefinition = {
       content: [
+        // {
+        //   image: 'assets/img/boda.jpg',
+        // },
         { text: data.title, style: 'header' },
         { text: 'Desde: ' + data.fechaInicio },
         { text: 'Hasta: ' + data.fechaFin },
@@ -136,6 +139,7 @@ export class ReportesComponent implements OnInit {
         header: {
           fontSize: 18,
           bold: true,
+          
           // alignment: 'center' // Alineación centrada para el título
         }
       }

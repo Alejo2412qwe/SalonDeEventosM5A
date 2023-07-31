@@ -255,10 +255,13 @@ export class DetallesusuarioComponent implements OnInit {
       ban = false;
     } else {
       const regexCorreo = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-      this.toastr.error('Correo invalido', '', {
-        timeOut: tiempo
-      });
-      ban = regexCorreo.test(this.persona.perCorreo);
+
+      if (!regexCorreo.test(this.persona.perCorreo)) {
+        this.toastr.error('Correo invalido', '', {
+          timeOut: tiempo
+        });
+        ban = false;
+      }
     }
 
 
@@ -340,10 +343,13 @@ export class DetallesusuarioComponent implements OnInit {
       ban = false;
     } else {
       const regexCorreo = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-      this.toastr.error('Correo invalido', '', {
-        timeOut: tiempo
-      });
-      ban = regexCorreo.test(this.persona.perCorreo);
+
+      if (!regexCorreo.test(this.persona.perCorreo)) {
+        this.toastr.error('Correo invalido', '', {
+          timeOut: tiempo
+        });
+        ban = false;
+      }
     }
 
 
@@ -419,7 +425,7 @@ export class DetallesusuarioComponent implements OnInit {
         }
       })
     }
-    
+
     if (this.confirmarPass.length === 0) {
       this.toastr.error('Debe confirmar su contraseña', '', {
         timeOut: tiempo
