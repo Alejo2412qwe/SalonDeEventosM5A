@@ -33,6 +33,10 @@ export class UsuarioService {
     return this.http.get(this.url + "/listar").pipe(map(response => response as Usuario[]));
   }
 
+  listarEst(est: number): Observable<Usuario[]> {
+    return this.http.get(`${this.url}/listar/${est}`).pipe(map(response => response as Usuario[]));
+}
+
   buscarUsuarios(busqueda: string, est: number): Observable<Usuario[]> {
     console.log(`${this.url}/busqueda/${busqueda}/${est}`)
     return this.http.get(`${this.url}/busqueda/${busqueda}/${est}`).pipe(map(response => response as Usuario[]));

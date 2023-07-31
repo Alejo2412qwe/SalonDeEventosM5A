@@ -19,46 +19,46 @@ export class ListausuariosComponent implements OnInit {
   busquedaAct: string = "";
   busquedaInAct: string = "";
   bRol: number = 0;
+  estado: string = "ACTIVOS";
 
   constructor(private PersonaService: PersonaService, private usuarioService: UsuarioService,
     private activatedRoute: ActivatedRoute, private AllScripts: AllScriptsService) {
-      AllScripts.Cargar(["default/ventana"]);
+    AllScripts.Cargar(["default/ventana"]);
 
   }
 
 
   ngOnInit(): void {
-    this.listaUsuarios();
+    this.listarUsuariosAct();
+    this.listarUsuariosInAct();
   }
 
-  listaUsuarios(): void {
-    this.usuariosAct= [];
-    this.usuariosInact=[];
-    this.usuarioService.getUsuarios().subscribe(
-      user => {
-
-        for (let us of user) {
-          if (us.usuEstado === 1) {
-            this.usuariosAct.push(us)
-          } else {
-            if (us.usuEstado === 0) {
-              this.usuariosInact.push(us)
-            }
-          }
-        }
-
-
-      }
+  listarUsuariosAct(): void {
+    this.usuarioService.listarEst(1).subscribe(
+      users => this.usuariosAct = users
     );
   }
+
 
   busquedaUsuariosAct(): void {
-    this.usuarioService.buscarUsuarios(this.busquedaAct, 1).subscribe(
-      user => {
-        this.usuariosAct = user
-      }
+    if (this.busquedaAct) {
+      this.usuarioService.buscarUsuarios(this.busquedaAct, 1).subscribe(
+        user => {
+          this.usuariosAct = user
+        }
 
+      );
+    } else {
+      this.listarUsuariosAct();
+    }
+  }
+
+  listarUsuariosInAct(): void {
+
+    this.usuarioService.listarEst(0).subscribe(
+      users => this.usuariosInact = users
     );
+
   }
 
   busquedaUsuariosInact(): void {
@@ -90,10 +90,11 @@ export class ListausuariosComponent implements OnInit {
       }
     }).then((result) => {
       if (result.isConfirmed) {
-        this.usuarioService.actualizarEst(id,0).subscribe(user => {
+        this.usuarioService.actualizarEst(id, 0).subscribe(user => {
 
-          this.listaUsuarios();
-
+          this.listarUsuariosAct();
+          this.listarUsuariosInAct();
+          
           Swal.fire({
             position: 'center',
             icon: 'success',
@@ -125,13 +126,14 @@ export class ListausuariosComponent implements OnInit {
       }
     }).then((result) => {
       if (result.isConfirmed) {
-        this.usuarioService.actualizarEst(id,1).subscribe(user => {
+        this.usuarioService.actualizarEst(id, 1).subscribe(user => {
           // this.usuarioService.getUsuarios().subscribe(users => 
           //   {
           //     this.usuarios = users
           //   });
 
-          this.listaUsuarios();
+          this.listarUsuariosAct();
+          this.listarUsuariosInAct();
 
           Swal.fire({
             position: 'center',

@@ -235,13 +235,13 @@ export class CotizacionComponent implements OnInit {
 
     pdfDocGenerator.getBase64((data) => {
       // Llamar al servicio enviarCorreo para enviar el PDF al backend
-      this.enviarCorreo(data, this.usuario.usuPerId.perCorreo);
+      this.enviarCorreo(data, this.usuario.usuPerId.perCorreo,this.viewEstado(this.reserva.resEstado));
     });    // pdfDocGenerator.download('reporte.pdf');
   }
 
 
-  enviarCorreo(pdfData: string, destinatario: string) {
-    this.reservaService.enviarCorreoConPDF(pdfData, destinatario).subscribe(
+  enviarCorreo(pdfData: string, destinatario: string, estado: string) {
+    this.reservaService.enviarCorreoConPDF(pdfData, destinatario,estado).subscribe(
       response => {
         console.log('Correo enviado:', response);
         // Aquí puedes realizar acciones adicionales si es necesario

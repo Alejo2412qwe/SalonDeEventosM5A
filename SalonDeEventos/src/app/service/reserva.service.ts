@@ -56,10 +56,10 @@ export class ReservaService {
         return this.http.get(`${this.url}/reservaFechas/${fechaIni}/${fechFin}/${est}`).pipe(map(response => response as Reserva[]));
     }
 
-    enviarCorreoConPDF(pdfData: string, destinatario: string): Observable<any> {
+    enviarCorreoConPDF(pdfData: string, destinatario: string, estado: string): Observable<any> {
         console.log(pdfData)
 
-        const url = `${this.url}/enviar-correo?destinatario=${encodeURIComponent(destinatario)}`;
+        const url = `${this.url}/enviar-correo?destinatario=${encodeURIComponent(destinatario)}&estado=${encodeURIComponent(estado)}`;
         // const body = { pdfData: pdfData };
         return this.http.post<any>(url, pdfData);
       }

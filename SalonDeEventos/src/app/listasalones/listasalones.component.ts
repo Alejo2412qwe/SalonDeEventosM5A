@@ -14,6 +14,7 @@ export class ListasalonesComponent implements OnInit {
   salInac: Salon[] = [];
   busquedaAct: string = "";
   busquedaInAct: string = "";
+  estado: string = "ACTIVOS";
 
 
   constructor(private salonService: SalonService) { }
@@ -35,46 +36,33 @@ export class ListasalonesComponent implements OnInit {
     );
   }
 
-  listaSalones(): void {
-    this.salInac= [];
-    this.salInac=[];
-    this.salonService.getSalon().subscribe(
-      salon => {
-
-        for (let sal of salon) {
-          if (sal.salEstado === 1) {
-            this.salAc.push(sal)
-          } else {
-            if (sal.salEstado === 0) {
-              this.salInac.push(sal)
-            }
-          }
+  busquedaSalAct(): void {
+    if (this.busquedaAct) {
+      console.log(this.busquedaAct)
+      this.salonService.buscarSal(this.busquedaAct, 1).subscribe(
+        sal => {
+          this.salAc = sal
         }
-
-
-      }
-    );
+      );
+    } else {
+      this.listarSalonesAct();
+    }
   }
 
-  busquedaPSAct(): void {
-    console.log(this.busquedaAct)
-    this.salonService.buscarSal(this.busquedaAct, 1).subscribe(
-      sal => {
-        this.salAc = sal
-      }
-    );
+  busquedaSalInact(): void {
+    if (this.busquedaInAct) {
+      console.log(this.busquedaAct)
+      this.salonService.buscarSal(this.busquedaAct, 0).subscribe(
+        sal => {
+          this.salAc = sal
+        }
+      );
+    } else {
+      this.listarSalonesInact();
+    }
   }
 
-  busquedaPSInact(): void {
-    console.log(this.busquedaAct)
-    this.salonService.buscarSal(this.busquedaAct, 0).subscribe(
-      sal => {
-        this.salAc = sal
-      }
-    );
-  }
-
-  actualizarEst(id: number, est:number): void {
+  actualizarEst(id: number, est: number): void {
     Swal.fire({
       title: `¿Seguro que desea eliminar el salon?`,
       showDenyButton: true,
@@ -89,7 +77,7 @@ export class ListasalonesComponent implements OnInit {
       }
     }).then((result) => {
       if (result.isConfirmed) {
-        this.salonService.actualizarEst(id,est).subscribe(salon => {
+        this.salonService.actualizarEst(id, est).subscribe(salon => {
 
           this.listarSalonesAct();
           this.listarSalonesInact();
@@ -126,13 +114,15 @@ export class ListasalonesComponent implements OnInit {
       }
     }).then((result) => {
       if (result.isConfirmed) {
-        this.salonService.actualizarEst(id,1).subscribe(salon => {
+        this.salonService.actualizarEst(id, 1).subscribe(salon => {
           // this.usuarioService.getUsuarios().subscribe(users => 
           //   {
           //     this.usuarios = users
           //   });
 
-          this.listaSalones();
+          // this.listaSalones();
+          this.listarSalonesAct()
+          this.listarSalonesInact()
           Swal.fire({
             position: 'center',
             icon: 'success',
