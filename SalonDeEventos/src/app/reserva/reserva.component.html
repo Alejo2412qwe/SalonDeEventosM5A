@@ -18,12 +18,14 @@
                 <section class="layout">
 
                     <div >
-                        <p class="cate" style="font-size: 18px;">Tipo de evento</p>
+                        <p class="cate" style="font-size: 16px;">¿Que tipo de evento deseas realizar?</p>
                     </div>
                     <div class="inputContainer">
 
                         <select class="select" name="TipoEvento" [(ngModel)]="cotizacion.cotiTipoEvento"
                             [disabled]="accion === 'micotizacion'">
+                            <option value="" disabled selected>Selecciona una opción</option>
+
                             <option>Boda</option>
                             <option>Graduación</option>
                             <option>Bautizo</option>
