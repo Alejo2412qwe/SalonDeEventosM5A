@@ -171,7 +171,7 @@
             <tbody>
                 <tr *ngFor="let adi of adicionales">
                     <td>{{adi.prodId.prodNombre}}</td>
-                    <td>{{adi.adiCantidad * adi.prodId.prodPrecio}}</td>
+                    <td>{{redondear(adi.adiCantidad * adi.prodId.prodPrecio)}}</td>
                     <td>{{adi.adiCantidad}}</td>
                     <td [hidden]="accion==='micotizacion'"><button
                             style="font-size: 10px; width: 140px; margin-left: 5px;" class="boton1"

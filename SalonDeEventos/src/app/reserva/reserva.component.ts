@@ -145,6 +145,9 @@ export class ReservaComponent {
     this.calcularMonto();
   }
 
+  redondear(num: number): number {
+    return parseFloat(num.toFixed(2))
+  }
   calcularMonto() {
     this.cotizacion.cotiMonto = 0;
     for (let add of this.adicionales) {
@@ -164,7 +167,7 @@ export class ReservaComponent {
     }
 
     this.cotizacion.cotiMonto = this.cotizacion.cotiMonto + (this.salon.salCostoHora * min)
-    this.cotizacion.cotiMonto= parseFloat(this.cotizacion.cotiMonto.toFixed(2));
+    this.cotizacion.cotiMonto = parseFloat(this.cotizacion.cotiMonto.toFixed(2));
 
     this.changeDetectorRef.detectChanges();
 
@@ -203,10 +206,11 @@ export class ReservaComponent {
               console.log(coti.usuId);
             } else if (result.isDenied) {
               Swal.fire({
-               title: 'Cotización registrada con éxito',
-               text: 'Puede continuar con la reserva cuando desee',
-               icon: 'success'})
-               this.router.navigate(["/micot",this.usuario.usuId]);
+                title: 'Cotización registrada con éxito',
+                text: 'Puede continuar con la reserva cuando desee',
+                icon: 'success'
+              })
+              this.router.navigate(["/micot", this.usuario.usuId]);
 
             }
           })

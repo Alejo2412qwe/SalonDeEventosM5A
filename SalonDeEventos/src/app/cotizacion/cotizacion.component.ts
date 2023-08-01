@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Reserva } from '../modelo/reserva';
 import { ImagenService } from '../service/imagen.service';
-import { HttpHeaders, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { CotizacionService } from '../service/cotizacion.service';
 import { Usuario } from '../modelo/usuario';
 import { Cotizacion } from '../modelo/cotizacion';
@@ -51,7 +51,7 @@ export class CotizacionComponent implements OnInit {
   constructor(private imagenService: ImagenService, private activatedRoute: ActivatedRoute, private cotizacionService: CotizacionService,
     private reservaService: ReservaService, private toastr: ToastrService, private imageService: ImagenService,
     private fileService: UploadFileService,
-    private router: Router) {
+    private router: Router, private http: HttpClient) {
   }
 
   ngOnInit(): void {
@@ -158,10 +158,35 @@ export class CotizacionComponent implements OnInit {
     )
   }
 
+  convertImageToDataURL(): Promise<string> {
+    const imageUrl = 'assets/png.png'; // Ruta de la imagen en la carpeta "assets"
+
+    return new Promise((resolve, reject) => {
+      // Realizar la solicitud para obtener la imagen como un blob
+      this.http.get(imageUrl, { responseType: 'blob' }).subscribe(
+        (blob: Blob) => {
+          // Crear un FileReader para leer el blob como una URL de datos
+          const reader = new FileReader();
+          reader.onloadend = () => {
+            const dataURL = reader.result as string;
+            resolve(dataURL);
+          };
+          reader.onerror = (error) => {
+            reject(error);
+          };
+          reader.readAsDataURL(blob); // Leer el blob como una URL de datos
+        },
+        (error) => {
+          reject(error);
+        }
+      );
+    });
+  }
 
 
   generarPDF() {
     // Datos del reporte (debes reemplazar esto con tus datos reales)
+// console.log(this.convertImageToDataURL())
     const data = {
 
       title: 'EL ESTADO DE SU RESERVA HA SIDO ACTUALIZADO',
@@ -184,13 +209,15 @@ export class CotizacionComponent implements OnInit {
       monto: this.cotizacion.cotiMonto,
       fechaEvento: this.fechaFormateada(this.reserva.resFechaEvento),
       fechaReserva: this.fechaFormateada(this.reserva.resFechaRegistro),
-
+      img: this.convertImageToDataURL()
 
     };
 
     // Definir el contenido del PDF utilizando la estructura de pdfmake
     const documentDefinition = {
       content: [
+        // { image: './assets/png.png', 
+        // width: 100, height: 100 },
         { text: data.title, style: 'header' },
         { text: 'Su reserva se encuentra en estado: ' + data.estado },
         { text: '\n' },
@@ -212,8 +239,8 @@ export class CotizacionComponent implements OnInit {
         { text: 'Reserva realizada el día: ' + data.fechaReserva },
         { text: 'Detalles de la reserva' },
         { text: 'Tipo de evento: ' + data.evento },
-        { text: 'Hora Inicio: ' + data.horaIni},
-        {text: 'Hora Fin: ' + data.horaFin },
+        { text: 'Hora Inicio: ' + data.horaIni },
+        { text: 'Hora Fin: ' + data.horaFin },
         { text: 'Descripción: ' + data.descripcion },
         { text: 'Costo: ' + data.monto },
         { text: 'Fecha del evento: ' + data.fechaEvento },
@@ -223,7 +250,7 @@ export class CotizacionComponent implements OnInit {
         header: {
           fontSize: 18,
           bold: true,
-          
+
           // alignment: 'center' 
         }
       }
@@ -235,13 +262,13 @@ export class CotizacionComponent implements OnInit {
 
     pdfDocGenerator.getBase64((data) => {
       // Llamar al servicio enviarCorreo para enviar el PDF al backend
-      this.enviarCorreo(data, this.usuario.usuPerId.perCorreo,this.viewEstado(this.reserva.resEstado));
+      this.enviarCorreo(data, this.usuario.usuPerId.perCorreo, this.viewEstado(this.reserva.resEstado));
     });    // pdfDocGenerator.download('reporte.pdf');
   }
 
 
   enviarCorreo(pdfData: string, destinatario: string, estado: string) {
-    this.reservaService.enviarCorreoConPDF(pdfData, destinatario,estado).subscribe(
+    this.reservaService.enviarCorreoConPDF(pdfData, destinatario, estado).subscribe(
       response => {
         console.log('Correo enviado:', response);
         // Aquí puedes realizar acciones adicionales si es necesario
