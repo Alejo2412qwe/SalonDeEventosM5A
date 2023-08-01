@@ -8,7 +8,8 @@ import { Observable, map } from "rxjs";
 })
 export class ReservaService {
 
-    private url: string = 'http://localhost:9999/reserva'
+    //private url: string = 'http://localhost:9999/reserva'
+    private url: string = 'http://147.182.165.168:9999/reserva'
 
 
     private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' })

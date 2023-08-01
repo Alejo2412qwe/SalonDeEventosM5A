@@ -7,7 +7,8 @@ import { Observable } from 'rxjs';
 })
 export class ImagenService {
 
-    private url: string = 'http://localhost:9999/imagen'
+    //private url: string = 'http://localhost:9999/imagen'
+    private url: string = 'http://147.182.165.168:9999/imagen'
 
     private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' })
 

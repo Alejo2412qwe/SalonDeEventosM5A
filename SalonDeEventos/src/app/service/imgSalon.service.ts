@@ -8,7 +8,8 @@ import { ImgSalon } from '../modelo/imgSalon';
 })
 export class ImgSalonService {
 
-  private url: string = 'http://localhost:9999/imgsalones'
+  //private url: string = 'http://localhost:9999/imgsalones'
+  private url: string = 'http://147.182.165.168:9999/imgsalones'
 
   private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' })
 

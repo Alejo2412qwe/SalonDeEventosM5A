@@ -8,7 +8,8 @@ import { Adicionales } from '../modelo/adicionales';
 })
 export class AdicionalesService {
 
-  private url: string = 'http://localhost:9999/adicionales'
+  //private url: string = 'http://localhost:9999/adicionales'
+  private url: string = 'http://147.182.165.168:9999/adicionales'
 
   private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' })
 

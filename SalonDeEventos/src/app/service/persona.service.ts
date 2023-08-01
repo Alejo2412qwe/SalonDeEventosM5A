@@ -10,7 +10,8 @@ import { PERSONAS } from '../listausuarios/listausuarios.json';
 })
 export class PersonaService {
 
-  private url: string = 'http://localhost:9999/persona'
+  //private url: string = 'http://localhost:9999/persona'
+  private url: string = 'http://147.182.165.168:9999/persona'
 
   private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' })
 
