@@ -59,7 +59,7 @@ export class ListaproductosComponent implements OnInit {
       this.toastr.error('Ingrese una categoría', '', {
         timeOut: 3500
       });
-      ban=false;
+      ban = false;
     }
     return ban;
   }
@@ -101,28 +101,39 @@ export class ListaproductosComponent implements OnInit {
   }
 
   busquedaPSAct(): void {
-    this.ProductoService.buscarProd(this.busquedaAct, 1).subscribe(
-      user => {
-        console.log("buscando")
-        this.productoAct = user
-      }
-    );
+    if (this.busquedaAct) {
+      this.ProductoService.buscarProd(this.busquedaAct, 1).subscribe(
+        user => {
+          console.log("buscando")
+          this.productoAct = user
+        }
+      );
+    } else {
+      this.listarProductosAct();
+    }
+
   }
 
   listarProductosInAct(): void {
+
     this.ProductoService.listarEst(0).subscribe(
       producto => this.productoInact = producto
     );
+
   }
 
   busquedaPSInAct(): void {
-    this.ProductoService.buscarProd(this.busquedaInAct, 0).subscribe(
-      user => {
-        console.log("buscando")
-        this.productoInact = user
-      }
+    if (this.busquedaInAct) {
+      this.ProductoService.buscarProd(this.busquedaInAct, 0).subscribe(
+        user => {
+          console.log("buscando")
+          this.productoInact = user
+        }
 
-    );
+      );
+    } else {
+      this.listarProductosInAct();
+    }
   }
 
   eliminar(id: number): void {

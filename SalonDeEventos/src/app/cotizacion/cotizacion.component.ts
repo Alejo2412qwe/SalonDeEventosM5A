@@ -213,17 +213,18 @@ export class CotizacionComponent implements OnInit {
         { text: 'Detalles de la reserva' },
         { text: 'Tipo de evento: ' + data.evento },
         { text: 'Hora Inicio: ' + data.horaIni},
-        {text: 'Hora Fin: ' + data.horaIni },
+        {text: 'Hora Fin: ' + data.horaFin },
         { text: 'Descripción: ' + data.descripcion },
         { text: 'Costo: ' + data.monto },
-        { text: 'Fecha del evento:: ' + data.fechaEvento },
+        { text: 'Fecha del evento: ' + data.fechaEvento },
 
       ],
       styles: {
         header: {
           fontSize: 18,
           bold: true,
-          // alignment: 'center' // Alineación centrada para el título
+          
+          // alignment: 'center' 
         }
       }
     };
@@ -234,13 +235,13 @@ export class CotizacionComponent implements OnInit {
 
     pdfDocGenerator.getBase64((data) => {
       // Llamar al servicio enviarCorreo para enviar el PDF al backend
-      this.enviarCorreo(data, this.usuario.usuPerId.perCorreo);
+      this.enviarCorreo(data, this.usuario.usuPerId.perCorreo,this.viewEstado(this.reserva.resEstado));
     });    // pdfDocGenerator.download('reporte.pdf');
   }
 
 
-  enviarCorreo(pdfData: string, destinatario: string) {
-    this.reservaService.enviarCorreoConPDF(pdfData, destinatario).subscribe(
+  enviarCorreo(pdfData: string, destinatario: string, estado: string) {
+    this.reservaService.enviarCorreoConPDF(pdfData, destinatario,estado).subscribe(
       response => {
         console.log('Correo enviado:', response);
         // Aquí puedes realizar acciones adicionales si es necesario

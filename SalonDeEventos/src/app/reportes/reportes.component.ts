@@ -139,7 +139,7 @@ export class ReportesComponent implements OnInit {
         header: {
           fontSize: 18,
           bold: true,
-          
+
           // alignment: 'center' // Alineación centrada para el título
         }
       }
@@ -160,25 +160,26 @@ export class ReportesComponent implements OnInit {
   }
 
 
-  viewEstado(est: number): string {
-   
-    let estado: string = "";
+  viewEstado(valor: number): string {
+    let valorS: string = valor.toString();
 
-    switch (est) {
+    let msj = ""
+    switch (parseInt(valorS)) {
       case 0:
-        estado = "Rechazado";
+        msj = "RECHAZADO";
         break;
       case 1:
-        estado = "Pendiente";
+        msj = "PENDIENTE";
         break;
       case 2:
-        estado = "Aprobado";
+        msj = "APROBADO";
         break;
-      default: ":c"
-
+      default:
+        msj = "DESCONOCIDO";
+        break;
     }
+    return msj
 
-    return estado;
   }
 
   fechaInicioFormateada(): string {
@@ -207,7 +208,8 @@ export class ReportesComponent implements OnInit {
 
 
   obtenerReporteFecha(): void {
-    console.log(this.fechaInicioFormateada() + " === " + this.fechaFinFormateada())
+    console.log(this.estado + "   " + this.viewEstado(this.estado))
+    // console.log(this.fechaInicioFormateada() + " === " + this.fechaFinFormateada())
     this.reservaService.reporteFechas(this.fechaInicioFormateada(), this.fechaFinFormateada(), this.estado).subscribe(res => {
       this.reporteFechas = res;
     })

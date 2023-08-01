@@ -151,9 +151,19 @@ export class DetallesusuarioComponent implements OnInit {
                     icon: 'success',
                     title: 'Sus datos se actualizaron correctamente',
                     showConfirmButton: true
+
+
                     // timer: 3500
                   }).then(() => {
-                    this.router.navigate(["perfiluser"]);
+                    if (this.sesion.usuId === response.usuId) {
+                      const usertString = JSON.stringify(response);
+                      localStorage.removeItem('userData');
+                      localStorage.setItem('userData', usertString);
+                      this.router.navigate(["perfiluser"]);
+                    } else {
+                      this.router.navigate(["listausu"]);
+
+                    }
                   });
                 });
 
