@@ -9,8 +9,8 @@ import { Cotizacion } from "../modelo/cotizacion";
 })
 export class CotizacionService {
 
-   // private url: string = 'http://localhost:9999/cotizacion'
-   private url: string = 'http://147.182.165.168:9999/cotizacion'
+   private url: string = 'http://localhost:9999/cotizacion'
+//    private url: string = 'http://147.182.165.168:9999/cotizacion'
 
     private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' })
 

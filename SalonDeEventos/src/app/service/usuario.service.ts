@@ -7,8 +7,8 @@ import { Usuario } from '../modelo/usuario';
   providedIn: 'root'
 })
 export class UsuarioService {
- // private url: string = 'http://localhost:9999/usuario'
- private url: string = 'http://147.182.165.168:9999/usuario'
+ private url: string = 'http://localhost:9999/usuario'
+//  private url: string = 'http://147.182.165.168:9999/usuario'
 
   private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' })
 

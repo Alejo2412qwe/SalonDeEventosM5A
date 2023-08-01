@@ -8,8 +8,8 @@ import { Categoria } from '../modelo/categoria';
 })
 export class CategoriaService {
 
- // private url: string = 'http://localhost:9999/categoria'
- private url: string = 'http://147.182.165.168:9999/categoria'
+ private url: string = 'http://localhost:9999/categoria'
+//  private url: string = 'http://147.182.165.168:9999/categoria'
 
   private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' })
 

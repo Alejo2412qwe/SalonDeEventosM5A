@@ -8,8 +8,8 @@ import { Tipo } from '../modelo/tipo';
 })
 export class TipoService {
 
-  //private url: string = 'http://localhost:9999/tipo'
-  private url: string = 'http://147.182.165.168:9999/tipo'
+  private url: string = 'http://localhost:9999/tipo'
+  // private url: string = 'http://147.182.165.168:9999/tipo'
 
   private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' })
 

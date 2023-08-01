@@ -66,15 +66,11 @@ export class SalonComponent {
                   this.fileService.getFileName(sal.imgSalNombre).subscribe(fileName => {
                     sal.imgSalUrl = fileName.url;
                     sal.salId = salonNew;
-                    // console.log("idprod= " + sal.prodId.prodId);
-                    // console.log("nombre= " + prod.imgProdNombre);
-                    // console.log("URL= " + prod.imgProdUrl);
+
                     imgSalon.push(sal)
                     console.log("=============================")
                     this.imgSalonService.agregarIMG(sal).subscribe(img => {
-                      // console.log("idprod= " + img?.prodId?.prodId);
-                      // console.log("nombre= " + img?.imgProdNombre);
-                      // console.log("URL= " + img?.imgProdUrl);
+
                     });
                   });
 
@@ -84,10 +80,10 @@ export class SalonComponent {
                   // });
 
                 }
-                for (let file of response) {
+                // for (let file of response) {
 
 
-                }
+                // }
 
                 console.log('Archivos subidos correctamente:', response);
 

@@ -9,8 +9,8 @@ import { ProductoComponent } from '../producto/producto.component';
 })
 export class productoService {
 
-   // private url: string = 'http://localhost:9999/productoServicio'
-    private url: string = 'http://147.182.165.168:9999/productoServicio'
+   private url: string = 'http://localhost:9999/productoServicio'
+    // private url: string = 'http://147.182.165.168:9999/productoServicio'
 
     private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' })
 

@@ -8,15 +8,15 @@ import { ImgProducto } from '../modelo/imgProducto';
 })
 export class ImgProductoService {
 
-  //private url: string = 'http://localhost:9999/imgproductos'
-  private url: string = 'http://147.182.165.168:9999/imgproductos'
+  private url: string = 'http://localhost:9999/imgproductos'
+  // private url: string = 'http://147.182.165.168:9999/imgproductos'
 
   private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' })
 
   constructor(private http: HttpClient) { }
 
-  agregarIMG(persona: ImgProducto): Observable<ImgProducto> {
-    return this.http.post<ImgProducto>(`${this.url}/crear`, persona, { headers: this.httpHeaders })
+  agregarIMG(img: ImgProducto): Observable<ImgProducto> {
+    return this.http.post<ImgProducto>(`${this.url}/crear`, img, { headers: this.httpHeaders })
   }
 
   imgsProdId(prod:number): Observable<ImgProducto[]> {

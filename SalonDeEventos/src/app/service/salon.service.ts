@@ -9,8 +9,8 @@ import { map } from 'rxjs';
 })
 export class SalonService {
 
-    //private url: string = 'http://localhost:9999/salon'
-    private url: string = 'http://147.182.165.168:9999/salon'
+    private url: string = 'http://localhost:9999/salon'
+    // private url: string = 'http://147.182.165.168:9999/salon'
 
     private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' })
 

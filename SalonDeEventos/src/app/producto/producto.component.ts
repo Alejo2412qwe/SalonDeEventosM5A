@@ -188,7 +188,8 @@ export class ProductoComponent {
       this.productoService.crearProducto(this.producto).subscribe(
         productonew => {
 
-          if (!this.selectedFiles) {
+          if (this.selectedFiles.length>0) {
+            
             this.fileService.uploadFiles(this.selectedFiles).subscribe(
               (response: FileModel[]) => {
 
@@ -196,10 +197,12 @@ export class ProductoComponent {
                 for (let file of response) {
                   let prod: ImgProducto = new ImgProducto();
                   prod.imgProdNombre = file.name;
-                  // prod.imgProdUrl = file.url;
-
+                  
                   this.fileService.getFileName(prod.imgProdNombre).subscribe(fileName => {
+                    // alert("filename ="+fileName.url)
+
                     prod.imgProdUrl = fileName.url;
+                    prod.prodId=productonew;
                     imgProducto.push(prod)
                     console.log("=============================")
                     this.imgProductoService.agregarIMG(prod).subscribe(img => {

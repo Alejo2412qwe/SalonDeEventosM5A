@@ -9,8 +9,8 @@ import { FileModel } from '../modelo/fileModel';
 export class UploadFileService {
 
   //Url obtenida de la variable de enviroments
-  //private baseUrl: string = 'http://localhost:9999/file'
-  private baseUrl: string = 'http://147.182.165.168:9999/file'
+  private baseUrl: string = 'http://localhost:9999/file'
+  // private baseUrl: string = 'http://147.182.165.168:9999/file'
 
 
   uploadFiles(files: File[]): Observable<FileModel[]> {
